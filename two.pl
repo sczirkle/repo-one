@@ -5,6 +5,6 @@ $b = "my hello\n";
 $c = 'nowhere man';
 
 
-print "This is where we go...\n";
+print "This is where we go... whee!\n";
 
 
