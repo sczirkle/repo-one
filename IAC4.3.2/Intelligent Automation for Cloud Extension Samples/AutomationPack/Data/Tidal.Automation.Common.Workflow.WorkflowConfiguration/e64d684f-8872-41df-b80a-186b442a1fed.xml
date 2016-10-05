@@ -1,0 +1,965 @@
+<?xml version="1.0"?>
+<WorkflowConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>e64d684f-8872-41df-b80a-186b442a1fed</Id>
+  <DisplayName>Extension: Return Infoblox IP</DisplayName>
+  <CreatedTime>2016-02-15T20:40:18.004625Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:40:36.2138671Z</ModifiedTime>
+  <FirstActivity xsi:type="RootNode">
+    <Id>531a4d55-4fd1-4147-bf12-618dc9adfb7e</Id>
+    <DisplayName />
+    <Children>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>8a87bd4d-3950-4fdf-9105-87f0c0db570a</Id>
+        <DisplayName>Check if script exists</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>67acb86e-4515-4830-abcf-90f01e46cb45</Id>
+            <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+            <DisplayName>If Execution Fails</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>dc2afdd9-76e1-44ab-97d4-6bcb41e9463d</Id>
+                <DisplayName>Set Remediation Settings</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>2836af9b-7246-418b-ba09-831048017096</Id>
+                    <ActivityNodeId>856874de-6654-47d2-af89-e9d032f6c607</ActivityNodeId>
+                    <CompletedId>06c5ff96-f028-4bbc-a083-ef869935c386</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+                  <Id>856874de-6654-47d2-af89-e9d032f6c607</Id>
+                  <DisplayName>Set Remediation Settings</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>4334412d-489c-41a5-8d7c-7a8cb5e25c48</ContainingProcessId>
+                  <Assignments>
+                    <PropertyReferenceValuePair>
+                      <VariableToSet>
+                        <DisplayPath>Process.Target.Properties.Cloud.Service.General.ErrorCode</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="ObjectReferenceLink">
+                            <ObjectLink>
+                              <Id>7ad8347e-4936-4962-ab6d-3ec987d2737a</Id>
+                              <ObjectType>PropertyExtension</ObjectType>
+                            </ObjectLink>
+                          </Link>
+                        </LinkChain>
+                        <ObjectType>ProcessInstance</ObjectType>
+                      </VariableToSet>
+                      <NewValue xsi:type="SubstitutableNumber">
+                        <HardcodedValue>5004</HardcodedValue>
+                      </NewValue>
+                    </PropertyReferenceValuePair>
+                    <PropertyReferenceValuePair>
+                      <VariableToSet>
+                        <DisplayPath>Process.Target.Properties.Cloud.Service.General.ErrorDescription</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="ObjectReferenceLink">
+                            <ObjectLink>
+                              <Id>05385a56-169a-4946-9e3e-8de36ceaa838</Id>
+                              <ObjectType>PropertyExtension</ObjectType>
+                            </ObjectLink>
+                          </Link>
+                        </LinkChain>
+                        <ObjectType>ProcessInstance</ObjectType>
+                      </VariableToSet>
+                      <NewValue xsi:type="SubstitutableString">
+                        <FormattedCode>{0}
+{1}
+</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.Check if script exists.Error Information</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ErrorInformation</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>0bef7623-2dfd-4b70-b1b2-0c9fce92f87d</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.Check if script exists.Output</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>Output</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>0bef7623-2dfd-4b70-b1b2-0c9fce92f87d</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </NewValue>
+                    </PropertyReferenceValuePair>
+                  </Assignments>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="CompletedNode">
+                <Id>71ce5cb6-822f-4b5d-8fad-038b77ba5bb3</Id>
+                <Notes>Fail the entire process</Notes>
+                <CompletedType>FailedNotCompleted</CompletedType>
+                <ResultMessage>
+                  <FormattedCode>{0}</FormattedCode>
+                  <References>
+                    <VariableReference xsi:type="PropertyReference">
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>ErrorInformation</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectId>0bef7623-2dfd-4b70-b1b2-0c9fce92f87d</ObjectId>
+                      <ObjectType>ActivityInstance</ObjectType>
+                    </VariableReference>
+                  </References>
+                </ResultMessage>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>dc200f5c-c548-4f89-9e61-86c9efa430c5</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>1544a890-a00f-4e8a-81b2-63c8ae96ae62</Id>
+                  <Expression xsi:type="SubstitutableBoolean">
+                    <HardcodedValue>true</HardcodedValue>
+                  </Expression>
+                  <Comparison>Equals</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>InstanceFailed</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>0bef7623-2dfd-4b70-b1b2-0c9fce92f87d</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="WindowsExecuteActivityConfiguration" xml:space="preserve">
+          <Id>0bef7623-2dfd-4b70-b1b2-0c9fce92f87d</Id>
+          <DisplayName>Check if script exists</DisplayName>
+          <TargetLoadBalancer xsi:type="OrchestratorServerLoadBalancer">
+            <TargetGroupId>bc5933b4-512f-46ce-86a9-3b40331ba395</TargetGroupId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>4334412d-489c-41a5-8d7c-7a8cb5e25c48</ContainingProcessId>
+          <WorkingDirectory>
+            <HardcodedValue />
+          </WorkingDirectory>
+          <FailReturnCodeNonZero>true</FailReturnCodeNonZero>
+          <UseTaskScheduler>false</UseTaskScheduler>
+          <TimeWindow>
+            <Milliseconds>300000</Milliseconds>
+            <Units>Minutes</Units>
+          </TimeWindow>
+          <CommandLine>
+            <FormattedCode>if not exist "{0}\{1}" echo NotExist</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Local.Infoblox directory</DisplayPath>
+                <LinkChain />
+                <ObjectId>d20cebde-e5a9-48a6-bcfb-18099f0145d4</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Local.Infoblox script</DisplayPath>
+                <LinkChain />
+                <ObjectId>f98bbf32-d374-4542-94aa-171f9ec5cc47</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </CommandLine>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ConditionBranchNode">
+        <Id>2c5ee623-9361-4d91-b72d-3ba5285925b9</Id>
+        <DisplayName>If script does not exists</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>7451dfe5-4047-45ed-b750-4b2d6bba703d</Id>
+            <DisplayName>Create script file</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>0b5002bb-836f-489d-a709-1c598ecf8cc6</Id>
+                <ActivityNodeId>0104d4a2-3597-41e0-af21-315add1e79f5</ActivityNodeId>
+                <CompletedId>687b82e6-cf33-468d-bfab-c026cf12d5f3</CompletedId>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="WindowsWriteFileActivityConfiguration" xml:space="preserve">
+              <Id>0104d4a2-3597-41e0-af21-315add1e79f5</Id>
+              <DisplayName>Create script file</DisplayName>
+              <TargetLoadBalancer xsi:type="OrchestratorServerLoadBalancer">
+                <TargetGroupId>bc5933b4-512f-46ce-86a9-3b40331ba395</TargetGroupId>
+              </TargetLoadBalancer>
+              <InheritTarget>false</InheritTarget>
+              <ContainingProcessId>4334412d-489c-41a5-8d7c-7a8cb5e25c48</ContainingProcessId>
+              <LocalFileName>
+                <FormattedCode>{0}\{1}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Local.Infoblox directory</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>d20cebde-e5a9-48a6-bcfb-18099f0145d4</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Local.Infoblox script</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>f98bbf32-d374-4542-94aa-171f9ec5cc47</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                </References>
+              </LocalFileName>
+              <Content>
+                <FormattedCode>#!/usr/bin/perl
+#use strict;
+use Infoblox;
+
+$ENV{{'PERL_LWP_SSL_VERIFY_HOSTNAME'}} = 0;
+
+#Info from parameters
+my $ipaddr = $ARGV[0];
+
+my $session = Infoblox::Session-&gt;new(
+        master =&gt; "$ARGV[1]",
+        password =&gt; "$ARGV[3]",
+        username =&gt; "$ARGV[2]",
+        timeout =&gt; 180,
+);
+
+my $ipam_object = $session-&gt;get( 'object'     =&gt; 'Infoblox::IPAM::Address',
+                                  'address' =&gt; $ipaddr,);
+print $ipam_object-&gt;name;
+
+my $host = $session-&gt;get ('object' =&gt; "Infoblox::DNS::Host",
+			  'name' =&gt;  $ipam_object-&gt;name,);
+
+print $host-&gt;name;
+
+$session-&gt;remove($host)
+     or die("Remove host record failed: ",
+            $session-&gt;status_code() . ":" . $session-&gt;status_detail());
+print "Returned $ipaddr"
+</FormattedCode>
+              </Content>
+              <Options>NoOverwrite</Options>
+              <Encoding>ASCII</Encoding>
+            </Configuration>
+          </ActivityNode>
+        </Children>
+        <Condition>
+          <Id>54cc464b-7924-48b1-8810-37a69780b004</Id>
+          <Conditions>
+            <ConditionDefinition xsi:type="VariableConditionDefinition">
+              <Id>9ecc8af2-9f7d-4816-bd54-657f1448fde2</Id>
+              <Expression xsi:type="SubstitutableWildcard">
+                <HardcodedValue>*NotExist*</HardcodedValue>
+              </Expression>
+              <Comparison>Wildcard</Comparison>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Check if script exists.Output</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>Output</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>0bef7623-2dfd-4b70-b1b2-0c9fce92f87d</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </VariableReference>
+            </ConditionDefinition>
+          </Conditions>
+        </Condition>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>6b6361ed-ec6b-4a82-9b5f-f770f7e0319c</Id>
+        <DisplayName>Execute Windows PowerShell Script</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>14d98080-9d6d-4e4e-a41e-c4f0467d2ad0</Id>
+            <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+            <DisplayName>If Execution Fails</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>d607e726-cb9c-40a3-b538-cbd2074f107c</Id>
+                <DisplayName>Set Remediation Settings</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>c6f3dce9-9c8a-4328-b19e-6ab0ae314b6d</Id>
+                    <ActivityNodeId>ecc1498b-5d99-40a8-bbb4-db2ce04452d7</ActivityNodeId>
+                    <CompletedId>30fa6ed9-84b3-43f8-881f-e737473eeed5</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+                  <Id>ecc1498b-5d99-40a8-bbb4-db2ce04452d7</Id>
+                  <DisplayName>Set Remediation Settings</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>4334412d-489c-41a5-8d7c-7a8cb5e25c48</ContainingProcessId>
+                  <Assignments>
+                    <PropertyReferenceValuePair>
+                      <VariableToSet>
+                        <DisplayPath>Process.Target.Properties.Cloud.Service.General.ErrorCode</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="ObjectReferenceLink">
+                            <ObjectLink>
+                              <Id>7ad8347e-4936-4962-ab6d-3ec987d2737a</Id>
+                              <ObjectType>PropertyExtension</ObjectType>
+                            </ObjectLink>
+                          </Link>
+                        </LinkChain>
+                        <ObjectType>ProcessInstance</ObjectType>
+                      </VariableToSet>
+                      <NewValue xsi:type="SubstitutableNumber">
+                        <HardcodedValue>5003</HardcodedValue>
+                      </NewValue>
+                    </PropertyReferenceValuePair>
+                    <PropertyReferenceValuePair>
+                      <VariableToSet>
+                        <DisplayPath>Process.Target.Properties.Cloud.Service.General.ErrorDescription</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="ObjectReferenceLink">
+                            <ObjectLink>
+                              <Id>05385a56-169a-4946-9e3e-8de36ceaa838</Id>
+                              <ObjectType>PropertyExtension</ObjectType>
+                            </ObjectLink>
+                          </Link>
+                        </LinkChain>
+                        <ObjectType>ProcessInstance</ObjectType>
+                      </VariableToSet>
+                      <NewValue xsi:type="SubstitutableString">
+                        <FormattedCode>{0}
+{1}
+</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.Execute Windows PowerShell Script.Error Information</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ErrorInformation</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>177d1e58-69ee-4ae2-9028-a400db4575ef</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.Execute Windows PowerShell Script.Output</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>Output</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>177d1e58-69ee-4ae2-9028-a400db4575ef</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </NewValue>
+                    </PropertyReferenceValuePair>
+                  </Assignments>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="CompletedNode">
+                <Id>53e2120a-6c34-4a6f-91e0-49b8ef1a3cf5</Id>
+                <Notes>Fail the entire process</Notes>
+                <CompletedType>FailedNotCompleted</CompletedType>
+                <ResultMessage>
+                  <FormattedCode>{0}</FormattedCode>
+                  <References>
+                    <VariableReference xsi:type="PropertyReference">
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>ErrorInformation</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectId>177d1e58-69ee-4ae2-9028-a400db4575ef</ObjectId>
+                      <ObjectType>ActivityInstance</ObjectType>
+                    </VariableReference>
+                  </References>
+                </ResultMessage>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>a890cde7-f489-4f46-bfad-f288b4ef2907</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>f31988e5-6786-4a8d-84f5-cf50efb5ba25</Id>
+                  <Expression xsi:type="SubstitutableBoolean">
+                    <HardcodedValue>true</HardcodedValue>
+                  </Expression>
+                  <Comparison>Equals</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>InstanceFailed</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>177d1e58-69ee-4ae2-9028-a400db4575ef</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="WindowsPowerShellScriptActivityConfiguration" xml:space="preserve">
+          <Id>177d1e58-69ee-4ae2-9028-a400db4575ef</Id>
+          <DisplayName>Execute Windows PowerShell Script</DisplayName>
+          <TargetLoadBalancer xsi:type="OrchestratorServerLoadBalancer">
+            <TargetGroupId>bc5933b4-512f-46ce-86a9-3b40331ba395</TargetGroupId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>4334412d-489c-41a5-8d7c-7a8cb5e25c48</ContainingProcessId>
+          <WorkingDirectory>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Local.Infoblox directory</DisplayPath>
+                <LinkChain />
+                <ObjectId>d20cebde-e5a9-48a6-bcfb-18099f0145d4</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </WorkingDirectory>
+          <FailReturnCodeNonZero>true</FailReturnCodeNonZero>
+          <UseTaskScheduler>false</UseTaskScheduler>
+          <TimeWindow>
+            <Milliseconds>300000</Milliseconds>
+            <Units>Minutes</Units>
+          </TimeWindow>
+          <Script>
+            <HardcodedValue>param ( $ipAddress,
+             $infobloxMaster,
+             $infobloxUser,
+             $infobloxpassword,
+             $scriptFile)
+
+perl  -X   $scriptFile $ipAddress $infobloxMaster $infobloxUser $infobloxpassword 2&gt;&amp;1</HardcodedValue>
+          </Script>
+          <Arguments>
+            <SubstitutableObject xsi:type="SubstitutableString">
+              <FormattedCode>{0}</FormattedCode>
+              <References>
+                <VariableReference xsi:type="PropertyReference">
+                  <DisplayPath>Process.Variables.Input.IP Address</DisplayPath>
+                  <LinkChain />
+                  <ObjectId>7ef7a89f-5d51-44de-bbae-2519ad721e28</ObjectId>
+                  <ObjectType>GlobalVariable</ObjectType>
+                </VariableReference>
+              </References>
+            </SubstitutableObject>
+            <SubstitutableObject xsi:type="SubstitutableString">
+              <FormattedCode>{0}</FormattedCode>
+              <References>
+                <VariableReference xsi:type="PropertyReference">
+                  <DisplayPath>Global Variables.Infoblox Master Address</DisplayPath>
+                  <LinkChain />
+                  <ObjectId>509d2b78-9de1-4f0b-a675-6d57186c8f79</ObjectId>
+                  <ObjectType>GlobalVariable</ObjectType>
+                </VariableReference>
+              </References>
+            </SubstitutableObject>
+            <SubstitutableObject xsi:type="SubstitutableString">
+              <FormattedCode>{0}</FormattedCode>
+              <References>
+                <VariableReference xsi:type="PropertyReference">
+                  <DisplayPath>Global Variables.Infoblox Username</DisplayPath>
+                  <LinkChain />
+                  <ObjectId>000d5705-16f3-4e8f-ad41-775e360778a1</ObjectId>
+                  <ObjectType>GlobalVariable</ObjectType>
+                </VariableReference>
+              </References>
+            </SubstitutableObject>
+            <SubstitutableObject xsi:type="SubstitutableEncryptedString">
+              <FormattedCode>{0}</FormattedCode>
+              <References>
+                <VariableReference xsi:type="PropertyReference">
+                  <DisplayPath>Global Variables.Infoblox password</DisplayPath>
+                  <LinkChain />
+                  <ObjectId>ccb3f8ee-8685-4558-bbe9-8ca3c0b51ad2</ObjectId>
+                  <ObjectType>GlobalVariable</ObjectType>
+                </VariableReference>
+              </References>
+            </SubstitutableObject>
+            <SubstitutableObject xsi:type="SubstitutableString">
+              <FormattedCode>{0}</FormattedCode>
+              <References>
+                <VariableReference xsi:type="PropertyReference">
+                  <DisplayPath>Process.Variables.Local.Infoblox script</DisplayPath>
+                  <LinkChain />
+                  <ObjectId>f98bbf32-d374-4542-94aa-171f9ec5cc47</ObjectId>
+                  <ObjectType>GlobalVariable</ObjectType>
+                </VariableReference>
+              </References>
+            </SubstitutableObject>
+          </Arguments>
+          <Use32BitPowerShell>false</Use32BitPowerShell>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="StartProcessNode">
+        <Id>b8da1966-1b95-44ef-a59c-aaeccce45c5a</Id>
+        <DisplayName>Retrieve IP Address Information</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>f958ff08-6cc7-48bc-9fa0-a8f75a0693f2</Id>
+            <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+            <DisplayName>If Execution Fails</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>687c8171-4c25-406e-abc3-acbfcac4e6f7</Id>
+                <DisplayName>Set Remediation Settings </DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>d83c4656-c70c-4c4b-8c2b-492075982c1a</Id>
+                    <ActivityNodeId>929e2d35-f9e1-409b-bdb0-849727f7dde8</ActivityNodeId>
+                    <CompletedId>548889d6-3db5-4d7d-9a2b-1aec4155d1fb</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+                  <Id>929e2d35-f9e1-409b-bdb0-849727f7dde8</Id>
+                  <DisplayName>Set Remediation Settings </DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>4334412d-489c-41a5-8d7c-7a8cb5e25c48</ContainingProcessId>
+                  <Assignments>
+                    <PropertyReferenceValuePair>
+                      <VariableToSet>
+                        <DisplayPath>Process.Target.Properties.Cloud.Service.General.ErrorCode</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="ObjectReferenceLink">
+                            <ObjectLink>
+                              <Id>7ad8347e-4936-4962-ab6d-3ec987d2737a</Id>
+                              <ObjectType>PropertyExtension</ObjectType>
+                            </ObjectLink>
+                          </Link>
+                        </LinkChain>
+                        <ObjectType>ProcessInstance</ObjectType>
+                      </VariableToSet>
+                      <NewValue xsi:type="SubstitutableNumber">
+                        <HardcodedValue>1012</HardcodedValue>
+                      </NewValue>
+                    </PropertyReferenceValuePair>
+                    <PropertyReferenceValuePair>
+                      <VariableToSet>
+                        <DisplayPath>Process.Target.Properties.Cloud.Service.General.ErrorDescription</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="ObjectReferenceLink">
+                            <ObjectLink>
+                              <Id>05385a56-169a-4946-9e3e-8de36ceaa838</Id>
+                              <ObjectType>PropertyExtension</ObjectType>
+                            </ObjectLink>
+                          </Link>
+                        </LinkChain>
+                        <ObjectType>ProcessInstance</ObjectType>
+                      </VariableToSet>
+                      <NewValue xsi:type="SubstitutableString">
+                        <FormattedCode>{0}
+
+</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.Retrieve IP Address Information.Error Information</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ErrorInformation</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>b8da1966-1b95-44ef-a59c-aaeccce45c5a</ObjectId>
+                            <ObjectType>ProcessInstance</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </NewValue>
+                    </PropertyReferenceValuePair>
+                  </Assignments>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="CompletedNode">
+                <Id>ff90f701-0ac7-44f8-8e77-a7754d0d5bdc</Id>
+                <Notes>Fail the entire process</Notes>
+                <CompletedType>FailedNotCompleted</CompletedType>
+                <ResultMessage>
+                  <FormattedCode>{0}</FormattedCode>
+                  <References>
+                    <VariableReference xsi:type="PropertyReference">
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>ErrorInformation</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectId>b8da1966-1b95-44ef-a59c-aaeccce45c5a</ObjectId>
+                      <ObjectType>ProcessInstance</ObjectType>
+                    </VariableReference>
+                  </References>
+                </ResultMessage>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>54acc246-71a9-4378-8b50-8e3976bb360c</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>90337e96-a649-4eb9-ae2e-55bc9dc39c65</Id>
+                  <Expression xsi:type="SubstitutableBoolean">
+                    <HardcodedValue>true</HardcodedValue>
+                  </Expression>
+                  <Comparison>Equals</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>InstanceFailed</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>b8da1966-1b95-44ef-a59c-aaeccce45c5a</ObjectId>
+                    <ObjectType>ProcessInstance</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+        </Children>
+        <ProcessId>d6c24223-8803-47c0-af04-c5696f7c0a5b</ProcessId>
+        <InputVariableTable>
+          <VariableAssignmentsAsArray>
+            <InputVariableAssignment>
+              <InputVariableId>61fa70ab-5890-4645-a21c-bcc9c980659e</InputVariableId>
+              <VariableValue xsi:type="SubstitutableString">
+                <HardcodedValue />
+              </VariableValue>
+            </InputVariableAssignment>
+            <InputVariableAssignment>
+              <InputVariableId>15240ce4-17e6-4848-a227-db1bc1668b06</InputVariableId>
+              <VariableValue xsi:type="SubstitutableString">
+                <HardcodedValue />
+              </VariableValue>
+            </InputVariableAssignment>
+            <InputVariableAssignment>
+              <InputVariableId>dcecbf57-df0a-45e9-acf2-5f374790e44f</InputVariableId>
+              <VariableValue xsi:type="SubstitutableString">
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Input.VLAN Instance</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>5c0aa3eb-9b2c-42ae-bc9a-eebeb4601937</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                </References>
+              </VariableValue>
+            </InputVariableAssignment>
+            <InputVariableAssignment>
+              <InputVariableId>44b9366b-7a9e-44c9-ac57-c3da36bfb0a5</InputVariableId>
+              <VariableValue xsi:type="SubstitutableString">
+                <HardcodedValue>VLAN</HardcodedValue>
+              </VariableValue>
+            </InputVariableAssignment>
+            <InputVariableAssignment>
+              <InputVariableId>8900a0d8-1af9-4fea-8826-8c1504a484f9</InputVariableId>
+              <VariableValue xsi:type="SubstitutableString">
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Input.IP Address</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>7ef7a89f-5d51-44de-bbae-2519ad721e28</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                </References>
+              </VariableValue>
+            </InputVariableAssignment>
+            <InputVariableAssignment>
+              <InputVariableId>48904642-9042-4a09-8f88-d22b0d7ba392</InputVariableId>
+              <VariableValue xsi:type="SubstitutableString">
+                <HardcodedValue>IPAddress</HardcodedValue>
+              </VariableValue>
+            </InputVariableAssignment>
+            <InputVariableAssignment>
+              <InputVariableId>d77bb3bf-3961-493b-87ac-89e46eb56d6c</InputVariableId>
+              <VariableValue xsi:type="SubstitutableString">
+                <HardcodedValue>IPAddress</HardcodedValue>
+              </VariableValue>
+            </InputVariableAssignment>
+          </VariableAssignmentsAsArray>
+        </InputVariableTable>
+        <Asynchronous>false</Asynchronous>
+        <InheritTarget>false</InheritTarget>
+        <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+          <SingleTargetId>
+            <HardcodedValue>ba183b27-04b2-4f17-aa1d-709221bd68f5</HardcodedValue>
+          </SingleTargetId>
+        </TargetLoadBalancer>
+        <InheritPriorityClass>true</InheritPriorityClass>
+        <RuntimeUserId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </RuntimeUserId>
+        <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+        <StartPointId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </StartPointId>
+        <StartPointName>
+          <FormattedCode />
+        </StartPointName>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>25148789-2a62-4edf-8fe7-f2af3a82718b</Id>
+        <DisplayName>Read IP Address Information</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>f901e0be-470d-4ac5-8d9c-9ffc14b833af</Id>
+            <ActivityNodeId>805bb960-afcb-4794-b528-bb773047aee6</ActivityNodeId>
+            <CompletedId>d4b7cde4-c695-4742-8e3b-711ab10800f9</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="ReadTableFromXmlActivityConfiguration" xml:space="preserve">
+          <Id>805bb960-afcb-4794-b528-bb773047aee6</Id>
+          <DisplayName>Read IP Address Information</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>4334412d-489c-41a5-8d7c-7a8cb5e25c48</ContainingProcessId>
+          <Columns>
+            <BuiltinTableColumn>
+              <Name>Name</Name>
+              <DataType>System.String</DataType>
+            </BuiltinTableColumn>
+            <BuiltinTableColumn>
+              <Name>IPAddress</Name>
+              <DataType>System.String</DataType>
+            </BuiltinTableColumn>
+            <BuiltinTableColumn>
+              <Name>VLAN</Name>
+              <DataType>System.String</DataType>
+            </BuiltinTableColumn>
+          </Columns>
+          <XmlRowElementName>
+            <HardcodedValue>row</HardcodedValue>
+          </XmlRowElementName>
+          <XmlString>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Retrieve IP Address Information.ResultsTable XML</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="ProcessOutputVariableLink">
+                    <LaunchingActivityId>b8da1966-1b95-44ef-a59c-aaeccce45c5a</LaunchingActivityId>
+                    <OutputVariableId>d4e94a28-84a7-4635-b8f5-db6fc2a37b62</OutputVariableId>
+                  </Link>
+                </LinkChain>
+                <ObjectId>b8da1966-1b95-44ef-a59c-aaeccce45c5a</ObjectId>
+                <ObjectType>WorkflowNode</ObjectType>
+              </VariableReference>
+            </References>
+          </XmlString>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>8bb9cbbf-0d26-499a-b7e7-8a8d02c175df</Id>
+        <DisplayName>Unassign IP Address Service Item</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>5133775d-e4a4-4723-87f8-5a13f68613c6</Id>
+            <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+            <DisplayName>Ignore Error</DisplayName>
+            <Children />
+            <Condition>
+              <Id>cae2b948-ba37-483e-a7eb-2263849094fe</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>4dabe2e3-4ca0-4b8a-be13-2cf9b4fb1626</Id>
+                  <Expression xsi:type="SubstitutableBoolean">
+                    <HardcodedValue>true</HardcodedValue>
+                  </Expression>
+                  <Comparison>Equals</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>InstanceFailed</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>8f4f1f4a-6bf6-4001-95c7-f10da9b881d0</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="UpdateServiceItemActivityConfiguration" xml:space="preserve">
+          <Id>8f4f1f4a-6bf6-4001-95c7-f10da9b881d0</Id>
+          <DisplayName>Unassign IP Address Service Item</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>b3216113-bb0f-4cb3-b7c2-93b9074ef87b</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>4334412d-489c-41a5-8d7c-7a8cb5e25c48</ContainingProcessId>
+          <RetryTimePeriod>
+            <DisplayUnits>Minutes</DisplayUnits>
+            <Period>
+              <FormattedCode>{0}</FormattedCode>
+              <References>
+                <VariableReference xsi:type="PropertyReference">
+                  <DisplayPath>Adapters.Cisco Service Portal Adapter.Retry Time Period (minutes)</DisplayPath>
+                  <LinkChain>
+                    <Link xsi:type="PropertyNameLink">
+                      <PropertyName>DefaultRetryMinutes</PropertyName>
+                    </Link>
+                  </LinkChain>
+                  <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                  <ObjectType>Adapter</ObjectType>
+                </VariableReference>
+              </References>
+            </Period>
+          </RetryTimePeriod>
+          <RetryFrequency>
+            <DisplayUnits>Seconds</DisplayUnits>
+            <Period>
+              <FormattedCode>{0}</FormattedCode>
+              <References>
+                <VariableReference xsi:type="PropertyReference">
+                  <DisplayPath>Adapters.Cisco Service Portal Adapter.Retry Frequency (seconds)</DisplayPath>
+                  <LinkChain>
+                    <Link xsi:type="PropertyNameLink">
+                      <PropertyName>DefaultRetryFrequency</PropertyName>
+                    </Link>
+                  </LinkChain>
+                  <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                  <ObjectType>Adapter</ObjectType>
+                </VariableReference>
+              </References>
+            </Period>
+          </RetryFrequency>
+          <Timeout>
+            <DisplayUnits>Seconds</DisplayUnits>
+            <Period>
+              <HardcodedValue>100</HardcodedValue>
+            </Period>
+          </Timeout>
+          <ItemType>
+            <HardcodedValue>IPAddress</HardcodedValue>
+          </ItemType>
+          <ItemName>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Read IP Address Information.Result Table.First Row.Name</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>ResultTable</PropertyName>
+                  </Link>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>FirstRow</PropertyName>
+                  </Link>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>Name</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>805bb960-afcb-4794-b528-bb773047aee6</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </VariableReference>
+            </References>
+          </ItemName>
+          <BrowseServiceItemName>IPAddress</BrowseServiceItemName>
+          <ItemAttributes>
+            <ServiceItemPropertyInformation>
+              <Name>
+                <HardcodedValue>UsedByMachine</HardcodedValue>
+              </Name>
+              <Value xsi:type="SubstitutableString">
+                <HardcodedValue> </HardcodedValue>
+              </Value>
+            </ServiceItemPropertyInformation>
+            <ServiceItemPropertyInformation>
+              <Name>
+                <HardcodedValue>Usage</HardcodedValue>
+              </Name>
+              <Value xsi:type="SubstitutableString">
+                <HardcodedValue>Unassigned</HardcodedValue>
+              </Value>
+            </ServiceItemPropertyInformation>
+          </ItemAttributes>
+          <Subscriber>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Retrieve IP Address Information.Cloud Portal API User Login</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="ProcessOutputVariableLink">
+                    <LaunchingActivityId>b8da1966-1b95-44ef-a59c-aaeccce45c5a</LaunchingActivityId>
+                    <OutputVariableId>45a28973-268c-44bb-9b69-32a5f13f1671</OutputVariableId>
+                  </Link>
+                </LinkChain>
+                <ObjectId>b8da1966-1b95-44ef-a59c-aaeccce45c5a</ObjectId>
+                <ObjectType>WorkflowNode</ObjectType>
+              </VariableReference>
+            </References>
+          </Subscriber>
+          <SubscriberOuName>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Retrieve IP Address Information.Cloud Portal API User OU</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="ProcessOutputVariableLink">
+                    <LaunchingActivityId>b8da1966-1b95-44ef-a59c-aaeccce45c5a</LaunchingActivityId>
+                    <OutputVariableId>c27484f2-363f-4726-9135-b5161e819c11</OutputVariableId>
+                  </Link>
+                </LinkChain>
+                <ObjectId>b8da1966-1b95-44ef-a59c-aaeccce45c5a</ObjectId>
+                <ObjectType>WorkflowNode</ObjectType>
+              </VariableReference>
+            </References>
+          </SubscriberOuName>
+          <SubscriberRequisitionEntryId>
+            <FormattedCode />
+          </SubscriberRequisitionEntryId>
+          <ChannelId>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Global Variables.Cloud Service Item Update Channel ID</DisplayPath>
+                <LinkChain />
+                <ObjectId>c070b5b6-0120-48f1-8b36-2319f9348a4a</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </ChannelId>
+        </Configuration>
+      </ActivityNode>
+    </Children>
+  </FirstActivity>
+  <ProcessId>4334412d-489c-41a5-8d7c-7a8cb5e25c48</ProcessId>
+</WorkflowConfiguration>
