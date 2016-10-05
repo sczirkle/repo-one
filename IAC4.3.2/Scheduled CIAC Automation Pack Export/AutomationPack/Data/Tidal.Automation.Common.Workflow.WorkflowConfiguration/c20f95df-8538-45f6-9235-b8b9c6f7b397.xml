@@ -1,0 +1,243 @@
+<?xml version="1.0"?>
+<WorkflowConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>c20f95df-8538-45f6-9235-b8b9c6f7b397</Id>
+  <DisplayName>Convert Multiline to Comma Separated String</DisplayName>
+  <CreatedTime>2016-02-16T19:38:57.42225Z</CreatedTime>
+  <ModifiedTime>2016-02-16T19:38:29.7646484Z</ModifiedTime>
+  <FirstActivity xsi:type="RootNode">
+    <Id>b4ea2fd3-1a68-4089-9a73-591e20a9dd01</Id>
+    <DisplayName />
+    <Children>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>69cbc90c-145b-4783-9250-1791e58e39f6</Id>
+        <DisplayName>Read Table from Text</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>90e9af12-bb96-401c-bece-a8a413ce326f</Id>
+            <ActivityNodeId>9301eec5-f043-4679-ad70-81c7860c74aa</ActivityNodeId>
+            <CompletedId>acf3d254-c90c-44fe-b5ad-cc04555141a2</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="BuiltinReadTableFromTextActivityConfiguration" xml:space="preserve">
+          <Id>9301eec5-f043-4679-ad70-81c7860c74aa</Id>
+          <DisplayName>Read Table from Text</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>13ef6c78-f316-4dce-bcbe-1ddb5293471f</ContainingProcessId>
+          <Columns>
+            <BuiltinTableColumn>
+              <Name>Line</Name>
+              <DataType>System.String</DataType>
+            </BuiltinTableColumn>
+          </Columns>
+          <OtherDelimeter>0</OtherDelimeter>
+          <SourceText>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.Multiline String</DisplayPath>
+                <LinkChain />
+                <ObjectId>a66275af-ce8b-4ebd-bc90-b282b60bb143</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </SourceText>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ForEachNode">
+        <Id>6faf9485-e3a1-4cc1-9018-6fdfa4e4c1f8</Id>
+        <DisplayName>For Each Line</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>2172cae1-ceca-4420-b75f-c970a73fb043</Id>
+            <DisplayName>Trim Leading &amp; Trailing Space</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>978fe85a-10c4-4765-b925-6100352a82b0</Id>
+                <ActivityNodeId>8357e3fc-84c5-4ec6-a13a-3dbf612a0663</ActivityNodeId>
+                <CompletedId>35eb9d1c-e17f-496d-893c-c1ad896f01e0</CompletedId>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="TrimStringActivityConfiguration" xml:space="preserve">
+              <Id>8357e3fc-84c5-4ec6-a13a-3dbf612a0663</Id>
+              <DisplayName>Trim Leading &amp; Trailing Space</DisplayName>
+              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                <SingleTargetId>
+                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                </SingleTargetId>
+              </TargetLoadBalancer>
+              <InheritTarget>false</InheritTarget>
+              <ContainingProcessId>13ef6c78-f316-4dce-bcbe-1ddb5293471f</ContainingProcessId>
+              <InputString>
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.For Each Line.Item.Line</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>Line</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>6faf9485-e3a1-4cc1-9018-6fdfa4e4c1f8</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </InputString>
+              <TrimCharacters>
+                <HardcodedValue> </HardcodedValue>
+              </TrimCharacters>
+              <TrimOption>Both</TrimOption>
+            </Configuration>
+          </ActivityNode>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>44f00ae7-bc8c-4016-a54f-6173c3a9f33b</Id>
+            <DisplayName>Concatenate Line</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>e0847f51-8ab7-4bf1-a60f-a56a5f579d22</Id>
+                <ActivityNodeId>dd153651-d589-435b-b9ef-7e0c3457a48c</ActivityNodeId>
+                <CompletedId>088890a4-b422-473f-bf79-766ad3f6e484</CompletedId>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+              <Id>dd153651-d589-435b-b9ef-7e0c3457a48c</Id>
+              <DisplayName>Concatenate Line</DisplayName>
+              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                <SingleTargetId>
+                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                </SingleTargetId>
+              </TargetLoadBalancer>
+              <InheritTarget>false</InheritTarget>
+              <ContainingProcessId>13ef6c78-f316-4dce-bcbe-1ddb5293471f</ContainingProcessId>
+              <VariableToSet>
+                <DisplayPath>Process.Variables.Output.Comma Separated String</DisplayPath>
+                <LinkChain />
+                <ObjectId>7f31a8f6-03cc-4249-b906-d0ae0fdef76d</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableToSet>
+              <NewValue xsi:type="SubstitutableString">
+                <FormattedCode>{0},{1}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Output.Comma Separated String</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>7f31a8f6-03cc-4249-b906-d0ae0fdef76d</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Trim Leading &amp; Trailing Space.Trim Result</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>Result</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>8357e3fc-84c5-4ec6-a13a-3dbf612a0663</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </NewValue>
+            </Configuration>
+          </ActivityNode>
+        </Children>
+        <ForEachSource xsi:type="PropertyReference">
+          <DisplayPath>Workflow.Read Table from Text.Result Table.Rows</DisplayPath>
+          <LinkChain>
+            <Link xsi:type="PropertyNameLink">
+              <PropertyName>ResultTable</PropertyName>
+            </Link>
+            <Link xsi:type="PropertyNameLink">
+              <PropertyName>TIARows</PropertyName>
+            </Link>
+          </LinkChain>
+          <ObjectId>9301eec5-f043-4679-ad70-81c7860c74aa</ObjectId>
+          <ObjectType>ActivityInstance</ObjectType>
+        </ForEachSource>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>631203cb-6b14-4a3d-9c5e-2c3bbb24fcd5</Id>
+        <DisplayName>Trim Leading Comma</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>a555e4f2-4bb1-4480-8be8-904352e07490</Id>
+            <ActivityNodeId>798830c3-844d-41bb-afd0-9990bd526e9b</ActivityNodeId>
+            <CompletedId>23d6afc0-8387-49f6-a6bc-bc13aa05a9a1</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="TrimStringActivityConfiguration" xml:space="preserve">
+          <Id>798830c3-844d-41bb-afd0-9990bd526e9b</Id>
+          <DisplayName>Trim Leading Comma</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>13ef6c78-f316-4dce-bcbe-1ddb5293471f</ContainingProcessId>
+          <InputString>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Output.Comma Separated String</DisplayPath>
+                <LinkChain />
+                <ObjectId>7f31a8f6-03cc-4249-b906-d0ae0fdef76d</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </InputString>
+          <TrimCharacters>
+            <HardcodedValue>,</HardcodedValue>
+          </TrimCharacters>
+          <TrimOption>Leading</TrimOption>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>f0cb6de9-2d61-4416-af4c-a17175360b36</Id>
+        <DisplayName>Update Comma Separated String</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>32a8d167-99e0-4229-aa52-0a1e789879b1</Id>
+            <ActivityNodeId>682d581f-95a0-48ba-b626-ac57d442220a</ActivityNodeId>
+            <CompletedId>613cfeea-a1d6-4a3c-bb85-59f80c901306</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+          <Id>682d581f-95a0-48ba-b626-ac57d442220a</Id>
+          <DisplayName>Update Comma Separated String</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>13ef6c78-f316-4dce-bcbe-1ddb5293471f</ContainingProcessId>
+          <VariableToSet>
+            <DisplayPath>Process.Variables.Output.Comma Separated String</DisplayPath>
+            <LinkChain />
+            <ObjectId>7f31a8f6-03cc-4249-b906-d0ae0fdef76d</ObjectId>
+            <ObjectType>GlobalVariable</ObjectType>
+          </VariableToSet>
+          <NewValue xsi:type="SubstitutableString">
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Trim Leading Comma.Trim Result</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>Result</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>798830c3-844d-41bb-afd0-9990bd526e9b</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </VariableReference>
+            </References>
+          </NewValue>
+        </Configuration>
+      </ActivityNode>
+    </Children>
+  </FirstActivity>
+  <ProcessId>13ef6c78-f316-4dce-bcbe-1ddb5293471f</ProcessId>
+</WorkflowConfiguration>
