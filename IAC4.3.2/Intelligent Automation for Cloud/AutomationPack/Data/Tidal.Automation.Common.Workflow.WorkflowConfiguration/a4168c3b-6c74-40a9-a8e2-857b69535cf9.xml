@@ -1,0 +1,612 @@
+<?xml version="1.0"?>
+<WorkflowConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>a4168c3b-6c74-40a9-a8e2-857b69535cf9</Id>
+  <DisplayName>Create Application</DisplayName>
+  <CreatedTime>2016-02-15T20:43:15.614Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:43:33.8232421Z</ModifiedTime>
+  <FirstActivity xsi:type="RootNode">
+    <Id>02c52c13-9e40-4f7e-b98a-280f2d59b722</Id>
+    <DisplayName />
+    <Children>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>09cfd8f7-d865-463c-a3e6-597416ef9f72</Id>
+        <DisplayName>Create New DataCenter Application Request</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>6de3c0ec-171f-414e-8b03-16ad00e92a07</Id>
+            <ActivityNodeId>09cfd8f7-d865-463c-a3e6-597416ef9f72</ActivityNodeId>
+            <CompletedId>d7fb5e14-2ab6-45f1-975a-61142dea2312</CompletedId>
+          </ActivityNode>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>7cf95c7b-7d99-4ba4-a4a2-66480cd3e304</Id>
+            <DisplayName>If VNMC Error</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>7c926f1c-387e-47b7-8da2-7327d011c7f3</Id>
+                <DisplayName>XPath Query</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>1464309a-4a8e-4c56-bf9b-6766e1c99006</Id>
+                    <ActivityNodeId>7c926f1c-387e-47b7-8da2-7327d011c7f3</ActivityNodeId>
+                    <CompletedId>6a16bb82-52ce-4542-8b01-7b493bc9be5c</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="XPathQueryActivityConfiguration" xml:space="preserve">
+                  <Id>7c926f1c-387e-47b7-8da2-7327d011c7f3</Id>
+                  <DisplayName>XPath Query</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>24b6d9d1-4644-41db-a63f-de3a8bac9f14</ContainingProcessId>
+                  <SourceXml>
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.Create New DataCenter Application.Response</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>Response</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>09cfd8f7-d865-463c-a3e6-597416ef9f72</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </SourceXml>
+                  <Namespaces />
+                  <Queries>
+                    <XPathQueryDefinition>
+                      <DisplayName>errorCode</DisplayName>
+                      <Query>
+                        <HardcodedValue>configConfMo/@errorCode</HardcodedValue>
+                      </Query>
+                      <ReturnType>String</ReturnType>
+                      <DefaultBehavior>Fail</DefaultBehavior>
+                    </XPathQueryDefinition>
+                    <XPathQueryDefinition>
+                      <DisplayName>errorDesc</DisplayName>
+                      <Query>
+                        <HardcodedValue>configConfMo/@errorDescr</HardcodedValue>
+                      </Query>
+                      <ReturnType>String</ReturnType>
+                      <DefaultBehavior>Fail</DefaultBehavior>
+                    </XPathQueryDefinition>
+                  </Queries>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>14c5b0ff-5935-4928-b57a-8ae3ad8f9dda</Id>
+                <DisplayName>Set Error Code</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>725838f2-ff1b-4073-ba0d-c47abef24e76</Id>
+                    <ActivityNodeId>14c5b0ff-5935-4928-b57a-8ae3ad8f9dda</ActivityNodeId>
+                    <CompletedId>6af5ef14-9043-42b5-8b1a-80a7677a58bb</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                  <Id>14c5b0ff-5935-4928-b57a-8ae3ad8f9dda</Id>
+                  <DisplayName>Set Error Code</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>24b6d9d1-4644-41db-a63f-de3a8bac9f14</ContainingProcessId>
+                  <VariableToSet>
+                    <DisplayPath>Process.Variables.Output.errorCode</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>9d17142d-3dd7-4a95-91a3-54c75060ab78</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableToSet>
+                  <NewValue xsi:type="SubstitutableNumber">
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.XPath Query.Results.errorCode</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>Results</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>errorCode</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>7c926f1c-387e-47b7-8da2-7327d011c7f3</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </NewValue>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>06cbf6ee-4638-4107-9776-c2075ff08fd9</Id>
+                <DisplayName>Set Error Type</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>77526f72-7abf-4e65-9c40-eaa48059b6fc</Id>
+                    <ActivityNodeId>06cbf6ee-4638-4107-9776-c2075ff08fd9</ActivityNodeId>
+                    <CompletedId>3dec59ea-3bfd-4d4e-a7ab-1474ca7ec328</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                  <Id>06cbf6ee-4638-4107-9776-c2075ff08fd9</Id>
+                  <DisplayName>Set Error Type</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>24b6d9d1-4644-41db-a63f-de3a8bac9f14</ContainingProcessId>
+                  <VariableToSet>
+                    <DisplayPath>Process.Variables.Output.errorType</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>e3ffee22-4cbd-4c48-851c-6338bf9ba11f</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableToSet>
+                  <NewValue xsi:type="SubstitutableString">
+                    <HardcodedValue>VNMC</HardcodedValue>
+                  </NewValue>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>ac2989cf-e326-4b26-afc1-67372f78fef2</Id>
+                <DisplayName>Set Error Message</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>55fb57e2-cbee-418d-a738-f0826c525f26</Id>
+                    <ActivityNodeId>ac2989cf-e326-4b26-afc1-67372f78fef2</ActivityNodeId>
+                    <CompletedId>b0d30f53-2aa6-45c5-9cc1-d34ef9c03b4b</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                  <Id>ac2989cf-e326-4b26-afc1-67372f78fef2</Id>
+                  <DisplayName>Set Error Message</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>24b6d9d1-4644-41db-a63f-de3a8bac9f14</ContainingProcessId>
+                  <VariableToSet>
+                    <DisplayPath>Process.Variables.Output.message</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>fadff55b-815b-4958-aad2-3780e0d7211e</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableToSet>
+                  <NewValue xsi:type="SubstitutableString">
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.XPath Query.Results.errorDesc</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>Results</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>errorDesc</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>7c926f1c-387e-47b7-8da2-7327d011c7f3</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </NewValue>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="CompletedNode">
+                <Id>fcfd157c-c0a1-4bbc-a0bb-e39875cbae6f</Id>
+                <CompletedType>Failed</CompletedType>
+                <ResultMessage>
+                  <FormattedCode>Application "{0}" creation on data center "{1}" for tenant "{2}" failed with VNMC error {3} : {4}</FormattedCode>
+                  <References>
+                    <VariableReference xsi:type="PropertyReference">
+                      <DisplayPath>Process.Variables.Input.application name</DisplayPath>
+                      <LinkChain />
+                      <ObjectId>6efad0c3-35b7-46c0-8256-0068fe622fd9</ObjectId>
+                      <ObjectType>GlobalVariable</ObjectType>
+                    </VariableReference>
+                    <VariableReference xsi:type="PropertyReference">
+                      <DisplayPath>Process.Variables.Input.datacenter name</DisplayPath>
+                      <LinkChain />
+                      <ObjectId>2a86bcb1-4680-415b-8b21-2d65396e588d</ObjectId>
+                      <ObjectType>GlobalVariable</ObjectType>
+                    </VariableReference>
+                    <VariableReference xsi:type="PropertyReference">
+                      <DisplayPath>Process.Variables.Input.tenant name</DisplayPath>
+                      <LinkChain />
+                      <ObjectId>cfaf46e7-94cf-426c-ba11-7739752fb3a1</ObjectId>
+                      <ObjectType>GlobalVariable</ObjectType>
+                    </VariableReference>
+                    <VariableReference xsi:type="PropertyReference">
+                      <DisplayPath>Workflow.XPath Query.Results.errorCode</DisplayPath>
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>Results</PropertyName>
+                        </Link>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>errorCode</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectId>7c926f1c-387e-47b7-8da2-7327d011c7f3</ObjectId>
+                      <ObjectType>ActivityInstance</ObjectType>
+                    </VariableReference>
+                    <VariableReference xsi:type="PropertyReference">
+                      <DisplayPath>Workflow.XPath Query.Results.errorDesc</DisplayPath>
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>Results</PropertyName>
+                        </Link>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>errorDesc</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectId>7c926f1c-387e-47b7-8da2-7327d011c7f3</ObjectId>
+                      <ObjectType>ActivityInstance</ObjectType>
+                    </VariableReference>
+                  </References>
+                </ResultMessage>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>bdcefa80-16e2-447b-b59a-9d48e4370625</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>089f7f79-d539-42dd-bf92-1c61f1f3775e</Id>
+                  <Expression xsi:type="SubstitutableString">
+                    <HardcodedValue>&lt;configConfMo[\w\W\n\r]*errorCode=[\w\W\n\r]*</HardcodedValue>
+                  </Expression>
+                  <Comparison>RegularExpression</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Create New DataCenter Application.Response</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>Response</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>09cfd8f7-d865-463c-a3e6-597416ef9f72</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>528c3f5a-ea70-4de5-9c1f-2798f1567f23</Id>
+            <DisplayName>If VNMC Created</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>6b3d4a62-7d4e-4400-bf52-d96b5335dd56</Id>
+                <DisplayName>Set Result</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>cb8cfb25-301e-4c5d-9a94-25fcbd932dec</Id>
+                    <ActivityNodeId>6b3d4a62-7d4e-4400-bf52-d96b5335dd56</ActivityNodeId>
+                    <CompletedId>13d4b5bf-7baf-4324-9aa2-a91e041e2e05</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                  <Id>6b3d4a62-7d4e-4400-bf52-d96b5335dd56</Id>
+                  <DisplayName>Set Result</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>24b6d9d1-4644-41db-a63f-de3a8bac9f14</ContainingProcessId>
+                  <VariableToSet>
+                    <DisplayPath>Process.Variables.Output.message</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>fadff55b-815b-4958-aad2-3780e0d7211e</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableToSet>
+                  <NewValue xsi:type="SubstitutableString">
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.Create New DataCenter Application.Response</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>Response</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>09cfd8f7-d865-463c-a3e6-597416ef9f72</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </NewValue>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="CompletedNode">
+                <Id>acb9d160-c8e7-4bdd-bc6c-cc88c6dc8d18</Id>
+                <CompletedType>Succeeded</CompletedType>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>bdcefa80-16e2-447b-b59a-9d48e4370625</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>089f7f79-d539-42dd-bf92-1c61f1f3775e</Id>
+                  <Expression xsi:type="SubstitutableString">
+                    <HardcodedValue>&lt;configConfMo[\w\W\n\r]*status="created"[\w\W\n\r]*</HardcodedValue>
+                  </Expression>
+                  <Comparison>RegularExpression</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Create New DataCenter Application.Response</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>Response</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>09cfd8f7-d865-463c-a3e6-597416ef9f72</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>acbf234d-89ef-4402-b762-313bb20ab493</Id>
+            <Notes>For example, if request URL is not correct, response may be:
+"Invalid application name:&lt;invalid-relative-url-provided&gt;, please make sure URL format is correct."</Notes>
+            <DisplayName>If Other Error</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>dce65179-d827-465c-b50f-0629ab98924b</Id>
+                <DisplayName>Set Error Code</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>8ff49592-3e83-47ba-bf60-061a90b8712b</Id>
+                    <ActivityNodeId>dce65179-d827-465c-b50f-0629ab98924b</ActivityNodeId>
+                    <CompletedId>7dc85796-6c0b-41de-a525-d07c84588b3e</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                  <Id>dce65179-d827-465c-b50f-0629ab98924b</Id>
+                  <DisplayName>Set Error Code</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>24b6d9d1-4644-41db-a63f-de3a8bac9f14</ContainingProcessId>
+                  <VariableToSet>
+                    <DisplayPath>Process.Variables.Output.errorCode</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>9d17142d-3dd7-4a95-91a3-54c75060ab78</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableToSet>
+                  <NewValue xsi:type="SubstitutableNumber">
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.Create New DataCenter Application.Status Code</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>StatusCode</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>09cfd8f7-d865-463c-a3e6-597416ef9f72</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </NewValue>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>1e607810-8b9f-43e1-b84f-cf7c20647e61</Id>
+                <DisplayName>Set Error Type</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>3c7820ca-cd6a-470b-8ffe-3b0feca1c9cb</Id>
+                    <ActivityNodeId>1e607810-8b9f-43e1-b84f-cf7c20647e61</ActivityNodeId>
+                    <CompletedId>b55a5c3e-7e12-43b7-bd72-2304fa70ce5e</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                  <Id>1e607810-8b9f-43e1-b84f-cf7c20647e61</Id>
+                  <DisplayName>Set Error Type</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>24b6d9d1-4644-41db-a63f-de3a8bac9f14</ContainingProcessId>
+                  <VariableToSet>
+                    <DisplayPath>Process.Variables.Output.errorType</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>e3ffee22-4cbd-4c48-851c-6338bf9ba11f</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableToSet>
+                  <NewValue xsi:type="SubstitutableString">
+                    <HardcodedValue>HTTP</HardcodedValue>
+                  </NewValue>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>56802e86-16db-4d51-95fe-11ade67ec17e</Id>
+                <DisplayName>Set Error Message</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>6027a2dc-b00f-482f-b5d0-89d17f9f33ea</Id>
+                    <ActivityNodeId>56802e86-16db-4d51-95fe-11ade67ec17e</ActivityNodeId>
+                    <CompletedId>547f5f19-6995-49f4-8b94-5ce59940457f</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                  <Id>56802e86-16db-4d51-95fe-11ade67ec17e</Id>
+                  <DisplayName>Set Error Message</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>24b6d9d1-4644-41db-a63f-de3a8bac9f14</ContainingProcessId>
+                  <VariableToSet>
+                    <DisplayPath>Process.Variables.Output.message</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>fadff55b-815b-4958-aad2-3780e0d7211e</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableToSet>
+                  <NewValue xsi:type="SubstitutableString">
+                    <FormattedCode>{0} / {1}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.Create New DataCenter Application.Response</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>Response</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>09cfd8f7-d865-463c-a3e6-597416ef9f72</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.Create New DataCenter Application.Status Description</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>StatusDescription</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>09cfd8f7-d865-463c-a3e6-597416ef9f72</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </NewValue>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="CompletedNode">
+                <Id>da2aaaf3-79ad-4a6c-bf83-3431ce67e0f5</Id>
+                <CompletedType>FailedNotCompleted</CompletedType>
+                <ResultMessage>
+                  <FormattedCode>{0}</FormattedCode>
+                  <References>
+                    <VariableReference xsi:type="PropertyReference">
+                      <DisplayPath>Workflow.Create New DataCenter Application.Response</DisplayPath>
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>Response</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectId>09cfd8f7-d865-463c-a3e6-597416ef9f72</ObjectId>
+                      <ObjectType>ActivityInstance</ObjectType>
+                    </VariableReference>
+                  </References>
+                </ResultMessage>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>bdcefa80-16e2-447b-b59a-9d48e4370625</Id>
+              <Conditions />
+            </Condition>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="WebHttpTargetAwareRequestActivityConfiguration" xml:space="preserve">
+          <Id>09cfd8f7-d865-463c-a3e6-597416ef9f72</Id>
+          <DisplayName>Create New DataCenter Application Request</DisplayName>
+          <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+          <ContainingProcessId>24b6d9d1-4644-41db-a63f-de3a8bac9f14</ContainingProcessId>
+          <UseCredentials>true</UseCredentials>
+          <RelativeUrl>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Local.relative-url</DisplayPath>
+                <LinkChain />
+                <ObjectId>3a126451-dfed-4d35-863c-cf6754c4e09c</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </RelativeUrl>
+          <ContentType>
+            <HardcodedValue>application/xml; charset=utf-8</HardcodedValue>
+          </ContentType>
+          <Method>
+            <HardcodedValue>POST</HardcodedValue>
+          </Method>
+          <UserAgent>
+            <HardcodedValue />
+          </UserAgent>
+          <Request>
+            <FormattedCode>&lt;configConfMo
+dn=""
+cookie="{0}"
+inHierarchical="false"&gt;
+    &lt;inConfig&gt;
+&lt;orgApp
+descr="{1}"
+dn="org-root/org-{2}/org-{3}/org-{4}"
+name="{5}"
+status="created"/&gt;
+    &lt;/inConfig&gt;
+&lt;/configConfMo&gt;
+</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.cookie</DisplayPath>
+                <LinkChain />
+                <ObjectId>fa382a1d-95fd-49f4-ad1e-1faae5c3b969</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.application description</DisplayPath>
+                <LinkChain />
+                <ObjectId>945f8126-d66e-4846-ae9f-cb1d5121d09e</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.tenant name</DisplayPath>
+                <LinkChain />
+                <ObjectId>cfaf46e7-94cf-426c-ba11-7739752fb3a1</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.datacenter name</DisplayPath>
+                <LinkChain />
+                <ObjectId>2a86bcb1-4680-415b-8b21-2d65396e588d</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.application name</DisplayPath>
+                <LinkChain />
+                <ObjectId>6efad0c3-35b7-46c0-8256-0068fe622fd9</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.application name</DisplayPath>
+                <LinkChain />
+                <ObjectId>6efad0c3-35b7-46c0-8256-0068fe622fd9</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </Request>
+          <ProtocolVersion>Version11</ProtocolVersion>
+          <AllowAutoRedirect>true</AllowAutoRedirect>
+          <Timeout>
+            <DisplayUnits>Seconds</DisplayUnits>
+            <Period>
+              <HardcodedValue>100</HardcodedValue>
+            </Period>
+          </Timeout>
+          <Accept>
+            <HardcodedValue />
+          </Accept>
+          <AcceptCookies>false</AcceptCookies>
+          <Headers />
+          <OutputFormat>Xml</OutputFormat>
+        </Configuration>
+      </ActivityNode>
+    </Children>
+  </FirstActivity>
+  <ProcessId>24b6d9d1-4644-41db-a63f-de3a8bac9f14</ProcessId>
+</WorkflowConfiguration>

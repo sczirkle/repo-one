@@ -1,0 +1,367 @@
+<?xml version="1.0"?>
+<WorkflowConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>c2e1a41c-5f1e-428f-bd7c-a1ecbe36514a</Id>
+  <DisplayName>Create Tenant Folder Alarm</DisplayName>
+  <CreatedTime>2016-02-15T20:46:26.254625Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:46:44.4638671Z</ModifiedTime>
+  <FirstActivity xsi:type="RootNode">
+    <Id>0e14dd58-15c9-42ac-9255-fee210017d7e</Id>
+    <DisplayName />
+    <Children>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>5c0b2a09-28f1-46c5-a2f4-3b7a755b04dc</Id>
+        <DisplayName>Execute PowerCLI</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>7a5a7f5c-064c-4255-a12f-8d6fa9ce3df1</Id>
+            <DisplayName>Instance Failed</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>473d9369-5e66-49e9-9431-0a6ba9a03f2f</Id>
+                <DisplayName>Unable to execute Windows PowerShell (5003)</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>103a2d59-2c18-4d29-b1c4-4daa1d7c5199</Id>
+                    <ActivityNodeId>473d9369-5e66-49e9-9431-0a6ba9a03f2f</ActivityNodeId>
+                    <CompletedId>a468a11c-3b76-4b4e-a0aa-ca4f0044b6c0</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                  <Id>473d9369-5e66-49e9-9431-0a6ba9a03f2f</Id>
+                  <DisplayName>Unable to execute Windows PowerShell (5003)</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>efac373f-2f78-4491-b13e-4bb2050d8dbd</ContainingProcessId>
+                  <VariableToSet>
+                    <DisplayPath>Process.Variables.Output.Error Code</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>83b99ea3-d522-431f-8091-26424e9cfece</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableToSet>
+                  <NewValue xsi:type="SubstitutableNumber">
+                    <HardcodedValue>5003</HardcodedValue>
+                  </NewValue>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="CompletedNode">
+                <Id>5a815775-c298-4b90-ad7e-a7ed9cc57580</Id>
+                <CompletedType>Failed</CompletedType>
+                <ResultMessage>
+                  <FormattedCode>{0}</FormattedCode>
+                  <References>
+                    <VariableReference xsi:type="PropertyReference">
+                      <DisplayPath>Workflow.Execute PowerCLI.Output</DisplayPath>
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>Output</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectId>5c0b2a09-28f1-46c5-a2f4-3b7a755b04dc</ObjectId>
+                      <ObjectType>ActivityInstance</ObjectType>
+                    </VariableReference>
+                  </References>
+                </ResultMessage>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>7b14083f-98c1-47a1-a8a5-83a0841db441</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>19c5aafb-671a-4053-af06-44dc9ecb45ef</Id>
+                  <Expression xsi:type="SubstitutableBoolean">
+                    <HardcodedValue>true</HardcodedValue>
+                  </Expression>
+                  <Comparison>Equals</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Execute PowerCLI.Instance Failed</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>InstanceFailed</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>5c0b2a09-28f1-46c5-a2f4-3b7a755b04dc</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="WindowsPowerShellScriptActivityConfiguration" xml:space="preserve">
+          <Id>5c0b2a09-28f1-46c5-a2f4-3b7a755b04dc</Id>
+          <DisplayName>Execute PowerCLI</DisplayName>
+          <TargetLoadBalancer xsi:type="OrchestratorServerLoadBalancer">
+            <TargetGroupId>bc5933b4-512f-46ce-86a9-3b40331ba395</TargetGroupId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>efac373f-2f78-4491-b13e-4bb2050d8dbd</ContainingProcessId>
+          <WorkingDirectory>
+            <HardcodedValue />
+          </WorkingDirectory>
+          <FailReturnCodeNonZero>false</FailReturnCodeNonZero>
+          <UseTaskScheduler>false</UseTaskScheduler>
+          <TimeWindow>
+            <Milliseconds>1800000</Milliseconds>
+            <Units>Minutes</Units>
+          </TimeWindow>
+          <Script>
+            <HardcodedValue>param(
+  [String]$vCenterAddress
+ ,[String]$vCenterProtocol
+ ,[String]$vCenterPort
+ ,[String]$vCenterUsername
+ ,[String]$vCenterPassword
+ ,[String]$vCenterLocation
+ ,[String]$TenantAcronym
+)
+
+trap { 
+  "`nError Information`n=================`nCategory: {0}`nID: {2}`nType: {1}`nMessage: {3}" -f
+  $_.CategoryInfo.Category, $_.Exception.GetType().FullName,
+  $_.FullyQualifiedErrorID, $_.Exception.Message
+  $_.ErrorDetails
+  $_
+  $LASTEXITCODE = 0
+  $ERROR.clear()
+  exit 0
+}
+
+$ErrorActionPreference = "Stop"
+
+Add-PSSnapin VMware.VimAutomation.Core
+
+Connect-VIServer -Server $vCenterAddress -Port $vCenterPort -Protocol $vCenterProtocol -User $vCenterUsername -Password $vCenterPassword -WarningAction SilentlyContinue | Out-Null
+
+try {
+  $ErrorActionPreference = "Stop"
+   
+  $folders = get-folder -name $TenantAcronym -ErrorAction SilentlyContinue
+
+if ($folders -ne $null)
+{ 
+ foreach ($folder in $folders)
+	{
+        $fid = ($folder.id).split("-")
+		$alarmMgr = Get-View AlarmManager
+		$alarm = New-Object VMware.Vim.AlarmSpec
+		$x = "::VM Events"
+		$alarm.Name = "$fid[2] $x"
+		$alarmexist = Get-AlarmDefinition -Name $alarmName
+		if ($alarmexist) {
+			$alarm.Description = ""
+			$alarm.Enabled = $TRUE
+
+			# Expression  - VM Reconfiguredm state set to "Red"
+			$expression1 = New-Object VMware.Vim.EventAlarmExpression
+			$expression1.EventType = "VmReconfiguredEvent"
+			$expression1.objectType = "VirtualMachine"
+			$expression1.status = "red"
+
+			$alarm.expression = New-Object VMware.Vim.OrAlarmExpression  
+			$alarm.expression.expression += $expression1 
+			$alarmMgr.CreateAlarm($folder.id,$alarm)
+		}
+	}
+
+Get-AlarmDefinition -Name $alarmName | New-AlarmAction -Snmp
+}
+
+
+}
+finally {
+  disconnect-VIServer -Confirm:$false
+}</HardcodedValue>
+          </Script>
+          <Arguments>
+            <SubstitutableObject xsi:type="SubstitutableString">
+              <FormattedCode>{0}</FormattedCode>
+              <References>
+                <VariableReference xsi:type="PropertyReference">
+                  <DisplayPath>Process.Target.Virtual Center/ESX Server Name</DisplayPath>
+                  <LinkChain>
+                    <Link xsi:type="PropertyNameLink">
+                      <PropertyName>ResolvedTarget</PropertyName>
+                    </Link>
+                    <Link xsi:type="PropertyNameLink">
+                      <PropertyName>VIServer</PropertyName>
+                    </Link>
+                  </LinkChain>
+                  <ObjectType>ProcessInstance</ObjectType>
+                </VariableReference>
+              </References>
+            </SubstitutableObject>
+            <SubstitutableObject xsi:type="SubstitutableString">
+              <FormattedCode>{0}</FormattedCode>
+              <References>
+                <VariableReference xsi:type="PropertyReference">
+                  <DisplayPath>Process.Target.Properties.vSphere.Service.vCenter.Protocol</DisplayPath>
+                  <LinkChain>
+                    <Link xsi:type="PropertyNameLink">
+                      <PropertyName>ResolvedTarget</PropertyName>
+                    </Link>
+                    <Link xsi:type="ObjectReferenceLink">
+                      <ObjectLink>
+                        <Id>66e4ade1-88c5-406f-b6d6-835f9492f53e</Id>
+                        <ObjectType>PropertyExtension</ObjectType>
+                      </ObjectLink>
+                    </Link>
+                  </LinkChain>
+                  <ObjectType>ProcessInstance</ObjectType>
+                </VariableReference>
+              </References>
+            </SubstitutableObject>
+            <SubstitutableObject xsi:type="SubstitutableString">
+              <FormattedCode>{0}</FormattedCode>
+              <References>
+                <VariableReference xsi:type="PropertyReference">
+                  <DisplayPath>Process.Target.Virtual Center/ESX Server Service Port</DisplayPath>
+                  <LinkChain>
+                    <Link xsi:type="PropertyNameLink">
+                      <PropertyName>ResolvedTarget</PropertyName>
+                    </Link>
+                    <Link xsi:type="PropertyNameLink">
+                      <PropertyName>VIPort</PropertyName>
+                    </Link>
+                  </LinkChain>
+                  <ObjectType>ProcessInstance</ObjectType>
+                </VariableReference>
+              </References>
+            </SubstitutableObject>
+            <SubstitutableObject xsi:type="SubstitutableString">
+              <FormattedCode>{0}</FormattedCode>
+              <References>
+                <VariableReference xsi:type="PropertyReference">
+                  <DisplayPath>Process.Target.Properties.vSphere.Service.vCenter.User</DisplayPath>
+                  <LinkChain>
+                    <Link xsi:type="PropertyNameLink">
+                      <PropertyName>ResolvedTarget</PropertyName>
+                    </Link>
+                    <Link xsi:type="ObjectReferenceLink">
+                      <ObjectLink>
+                        <Id>88419c62-0274-4851-b74a-cafd84acd332</Id>
+                        <ObjectType>PropertyExtension</ObjectType>
+                      </ObjectLink>
+                    </Link>
+                  </LinkChain>
+                  <ObjectType>ProcessInstance</ObjectType>
+                </VariableReference>
+              </References>
+            </SubstitutableObject>
+            <SubstitutableObject xsi:type="SubstitutableEncryptedString">
+              <FormattedCode>{0}</FormattedCode>
+              <References>
+                <VariableReference xsi:type="PropertyReference">
+                  <DisplayPath>Process.Target.Properties.vSphere.Service.vCenter.Password</DisplayPath>
+                  <LinkChain>
+                    <Link xsi:type="PropertyNameLink">
+                      <PropertyName>ResolvedTarget</PropertyName>
+                    </Link>
+                    <Link xsi:type="ObjectReferenceLink">
+                      <ObjectLink>
+                        <Id>be861155-a06b-4488-ade5-78daa2e6029f</Id>
+                        <ObjectType>PropertyExtension</ObjectType>
+                      </ObjectLink>
+                    </Link>
+                  </LinkChain>
+                  <ObjectType>ProcessInstance</ObjectType>
+                </VariableReference>
+              </References>
+            </SubstitutableObject>
+            <SubstitutableObject xsi:type="SubstitutableString">
+              <FormattedCode>{0}</FormattedCode>
+              <References>
+                <VariableReference xsi:type="PropertyReference">
+                  <DisplayPath>Process.Variables.Input.Location</DisplayPath>
+                  <LinkChain />
+                  <ObjectId>62bfa591-aa3f-4a54-9678-c4cf507b7a47</ObjectId>
+                  <ObjectType>GlobalVariable</ObjectType>
+                </VariableReference>
+              </References>
+            </SubstitutableObject>
+            <SubstitutableObject xsi:type="SubstitutableString">
+              <FormattedCode>{0}</FormattedCode>
+              <References>
+                <VariableReference xsi:type="PropertyReference">
+                  <DisplayPath>Process.Variables.Input.TenantAcronym</DisplayPath>
+                  <LinkChain />
+                  <ObjectId>1f893f3e-c337-4d13-9bdd-7e6c91f97132</ObjectId>
+                  <ObjectType>GlobalVariable</ObjectType>
+                </VariableReference>
+              </References>
+            </SubstitutableObject>
+          </Arguments>
+          <Use32BitPowerShell>false</Use32BitPowerShell>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ConditionBranchNode">
+        <Id>efb36bf7-dfbf-4bdd-bc21-f6abe3fae877</Id>
+        <DisplayName>Handle Exception</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="CompletedNode">
+            <Id>08f93dfd-1c27-4ca7-a343-c1f98ecaceef</Id>
+            <CompletedType>Failed</CompletedType>
+            <ResultMessage>
+              <FormattedCode>{0}</FormattedCode>
+              <References>
+                <VariableReference xsi:type="PropertyReference">
+                  <DisplayPath>Workflow.Execute PowerCLI.Output</DisplayPath>
+                  <LinkChain>
+                    <Link xsi:type="PropertyNameLink">
+                      <PropertyName>Output</PropertyName>
+                    </Link>
+                  </LinkChain>
+                  <ObjectId>5c0b2a09-28f1-46c5-a2f4-3b7a755b04dc</ObjectId>
+                  <ObjectType>ActivityInstance</ObjectType>
+                </VariableReference>
+              </References>
+            </ResultMessage>
+          </ActivityNode>
+        </Children>
+        <Condition>
+          <Id>51e71b7d-446c-49e6-8510-8b7cdceca52c</Id>
+          <Conditions>
+            <ConditionDefinition xsi:type="VariableConditionDefinition">
+              <Id>4f94e1aa-c6fa-41af-8934-c7fc85ab900d</Id>
+              <Expression xsi:type="SubstitutableString">
+                <HardcodedValue>*Error Information*</HardcodedValue>
+              </Expression>
+              <Comparison>Wildcard</Comparison>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Execute PowerCLI.Output</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>Output</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>5c0b2a09-28f1-46c5-a2f4-3b7a755b04dc</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </VariableReference>
+            </ConditionDefinition>
+            <ConditionDefinition xsi:type="VariableConditionDefinition">
+              <Id>a8ae8ead-95e8-48d5-9965-0be8298ba191</Id>
+              <Expression xsi:type="SubstitutableString">
+                <HardcodedValue>*Category:*</HardcodedValue>
+              </Expression>
+              <Comparison>Wildcard</Comparison>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Execute PowerCLI.Output</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>Output</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>5c0b2a09-28f1-46c5-a2f4-3b7a755b04dc</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </VariableReference>
+            </ConditionDefinition>
+          </Conditions>
+        </Condition>
+      </ActivityNode>
+    </Children>
+  </FirstActivity>
+  <ProcessId>efac373f-2f78-4491-b13e-4bb2050d8dbd</ProcessId>
+</WorkflowConfiguration>

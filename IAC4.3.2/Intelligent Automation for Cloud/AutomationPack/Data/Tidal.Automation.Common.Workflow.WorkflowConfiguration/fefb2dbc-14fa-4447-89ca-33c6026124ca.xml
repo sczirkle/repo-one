@@ -1,0 +1,162 @@
+<?xml version="1.0"?>
+<WorkflowConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>fefb2dbc-14fa-4447-89ca-33c6026124ca</Id>
+  <DisplayName>Delete APIC Tenant</DisplayName>
+  <CreatedTime>2016-02-15T20:42:57.39525Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:43:15.6044921Z</ModifiedTime>
+  <FirstActivity xsi:type="RootNode">
+    <Id>c9c62423-c156-4caf-99a1-cbbe93bfa058</Id>
+    <DisplayName />
+    <Children>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>7e3c0c6a-048a-4271-bab8-6c68f3d10b83</Id>
+        <DisplayName>Authenticate to APIC</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>565e14e5-6a55-4fbb-baf7-3b0b9d38b130</Id>
+            <ActivityNodeId>7e3c0c6a-048a-4271-bab8-6c68f3d10b83</ActivityNodeId>
+            <CompletedId>a0d6b039-427e-42e4-a33c-d20e4497665d</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="WebHttpTargetAwareRequestActivityConfiguration" xml:space="preserve">
+          <Id>7e3c0c6a-048a-4271-bab8-6c68f3d10b83</Id>
+          <DisplayName>Authenticate to APIC</DisplayName>
+          <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+          <ContainingProcessId>15a084a2-0467-44fc-87b4-2999f846ba29</ContainingProcessId>
+          <UseCredentials>false</UseCredentials>
+          <RelativeUrl>
+            <FormattedCode>/api/mo/aaaLogin.xml</FormattedCode>
+          </RelativeUrl>
+          <ContentType>
+            <HardcodedValue>application/xml; charset=utf-8</HardcodedValue>
+          </ContentType>
+          <Method>
+            <HardcodedValue>POST</HardcodedValue>
+          </Method>
+          <UserAgent>
+            <HardcodedValue />
+          </UserAgent>
+          <Request>
+            <FormattedCode>&lt;aaaUser name='{0}' pwd='{1}'/&gt;
+&lt;!-- The response will include an aaaLogin object, containing a token attribute
+This will be included with subsequent requests as a Cookie named IFC-Cookie to continue the session, e.g.,
+Cookie: IFC-cookie=abcdefgh12345678
+--&gt;</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Target.Cloud.Service.APIC.User Name</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>ResolvedTarget</PropertyName>
+                  </Link>
+                  <Link xsi:type="ObjectReferenceLink">
+                    <ObjectLink>
+                      <Id>1fab966d-0dea-4648-81d0-390bc07b66bb</Id>
+                      <ObjectType>PropertyExtension</ObjectType>
+                    </ObjectLink>
+                  </Link>
+                </LinkChain>
+                <ObjectType>ProcessInstance</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Target.Cloud.Service.APIC.User Password</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>ResolvedTarget</PropertyName>
+                  </Link>
+                  <Link xsi:type="ObjectReferenceLink">
+                    <ObjectLink>
+                      <Id>14af71e8-d2a4-4088-9a0f-07a9dba86ce8</Id>
+                      <ObjectType>PropertyExtension</ObjectType>
+                    </ObjectLink>
+                  </Link>
+                </LinkChain>
+                <ObjectType>ProcessInstance</ObjectType>
+              </VariableReference>
+            </References>
+          </Request>
+          <ProtocolVersion>Version11</ProtocolVersion>
+          <AllowAutoRedirect>true</AllowAutoRedirect>
+          <Timeout>
+            <DisplayUnits>Seconds</DisplayUnits>
+            <Period>
+              <HardcodedValue>100</HardcodedValue>
+            </Period>
+          </Timeout>
+          <Accept>
+            <HardcodedValue />
+          </Accept>
+          <AcceptCookies>true</AcceptCookies>
+          <Headers />
+          <OutputFormat>Xml</OutputFormat>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>4470235e-236b-49ad-9d40-b3cd9e4417f6</Id>
+        <DisplayName>Delete Tenant in APIC</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>3adc7261-b115-453e-abe3-ff61b5e44b34</Id>
+            <ActivityNodeId>4470235e-236b-49ad-9d40-b3cd9e4417f6</ActivityNodeId>
+            <CompletedId>b4e6fbed-8d5d-44be-af30-6f6021aef2c3</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="WebHttpTargetAwareRequestActivityConfiguration" xml:space="preserve">
+          <Id>4470235e-236b-49ad-9d40-b3cd9e4417f6</Id>
+          <DisplayName>Delete Tenant in APIC</DisplayName>
+          <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+          <ContainingProcessId>15a084a2-0467-44fc-87b4-2999f846ba29</ContainingProcessId>
+          <UseCredentials>false</UseCredentials>
+          <RelativeUrl>
+            <FormattedCode>/api/mo/uni.xml</FormattedCode>
+          </RelativeUrl>
+          <ContentType>
+            <HardcodedValue>application/xml; charset=utf-8</HardcodedValue>
+          </ContentType>
+          <Method>
+            <HardcodedValue>POST</HardcodedValue>
+          </Method>
+          <UserAgent>
+            <HardcodedValue />
+          </UserAgent>
+          <Request>
+            <FormattedCode>&lt;fvTenant name="_openstack_{0}" status="deleted"/&gt;</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.Tenant Name</DisplayPath>
+                <LinkChain />
+                <ObjectId>d0fa46ef-1e00-4687-8017-146829082295</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </Request>
+          <ProtocolVersion>Version11</ProtocolVersion>
+          <AllowAutoRedirect>true</AllowAutoRedirect>
+          <Timeout>
+            <DisplayUnits>Seconds</DisplayUnits>
+            <Period>
+              <HardcodedValue>100</HardcodedValue>
+            </Period>
+          </Timeout>
+          <Accept>
+            <HardcodedValue />
+          </Accept>
+          <AcceptCookies>false</AcceptCookies>
+          <CookieCollection xsi:type="PropertyReference">
+            <DisplayPath>Workflow.Authenticate to APIC.Cookies</DisplayPath>
+            <LinkChain>
+              <Link xsi:type="PropertyNameLink">
+                <PropertyName>CookieDataTable</PropertyName>
+              </Link>
+            </LinkChain>
+            <ObjectId>7e3c0c6a-048a-4271-bab8-6c68f3d10b83</ObjectId>
+            <ObjectType>ActivityInstance</ObjectType>
+          </CookieCollection>
+          <Headers />
+          <OutputFormat>Xml</OutputFormat>
+        </Configuration>
+      </ActivityNode>
+    </Children>
+  </FirstActivity>
+  <ProcessId>15a084a2-0467-44fc-87b4-2999f846ba29</ProcessId>
+</WorkflowConfiguration>

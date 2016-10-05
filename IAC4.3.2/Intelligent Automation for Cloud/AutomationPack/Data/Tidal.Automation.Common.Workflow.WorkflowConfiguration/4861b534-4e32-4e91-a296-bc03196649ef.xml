@@ -1,0 +1,548 @@
+<?xml version="1.0"?>
+<WorkflowConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>4861b534-4e32-4e91-a296-bc03196649ef</Id>
+  <DisplayName>Network Device Discovery - File Version</DisplayName>
+  <CreatedTime>2016-02-15T20:43:23.723375Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:43:41.9326171Z</ModifiedTime>
+  <FirstActivity xsi:type="RootNode">
+    <Id>fecf03c9-118d-4a05-9e92-51bd97c9a10b</Id>
+    <DisplayName />
+    <Children>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>b9ea4d51-9c1a-4bf7-8e8e-d6c22f997cad</Id>
+        <DisplayName>Add Note - Process Started</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>90ad71f5-1985-4ad1-8305-ea9817e462d9</Id>
+            <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+            <DisplayName>Ignore Error</DisplayName>
+            <Children />
+            <Condition>
+              <Id>45e911e0-b8f1-41f2-a958-4f31f7178383</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>d033702c-cf07-4bff-a1ef-e5ddba0cdb9f</Id>
+                  <Expression xsi:type="SubstitutableBoolean">
+                    <HardcodedValue>true</HardcodedValue>
+                  </Expression>
+                  <Comparison>Equals</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>InstanceFailed</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>b9ea4d51-9c1a-4bf7-8e8e-d6c22f997cad</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="UpdateChangeRequestActivityConfiguration" xml:space="preserve">
+          <Id>b9ea4d51-9c1a-4bf7-8e8e-d6c22f997cad</Id>
+          <DisplayName>Add Note - Process Started</DisplayName>
+          <Description>This activity adds a note to the PO console while running, the purpose of which is to inform the user of the progress being made by the process.</Description>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>28e40a8f-d61d-48e5-ac02-6d3843469646</ContainingProcessId>
+          <TaskId>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Target.Properties.Cloud.Service.General.ChangeRequestID</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>ResolvedTarget</PropertyName>
+                  </Link>
+                  <Link xsi:type="ObjectReferenceLink">
+                    <ObjectLink>
+                      <Id>2924872b-3254-4306-9160-e08f75efa691</Id>
+                      <ObjectType>PropertyExtension</ObjectType>
+                    </ObjectLink>
+                  </Link>
+                </LinkChain>
+                <ObjectType>ProcessInstance</ObjectType>
+              </VariableReference>
+            </References>
+          </TaskId>
+          <ModificationGroup>
+            <ObjectId>00000000-0000-0000-0000-000000000000</ObjectId>
+            <ObjectType>Task</ObjectType>
+            <Modifications>
+              <PropertyModification>
+                <DisplayPath>New Note</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>NewNote</PropertyName>
+                  </Link>
+                </LinkChain>
+                <Action>Set</Action>
+                <Value xsi:type="SubstitutableString">
+                  <FormattedCode>{0} started on {1}. Querying XML.</FormattedCode>
+                  <References>
+                    <VariableReference xsi:type="PropertyReference">
+                      <DisplayPath>Process.Name</DisplayPath>
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>DisplayName</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectType>ProcessInstance</ObjectType>
+                    </VariableReference>
+                    <VariableReference xsi:type="PropertyReference">
+                      <DisplayPath>Process.Start Time</DisplayPath>
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>StartTime</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectType>ProcessInstance</ObjectType>
+                    </VariableReference>
+                  </References>
+                </Value>
+              </PropertyModification>
+            </Modifications>
+          </ModificationGroup>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="StartPointNode">
+        <Id>89c2f79d-7e0c-404f-addd-abdaf5eadde0</Id>
+        <DisplayName>Initialize Lease Management</DisplayName>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>85b8c68d-4046-499a-ba00-17c1dce66e6f</Id>
+        <DisplayName>Query ServiceRequestXML</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>25793ff3-8236-4ce4-88c2-33b1458efb16</Id>
+            <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+            <DisplayName>If Execution Fails</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>4ff20435-dee8-4f04-9832-2a14004588bf</Id>
+                <DisplayName>Failed to parse Service Request XML (1001)</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>d68f0e21-2554-4f1c-af57-d667537bf107</Id>
+                    <ActivityNodeId>4ff20435-dee8-4f04-9832-2a14004588bf</ActivityNodeId>
+                    <CompletedId>464b4efd-e0c9-44dc-82d5-f57ad3d8a093</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                  <Id>4ff20435-dee8-4f04-9832-2a14004588bf</Id>
+                  <DisplayName>Failed to parse Service Request XML (1001)</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>28e40a8f-d61d-48e5-ac02-6d3843469646</ContainingProcessId>
+                  <VariableToSet>
+                    <DisplayPath>Process.Target.Properties.Cloud.Service.General.ErrorCode</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResolvedTarget</PropertyName>
+                      </Link>
+                      <Link xsi:type="ObjectReferenceLink">
+                        <ObjectLink>
+                          <Id>7ad8347e-4936-4962-ab6d-3ec987d2737a</Id>
+                          <ObjectType>PropertyExtension</ObjectType>
+                        </ObjectLink>
+                      </Link>
+                    </LinkChain>
+                    <ObjectType>ProcessInstance</ObjectType>
+                  </VariableToSet>
+                  <NewValue xsi:type="SubstitutableNumber">
+                    <HardcodedValue>1001</HardcodedValue>
+                  </NewValue>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="CompletedNode">
+                <Id>877eb931-9fbb-4e80-ab2c-443529c01a4b</Id>
+                <Notes>Fail the entire process</Notes>
+                <CompletedType>FailedNotCompleted</CompletedType>
+                <ResultMessage>
+                  <FormattedCode>Failed to parse Cloud Portal service request XML.
+{0}</FormattedCode>
+                  <References>
+                    <VariableReference xsi:type="PropertyReference">
+                      <DisplayPath>Workflow.Query ServiceRequestXML.Error Information</DisplayPath>
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>ErrorInformation</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectId>85b8c68d-4046-499a-ba00-17c1dce66e6f</ObjectId>
+                      <ObjectType>ActivityInstance</ObjectType>
+                    </VariableReference>
+                  </References>
+                </ResultMessage>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>99348e8d-ded8-4dcc-80b2-386faa6c5dc9</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>8af87172-f44a-4ef9-8ab0-82b789f19ce4</Id>
+                  <Expression xsi:type="SubstitutableBoolean">
+                    <HardcodedValue>true</HardcodedValue>
+                  </Expression>
+                  <Comparison>Equals</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>InstanceFailed</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>85b8c68d-4046-499a-ba00-17c1dce66e6f</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="XPathQueryActivityConfiguration" xml:space="preserve">
+          <Id>85b8c68d-4046-499a-ba00-17c1dce66e6f</Id>
+          <DisplayName>Query ServiceRequestXML</DisplayName>
+          <Description>Input values that are necessary for the process to run are passed to it through an  XML fragment which is parsed by this activity to obtain the individual parameters.</Description>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <KnowledgeBaseId>367785ad-dc93-45ba-b9fc-16baf718623f</KnowledgeBaseId>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>28e40a8f-d61d-48e5-ac02-6d3843469646</ContainingProcessId>
+          <SourceXml>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.Service Request XML</DisplayPath>
+                <LinkChain />
+                <ObjectId>fdcc5dee-87a1-4c8e-ab46-38c3719a7962</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </SourceXml>
+          <Namespaces />
+          <Queries>
+            <XPathQueryDefinition>
+              <DisplayName>Action</DisplayName>
+              <Query>
+                <HardcodedValue>root/Common/Action</HardcodedValue>
+              </Query>
+              <ReturnType>String</ReturnType>
+              <DefaultBehavior>Fail</DefaultBehavior>
+            </XPathQueryDefinition>
+            <XPathQueryDefinition>
+              <DisplayName>Channel ID</DisplayName>
+              <Query>
+                <HardcodedValue>root/Common/ChannelID</HardcodedValue>
+              </Query>
+              <ReturnType>String</ReturnType>
+              <DefaultBehavior>Fail</DefaultBehavior>
+            </XPathQueryDefinition>
+            <XPathQueryDefinition>
+              <DisplayName>Requistion ID</DisplayName>
+              <Query>
+                <HardcodedValue>root/Common/RequisitionID</HardcodedValue>
+              </Query>
+              <ReturnType>String</ReturnType>
+              <DefaultBehavior>Fail</DefaultBehavior>
+            </XPathQueryDefinition>
+            <XPathQueryDefinition>
+              <DisplayName>SeedDevice</DisplayName>
+              <Query>
+                <HardcodedValue>root/FormData/NetworkDeviceDiscovery.SeedDevice</HardcodedValue>
+              </Query>
+              <ReturnType>String</ReturnType>
+              <DefaultBehavior>Fail</DefaultBehavior>
+            </XPathQueryDefinition>
+            <XPathQueryDefinition>
+              <DisplayName>SNMPV2Community</DisplayName>
+              <Query>
+                <HardcodedValue>root/FormData/NetworkDeviceDiscovery.SNMPV2Community</HardcodedValue>
+              </Query>
+              <ReturnType>String</ReturnType>
+              <DefaultBehavior>Fail</DefaultBehavior>
+            </XPathQueryDefinition>
+            <XPathQueryDefinition>
+              <DisplayName>SNMPV3User</DisplayName>
+              <Query>
+                <HardcodedValue>root/FormData/NetworkDeviceDiscovery.SNMPV3User</HardcodedValue>
+              </Query>
+              <ReturnType>String</ReturnType>
+              <DefaultBehavior>Fail</DefaultBehavior>
+            </XPathQueryDefinition>
+            <XPathQueryDefinition>
+              <DisplayName>SNVMPV3Passwd</DisplayName>
+              <Query>
+                <HardcodedValue>root/FormData/NetworkDeviceDiscovery.SNVMPV3Passwd</HardcodedValue>
+              </Query>
+              <ReturnType>String</ReturnType>
+              <DefaultBehavior>Fail</DefaultBehavior>
+            </XPathQueryDefinition>
+            <XPathQueryDefinition>
+              <DisplayName>SSHUser</DisplayName>
+              <Query>
+                <HardcodedValue>root/FormData/NetworkDeviceDiscovery.SSHUser</HardcodedValue>
+              </Query>
+              <ReturnType>String</ReturnType>
+              <DefaultBehavior>Fail</DefaultBehavior>
+            </XPathQueryDefinition>
+            <XPathQueryDefinition>
+              <DisplayName>SSHPasswd</DisplayName>
+              <Query>
+                <HardcodedValue>root/FormData/NetworkDeviceDiscovery.SSHPasswd</HardcodedValue>
+              </Query>
+              <ReturnType>String</ReturnType>
+              <DefaultBehavior>Fail</DefaultBehavior>
+            </XPathQueryDefinition>
+            <XPathQueryDefinition>
+              <DisplayName>EnablePasswd</DisplayName>
+              <Query>
+                <HardcodedValue>root/FormData/NetworkDeviceDiscovery.EnablePasswd</HardcodedValue>
+              </Query>
+              <ReturnType>String</ReturnType>
+              <DefaultBehavior>Fail</DefaultBehavior>
+            </XPathQueryDefinition>
+          </Queries>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>c41ab4d3-e820-40e4-8364-4b22623eefc2</Id>
+        <DisplayName>Write File</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>6414bb23-1471-4882-816f-b954b7face3a</Id>
+            <ActivityNodeId>c41ab4d3-e820-40e4-8364-4b22623eefc2</ActivityNodeId>
+            <CompletedId>f4345e9c-2203-4979-991b-43affeb88caf</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="WindowsWriteFileActivityConfiguration" xml:space="preserve">
+          <Id>c41ab4d3-e820-40e4-8364-4b22623eefc2</Id>
+          <DisplayName>Write File</DisplayName>
+          <TargetLoadBalancer xsi:type="OrchestratorServerLoadBalancer">
+            <TargetGroupId>bc5933b4-512f-46ce-86a9-3b40331ba395</TargetGroupId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>28e40a8f-d61d-48e5-ac02-6d3843469646</ContainingProcessId>
+          <LocalFileName>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Local.user info file</DisplayPath>
+                <LinkChain />
+                <ObjectId>18171c35-a9bf-48f2-b43c-5d78434ea210</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </LocalFileName>
+          <Content>
+            <FormattedCode>SeedDevice={0}
+SNMPV2Community={1}
+SNMPV3User={2}
+SNVMPV3Passwd={3}
+SSHUser={4}
+SSHPasswd={5}
+EnablePasswd={6}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Query ServiceRequestXML.Results.SeedDevice</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>Results</PropertyName>
+                  </Link>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>SeedDevice</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>85b8c68d-4046-499a-ba00-17c1dce66e6f</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Query ServiceRequestXML.Results.SNMPV2Community</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>Results</PropertyName>
+                  </Link>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>SNMPV2Community</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>85b8c68d-4046-499a-ba00-17c1dce66e6f</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Query ServiceRequestXML.Results.SNMPV3User</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>Results</PropertyName>
+                  </Link>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>SNMPV3User</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>85b8c68d-4046-499a-ba00-17c1dce66e6f</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Query ServiceRequestXML.Results.SNVMPV3Passwd</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>Results</PropertyName>
+                  </Link>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>SNVMPV3Passwd</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>85b8c68d-4046-499a-ba00-17c1dce66e6f</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Query ServiceRequestXML.Results.SSHUser</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>Results</PropertyName>
+                  </Link>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>SSHUser</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>85b8c68d-4046-499a-ba00-17c1dce66e6f</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Query ServiceRequestXML.Results.SSHPasswd</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>Results</PropertyName>
+                  </Link>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>SSHPasswd</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>85b8c68d-4046-499a-ba00-17c1dce66e6f</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Query ServiceRequestXML.Results.EnablePasswd</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>Results</PropertyName>
+                  </Link>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>EnablePasswd</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>85b8c68d-4046-499a-ba00-17c1dce66e6f</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </VariableReference>
+            </References>
+          </Content>
+          <Options>Overwrite</Options>
+          <Encoding>ASCII</Encoding>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>23b10d96-f089-4544-ad4f-56386242dae9</Id>
+        <DisplayName>Execute Windows Command</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>4c25944c-6ffe-42a8-bdea-3d76919b4c10</Id>
+            <ActivityNodeId>23b10d96-f089-4544-ad4f-56386242dae9</ActivityNodeId>
+            <CompletedId>f1570f3a-8bba-4323-8e94-5dcbf11d4ef2</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="WindowsExecuteActivityConfiguration" xml:space="preserve">
+          <Id>23b10d96-f089-4544-ad4f-56386242dae9</Id>
+          <DisplayName>Execute Windows Command</DisplayName>
+          <TargetLoadBalancer xsi:type="OrchestratorServerLoadBalancer">
+            <TargetGroupId>bc5933b4-512f-46ce-86a9-3b40331ba395</TargetGroupId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>28e40a8f-d61d-48e5-ac02-6d3843469646</ContainingProcessId>
+          <WorkingDirectory>
+            <HardcodedValue>c:\iac\xmp\</HardcodedValue>
+          </WorkingDirectory>
+          <FailReturnCodeNonZero>true</FailReturnCodeNonZero>
+          <UseTaskScheduler>false</UseTaskScheduler>
+          <TimeWindow>
+            <Milliseconds>300000</Milliseconds>
+            <Units>Minutes</Units>
+          </TimeWindow>
+          <CommandLine>
+            <FormattedCode>c:\iac\xmp\CreateUserConfig.bat {0} user-config-template.xml {1}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Local.user info file</DisplayPath>
+                <LinkChain />
+                <ObjectId>18171c35-a9bf-48f2-b43c-5d78434ea210</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Local.xmp user config file</DisplayPath>
+                <LinkChain />
+                <ObjectId>85318735-5f51-44ef-a123-a41af0d95f4c</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </CommandLine>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="StartPointNode">
+        <Id>97087388-0d24-47c6-9c59-eff63cb80692</Id>
+        <DisplayName>Process Complete</DisplayName>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>a9e0a436-1ffc-4332-bfe6-1fd97e7e84db</Id>
+        <DisplayName>Process Complete</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>1718e543-a8e7-4750-b5cc-da17ea9b360c</Id>
+            <ActivityNodeId>a9e0a436-1ffc-4332-bfe6-1fd97e7e84db</ActivityNodeId>
+            <CompletedId>7237e1dd-7d86-48ff-b8fa-c83acb7c60e3</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+          <Id>a9e0a436-1ffc-4332-bfe6-1fd97e7e84db</Id>
+          <DisplayName>Process Complete</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>28e40a8f-d61d-48e5-ac02-6d3843469646</ContainingProcessId>
+          <VariableToSet>
+            <DisplayPath>Process.Target.Properties.Cloud.Service.General.ErrorRemediation.UserSet.Retry</DisplayPath>
+            <LinkChain>
+              <Link xsi:type="PropertyNameLink">
+                <PropertyName>ResolvedTarget</PropertyName>
+              </Link>
+              <Link xsi:type="ObjectReferenceLink">
+                <ObjectLink>
+                  <Id>dfd0c20a-58bd-4a1f-b242-7658e642dcd1</Id>
+                  <ObjectType>PropertyExtension</ObjectType>
+                </ObjectLink>
+              </Link>
+            </LinkChain>
+            <ObjectType>ProcessInstance</ObjectType>
+          </VariableToSet>
+          <NewValue xsi:type="SubstitutableBoolean">
+            <HardcodedValue>false</HardcodedValue>
+          </NewValue>
+        </Configuration>
+      </ActivityNode>
+    </Children>
+  </FirstActivity>
+  <ProcessId>28e40a8f-d61d-48e5-ac02-6d3843469646</ProcessId>
+</WorkflowConfiguration>

@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<WorkflowConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>52b44706-dd76-4782-8ced-3db92250766e</Id>
+  <DisplayName>Delete VNMC Tier</DisplayName>
+  <CreatedTime>2016-02-15T20:44:16.442125Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:44:34.6513671Z</ModifiedTime>
+  <FirstActivity xsi:type="RootNode">
+    <Id>7f349c80-7dc9-409a-add3-80f66d4e2620</Id>
+    <DisplayName />
+    <Children>
+      <ActivityNode xsi:type="StartProcessNode">
+        <Id>c83996d4-9fd7-4356-ad58-a40becd2bcb8</Id>
+        <DisplayName>Get VNMC Cookie</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>db90b8dd-f8bc-4461-9a3e-765fffc076b0</Id>
+            <ProcessNodeId>c83996d4-9fd7-4356-ad58-a40becd2bcb8</ProcessNodeId>
+            <CompletedId>ab6b3fd1-9e0e-41fa-896f-49fbfab3ca75</CompletedId>
+          </ActivityNode>
+        </Children>
+        <ProcessId>406fe7a8-4f8c-4809-83d2-e6e9b19d920b</ProcessId>
+        <InputVariableTable>
+          <VariableAssignmentsAsArray />
+        </InputVariableTable>
+        <Asynchronous>false</Asynchronous>
+        <InheritTarget>true</InheritTarget>
+        <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+        <InheritPriorityClass>true</InheritPriorityClass>
+        <RuntimeUserId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </RuntimeUserId>
+        <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+        <StartPointId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </StartPointId>
+        <StartPointName>
+          <FormattedCode />
+        </StartPointName>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>d5f1a4a7-3968-446f-b08b-42c871c38af8</Id>
+        <DisplayName>Web HTTP Request</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>299b64e3-945f-4075-b065-7300a419cdd5</Id>
+            <ActivityNodeId>d5f1a4a7-3968-446f-b08b-42c871c38af8</ActivityNodeId>
+            <CompletedId>bf546ec0-9a8e-4bcb-bff5-54c4d3972fab</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="WebHttpTargetAwareRequestActivityConfiguration" xml:space="preserve">
+          <Id>d5f1a4a7-3968-446f-b08b-42c871c38af8</Id>
+          <DisplayName>Web HTTP Request</DisplayName>
+          <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+          <ContainingProcessId>4abebedf-bd22-4f0e-85a3-403cc5c13890</ContainingProcessId>
+          <UseCredentials>true</UseCredentials>
+          <RelativeUrl>
+            <FormattedCode>/service-reg</FormattedCode>
+          </RelativeUrl>
+          <ContentType>
+            <HardcodedValue>application/xml; charset=utf-8</HardcodedValue>
+          </ContentType>
+          <Method>
+            <HardcodedValue>POST</HardcodedValue>
+          </Method>
+          <UserAgent>
+            <HardcodedValue />
+          </UserAgent>
+          <Request>
+            <FormattedCode>&lt;configConfMo cookie="{0}" inHierarchical="false"&gt;
+    &lt;inConfig&gt;
+&lt;orgTier dn="org-root/org-{1}/org-{2}/org-{3}/org-{4}" status="deleted"/&gt;
+    &lt;/inConfig&gt;
+&lt;/configConfMo&gt;</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Get VNMC Cookie.Cookie</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="ProcessOutputVariableLink">
+                    <LaunchingActivityId>c83996d4-9fd7-4356-ad58-a40becd2bcb8</LaunchingActivityId>
+                    <OutputVariableId>d7de7060-a90c-4483-9389-9a1a86861b66</OutputVariableId>
+                  </Link>
+                </LinkChain>
+                <ObjectId>c83996d4-9fd7-4356-ad58-a40becd2bcb8</ObjectId>
+                <ObjectType>WorkflowNode</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.Tenant Name</DisplayPath>
+                <LinkChain />
+                <ObjectId>39c3772b-d057-4f91-8370-87e5c4a4e956</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.VDC Name</DisplayPath>
+                <LinkChain />
+                <ObjectId>66d62135-3ae4-406a-9d5a-9105546d62ab</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.App Name</DisplayPath>
+                <LinkChain />
+                <ObjectId>da61ac1b-e0fd-40e3-97a5-d3d3eef21ff1</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.Tier Name</DisplayPath>
+                <LinkChain />
+                <ObjectId>1e022490-4fd1-4f45-a97b-125fa87c4430</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </Request>
+          <ProtocolVersion>Version11</ProtocolVersion>
+          <AllowAutoRedirect>true</AllowAutoRedirect>
+          <Timeout>
+            <DisplayUnits>Seconds</DisplayUnits>
+            <Period>
+              <HardcodedValue>100</HardcodedValue>
+            </Period>
+          </Timeout>
+          <Accept>
+            <HardcodedValue />
+          </Accept>
+          <AcceptCookies>false</AcceptCookies>
+          <Headers />
+          <OutputFormat>Html</OutputFormat>
+        </Configuration>
+      </ActivityNode>
+    </Children>
+  </FirstActivity>
+  <ProcessId>4abebedf-bd22-4f0e-85a3-403cc5c13890</ProcessId>
+</WorkflowConfiguration>

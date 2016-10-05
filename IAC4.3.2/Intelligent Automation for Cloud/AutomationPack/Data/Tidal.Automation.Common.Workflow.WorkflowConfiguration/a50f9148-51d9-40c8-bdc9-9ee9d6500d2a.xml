@@ -1,0 +1,310 @@
+<?xml version="1.0"?>
+<WorkflowConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>a50f9148-51d9-40c8-bdc9-9ee9d6500d2a</Id>
+  <DisplayName>Disassociate Compute FW from VSG</DisplayName>
+  <CreatedTime>2016-02-15T20:45:28.864Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:45:47.0732421Z</ModifiedTime>
+  <FirstActivity xsi:type="RootNode">
+    <Id>a219ef84-5afd-44fe-9f1d-65e6fe3a09a3</Id>
+    <DisplayName />
+    <Children>
+      <ActivityNode xsi:type="StartProcessNode">
+        <Id>979eabdf-bfb9-4fb1-ace7-ec40555964ec</Id>
+        <DisplayName>Get VNMC Cookie</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>cbc758f7-62e6-49c8-b175-c31e466adee7</Id>
+            <ProcessNodeId>979eabdf-bfb9-4fb1-ace7-ec40555964ec</ProcessNodeId>
+            <CompletedId>25efc503-a89b-4a67-87da-d2a79d02bc4b</CompletedId>
+          </ActivityNode>
+        </Children>
+        <ProcessId>406fe7a8-4f8c-4809-83d2-e6e9b19d920b</ProcessId>
+        <InputVariableTable>
+          <VariableAssignmentsAsArray />
+        </InputVariableTable>
+        <Asynchronous>false</Asynchronous>
+        <InheritTarget>true</InheritTarget>
+        <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+        <InheritPriorityClass>true</InheritPriorityClass>
+        <RuntimeUserId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </RuntimeUserId>
+        <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+        <StartPointId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </StartPointId>
+        <StartPointName>
+          <FormattedCode />
+        </StartPointName>
+      </ActivityNode>
+      <ActivityNode xsi:type="ConditionBranchNode">
+        <Id>8a39e044-333b-42c2-b433-35220cc10494</Id>
+        <DisplayName>VSG IP was specified</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>c152eed6-1324-4e8f-b38d-53100b07d634</Id>
+            <DisplayName>Find VSG by Management IP</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>0913b831-d102-4a65-bf45-abb5dd499a26</Id>
+                <ActivityNodeId>c152eed6-1324-4e8f-b38d-53100b07d634</ActivityNodeId>
+                <CompletedId>80c0f87d-d631-4e8d-a376-e6c81fa043c3</CompletedId>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="WebHttpTargetAwareRequestActivityConfiguration" xml:space="preserve">
+              <Id>c152eed6-1324-4e8f-b38d-53100b07d634</Id>
+              <DisplayName>Find VSG by Management IP</DisplayName>
+              <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+              <ContainingProcessId>705c0000-b4e8-4bab-9a54-3008440c6c74</ContainingProcessId>
+              <UseCredentials>true</UseCredentials>
+              <RelativeUrl>
+                <FormattedCode>/resource-mgr</FormattedCode>
+              </RelativeUrl>
+              <ContentType>
+                <HardcodedValue>application/xml; charset=utf-8</HardcodedValue>
+              </ContentType>
+              <Method>
+                <HardcodedValue>POST</HardcodedValue>
+              </Method>
+              <UserAgent>
+                <HardcodedValue />
+              </UserAgent>
+              <Request>
+                <FormattedCode>&lt;configResolveClass cookie="{0}" classId="fwInstance" inHierarchical="false"&gt;
+ &lt;inFilter&gt;
+ &lt;eq class="fwInstance" property="mgmtIp" value="{1}"/&gt;
+ &lt;/inFilter&gt;
+&lt;/configResolveClass&gt;
+</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Get VNMC Cookie.Cookie</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="ProcessOutputVariableLink">
+                        <LaunchingActivityId>979eabdf-bfb9-4fb1-ace7-ec40555964ec</LaunchingActivityId>
+                        <OutputVariableId>d7de7060-a90c-4483-9389-9a1a86861b66</OutputVariableId>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>979eabdf-bfb9-4fb1-ace7-ec40555964ec</ObjectId>
+                    <ObjectType>WorkflowNode</ObjectType>
+                  </VariableReference>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Input.VSG Management IP</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>d307ee11-9951-4fe1-82ee-2ef5fd49f7a3</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                </References>
+              </Request>
+              <ProtocolVersion>Version11</ProtocolVersion>
+              <AllowAutoRedirect>true</AllowAutoRedirect>
+              <Timeout>
+                <DisplayUnits>Seconds</DisplayUnits>
+                <Period>
+                  <HardcodedValue>100</HardcodedValue>
+                </Period>
+              </Timeout>
+              <Accept>
+                <HardcodedValue />
+              </Accept>
+              <AcceptCookies>false</AcceptCookies>
+              <Headers />
+              <OutputFormat>Text</OutputFormat>
+            </Configuration>
+          </ActivityNode>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>07e8c3f1-d1b1-4438-830b-5d98c550bb1a</Id>
+            <DisplayName>Get VSG DN</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>581658d6-9498-48d2-a7d6-5d6c1a2b8bb2</Id>
+                <ActivityNodeId>07e8c3f1-d1b1-4438-830b-5d98c550bb1a</ActivityNodeId>
+                <CompletedId>4c355fdc-f7e0-4942-a8cb-a12157a755a0</CompletedId>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="XPathQueryActivityConfiguration" xml:space="preserve">
+              <Id>07e8c3f1-d1b1-4438-830b-5d98c550bb1a</Id>
+              <DisplayName>Get VSG DN</DisplayName>
+              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                <SingleTargetId>
+                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                </SingleTargetId>
+              </TargetLoadBalancer>
+              <InheritTarget>false</InheritTarget>
+              <ContainingProcessId>705c0000-b4e8-4bab-9a54-3008440c6c74</ContainingProcessId>
+              <SourceXml>
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Find VSG by Management IP.Response</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>Response</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>c152eed6-1324-4e8f-b38d-53100b07d634</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </SourceXml>
+              <Namespaces />
+              <Queries>
+                <XPathQueryDefinition>
+                  <DisplayName>VSG Distinguished Name</DisplayName>
+                  <Query>
+                    <HardcodedValue>//fwInstance/@dn</HardcodedValue>
+                  </Query>
+                  <ReturnType>String</ReturnType>
+                  <DefaultBehavior>Fail</DefaultBehavior>
+                </XPathQueryDefinition>
+                <XPathQueryDefinition>
+                  <DisplayName>CFW DN</DisplayName>
+                  <Query>
+                    <HardcodedValue>//fwInstance/@assignedToDn</HardcodedValue>
+                  </Query>
+                  <ReturnType>String</ReturnType>
+                  <DefaultBehavior>Fail</DefaultBehavior>
+                </XPathQueryDefinition>
+              </Queries>
+            </Configuration>
+          </ActivityNode>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>63ec9c2d-cf60-497e-83b9-379f92bf25b3</Id>
+            <DisplayName>Set Variable</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>b26ea4ed-7581-47cd-ab46-20c7921e0bb0</Id>
+                <ActivityNodeId>63ec9c2d-cf60-497e-83b9-379f92bf25b3</ActivityNodeId>
+                <CompletedId>405a8c9e-83a9-4f2d-b313-a9d0af1eb7b0</CompletedId>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+              <Id>63ec9c2d-cf60-497e-83b9-379f92bf25b3</Id>
+              <DisplayName>Set Variable</DisplayName>
+              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                <SingleTargetId>
+                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                </SingleTargetId>
+              </TargetLoadBalancer>
+              <InheritTarget>false</InheritTarget>
+              <ContainingProcessId>705c0000-b4e8-4bab-9a54-3008440c6c74</ContainingProcessId>
+              <VariableToSet>
+                <DisplayPath>Process.Variables.Input.Compute Firewall DN</DisplayPath>
+                <LinkChain />
+                <ObjectId>b50fda5b-6c4f-489c-bbe9-160ee7b16abc</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableToSet>
+              <NewValue xsi:type="SubstitutableString">
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Get VSG DN.Results.CFW DN</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>Results</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>CFW DN</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>07e8c3f1-d1b1-4438-830b-5d98c550bb1a</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </NewValue>
+            </Configuration>
+          </ActivityNode>
+        </Children>
+        <Condition>
+          <Id>df7b02e0-6103-4d3e-8925-ae3adbc0df33</Id>
+          <Conditions>
+            <ConditionDefinition xsi:type="VariableConditionDefinition">
+              <Id>9466a796-5264-48b2-b203-5383602a089b</Id>
+              <Expression xsi:type="SubstitutableString">
+                <HardcodedValue />
+              </Expression>
+              <Comparison>NotEquals</Comparison>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.VSG Management IP</DisplayPath>
+                <LinkChain />
+                <ObjectId>d307ee11-9951-4fe1-82ee-2ef5fd49f7a3</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </ConditionDefinition>
+          </Conditions>
+        </Condition>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>24165333-d05a-4d6d-885d-719af1763209</Id>
+        <DisplayName>Disassociate CFW from VSG</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>cfde03ce-d528-40f9-9f32-79b0894d9096</Id>
+            <ActivityNodeId>24165333-d05a-4d6d-885d-719af1763209</ActivityNodeId>
+            <CompletedId>5fc09401-8e26-4276-ac06-0d434ce522a6</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="WebHttpTargetAwareRequestActivityConfiguration" xml:space="preserve">
+          <Id>24165333-d05a-4d6d-885d-719af1763209</Id>
+          <DisplayName>Disassociate CFW from VSG</DisplayName>
+          <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+          <ContainingProcessId>705c0000-b4e8-4bab-9a54-3008440c6c74</ContainingProcessId>
+          <UseCredentials>true</UseCredentials>
+          <RelativeUrl>
+            <FormattedCode>/resource-mgr</FormattedCode>
+          </RelativeUrl>
+          <ContentType>
+            <HardcodedValue>application/xml; charset=utf-8</HardcodedValue>
+          </ContentType>
+          <Method>
+            <HardcodedValue>POST</HardcodedValue>
+          </Method>
+          <UserAgent>
+            <HardcodedValue />
+          </UserAgent>
+          <Request>
+            <FormattedCode>&lt;configConfMo cookie="{0}" inHierarchical="false"&gt;
+    &lt;inConfig&gt;
+&lt;fwResourceBinding dn="{1}/binding" status="deleted"/&gt;
+    &lt;/inConfig&gt;
+&lt;/configConfMo&gt;</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Get VNMC Cookie.Cookie</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="ProcessOutputVariableLink">
+                    <LaunchingActivityId>979eabdf-bfb9-4fb1-ace7-ec40555964ec</LaunchingActivityId>
+                    <OutputVariableId>d7de7060-a90c-4483-9389-9a1a86861b66</OutputVariableId>
+                  </Link>
+                </LinkChain>
+                <ObjectId>979eabdf-bfb9-4fb1-ace7-ec40555964ec</ObjectId>
+                <ObjectType>WorkflowNode</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.Compute Firewall DN</DisplayPath>
+                <LinkChain />
+                <ObjectId>b50fda5b-6c4f-489c-bbe9-160ee7b16abc</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </Request>
+          <ProtocolVersion>Version11</ProtocolVersion>
+          <AllowAutoRedirect>true</AllowAutoRedirect>
+          <Timeout>
+            <DisplayUnits>Seconds</DisplayUnits>
+            <Period>
+              <HardcodedValue>100</HardcodedValue>
+            </Period>
+          </Timeout>
+          <Accept>
+            <HardcodedValue />
+          </Accept>
+          <AcceptCookies>false</AcceptCookies>
+          <Headers />
+          <OutputFormat>Xml</OutputFormat>
+        </Configuration>
+      </ActivityNode>
+    </Children>
+  </FirstActivity>
+  <ProcessId>705c0000-b4e8-4bab-9a54-3008440c6c74</ProcessId>
+</WorkflowConfiguration>

@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<ProcessConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>7d3fcc89-299d-4f93-bf85-791085224602</Id>
+  <DisplayName>Enumerate Portgroups</DisplayName>
+  <Description>Enumerate vSphere datacenters and return information: Name, Moref, and Path.</Description>
+  <VersionNumber>-1</VersionNumber>
+  <CreatedTime>2016-02-15T20:42:10.489Z</CreatedTime>
+  <ModifiedTime>2016-05-03T22:16:55.6373828Z</ModifiedTime>
+  <Version>4.3.1.9733</Version>
+  <TargetLoadBalancer xsi:type="RequireOverrideLoadBalancer" />
+  <AuditStarts>true</AuditStarts>
+  <AuditSuccesses>true</AuditSuccesses>
+  <WorkflowId>22bd0436-7d9b-4fd7-99ad-63ba8ef9bc63</WorkflowId>
+  <CategoryIds>
+    <guid>9b15aaa9-974d-41f6-8e09-3222a20b781a</guid>
+  </CategoryIds>
+  <TriggerOwner>74d6de41-8d7c-42dd-b0df-37578a8885eb</TriggerOwner>
+  <Triggers>
+    <TriggerDefinition>
+      <Event xsi:type="AdHocEventDefinition">
+        <Id>0c444684-4c6e-439a-a535-737984a74642</Id>
+        <DisplayName>Started by User</DisplayName>
+        <Imported>true</Imported>
+        <Identities />
+      </Event>
+      <Condition xsi:type="RootConditionDefinition">
+        <Id>cdc0302b-6638-4824-b083-e88542a6b3f5</Id>
+        <Conditions />
+      </Condition>
+      <TriggerId>b85ad63c-c83a-4460-9139-02345b514dee</TriggerId>
+    </TriggerDefinition>
+    <TriggerDefinition>
+      <Event xsi:type="StartProcessEventDefinition">
+        <Id>9afdace0-cf83-419d-a682-7a7d0076f02b</Id>
+        <DisplayName>Started by Parent Process</DisplayName>
+        <Imported>true</Imported>
+        <ProcessIds />
+      </Event>
+      <Condition xsi:type="RootConditionDefinition">
+        <Id>944302fb-9ceb-4c36-8f5a-dbb40dce36e7</Id>
+        <Conditions />
+      </Condition>
+      <TriggerId>62996ccd-5b8d-46a9-bfb5-b81fe368dc03</TriggerId>
+    </TriggerDefinition>
+    <TriggerDefinition>
+      <Event xsi:type="NorthboundEventDefinition">
+        <Id>6bbdb5ae-9aa0-400a-b23b-925b5d59b073</Id>
+        <DisplayName>Started by Web Service</DisplayName>
+        <Imported>true</Imported>
+      </Event>
+      <Condition xsi:type="RootConditionDefinition">
+        <Id>834dade5-1e81-446d-a393-e25df960bd31</Id>
+        <Conditions />
+      </Condition>
+      <TriggerId>de4836e6-595c-4b31-99c5-60cac0e609b8</TriggerId>
+    </TriggerDefinition>
+    <TriggerDefinition>
+      <Event xsi:type="NorthboundEventDefinition">
+        <Id>34ea49d1-c4ff-4383-be57-33fb4b3fd7e5</Id>
+        <DisplayName>Started by Web Service</DisplayName>
+        <Imported>true</Imported>
+        <NorthboundName>EnumeratePortgroups</NorthboundName>
+      </Event>
+      <Condition xsi:type="RootConditionDefinition">
+        <Id>698e2a52-a2b7-425a-b8cc-3b4f16cc6992</Id>
+        <Conditions />
+      </Condition>
+      <TriggerId>cee239b6-6801-48cc-9c35-042f5091773a</TriggerId>
+    </TriggerDefinition>
+    <TriggerDefinition>
+      <Event xsi:type="NorthboundEventDefinition">
+        <Id>f8ac6911-6947-4deb-9bcd-8f4a4b813b4e</Id>
+        <DisplayName>Started by Web Service</DisplayName>
+      </Event>
+      <Condition xsi:type="RootConditionDefinition">
+        <Id>795f9ce9-313b-4bd5-bf6f-03b9c03562fb</Id>
+        <Conditions />
+      </Condition>
+      <TriggerId>698ec4d1-0b80-4a91-88b8-578d531162f5</TriggerId>
+    </TriggerDefinition>
+  </Triggers>
+  <VariableDefinitions>
+    <VariableConfiguration xsi:type="StringVariableConfiguration" xml:space="preserve">
+      <Id>2e472452-12bf-4987-b29c-6cad42800db7</Id>
+      <DisplayName>Result Table XML</DisplayName>
+      <Description>The results of enumerate datacenter in XML format. Contains the columns Name, Moref, Path. Each row has the element name of row. </Description>
+      <ModifiedTime>2012-10-11T17:21:04.8609606Z</ModifiedTime>
+      <string />
+      <Scope>
+        <Family>ProcessInstanceOut</Family>
+        <ControllingItemId>7d3fcc89-299d-4f93-bf85-791085224602</ControllingItemId>
+      </Scope>
+      <Multiline>true</Multiline>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="StringVariableConfiguration" xml:space="preserve">
+      <Id>1c63afec-33fe-444f-9ad1-930f705ff50d</Id>
+      <DisplayName>Datacenter</DisplayName>
+      <Description>This is the command line of the fields to be passed in.</Description>
+      <ModifiedTime>2013-06-21T10:59:05.7168697Z</ModifiedTime>
+      <string>*</string>
+      <Scope>
+        <Family>ProcessInstanceIn</Family>
+        <ControllingItemId>7d3fcc89-299d-4f93-bf85-791085224602</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="NumberVariableConfiguration" xml:space="preserve">
+      <Id>7a0ea958-e24e-4ffe-a800-f127d24d0613</Id>
+      <DisplayName>Error Code</DisplayName>
+      <Description>The error code for this run of the process. The default value is 0, which indicates a successful run. </Description>
+      <ModifiedTime>2012-10-11T17:14:12.1716958Z</ModifiedTime>
+      <double>0</double>
+      <Scope>
+        <Family>ProcessInstanceOut</Family>
+        <ControllingItemId>7d3fcc89-299d-4f93-bf85-791085224602</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="BooleanVariableConfiguration" xml:space="preserve">
+      <Id>163eabef-55b2-44b0-b01e-caed9995da8b</Id>
+      <DisplayName>XML State</DisplayName>
+      <boolean>true</boolean>
+      <Scope>
+        <Family>ProcessInstanceLocal</Family>
+        <ControllingItemId>7d3fcc89-299d-4f93-bf85-791085224602</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+  </VariableDefinitions>
+  <Notes />
+  <GeneralHelp xsi:type="CustomHelpAlias">
+    <Alias>IDH_IAC_PROP_ACT_ENUMDATACENTERS_GENERAL</Alias>
+  </GeneralHelp>
+  <GeneralInstanceHelp xsi:type="CustomHelpAlias">
+    <Alias>IDH_IAC_PROP_ACT_ENUMDATACENTERS_GENERAL</Alias>
+  </GeneralInstanceHelp>
+  <InputHelp xsi:type="CustomHelpAlias">
+    <Alias>IDH_IAC_PROP_ACT_ENUMDATACENTERS_INPUTS</Alias>
+  </InputHelp>
+  <InputInstanceHelp xsi:type="CustomHelpAlias">
+    <Alias>IDH_IAC_PROP_ACT_ENUMDATACENTERS_INPUTS</Alias>
+  </InputInstanceHelp>
+  <OutputHelp xsi:type="CustomHelpAlias">
+    <Alias>IDH_IAC_PROP_ACT_ENUMDATACENTERS_OUTPUTS</Alias>
+  </OutputHelp>
+  <ValidTargetTypeNames>
+    <string>Tidal.Automation.VMware.Common.VCTargetConfiguration, Tidal.Automation.VMware.Common</string>
+  </ValidTargetTypeNames>
+  <ValidTargetTypeExtensionIds>
+    <guid>a7fc2f5a-1e30-7968-b60a-1860da88e13d</guid>
+  </ValidTargetTypeExtensionIds>
+  <ValidRuntimeUserTypeNames>
+    <string>Tidal.Automation.Ssh.Common.PublicKeyAdminUserConfiguration, Tidal.Automation.Ssh.Common</string>
+    <string>Tidal.Automation.Ssh.Common.IOSUserConfiguration, Tidal.Automation.Ssh.Common</string>
+    <string>Tidal.Automation.BuiltinAdapter.Common.GenericRuntimeUserConfiguration, Tidal.Automation.BuiltinAdapter.Common</string>
+    <string>Tidal.Automation.Snmp.Common.SnmpUserConfiguration, Tidal.Automation.Snmp.Common</string>
+    <string>Tidal.Automation.Windows.Common.WindowsUserConfiguration, Tidal.Automation.Windows.Common</string>
+  </ValidRuntimeUserTypeNames>
+  <GroupName>Cloud Virtual Server Automation</GroupName>
+</ProcessConfiguration>

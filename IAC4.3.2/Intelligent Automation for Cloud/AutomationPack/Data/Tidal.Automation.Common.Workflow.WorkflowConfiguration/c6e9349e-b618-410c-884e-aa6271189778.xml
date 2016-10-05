@@ -1,0 +1,430 @@
+<?xml version="1.0"?>
+<WorkflowConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>c6e9349e-b618-410c-884e-aa6271189778</Id>
+  <DisplayName>Create Compute Firewall</DisplayName>
+  <CreatedTime>2016-02-15T20:46:03.70775Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:46:21.9169921Z</ModifiedTime>
+  <FirstActivity xsi:type="RootNode">
+    <Id>ccbb8ec5-be74-4d23-9324-825174d3ba0d</Id>
+    <DisplayName />
+    <Children>
+      <ActivityNode xsi:type="ConditionBranchNode">
+        <Id>8233ed77-901f-4d63-9be1-4302283ba965</Id>
+        <DisplayName>Get Organization DN</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>689ce07f-8ca0-4861-ab64-5d3207cb8db6</Id>
+            <DisplayName>Set Tenant DN</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>d82a0f33-22de-43f4-8e71-0aa9bc6577a6</Id>
+                <ActivityNodeId>689ce07f-8ca0-4861-ab64-5d3207cb8db6</ActivityNodeId>
+                <CompletedId>ba86c09d-d8ce-460d-9bde-ee52e20b7824</CompletedId>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+              <Id>689ce07f-8ca0-4861-ab64-5d3207cb8db6</Id>
+              <DisplayName>Set Tenant DN</DisplayName>
+              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                <SingleTargetId>
+                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                </SingleTargetId>
+              </TargetLoadBalancer>
+              <InheritTarget>false</InheritTarget>
+              <ContainingProcessId>e9e56130-d6d3-435e-9088-59224fa3e547</ContainingProcessId>
+              <VariableToSet>
+                <DisplayPath>Process.Variables.Local.inDn</DisplayPath>
+                <LinkChain />
+                <ObjectId>7308e7b4-123b-4e42-ad43-e440ec935a8d</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableToSet>
+              <NewValue xsi:type="SubstitutableString">
+                <FormattedCode>org-root/org-{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Input.tenant name</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>ae8793b8-0538-4e30-a05a-3ae144d65e18</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                </References>
+              </NewValue>
+            </Configuration>
+          </ActivityNode>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>2c276636-060e-4dcd-8e29-08d3eefa5422</Id>
+            <DisplayName>Data Center Policy</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>8b04e975-cacc-4006-a5b1-9e16775b4fe5</Id>
+                <DisplayName>Set Data Center DN</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>016ad84c-7856-4a30-852b-e37b861219d9</Id>
+                    <ActivityNodeId>8b04e975-cacc-4006-a5b1-9e16775b4fe5</ActivityNodeId>
+                    <CompletedId>427299d3-60ee-452b-9da2-364e0cd016a2</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                  <Id>8b04e975-cacc-4006-a5b1-9e16775b4fe5</Id>
+                  <DisplayName>Set Data Center DN</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>e9e56130-d6d3-435e-9088-59224fa3e547</ContainingProcessId>
+                  <VariableToSet>
+                    <DisplayPath>Process.Variables.Local.inDn</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>7308e7b4-123b-4e42-ad43-e440ec935a8d</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableToSet>
+                  <NewValue xsi:type="SubstitutableString">
+                    <FormattedCode>org-root/org-{0}/org-{1}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Variables.Input.tenant name</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>ae8793b8-0538-4e30-a05a-3ae144d65e18</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableReference>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Variables.Input.datacenter name</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>fa90a608-d970-4d76-999c-34e80fba059d</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </NewValue>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="ConditionBranchNode">
+                <Id>a58c3016-8d2f-4baf-850d-40798c301211</Id>
+                <DisplayName>Application Policy</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="ExecuteActivityNode">
+                    <Id>93c077ee-28b7-4db3-947a-29c8b2dc67a6</Id>
+                    <DisplayName>Set Application DN</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                        <Id>8c34e8f4-0226-4ffc-b1c3-83824d4ee356</Id>
+                        <ActivityNodeId>93c077ee-28b7-4db3-947a-29c8b2dc67a6</ActivityNodeId>
+                        <CompletedId>b86b7278-f296-4b96-9995-374156a02934</CompletedId>
+                      </ActivityNode>
+                    </Children>
+                    <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                      <Id>93c077ee-28b7-4db3-947a-29c8b2dc67a6</Id>
+                      <DisplayName>Set Application DN</DisplayName>
+                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                        <SingleTargetId>
+                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                        </SingleTargetId>
+                      </TargetLoadBalancer>
+                      <InheritTarget>false</InheritTarget>
+                      <ContainingProcessId>e9e56130-d6d3-435e-9088-59224fa3e547</ContainingProcessId>
+                      <VariableToSet>
+                        <DisplayPath>Process.Variables.Local.inDn</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>7308e7b4-123b-4e42-ad43-e440ec935a8d</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableToSet>
+                      <NewValue xsi:type="SubstitutableString">
+                        <FormattedCode>org-root/org-{0}/org-{1}/org-{2}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Input.tenant name</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>ae8793b8-0538-4e30-a05a-3ae144d65e18</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Input.datacenter name</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>fa90a608-d970-4d76-999c-34e80fba059d</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Input.application name</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>2b952fb5-913c-4bfb-b2ec-03c8530dac2a</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </NewValue>
+                    </Configuration>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="ConditionBranchNode">
+                    <Id>d440c4d5-e700-48c8-9a5f-4792ff21f616</Id>
+                    <DisplayName>Tier Policy</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ExecuteActivityNode">
+                        <Id>4ac06d10-f8db-4981-8702-9486eda2a69d</Id>
+                        <DisplayName>Set Tier DN</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                            <Id>a727ed9c-4ae4-4de3-8390-07ec721294a0</Id>
+                            <ActivityNodeId>4ac06d10-f8db-4981-8702-9486eda2a69d</ActivityNodeId>
+                            <CompletedId>f9935673-a977-46af-8956-147a721b8a5e</CompletedId>
+                          </ActivityNode>
+                        </Children>
+                        <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                          <Id>4ac06d10-f8db-4981-8702-9486eda2a69d</Id>
+                          <DisplayName>Set Tier DN</DisplayName>
+                          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                            <SingleTargetId>
+                              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                            </SingleTargetId>
+                          </TargetLoadBalancer>
+                          <InheritTarget>false</InheritTarget>
+                          <ContainingProcessId>e9e56130-d6d3-435e-9088-59224fa3e547</ContainingProcessId>
+                          <VariableToSet>
+                            <DisplayPath>Process.Variables.Local.inDn</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>7308e7b4-123b-4e42-ad43-e440ec935a8d</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableToSet>
+                          <NewValue xsi:type="SubstitutableString">
+                            <FormattedCode>org-root/org-{0}/org-{1}/org-{2}/org-{3}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Variables.Input.tenant name</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>ae8793b8-0538-4e30-a05a-3ae144d65e18</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableReference>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Variables.Input.datacenter name</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>fa90a608-d970-4d76-999c-34e80fba059d</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableReference>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Variables.Input.application name</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>2b952fb5-913c-4bfb-b2ec-03c8530dac2a</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableReference>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Variables.Input.tier name</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>2a058bca-fe8f-4e0e-a835-ac01805c2894</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </NewValue>
+                        </Configuration>
+                      </ActivityNode>
+                    </Children>
+                    <Condition>
+                      <Id>8ab6b54c-8c6b-450b-9ad8-bb2cd1441515</Id>
+                      <Conditions>
+                        <ConditionDefinition xsi:type="VariableConditionDefinition">
+                          <Id>878d38eb-7220-4428-8637-e34ddb0c3c21</Id>
+                          <Expression xsi:type="SubstitutableString">
+                            <HardcodedValue />
+                          </Expression>
+                          <Comparison>NotEquals</Comparison>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Input.tier name</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>2a058bca-fe8f-4e0e-a835-ac01805c2894</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                        </ConditionDefinition>
+                      </Conditions>
+                    </Condition>
+                  </ActivityNode>
+                </Children>
+                <Condition>
+                  <Id>68b213c2-e5ed-4953-b45d-1eeedf803b36</Id>
+                  <Conditions>
+                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                      <Id>aff9ed1c-21f2-4152-9e50-4a2fc79036eb</Id>
+                      <Expression xsi:type="SubstitutableString">
+                        <HardcodedValue />
+                      </Expression>
+                      <Comparison>NotEquals</Comparison>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Variables.Input.application name</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>2b952fb5-913c-4bfb-b2ec-03c8530dac2a</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableReference>
+                    </ConditionDefinition>
+                  </Conditions>
+                </Condition>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>5af48c6a-5802-4944-96c8-04fdd83b8e90</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>335078c4-f8c1-418d-adef-5d84d6e0002c</Id>
+                  <Expression xsi:type="SubstitutableString">
+                    <HardcodedValue />
+                  </Expression>
+                  <Comparison>NotEquals</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Input.datacenter name</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>fa90a608-d970-4d76-999c-34e80fba059d</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+        </Children>
+        <Condition>
+          <Id>3e8e06d4-9a49-41cd-b42a-70e6fbf30350</Id>
+          <Conditions>
+            <ConditionDefinition xsi:type="VariableConditionDefinition">
+              <Id>0b9456b2-d59c-4848-8000-8e3d527bc951</Id>
+              <Expression xsi:type="SubstitutableString">
+                <HardcodedValue />
+              </Expression>
+              <Comparison>NotEquals</Comparison>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.tenant name</DisplayPath>
+                <LinkChain />
+                <ObjectId>ae8793b8-0538-4e30-a05a-3ae144d65e18</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </ConditionDefinition>
+          </Conditions>
+        </Condition>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>a0eeedd4-b2da-4148-8654-cdfc77dc8a05</Id>
+        <DisplayName>Create Compute-Firewall Request</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>f33b025f-e3e7-4ee0-9c64-7ba9ad0d5e0f</Id>
+            <ActivityNodeId>a0eeedd4-b2da-4148-8654-cdfc77dc8a05</ActivityNodeId>
+            <CompletedId>ca0fa6fc-40d9-46ea-9bfc-aacf1dd8e09b</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="WebHttpTargetAwareRequestActivityConfiguration" xml:space="preserve">
+          <Id>a0eeedd4-b2da-4148-8654-cdfc77dc8a05</Id>
+          <DisplayName>Create Compute-Firewall Request</DisplayName>
+          <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+          <ContainingProcessId>e9e56130-d6d3-435e-9088-59224fa3e547</ContainingProcessId>
+          <UseCredentials>true</UseCredentials>
+          <RelativeUrl>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Local.relative-url</DisplayPath>
+                <LinkChain />
+                <ObjectId>b72e6473-6b63-4be6-be88-7084290921f3</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </RelativeUrl>
+          <ContentType>
+            <HardcodedValue>application/xml; charset=utf-8</HardcodedValue>
+          </ContentType>
+          <Method>
+            <HardcodedValue>POST</HardcodedValue>
+          </Method>
+          <UserAgent>
+            <HardcodedValue />
+          </UserAgent>
+          <Request>
+            <FormattedCode>&lt;configConfMo
+dn=""
+cookie="{0}"
+inHierarchical="{1}"&gt;
+    &lt;inConfig&gt;
+&lt;fwComputeFirewall
+
+dataIpAddress="{2}"
+dataIpSubnet="{3}"
+descr="{4}"
+dn="{5}/cfw-{6}"
+hostname="{7}"
+name="{8}"
+
+status="created"/&gt;
+    &lt;/inConfig&gt;
+&lt;/configConfMo&gt;
+</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.cookie</DisplayPath>
+                <LinkChain />
+                <ObjectId>47ca2f55-8ae1-4dc2-b1b8-6389929aa3f2</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.recursive</DisplayPath>
+                <LinkChain />
+                <ObjectId>b0752464-0040-488c-ba17-d651084d3ad6</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.ip address</DisplayPath>
+                <LinkChain />
+                <ObjectId>8e5ea173-21ac-4eda-b5e9-5ef507755e7a</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.subnet</DisplayPath>
+                <LinkChain />
+                <ObjectId>ade86cdb-49e3-4666-b2ec-65eca87517c1</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.firewall description</DisplayPath>
+                <LinkChain />
+                <ObjectId>be5e2093-f4f1-4bd3-8ceb-5bce1bc88fc3</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Local.inDn</DisplayPath>
+                <LinkChain />
+                <ObjectId>7308e7b4-123b-4e42-ad43-e440ec935a8d</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.firewall name</DisplayPath>
+                <LinkChain />
+                <ObjectId>257df664-ab83-421b-a8e2-5ec3c3ac4ec7</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.management hostname</DisplayPath>
+                <LinkChain />
+                <ObjectId>4dd45f48-1d83-4181-b8c9-ed647818a021</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.firewall name</DisplayPath>
+                <LinkChain />
+                <ObjectId>257df664-ab83-421b-a8e2-5ec3c3ac4ec7</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </Request>
+          <ProtocolVersion>Version11</ProtocolVersion>
+          <AllowAutoRedirect>true</AllowAutoRedirect>
+          <Timeout>
+            <DisplayUnits>Seconds</DisplayUnits>
+            <Period>
+              <HardcodedValue>100</HardcodedValue>
+            </Period>
+          </Timeout>
+          <Accept>
+            <HardcodedValue />
+          </Accept>
+          <AcceptCookies>false</AcceptCookies>
+          <Headers />
+          <OutputFormat>Xml</OutputFormat>
+        </Configuration>
+      </ActivityNode>
+    </Children>
+  </FirstActivity>
+  <ProcessId>e9e56130-d6d3-435e-9088-59224fa3e547</ProcessId>
+</WorkflowConfiguration>

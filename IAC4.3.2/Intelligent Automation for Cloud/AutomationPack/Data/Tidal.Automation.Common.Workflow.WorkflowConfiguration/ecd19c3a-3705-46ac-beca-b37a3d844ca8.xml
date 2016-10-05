@@ -1,0 +1,2806 @@
+<?xml version="1.0"?>
+<WorkflowConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>ecd19c3a-3705-46ac-beca-b37a3d844ca8</Id>
+  <DisplayName>Delete Load Balancer FW Rule</DisplayName>
+  <CreatedTime>2016-02-15T20:43:44.5515Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:44:02.7763671Z</ModifiedTime>
+  <FirstActivity xsi:type="RootNode">
+    <Id>379936cc-0c23-412a-9b7b-74d6f36b73b5</Id>
+    <DisplayName />
+    <Children>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>fad66d9c-a20a-468b-b5ea-b92e9f99e98c</Id>
+        <DisplayName>Find VPXLBVirtualServer</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>0ae78ebc-083c-41da-b01a-a5ad6fac3b47</Id>
+            <ActivityNodeId>fad66d9c-a20a-468b-b5ea-b92e9f99e98c</ActivityNodeId>
+            <CompletedId>e8a26ef7-da38-4e6f-872f-f94acff79679</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="FindServiceItemsActivityConfiguration" xml:space="preserve">
+          <Id>fad66d9c-a20a-468b-b5ea-b92e9f99e98c</Id>
+          <DisplayName>Find VPXLBVirtualServer</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+            <SingleTargetReference>
+              <FormattedCode />
+              <HardcodedValue>
+                <Id>b3216113-bb0f-4cb3-b7c2-93b9074ef87b</Id>
+                <ObjectType>Target</ObjectType>
+              </HardcodedValue>
+            </SingleTargetReference>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>9c96d3dd-5593-43ab-8ce6-22308f715d29</ContainingProcessId>
+          <RetryTimePeriod>
+            <DisplayUnits>Minutes</DisplayUnits>
+            <Period>
+              <FormattedCode>{0}</FormattedCode>
+              <References>
+                <VariableReference xsi:type="PropertyReference">
+                  <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Time Period (minutes)</DisplayPath>
+                  <LinkChain>
+                    <Link xsi:type="PropertyNameLink">
+                      <PropertyName>DefaultRetryMinutes</PropertyName>
+                    </Link>
+                  </LinkChain>
+                  <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                  <ObjectType>Adapter</ObjectType>
+                </VariableReference>
+              </References>
+            </Period>
+          </RetryTimePeriod>
+          <RetryFrequency>
+            <DisplayUnits>Seconds</DisplayUnits>
+            <Period>
+              <FormattedCode>{0}</FormattedCode>
+              <References>
+                <VariableReference xsi:type="PropertyReference">
+                  <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Frequency (seconds)</DisplayPath>
+                  <LinkChain>
+                    <Link xsi:type="PropertyNameLink">
+                      <PropertyName>DefaultRetryFrequency</PropertyName>
+                    </Link>
+                  </LinkChain>
+                  <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                  <ObjectType>Adapter</ObjectType>
+                </VariableReference>
+              </References>
+            </Period>
+          </RetryFrequency>
+          <Timeout>
+            <DisplayUnits>Seconds</DisplayUnits>
+            <Period>
+              <HardcodedValue>100</HardcodedValue>
+            </Period>
+          </Timeout>
+          <ItemType>
+            <HardcodedValue>VPXLBVirtualServers</HardcodedValue>
+          </ItemType>
+          <ItemName>
+            <FormattedCode />
+          </ItemName>
+          <BrowseServiceItemName>VPXLBVirtualServers</BrowseServiceItemName>
+          <Properties>
+            <ServiceItemProperty>
+              <Name>
+                <HardcodedValue>Name</HardcodedValue>
+              </Name>
+            </ServiceItemProperty>
+          </Properties>
+          <SearchCriteria>
+            <ServiceItemSearchCriteria>
+              <Name>
+                <HardcodedValue>VirtualServerName</HardcodedValue>
+              </Name>
+              <Value xsi:type="SubstitutableString">
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Input.Virtual Server Name (not SI Name)</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>ddff7568-4573-44f5-b622-f81dd92d6a60</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                </References>
+              </Value>
+              <Comparison>Equal</Comparison>
+            </ServiceItemSearchCriteria>
+          </SearchCriteria>
+          <Subscriber>
+            <HardcodedValue />
+          </Subscriber>
+          <SubscriberOuName>
+            <HardcodedValue />
+          </SubscriberOuName>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>de940bdd-3b16-4d79-b460-b5452a8797da</Id>
+        <DisplayName>Get Unique String</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>28b6dda1-c4d1-4461-81ca-e2fc2a4027bf</Id>
+            <ActivityNodeId>de940bdd-3b16-4d79-b460-b5452a8797da</ActivityNodeId>
+            <CompletedId>4399b331-ad30-4ec9-b489-af5f98779698</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="SubStringActivityConfiguration" xml:space="preserve">
+          <Id>de940bdd-3b16-4d79-b460-b5452a8797da</Id>
+          <DisplayName>Get Unique String</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>9c96d3dd-5593-43ab-8ce6-22308f715d29</ContainingProcessId>
+          <InputString>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Find VPXLBVirtualServer.Service Items.First Row.Name</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>ResultsTable</PropertyName>
+                  </Link>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>FirstRow</PropertyName>
+                  </Link>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>Name</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>fad66d9c-a20a-468b-b5ea-b92e9f99e98c</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </VariableReference>
+            </References>
+          </InputString>
+          <StartPos>
+            <HardcodedValue>0</HardcodedValue>
+          </StartPos>
+          <EndPos>
+            <HardcodedValue>6</HardcodedValue>
+          </EndPos>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>3e3138a3-bb97-4f1d-9765-17503811ee33</Id>
+        <DisplayName>Get Unique String from Zone name</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>3c95420b-f71c-435a-aefe-8976fcd24a94</Id>
+            <ActivityNodeId>3e3138a3-bb97-4f1d-9765-17503811ee33</ActivityNodeId>
+            <CompletedId>70a0aa64-265e-4f49-8833-130229e561a2</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="SubStringActivityConfiguration" xml:space="preserve">
+          <Id>3e3138a3-bb97-4f1d-9765-17503811ee33</Id>
+          <DisplayName>Get Unique String from Zone name</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>9c96d3dd-5593-43ab-8ce6-22308f715d29</ContainingProcessId>
+          <InputString>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.Zone</DisplayPath>
+                <LinkChain />
+                <ObjectId>35e57197-2856-4a72-b62b-9f1189fa052a</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </InputString>
+          <StartPos>
+            <HardcodedValue>0</HardcodedValue>
+          </StartPos>
+          <EndPos>
+            <HardcodedValue>2</HardcodedValue>
+          </EndPos>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>fde3a69e-422f-4b2a-9a00-2345654d4ba4</Id>
+        <DisplayName>Set Parent DN</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>5669b167-e2e1-4284-ac55-1ddd39da288e</Id>
+            <ActivityNodeId>fde3a69e-422f-4b2a-9a00-2345654d4ba4</ActivityNodeId>
+            <CompletedId>c90ed527-a1f3-46b3-b8a1-35f25fa1f5f6</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+          <Id>fde3a69e-422f-4b2a-9a00-2345654d4ba4</Id>
+          <DisplayName>Set Parent DN</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>9c96d3dd-5593-43ab-8ce6-22308f715d29</ContainingProcessId>
+          <VariableToSet>
+            <DisplayPath>Process.Variables.Local.PNSC Parent Distinguished Name</DisplayPath>
+            <LinkChain />
+            <ObjectId>4152e922-1cb2-4858-a86d-ee7a7d7cc958</ObjectId>
+            <ObjectType>GlobalVariable</ObjectType>
+          </VariableToSet>
+          <NewValue xsi:type="SubstitutableString">
+            <FormattedCode>org-root/org-{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.Tenant Acronym</DisplayPath>
+                <LinkChain />
+                <ObjectId>e031501c-e3a5-425c-9662-0878d6048f83</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </NewValue>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="StartProcessNode">
+        <Id>ac17f62c-edd3-4c49-82b1-b74471070e05</Id>
+        <DisplayName>Login to Prime NSC</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>15ec73f8-d684-4dde-a9b0-332062128f5e</Id>
+            <ProcessNodeId>ac17f62c-edd3-4c49-82b1-b74471070e05</ProcessNodeId>
+            <CompletedId>e624cd87-baa0-45fe-8788-9bd6e5cee2b0</CompletedId>
+          </ActivityNode>
+        </Children>
+        <ProcessId>07e1dd08-08f9-42bc-8661-8ce2dde61c28</ProcessId>
+        <InputVariableTable>
+          <VariableAssignmentsAsArray />
+        </InputVariableTable>
+        <Asynchronous>false</Asynchronous>
+        <InheritTarget>true</InheritTarget>
+        <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+        <InheritPriorityClass>true</InheritPriorityClass>
+        <RuntimeUserId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </RuntimeUserId>
+        <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+        <StartPointId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </StartPointId>
+        <StartPointName>
+          <FormattedCode />
+        </StartPointName>
+      </ActivityNode>
+      <ActivityNode xsi:type="SwitchNode">
+        <Id>02eecad9-abdd-4830-8eb4-9accd3668444</Id>
+        <DisplayName>Type</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>afb7e261-5976-41fd-838e-0d86422d2d81</Id>
+            <DisplayName>SNIP</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ParallelNode">
+                <Id>eeba89ed-49ca-414f-8a4d-d703ea2edfe2</Id>
+                <DisplayName>Parallel Block</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="SequenceNode">
+                    <Id>2467b6d0-e3c3-40ad-86ce-1bff0c284a7c</Id>
+                    <DisplayName>Inbound</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ExecuteActivityNode">
+                        <Id>38045b11-5cc5-4cf2-b40b-16a7811f4c99</Id>
+                        <DisplayName>Find firewall rules</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                            <Id>89a12078-4f0d-4aa0-af16-06d1e21a5772</Id>
+                            <ActivityNodeId>38045b11-5cc5-4cf2-b40b-16a7811f4c99</ActivityNodeId>
+                            <CompletedId>c62f3671-3767-4ef4-9e7a-ff465d0aba02</CompletedId>
+                          </ActivityNode>
+                        </Children>
+                        <Configuration xsi:type="FindServiceItemsActivityConfiguration" xml:space="preserve">
+                          <Id>38045b11-5cc5-4cf2-b40b-16a7811f4c99</Id>
+                          <DisplayName>Find firewall rules</DisplayName>
+                          <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                            <SingleTargetReference>
+                              <FormattedCode />
+                              <HardcodedValue>
+                                <Id>b3216113-bb0f-4cb3-b7c2-93b9074ef87b</Id>
+                                <ObjectType>Target</ObjectType>
+                              </HardcodedValue>
+                            </SingleTargetReference>
+                          </TargetLoadBalancer>
+                          <InheritTarget>false</InheritTarget>
+                          <ContainingProcessId>9c96d3dd-5593-43ab-8ce6-22308f715d29</ContainingProcessId>
+                          <RetryTimePeriod>
+                            <DisplayUnits>Minutes</DisplayUnits>
+                            <Period>
+                              <FormattedCode>{0}</FormattedCode>
+                              <References>
+                                <VariableReference xsi:type="PropertyReference">
+                                  <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Time Period (minutes)</DisplayPath>
+                                  <LinkChain>
+                                    <Link xsi:type="PropertyNameLink">
+                                      <PropertyName>DefaultRetryMinutes</PropertyName>
+                                    </Link>
+                                  </LinkChain>
+                                  <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                                  <ObjectType>Adapter</ObjectType>
+                                </VariableReference>
+                              </References>
+                            </Period>
+                          </RetryTimePeriod>
+                          <RetryFrequency>
+                            <DisplayUnits>Seconds</DisplayUnits>
+                            <Period>
+                              <FormattedCode>{0}</FormattedCode>
+                              <References>
+                                <VariableReference xsi:type="PropertyReference">
+                                  <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Frequency (seconds)</DisplayPath>
+                                  <LinkChain>
+                                    <Link xsi:type="PropertyNameLink">
+                                      <PropertyName>DefaultRetryFrequency</PropertyName>
+                                    </Link>
+                                  </LinkChain>
+                                  <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                                  <ObjectType>Adapter</ObjectType>
+                                </VariableReference>
+                              </References>
+                            </Period>
+                          </RetryFrequency>
+                          <Timeout>
+                            <DisplayUnits>Seconds</DisplayUnits>
+                            <Period>
+                              <HardcodedValue>100</HardcodedValue>
+                            </Period>
+                          </Timeout>
+                          <ItemType>
+                            <HardcodedValue>FirewallPolicyRule</HardcodedValue>
+                          </ItemType>
+                          <ItemName>
+                            <FormattedCode />
+                          </ItemName>
+                          <BrowseServiceItemName>FirewallPolicyRule</BrowseServiceItemName>
+                          <Properties>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>RuleOrder</HardcodedValue>
+                              </Name>
+                              <VariableType>Number</VariableType>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>SrcType</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>SrcServerGroupSIName</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>ServiceGroupSIName</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>SrcZoneName</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>SrcNetmask</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>SrcServerName</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>SystemName</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>PortNumber</HardcodedValue>
+                              </Name>
+                              <VariableType>Number</VariableType>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>DestServerName</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>Protocol</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>Action</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>SrcAddress</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>DestLBVSSIName</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>FriendlyName</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>Name</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>SrcVLANInstanceSIName</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>ServiceType</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>DestNetmask</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>DestAddress</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>VDCSIName</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>DestZoneName</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>DestServerGroupSIName</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>DestType</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>DestVLANInstanceSIName</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>SrcLBVSSIName</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>Description</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                          </Properties>
+                          <SearchCriteria>
+                            <ServiceItemSearchCriteria>
+                              <Name>
+                                <HardcodedValue>DestServerName</HardcodedValue>
+                              </Name>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Process.Variables.Input.VM Name</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>d5b7048c-b404-4f50-ac60-b427822ff445</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                              <Comparison>Equal</Comparison>
+                            </ServiceItemSearchCriteria>
+                            <ServiceItemSearchCriteria>
+                              <Name>
+                                <HardcodedValue>DestAddress</HardcodedValue>
+                              </Name>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Process.Variables.Input.Destination Network Address</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>2f561087-de12-4ed4-93f3-666d210c67f1</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                              <Comparison>Equal</Comparison>
+                            </ServiceItemSearchCriteria>
+                            <ServiceItemSearchCriteria>
+                              <Name>
+                                <HardcodedValue>SrcAddress</HardcodedValue>
+                              </Name>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Process.Variables.Input.Source Network Address</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>c0992c56-394d-43f6-a747-cc1733c54a1c</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                              <Comparison>Equal</Comparison>
+                            </ServiceItemSearchCriteria>
+                          </SearchCriteria>
+                          <Subscriber>
+                            <HardcodedValue />
+                          </Subscriber>
+                          <SubscriberOuName>
+                            <HardcodedValue />
+                          </SubscriberOuName>
+                        </Configuration>
+                      </ActivityNode>
+                      <ActivityNode xsi:type="ForEachNode">
+                        <Id>65294207-e19d-4eb8-b6b6-039a6459949f</Id>
+                        <DisplayName>For Each Rule</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="StartProcessNode">
+                            <Id>612c5e1b-b03a-4275-8e8a-077e6f747023</Id>
+                            <DisplayName>Get Rule from Inbound ACL Policy</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                <Id>1870c3f6-c06b-4366-aa56-a59f3f27f6f8</Id>
+                                <ProcessNodeId>612c5e1b-b03a-4275-8e8a-077e6f747023</ProcessNodeId>
+                                <CompletedId>1d1afd7f-ee46-4bdc-a595-31a427541fc4</CompletedId>
+                              </ActivityNode>
+                            </Children>
+                            <ProcessId>278de494-6eb1-4bd9-8458-e4183bbc2d13</ProcessId>
+                            <InputVariableTable>
+                              <VariableAssignmentsAsArray>
+                                <InputVariableAssignment>
+                                  <InputVariableId>97743146-65c3-42b1-8242-c64aa44dd5fd</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableBoolean">
+                                    <HardcodedValue>false</HardcodedValue>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                                <InputVariableAssignment>
+                                  <InputVariableId>ee753695-ba9d-4675-9e0b-f15601e3ebe7</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableString">
+                                    <HardcodedValue>policy-mgr</HardcodedValue>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                                <InputVariableAssignment>
+                                  <InputVariableId>372395cb-5aed-43f3-b09b-74922bf39e59</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}/pol-{1}_LB_{2}_ACL/rule-{3}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Local.PNSC Parent Distinguished Name</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>4152e922-1cb2-4858-a86d-ee7a7d7cc958</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Input.Type</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>6539fcf2-2fe5-4f73-8ab7-1aa8385c87b5</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Input.Zone</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>35e57197-2856-4a72-b62b-9f1189fa052a</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.For Each Rule.Item.SystemName</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>SystemName</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>65294207-e19d-4eb8-b6b6-039a6459949f</ObjectId>
+                                        <ObjectType>ActivityInstance</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                                <InputVariableAssignment>
+                                  <InputVariableId>ad6e7eb3-3fce-4430-a821-0f82a5b002e9</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.Login to Prime NSC.pnsc-cookie</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="ProcessOutputVariableLink">
+                                            <LaunchingActivityId>ac17f62c-edd3-4c49-82b1-b74471070e05</LaunchingActivityId>
+                                            <OutputVariableId>47c30024-30a5-47db-8eff-91f701676cfd</OutputVariableId>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>ac17f62c-edd3-4c49-82b1-b74471070e05</ObjectId>
+                                        <ObjectType>WorkflowNode</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                              </VariableAssignmentsAsArray>
+                            </InputVariableTable>
+                            <Asynchronous>false</Asynchronous>
+                            <InheritTarget>false</InheritTarget>
+                            <TargetLoadBalancer xsi:type="ActivityTargetLoadBalancer">
+                              <ActivityId>00000000-0000-0000-0000-000000000000</ActivityId>
+                              <ChildProcessNodeId>ac17f62c-edd3-4c49-82b1-b74471070e05</ChildProcessNodeId>
+                            </TargetLoadBalancer>
+                            <InheritPriorityClass>true</InheritPriorityClass>
+                            <RuntimeUserId>
+                              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                            </RuntimeUserId>
+                            <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                            <StartPointId>
+                              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                            </StartPointId>
+                            <StartPointName>
+                              <FormattedCode />
+                            </StartPointName>
+                          </ActivityNode>
+                          <ActivityNode xsi:type="ConditionBranchNode">
+                            <Id>d8b1f152-4a3d-4e86-8b27-1a0d036425d5</Id>
+                            <DisplayName>Exists?</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="ExecuteActivityNode">
+                                <Id>b3841cf3-1369-4315-a881-ba6ab05d2a95</Id>
+                                <DisplayName>Get Dn</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                    <Id>8ea5f485-e522-4f40-b3ef-6b0547f45636</Id>
+                                    <ActivityNodeId>b3841cf3-1369-4315-a881-ba6ab05d2a95</ActivityNodeId>
+                                    <CompletedId>fa32ba02-8008-4b7e-8a1a-ab30ad8dbeb0</CompletedId>
+                                  </ActivityNode>
+                                </Children>
+                                <Configuration xsi:type="XPathQueryActivityConfiguration" xml:space="preserve">
+                                  <Id>b3841cf3-1369-4315-a881-ba6ab05d2a95</Id>
+                                  <DisplayName>Get Dn</DisplayName>
+                                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                    <SingleTargetId>
+                                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                    </SingleTargetId>
+                                  </TargetLoadBalancer>
+                                  <InheritTarget>false</InheritTarget>
+                                  <ContainingProcessId>9c96d3dd-5593-43ab-8ce6-22308f715d29</ContainingProcessId>
+                                  <SourceXml>
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.Get Rule from Inbound ACL Policy.Object XML</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="ProcessOutputVariableLink">
+                                            <LaunchingActivityId>612c5e1b-b03a-4275-8e8a-077e6f747023</LaunchingActivityId>
+                                            <OutputVariableId>004915b1-3d5b-41ff-b70f-0e5ddc8b4c82</OutputVariableId>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>612c5e1b-b03a-4275-8e8a-077e6f747023</ObjectId>
+                                        <ObjectType>WorkflowNode</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </SourceXml>
+                                  <Namespaces />
+                                  <Queries>
+                                    <XPathQueryDefinition>
+                                      <DisplayName>dn</DisplayName>
+                                      <Query>
+                                        <HardcodedValue>//policyRule/@dn</HardcodedValue>
+                                      </Query>
+                                      <ReturnType>String</ReturnType>
+                                      <DefaultBehavior>Fail</DefaultBehavior>
+                                    </XPathQueryDefinition>
+                                  </Queries>
+                                </Configuration>
+                              </ActivityNode>
+                              <ActivityNode xsi:type="StartProcessNode">
+                                <Id>6842d2b1-4a2b-405e-a208-b95ae10d0fec</Id>
+                                <DisplayName>Delete Rule from Inbound Policy</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                    <Id>66c06e9b-1c15-4374-a9ad-05bac6300417</Id>
+                                    <ProcessNodeId>6842d2b1-4a2b-405e-a208-b95ae10d0fec</ProcessNodeId>
+                                    <CompletedId>0527658f-5242-4eda-9425-1c1365fcf24b</CompletedId>
+                                  </ActivityNode>
+                                </Children>
+                                <ProcessId>38e4530c-bb1a-428f-aa34-5c7c7da52a6e</ProcessId>
+                                <InputVariableTable>
+                                  <VariableAssignmentsAsArray>
+                                    <InputVariableAssignment>
+                                      <InputVariableId>ae204c2d-99cc-4c24-baaa-30d2d5a17b30</InputVariableId>
+                                      <VariableValue xsi:type="SubstitutableString">
+                                        <FormattedCode>&lt;configConfMos cookie="{0}" inHierarchical="false"&gt;
+&lt;inConfigs&gt;
+&lt;pair key="{1}"&gt;
+&lt;policyRule dn="{2}" status="deleted" /&gt;
+&lt;/pair&gt;
+&lt;/inConfigs&gt;
+&lt;/configConfMos&gt;</FormattedCode>
+                                        <References>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.Login to Prime NSC.pnsc-cookie</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="ProcessOutputVariableLink">
+                                                <LaunchingActivityId>ac17f62c-edd3-4c49-82b1-b74471070e05</LaunchingActivityId>
+                                                <OutputVariableId>47c30024-30a5-47db-8eff-91f701676cfd</OutputVariableId>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>ac17f62c-edd3-4c49-82b1-b74471070e05</ObjectId>
+                                            <ObjectType>WorkflowNode</ObjectType>
+                                          </VariableReference>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.Get Dn.Results.dn</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>Results</PropertyName>
+                                              </Link>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>dn</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>b3841cf3-1369-4315-a881-ba6ab05d2a95</ObjectId>
+                                            <ObjectType>ActivityInstance</ObjectType>
+                                          </VariableReference>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.Get Dn.Results.dn</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>Results</PropertyName>
+                                              </Link>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>dn</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>b3841cf3-1369-4315-a881-ba6ab05d2a95</ObjectId>
+                                            <ObjectType>ActivityInstance</ObjectType>
+                                          </VariableReference>
+                                        </References>
+                                      </VariableValue>
+                                    </InputVariableAssignment>
+                                    <InputVariableAssignment>
+                                      <InputVariableId>ff0dbe03-3e6a-4227-a663-1bbebe6a12f8</InputVariableId>
+                                      <VariableValue xsi:type="SubstitutableString">
+                                        <HardcodedValue>policy-mgr</HardcodedValue>
+                                      </VariableValue>
+                                    </InputVariableAssignment>
+                                  </VariableAssignmentsAsArray>
+                                </InputVariableTable>
+                                <Asynchronous>false</Asynchronous>
+                                <InheritTarget>true</InheritTarget>
+                                <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+                                <InheritPriorityClass>true</InheritPriorityClass>
+                                <RuntimeUserId>
+                                  <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                                </RuntimeUserId>
+                                <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                                <StartPointId>
+                                  <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                                </StartPointId>
+                                <StartPointName>
+                                  <FormattedCode />
+                                </StartPointName>
+                              </ActivityNode>
+                              <ActivityNode xsi:type="ExecuteActivityNode">
+                                <Id>df2525bd-0bb2-4bff-a5ee-0cef482c778b</Id>
+                                <DisplayName>Delete Inbound Firewall Rule</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                    <Id>90bf37e1-de9d-40be-b31a-99ca2469eb33</Id>
+                                    <ActivityNodeId>df2525bd-0bb2-4bff-a5ee-0cef482c778b</ActivityNodeId>
+                                    <CompletedId>1dcd0422-bb01-4483-af1e-b04fe23b37fd</CompletedId>
+                                  </ActivityNode>
+                                </Children>
+                                <Configuration xsi:type="DeleteServiceItemActivityConfiguration" xml:space="preserve">
+                                  <Id>df2525bd-0bb2-4bff-a5ee-0cef482c778b</Id>
+                                  <DisplayName>Delete Inbound Firewall Rule</DisplayName>
+                                  <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                                    <SingleTargetReference>
+                                      <FormattedCode />
+                                      <HardcodedValue>
+                                        <Id>b3216113-bb0f-4cb3-b7c2-93b9074ef87b</Id>
+                                        <ObjectType>Target</ObjectType>
+                                      </HardcodedValue>
+                                    </SingleTargetReference>
+                                  </TargetLoadBalancer>
+                                  <InheritTarget>false</InheritTarget>
+                                  <ContainingProcessId>9c96d3dd-5593-43ab-8ce6-22308f715d29</ContainingProcessId>
+                                  <RetryTimePeriod>
+                                    <DisplayUnits>Minutes</DisplayUnits>
+                                    <Period>
+                                      <FormattedCode>{0}</FormattedCode>
+                                      <References>
+                                        <VariableReference xsi:type="PropertyReference">
+                                          <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Time Period (minutes)</DisplayPath>
+                                          <LinkChain>
+                                            <Link xsi:type="PropertyNameLink">
+                                              <PropertyName>DefaultRetryMinutes</PropertyName>
+                                            </Link>
+                                          </LinkChain>
+                                          <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                                          <ObjectType>Adapter</ObjectType>
+                                        </VariableReference>
+                                      </References>
+                                    </Period>
+                                  </RetryTimePeriod>
+                                  <RetryFrequency>
+                                    <DisplayUnits>Seconds</DisplayUnits>
+                                    <Period>
+                                      <FormattedCode>{0}</FormattedCode>
+                                      <References>
+                                        <VariableReference xsi:type="PropertyReference">
+                                          <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Frequency (seconds)</DisplayPath>
+                                          <LinkChain>
+                                            <Link xsi:type="PropertyNameLink">
+                                              <PropertyName>DefaultRetryFrequency</PropertyName>
+                                            </Link>
+                                          </LinkChain>
+                                          <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                                          <ObjectType>Adapter</ObjectType>
+                                        </VariableReference>
+                                      </References>
+                                    </Period>
+                                  </RetryFrequency>
+                                  <Timeout>
+                                    <DisplayUnits>Seconds</DisplayUnits>
+                                    <Period>
+                                      <HardcodedValue>100</HardcodedValue>
+                                    </Period>
+                                  </Timeout>
+                                  <ItemType>
+                                    <HardcodedValue>FirewallPolicyRule</HardcodedValue>
+                                  </ItemType>
+                                  <ItemName>
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.For Each Rule.Item.Name</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>Name</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>65294207-e19d-4eb8-b6b6-039a6459949f</ObjectId>
+                                        <ObjectType>ActivityInstance</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </ItemName>
+                                  <BrowseServiceItemName>FirewallPolicyRule</BrowseServiceItemName>
+                                  <ChannelId>
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Global Variables.Cloud Service Item Update Channel ID</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>c070b5b6-0120-48f1-8b36-2319f9348a4a</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </ChannelId>
+                                </Configuration>
+                              </ActivityNode>
+                            </Children>
+                            <Condition>
+                              <Id>223e655f-db99-4f87-b735-e1da878cedbb</Id>
+                              <Conditions>
+                                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                                  <Id>2bde863f-850e-4f6e-9d1b-301f8777c1ff</Id>
+                                  <Expression xsi:type="SubstitutableString">
+                                    <HardcodedValue />
+                                  </Expression>
+                                  <Comparison>NotEquals</Comparison>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Get Rule from Inbound ACL Policy.Object XML</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="ProcessOutputVariableLink">
+                                        <LaunchingActivityId>612c5e1b-b03a-4275-8e8a-077e6f747023</LaunchingActivityId>
+                                        <OutputVariableId>004915b1-3d5b-41ff-b70f-0e5ddc8b4c82</OutputVariableId>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>612c5e1b-b03a-4275-8e8a-077e6f747023</ObjectId>
+                                    <ObjectType>WorkflowNode</ObjectType>
+                                  </VariableReference>
+                                </ConditionDefinition>
+                              </Conditions>
+                            </Condition>
+                          </ActivityNode>
+                        </Children>
+                        <ForEachSource xsi:type="PropertyReference">
+                          <DisplayPath>Workflow.Find firewall rules.Service Items.Rows</DisplayPath>
+                          <LinkChain>
+                            <Link xsi:type="PropertyNameLink">
+                              <PropertyName>ResultsTable</PropertyName>
+                            </Link>
+                            <Link xsi:type="PropertyNameLink">
+                              <PropertyName>TIARows</PropertyName>
+                            </Link>
+                          </LinkChain>
+                          <ObjectId>38045b11-5cc5-4cf2-b40b-16a7811f4c99</ObjectId>
+                          <ObjectType>ActivityInstance</ObjectType>
+                        </ForEachSource>
+                      </ActivityNode>
+                    </Children>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="SequenceNode">
+                    <Id>70159327-f7d2-4189-96e4-c87ea2c1b4e6</Id>
+                    <DisplayName>Outbound</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ExecuteActivityNode">
+                        <Id>935032ac-a96d-4d29-acda-626ae415df9d</Id>
+                        <DisplayName>Find firewall rules</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                            <Id>36f43e18-43b0-4d4c-8dcc-79a3a13f07ce</Id>
+                            <ActivityNodeId>935032ac-a96d-4d29-acda-626ae415df9d</ActivityNodeId>
+                            <CompletedId>033a2825-045c-436d-826a-43371dfa61bf</CompletedId>
+                          </ActivityNode>
+                        </Children>
+                        <Configuration xsi:type="FindServiceItemsActivityConfiguration" xml:space="preserve">
+                          <Id>935032ac-a96d-4d29-acda-626ae415df9d</Id>
+                          <DisplayName>Find firewall rules</DisplayName>
+                          <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                            <SingleTargetReference>
+                              <FormattedCode />
+                              <HardcodedValue>
+                                <Id>b3216113-bb0f-4cb3-b7c2-93b9074ef87b</Id>
+                                <ObjectType>Target</ObjectType>
+                              </HardcodedValue>
+                            </SingleTargetReference>
+                          </TargetLoadBalancer>
+                          <InheritTarget>false</InheritTarget>
+                          <ContainingProcessId>9c96d3dd-5593-43ab-8ce6-22308f715d29</ContainingProcessId>
+                          <RetryTimePeriod>
+                            <DisplayUnits>Minutes</DisplayUnits>
+                            <Period>
+                              <FormattedCode>{0}</FormattedCode>
+                              <References>
+                                <VariableReference xsi:type="PropertyReference">
+                                  <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Time Period (minutes)</DisplayPath>
+                                  <LinkChain>
+                                    <Link xsi:type="PropertyNameLink">
+                                      <PropertyName>DefaultRetryMinutes</PropertyName>
+                                    </Link>
+                                  </LinkChain>
+                                  <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                                  <ObjectType>Adapter</ObjectType>
+                                </VariableReference>
+                              </References>
+                            </Period>
+                          </RetryTimePeriod>
+                          <RetryFrequency>
+                            <DisplayUnits>Seconds</DisplayUnits>
+                            <Period>
+                              <FormattedCode>{0}</FormattedCode>
+                              <References>
+                                <VariableReference xsi:type="PropertyReference">
+                                  <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Frequency (seconds)</DisplayPath>
+                                  <LinkChain>
+                                    <Link xsi:type="PropertyNameLink">
+                                      <PropertyName>DefaultRetryFrequency</PropertyName>
+                                    </Link>
+                                  </LinkChain>
+                                  <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                                  <ObjectType>Adapter</ObjectType>
+                                </VariableReference>
+                              </References>
+                            </Period>
+                          </RetryFrequency>
+                          <Timeout>
+                            <DisplayUnits>Seconds</DisplayUnits>
+                            <Period>
+                              <HardcodedValue>100</HardcodedValue>
+                            </Period>
+                          </Timeout>
+                          <ItemType>
+                            <HardcodedValue>FirewallPolicyRule</HardcodedValue>
+                          </ItemType>
+                          <ItemName>
+                            <FormattedCode />
+                          </ItemName>
+                          <BrowseServiceItemName>FirewallPolicyRule</BrowseServiceItemName>
+                          <Properties>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>ServiceGroupSIName</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>DestZoneName</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>PortNumber</HardcodedValue>
+                              </Name>
+                              <VariableType>Number</VariableType>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>SrcZoneName</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>SrcServerGroupSIName</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>SrcType</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>DestAddress</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>DestServerName</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>ServiceType</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>RuleOrder</HardcodedValue>
+                              </Name>
+                              <VariableType>Number</VariableType>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>DestVLANInstanceSIName</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>DestServerGroupSIName</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>DestType</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>Name</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>Description</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>SrcServerName</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>Protocol</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>SrcNetmask</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>VDCSIName</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>DestNetmask</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>SrcVLANInstanceSIName</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>DestLBVSSIName</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>SrcAddress</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>SrcLBVSSIName</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>Action</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>SystemName</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                            <ServiceItemProperty>
+                              <Name>
+                                <HardcodedValue>FriendlyName</HardcodedValue>
+                              </Name>
+                            </ServiceItemProperty>
+                          </Properties>
+                          <SearchCriteria>
+                            <ServiceItemSearchCriteria>
+                              <Name>
+                                <HardcodedValue>DestServerName</HardcodedValue>
+                              </Name>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Process.Variables.Input.VM Name</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>d5b7048c-b404-4f50-ac60-b427822ff445</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                              <Comparison>Equal</Comparison>
+                            </ServiceItemSearchCriteria>
+                            <ServiceItemSearchCriteria>
+                              <Name>
+                                <HardcodedValue>DestAddress</HardcodedValue>
+                              </Name>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Process.Variables.Input.Source Network Address</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>c0992c56-394d-43f6-a747-cc1733c54a1c</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                              <Comparison>Equal</Comparison>
+                            </ServiceItemSearchCriteria>
+                            <ServiceItemSearchCriteria>
+                              <Name>
+                                <HardcodedValue>SrcAddress</HardcodedValue>
+                              </Name>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Process.Variables.Input.Destination Network Address</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>2f561087-de12-4ed4-93f3-666d210c67f1</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                              <Comparison>Equal</Comparison>
+                            </ServiceItemSearchCriteria>
+                          </SearchCriteria>
+                          <Subscriber>
+                            <HardcodedValue />
+                          </Subscriber>
+                          <SubscriberOuName>
+                            <HardcodedValue />
+                          </SubscriberOuName>
+                        </Configuration>
+                      </ActivityNode>
+                      <ActivityNode xsi:type="ForEachNode">
+                        <Id>6f783963-4d30-43a2-aceb-06c889b8b948</Id>
+                        <DisplayName>For Each Rule</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="StartProcessNode">
+                            <Id>2ccce0af-d9f5-4b67-bf37-fd76f5da7646</Id>
+                            <DisplayName>Get Rule from outbound ACL Policy</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                <Id>aed5fdb2-2226-42bc-98c0-048e4431bb62</Id>
+                                <ProcessNodeId>2ccce0af-d9f5-4b67-bf37-fd76f5da7646</ProcessNodeId>
+                                <CompletedId>7d3016cc-85f8-471e-a199-d16b0a3e13ec</CompletedId>
+                              </ActivityNode>
+                            </Children>
+                            <ProcessId>278de494-6eb1-4bd9-8458-e4183bbc2d13</ProcessId>
+                            <InputVariableTable>
+                              <VariableAssignmentsAsArray>
+                                <InputVariableAssignment>
+                                  <InputVariableId>97743146-65c3-42b1-8242-c64aa44dd5fd</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableBoolean">
+                                    <HardcodedValue>false</HardcodedValue>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                                <InputVariableAssignment>
+                                  <InputVariableId>ee753695-ba9d-4675-9e0b-f15601e3ebe7</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableString">
+                                    <HardcodedValue>policy-mgr</HardcodedValue>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                                <InputVariableAssignment>
+                                  <InputVariableId>372395cb-5aed-43f3-b09b-74922bf39e59</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}/pol-{1}_{2}_LB_ACL/rule-{3}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Local.PNSC Parent Distinguished Name</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>4152e922-1cb2-4858-a86d-ee7a7d7cc958</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Input.Zone</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>35e57197-2856-4a72-b62b-9f1189fa052a</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Input.Type</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>6539fcf2-2fe5-4f73-8ab7-1aa8385c87b5</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.For Each Rule.Item.SystemName</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>SystemName</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>6f783963-4d30-43a2-aceb-06c889b8b948</ObjectId>
+                                        <ObjectType>ActivityInstance</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                                <InputVariableAssignment>
+                                  <InputVariableId>ad6e7eb3-3fce-4430-a821-0f82a5b002e9</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.Login to Prime NSC.pnsc-cookie</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="ProcessOutputVariableLink">
+                                            <LaunchingActivityId>ac17f62c-edd3-4c49-82b1-b74471070e05</LaunchingActivityId>
+                                            <OutputVariableId>47c30024-30a5-47db-8eff-91f701676cfd</OutputVariableId>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>ac17f62c-edd3-4c49-82b1-b74471070e05</ObjectId>
+                                        <ObjectType>WorkflowNode</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                              </VariableAssignmentsAsArray>
+                            </InputVariableTable>
+                            <Asynchronous>false</Asynchronous>
+                            <InheritTarget>false</InheritTarget>
+                            <TargetLoadBalancer xsi:type="ActivityTargetLoadBalancer">
+                              <ActivityId>00000000-0000-0000-0000-000000000000</ActivityId>
+                              <ChildProcessNodeId>ac17f62c-edd3-4c49-82b1-b74471070e05</ChildProcessNodeId>
+                            </TargetLoadBalancer>
+                            <InheritPriorityClass>true</InheritPriorityClass>
+                            <RuntimeUserId>
+                              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                            </RuntimeUserId>
+                            <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                            <StartPointId>
+                              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                            </StartPointId>
+                            <StartPointName>
+                              <FormattedCode />
+                            </StartPointName>
+                          </ActivityNode>
+                          <ActivityNode xsi:type="ConditionBranchNode">
+                            <Id>dd3c85af-6ea4-402e-b011-5baf70553f47</Id>
+                            <DisplayName>Exists?</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="ExecuteActivityNode">
+                                <Id>5e193ad6-5052-458c-9fb2-d57440aace92</Id>
+                                <DisplayName>Get Dn</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                    <Id>e5d6bff4-4f75-4719-892a-87be54c77b25</Id>
+                                    <ActivityNodeId>5e193ad6-5052-458c-9fb2-d57440aace92</ActivityNodeId>
+                                    <CompletedId>b46ec8e4-449e-4b92-8a3f-f6c69acedaab</CompletedId>
+                                  </ActivityNode>
+                                </Children>
+                                <Configuration xsi:type="XPathQueryActivityConfiguration" xml:space="preserve">
+                                  <Id>5e193ad6-5052-458c-9fb2-d57440aace92</Id>
+                                  <DisplayName>Get Dn</DisplayName>
+                                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                    <SingleTargetId>
+                                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                    </SingleTargetId>
+                                  </TargetLoadBalancer>
+                                  <InheritTarget>false</InheritTarget>
+                                  <ContainingProcessId>9c96d3dd-5593-43ab-8ce6-22308f715d29</ContainingProcessId>
+                                  <SourceXml>
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.Get Rule from outbound ACL Policy.Object XML</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="ProcessOutputVariableLink">
+                                            <LaunchingActivityId>2ccce0af-d9f5-4b67-bf37-fd76f5da7646</LaunchingActivityId>
+                                            <OutputVariableId>004915b1-3d5b-41ff-b70f-0e5ddc8b4c82</OutputVariableId>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>2ccce0af-d9f5-4b67-bf37-fd76f5da7646</ObjectId>
+                                        <ObjectType>WorkflowNode</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </SourceXml>
+                                  <Namespaces />
+                                  <Queries>
+                                    <XPathQueryDefinition>
+                                      <DisplayName>dn</DisplayName>
+                                      <Query>
+                                        <HardcodedValue>//policyRule/@dn</HardcodedValue>
+                                      </Query>
+                                      <ReturnType>String</ReturnType>
+                                      <DefaultBehavior>Fail</DefaultBehavior>
+                                    </XPathQueryDefinition>
+                                  </Queries>
+                                </Configuration>
+                              </ActivityNode>
+                              <ActivityNode xsi:type="StartProcessNode">
+                                <Id>9c025a52-46b6-4686-ab2f-4d470b446bb7</Id>
+                                <DisplayName>Delete Rule from outbound Policy </DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                    <Id>638ce422-b5db-4a50-81f2-068e0ceaf88e</Id>
+                                    <ProcessNodeId>9c025a52-46b6-4686-ab2f-4d470b446bb7</ProcessNodeId>
+                                    <CompletedId>c5cfa1e4-94b2-4f35-9f5b-f051d7813500</CompletedId>
+                                  </ActivityNode>
+                                </Children>
+                                <ProcessId>38e4530c-bb1a-428f-aa34-5c7c7da52a6e</ProcessId>
+                                <InputVariableTable>
+                                  <VariableAssignmentsAsArray>
+                                    <InputVariableAssignment>
+                                      <InputVariableId>ae204c2d-99cc-4c24-baaa-30d2d5a17b30</InputVariableId>
+                                      <VariableValue xsi:type="SubstitutableString">
+                                        <FormattedCode>&lt;configConfMos cookie="{0}" inHierarchical="false"&gt;
+&lt;inConfigs&gt;
+&lt;pair key="{1}"&gt;
+&lt;policyRule dn="{2}" status="deleted" /&gt;
+&lt;/pair&gt;
+&lt;/inConfigs&gt;
+&lt;/configConfMos&gt;</FormattedCode>
+                                        <References>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.Login to Prime NSC.pnsc-cookie</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="ProcessOutputVariableLink">
+                                                <LaunchingActivityId>ac17f62c-edd3-4c49-82b1-b74471070e05</LaunchingActivityId>
+                                                <OutputVariableId>47c30024-30a5-47db-8eff-91f701676cfd</OutputVariableId>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>ac17f62c-edd3-4c49-82b1-b74471070e05</ObjectId>
+                                            <ObjectType>WorkflowNode</ObjectType>
+                                          </VariableReference>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.Get Dn.Results.dn</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>Results</PropertyName>
+                                              </Link>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>dn</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>5e193ad6-5052-458c-9fb2-d57440aace92</ObjectId>
+                                            <ObjectType>ActivityInstance</ObjectType>
+                                          </VariableReference>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.Get Dn.Results.dn</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>Results</PropertyName>
+                                              </Link>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>dn</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>5e193ad6-5052-458c-9fb2-d57440aace92</ObjectId>
+                                            <ObjectType>ActivityInstance</ObjectType>
+                                          </VariableReference>
+                                        </References>
+                                      </VariableValue>
+                                    </InputVariableAssignment>
+                                    <InputVariableAssignment>
+                                      <InputVariableId>ff0dbe03-3e6a-4227-a663-1bbebe6a12f8</InputVariableId>
+                                      <VariableValue xsi:type="SubstitutableString">
+                                        <HardcodedValue>policy-mgr</HardcodedValue>
+                                      </VariableValue>
+                                    </InputVariableAssignment>
+                                  </VariableAssignmentsAsArray>
+                                </InputVariableTable>
+                                <Asynchronous>false</Asynchronous>
+                                <InheritTarget>true</InheritTarget>
+                                <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+                                <InheritPriorityClass>true</InheritPriorityClass>
+                                <RuntimeUserId>
+                                  <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                                </RuntimeUserId>
+                                <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                                <StartPointId>
+                                  <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                                </StartPointId>
+                                <StartPointName>
+                                  <FormattedCode />
+                                </StartPointName>
+                              </ActivityNode>
+                              <ActivityNode xsi:type="ExecuteActivityNode">
+                                <Id>a4b8409f-1d26-49d2-ba10-2ad3cc5e11db</Id>
+                                <DisplayName>Delete outbound Firewall Rule</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                    <Id>0edce2df-6221-4a14-bd56-34da94461f36</Id>
+                                    <ActivityNodeId>a4b8409f-1d26-49d2-ba10-2ad3cc5e11db</ActivityNodeId>
+                                    <CompletedId>a5021d6a-05ca-493b-b3bf-384e7dbb181c</CompletedId>
+                                  </ActivityNode>
+                                </Children>
+                                <Configuration xsi:type="DeleteServiceItemActivityConfiguration" xml:space="preserve">
+                                  <Id>a4b8409f-1d26-49d2-ba10-2ad3cc5e11db</Id>
+                                  <DisplayName>Delete outbound Firewall Rule</DisplayName>
+                                  <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                                    <SingleTargetReference>
+                                      <FormattedCode />
+                                      <HardcodedValue>
+                                        <Id>b3216113-bb0f-4cb3-b7c2-93b9074ef87b</Id>
+                                        <ObjectType>Target</ObjectType>
+                                      </HardcodedValue>
+                                    </SingleTargetReference>
+                                  </TargetLoadBalancer>
+                                  <InheritTarget>false</InheritTarget>
+                                  <ContainingProcessId>9c96d3dd-5593-43ab-8ce6-22308f715d29</ContainingProcessId>
+                                  <RetryTimePeriod>
+                                    <DisplayUnits>Minutes</DisplayUnits>
+                                    <Period>
+                                      <FormattedCode>{0}</FormattedCode>
+                                      <References>
+                                        <VariableReference xsi:type="PropertyReference">
+                                          <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Time Period (minutes)</DisplayPath>
+                                          <LinkChain>
+                                            <Link xsi:type="PropertyNameLink">
+                                              <PropertyName>DefaultRetryMinutes</PropertyName>
+                                            </Link>
+                                          </LinkChain>
+                                          <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                                          <ObjectType>Adapter</ObjectType>
+                                        </VariableReference>
+                                      </References>
+                                    </Period>
+                                  </RetryTimePeriod>
+                                  <RetryFrequency>
+                                    <DisplayUnits>Seconds</DisplayUnits>
+                                    <Period>
+                                      <FormattedCode>{0}</FormattedCode>
+                                      <References>
+                                        <VariableReference xsi:type="PropertyReference">
+                                          <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Frequency (seconds)</DisplayPath>
+                                          <LinkChain>
+                                            <Link xsi:type="PropertyNameLink">
+                                              <PropertyName>DefaultRetryFrequency</PropertyName>
+                                            </Link>
+                                          </LinkChain>
+                                          <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                                          <ObjectType>Adapter</ObjectType>
+                                        </VariableReference>
+                                      </References>
+                                    </Period>
+                                  </RetryFrequency>
+                                  <Timeout>
+                                    <DisplayUnits>Seconds</DisplayUnits>
+                                    <Period>
+                                      <HardcodedValue>100</HardcodedValue>
+                                    </Period>
+                                  </Timeout>
+                                  <ItemType>
+                                    <HardcodedValue>FirewallPolicyRule</HardcodedValue>
+                                  </ItemType>
+                                  <ItemName>
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.For Each Rule.Item.Name</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>Name</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>6f783963-4d30-43a2-aceb-06c889b8b948</ObjectId>
+                                        <ObjectType>ActivityInstance</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </ItemName>
+                                  <BrowseServiceItemName>FirewallPolicyRule</BrowseServiceItemName>
+                                  <ChannelId>
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Global Variables.Cloud Service Item Update Channel ID</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>c070b5b6-0120-48f1-8b36-2319f9348a4a</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </ChannelId>
+                                </Configuration>
+                              </ActivityNode>
+                            </Children>
+                            <Condition>
+                              <Id>eb746487-3de9-4a0e-a6b9-dfa148b9fdd2</Id>
+                              <Conditions>
+                                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                                  <Id>e5341952-3f13-46c3-9221-bc9092f609ae</Id>
+                                  <Expression xsi:type="SubstitutableString">
+                                    <HardcodedValue />
+                                  </Expression>
+                                  <Comparison>NotEquals</Comparison>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Get Rule from outbound ACL Policy.Object XML</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="ProcessOutputVariableLink">
+                                        <LaunchingActivityId>2ccce0af-d9f5-4b67-bf37-fd76f5da7646</LaunchingActivityId>
+                                        <OutputVariableId>004915b1-3d5b-41ff-b70f-0e5ddc8b4c82</OutputVariableId>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>2ccce0af-d9f5-4b67-bf37-fd76f5da7646</ObjectId>
+                                    <ObjectType>WorkflowNode</ObjectType>
+                                  </VariableReference>
+                                </ConditionDefinition>
+                              </Conditions>
+                            </Condition>
+                          </ActivityNode>
+                        </Children>
+                        <ForEachSource xsi:type="PropertyReference">
+                          <DisplayPath>Workflow.Find firewall rules.Service Items.Rows</DisplayPath>
+                          <LinkChain>
+                            <Link xsi:type="PropertyNameLink">
+                              <PropertyName>ResultsTable</PropertyName>
+                            </Link>
+                            <Link xsi:type="PropertyNameLink">
+                              <PropertyName>TIARows</PropertyName>
+                            </Link>
+                          </LinkChain>
+                          <ObjectId>935032ac-a96d-4d29-acda-626ae415df9d</ObjectId>
+                          <ObjectType>ActivityInstance</ObjectType>
+                        </ForEachSource>
+                      </ActivityNode>
+                    </Children>
+                  </ActivityNode>
+                </Children>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>2160c548-50cd-4369-8b38-9b708a616b4f</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>6f76f65f-9678-4c4a-bd05-eb17a70ffb86</Id>
+                  <Expression xsi:type="SubstitutableString">
+                    <HardcodedValue>SNIP</HardcodedValue>
+                  </Expression>
+                  <Comparison>Equals</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Input.Type</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>6539fcf2-2fe5-4f73-8ab7-1aa8385c87b5</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>80cfdff0-72dc-4935-a28e-fba3d7a2a680</Id>
+            <DisplayName>VIP</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>be8d09bd-8f33-407d-b853-37e821e54bf5</Id>
+                <DisplayName>Set Multiple Variables</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>72680d6b-090b-4637-a4ac-393005b4f5f5</Id>
+                    <ActivityNodeId>be8d09bd-8f33-407d-b853-37e821e54bf5</ActivityNodeId>
+                    <CompletedId>9b46dfeb-de8c-4cb4-a0a0-9068408d0bea</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+                  <Id>be8d09bd-8f33-407d-b853-37e821e54bf5</Id>
+                  <DisplayName>Set Multiple Variables</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>9c96d3dd-5593-43ab-8ce6-22308f715d29</ContainingProcessId>
+                  <Assignments>
+                    <PropertyReferenceValuePair>
+                      <VariableToSet>
+                        <DisplayPath>Process.Variables.Local.Inbound Policy Name</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>e915f070-ebaa-4aec-96db-3763ef2d5ac7</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableToSet>
+                      <NewValue xsi:type="SubstitutableString">
+                        <FormattedCode>LB_IN_Allow_{0}{1}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.Get Unique String.Result</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>Result</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>de940bdd-3b16-4d79-b460-b5452a8797da</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.Get Unique String from Zone name.Result</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>Result</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>3e3138a3-bb97-4f1d-9765-17503811ee33</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </NewValue>
+                    </PropertyReferenceValuePair>
+                    <PropertyReferenceValuePair>
+                      <VariableToSet>
+                        <DisplayPath>Process.Variables.Local.Outbound Policy Name</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>fb0a63df-e236-4a2a-bd2b-0a9a49c0d681</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableToSet>
+                      <NewValue xsi:type="SubstitutableString">
+                        <FormattedCode>LB_OUT_Allow_{0}{1}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.Get Unique String.Result</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>Result</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>de940bdd-3b16-4d79-b460-b5452a8797da</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.Get Unique String from Zone name.Result</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>Result</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>3e3138a3-bb97-4f1d-9765-17503811ee33</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </NewValue>
+                    </PropertyReferenceValuePair>
+                  </Assignments>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="StartProcessNode">
+                <Id>c51667d2-3d3f-44d7-978d-1179a1d5f7eb</Id>
+                <DisplayName>Delete Class Map Refs</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>7ebeb3fe-23f1-4dfa-bbc6-98e39ac62497</Id>
+                    <ProcessNodeId>c51667d2-3d3f-44d7-978d-1179a1d5f7eb</ProcessNodeId>
+                    <CompletedId>17114541-a495-447b-b0e0-f1fa0689ef4c</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <ProcessId>38e4530c-bb1a-428f-aa34-5c7c7da52a6e</ProcessId>
+                <InputVariableTable>
+                  <VariableAssignmentsAsArray>
+                    <InputVariableAssignment>
+                      <InputVariableId>ae204c2d-99cc-4c24-baaa-30d2d5a17b30</InputVariableId>
+                      <VariableValue xsi:type="SubstitutableString">
+                        <FormattedCode>&lt;configConfMos cookie="{0}" inHierarchical="false"&gt;
+&lt;inConfigs&gt;
+&lt;pair key="{1}/zbf-pol-{2}_LB_{3}/rule-{4}_RULE"&gt;
+&lt;policyRule dn="{5}/zbf-pol-{6}_LB_{7}/rule-{8}_RULE" status="deleted" /&gt;
+&lt;/pair&gt;
+&lt;pair key="{9}/zbf-pol-{10}_LB_{11}/rule-{12}_RULE"&gt;
+&lt;policyRule dn="{13}/zbf-pol-{14}_LB_{15}/rule-{16}_RULE" status="deleted" /&gt;
+&lt;/pair&gt;
+&lt;/inConfigs&gt;
+&lt;/configConfMos&gt;</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.Login to Prime NSC.pnsc-cookie</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="ProcessOutputVariableLink">
+                                <LaunchingActivityId>ac17f62c-edd3-4c49-82b1-b74471070e05</LaunchingActivityId>
+                                <OutputVariableId>47c30024-30a5-47db-8eff-91f701676cfd</OutputVariableId>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>ac17f62c-edd3-4c49-82b1-b74471070e05</ObjectId>
+                            <ObjectType>WorkflowNode</ObjectType>
+                          </VariableReference>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Local.PNSC Parent Distinguished Name</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>4152e922-1cb2-4858-a86d-ee7a7d7cc958</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Input.Type</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>6539fcf2-2fe5-4f73-8ab7-1aa8385c87b5</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Input.Zone</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>35e57197-2856-4a72-b62b-9f1189fa052a</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Local.Inbound Policy Name</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>e915f070-ebaa-4aec-96db-3763ef2d5ac7</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Local.PNSC Parent Distinguished Name</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>4152e922-1cb2-4858-a86d-ee7a7d7cc958</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Input.Type</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>6539fcf2-2fe5-4f73-8ab7-1aa8385c87b5</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Input.Zone</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>35e57197-2856-4a72-b62b-9f1189fa052a</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Local.Inbound Policy Name</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>e915f070-ebaa-4aec-96db-3763ef2d5ac7</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Local.PNSC Parent Distinguished Name</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>4152e922-1cb2-4858-a86d-ee7a7d7cc958</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Input.Type</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>6539fcf2-2fe5-4f73-8ab7-1aa8385c87b5</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Input.Zone</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>35e57197-2856-4a72-b62b-9f1189fa052a</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Local.Outbound Policy Name</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>fb0a63df-e236-4a2a-bd2b-0a9a49c0d681</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Local.PNSC Parent Distinguished Name</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>4152e922-1cb2-4858-a86d-ee7a7d7cc958</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Input.Type</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>6539fcf2-2fe5-4f73-8ab7-1aa8385c87b5</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Input.Zone</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>35e57197-2856-4a72-b62b-9f1189fa052a</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Local.Outbound Policy Name</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>fb0a63df-e236-4a2a-bd2b-0a9a49c0d681</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </VariableValue>
+                    </InputVariableAssignment>
+                    <InputVariableAssignment>
+                      <InputVariableId>ff0dbe03-3e6a-4227-a663-1bbebe6a12f8</InputVariableId>
+                      <VariableValue xsi:type="SubstitutableString">
+                        <HardcodedValue>policy-mgr</HardcodedValue>
+                      </VariableValue>
+                    </InputVariableAssignment>
+                  </VariableAssignmentsAsArray>
+                </InputVariableTable>
+                <Asynchronous>false</Asynchronous>
+                <InheritTarget>true</InheritTarget>
+                <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+                <InheritPriorityClass>true</InheritPriorityClass>
+                <RuntimeUserId>
+                  <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                </RuntimeUserId>
+                <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                <StartPointId>
+                  <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                </StartPointId>
+                <StartPointName>
+                  <FormattedCode />
+                </StartPointName>
+              </ActivityNode>
+              <ActivityNode xsi:type="ParallelNode">
+                <Id>7056ec60-ab42-46bc-bcbd-d1b1da8eff43</Id>
+                <DisplayName>Parallel Block</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="SequenceNode">
+                    <Id>fe02c3bc-dd61-4081-a435-661c08c61a47</Id>
+                    <DisplayName>Sequential Block</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="StartProcessNode">
+                        <Id>a5cc439d-a8fe-4f98-a570-1dd2d454aee1</Id>
+                        <DisplayName>Get Inbound ACL Policy</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                            <Id>5b9ea475-63fe-421a-9e63-6f64c7deddfb</Id>
+                            <ProcessNodeId>a5cc439d-a8fe-4f98-a570-1dd2d454aee1</ProcessNodeId>
+                            <CompletedId>82b3760f-78e4-4028-913c-1825af47e386</CompletedId>
+                          </ActivityNode>
+                        </Children>
+                        <ProcessId>278de494-6eb1-4bd9-8458-e4183bbc2d13</ProcessId>
+                        <InputVariableTable>
+                          <VariableAssignmentsAsArray>
+                            <InputVariableAssignment>
+                              <InputVariableId>97743146-65c3-42b1-8242-c64aa44dd5fd</InputVariableId>
+                              <VariableValue xsi:type="SubstitutableBoolean">
+                                <HardcodedValue>true</HardcodedValue>
+                              </VariableValue>
+                            </InputVariableAssignment>
+                            <InputVariableAssignment>
+                              <InputVariableId>ee753695-ba9d-4675-9e0b-f15601e3ebe7</InputVariableId>
+                              <VariableValue xsi:type="SubstitutableString">
+                                <HardcodedValue>policy-mgr</HardcodedValue>
+                              </VariableValue>
+                            </InputVariableAssignment>
+                            <InputVariableAssignment>
+                              <InputVariableId>372395cb-5aed-43f3-b09b-74922bf39e59</InputVariableId>
+                              <VariableValue xsi:type="SubstitutableString">
+                                <FormattedCode>{0}/pol-{1}_ACL</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Process.Variables.Local.PNSC Parent Distinguished Name</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>4152e922-1cb2-4858-a86d-ee7a7d7cc958</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableReference>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Process.Variables.Local.Inbound Policy Name</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>e915f070-ebaa-4aec-96db-3763ef2d5ac7</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </VariableValue>
+                            </InputVariableAssignment>
+                            <InputVariableAssignment>
+                              <InputVariableId>ad6e7eb3-3fce-4430-a821-0f82a5b002e9</InputVariableId>
+                              <VariableValue xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Login to Prime NSC.pnsc-cookie</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="ProcessOutputVariableLink">
+                                        <LaunchingActivityId>ac17f62c-edd3-4c49-82b1-b74471070e05</LaunchingActivityId>
+                                        <OutputVariableId>47c30024-30a5-47db-8eff-91f701676cfd</OutputVariableId>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>ac17f62c-edd3-4c49-82b1-b74471070e05</ObjectId>
+                                    <ObjectType>WorkflowNode</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </VariableValue>
+                            </InputVariableAssignment>
+                          </VariableAssignmentsAsArray>
+                        </InputVariableTable>
+                        <Asynchronous>false</Asynchronous>
+                        <InheritTarget>false</InheritTarget>
+                        <TargetLoadBalancer xsi:type="ActivityTargetLoadBalancer">
+                          <ActivityId>00000000-0000-0000-0000-000000000000</ActivityId>
+                          <ChildProcessNodeId>ac17f62c-edd3-4c49-82b1-b74471070e05</ChildProcessNodeId>
+                        </TargetLoadBalancer>
+                        <InheritPriorityClass>true</InheritPriorityClass>
+                        <RuntimeUserId>
+                          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                        </RuntimeUserId>
+                        <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                        <StartPointId>
+                          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                        </StartPointId>
+                        <StartPointName>
+                          <FormattedCode />
+                        </StartPointName>
+                      </ActivityNode>
+                      <ActivityNode xsi:type="ConditionBranchNode">
+                        <Id>57eb6e1a-0267-456b-a3a7-99d4b0e5efbb</Id>
+                        <DisplayName>Exists?</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="StartProcessNode">
+                            <Id>bb4675bd-905c-4c07-9da6-8918775b105e</Id>
+                            <DisplayName>Delete Inbound ACL Policy</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                <Id>6180e3a2-472b-41ec-9a41-54958ebcfdbc</Id>
+                                <ProcessNodeId>bb4675bd-905c-4c07-9da6-8918775b105e</ProcessNodeId>
+                                <CompletedId>a902cbdf-e826-4d80-8d2c-754c3c3752dc</CompletedId>
+                              </ActivityNode>
+                            </Children>
+                            <ProcessId>38e4530c-bb1a-428f-aa34-5c7c7da52a6e</ProcessId>
+                            <InputVariableTable>
+                              <VariableAssignmentsAsArray>
+                                <InputVariableAssignment>
+                                  <InputVariableId>ae204c2d-99cc-4c24-baaa-30d2d5a17b30</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableString">
+                                    <FormattedCode>&lt;configConfMos cookie="{0}" inHierarchical="false"&gt;
+&lt;inConfigs&gt;
+&lt;pair key="{1}/pol-{2}_ACL"&gt;
+&lt;policyRuleBasedPolicy dn="{3}/pol-{4}_ACL" status="deleted" /&gt;
+&lt;/pair&gt;
+&lt;/inConfigs&gt;
+&lt;/configConfMos&gt;</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.Login to Prime NSC.pnsc-cookie</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="ProcessOutputVariableLink">
+                                            <LaunchingActivityId>ac17f62c-edd3-4c49-82b1-b74471070e05</LaunchingActivityId>
+                                            <OutputVariableId>47c30024-30a5-47db-8eff-91f701676cfd</OutputVariableId>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>ac17f62c-edd3-4c49-82b1-b74471070e05</ObjectId>
+                                        <ObjectType>WorkflowNode</ObjectType>
+                                      </VariableReference>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Local.PNSC Parent Distinguished Name</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>4152e922-1cb2-4858-a86d-ee7a7d7cc958</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Local.Inbound Policy Name</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>e915f070-ebaa-4aec-96db-3763ef2d5ac7</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Local.PNSC Parent Distinguished Name</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>4152e922-1cb2-4858-a86d-ee7a7d7cc958</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Local.Inbound Policy Name</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>e915f070-ebaa-4aec-96db-3763ef2d5ac7</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                                <InputVariableAssignment>
+                                  <InputVariableId>ff0dbe03-3e6a-4227-a663-1bbebe6a12f8</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableString">
+                                    <HardcodedValue>policy-mgr</HardcodedValue>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                              </VariableAssignmentsAsArray>
+                            </InputVariableTable>
+                            <Asynchronous>false</Asynchronous>
+                            <InheritTarget>true</InheritTarget>
+                            <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+                            <InheritPriorityClass>true</InheritPriorityClass>
+                            <RuntimeUserId>
+                              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                            </RuntimeUserId>
+                            <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                            <StartPointId>
+                              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                            </StartPointId>
+                            <StartPointName>
+                              <FormattedCode />
+                            </StartPointName>
+                          </ActivityNode>
+                        </Children>
+                        <Condition>
+                          <Id>d28f570b-192e-4c0f-b1a5-5f66379a5eb4</Id>
+                          <Conditions>
+                            <ConditionDefinition xsi:type="VariableConditionDefinition">
+                              <Id>6d0759d9-45ae-4561-997b-423a7b238620</Id>
+                              <Expression xsi:type="SubstitutableString">
+                                <HardcodedValue />
+                              </Expression>
+                              <Comparison>NotEquals</Comparison>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.Get Inbound ACL Policy.Object XML</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="ProcessOutputVariableLink">
+                                    <LaunchingActivityId>a5cc439d-a8fe-4f98-a570-1dd2d454aee1</LaunchingActivityId>
+                                    <OutputVariableId>004915b1-3d5b-41ff-b70f-0e5ddc8b4c82</OutputVariableId>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>a5cc439d-a8fe-4f98-a570-1dd2d454aee1</ObjectId>
+                                <ObjectType>WorkflowNode</ObjectType>
+                              </VariableReference>
+                            </ConditionDefinition>
+                          </Conditions>
+                        </Condition>
+                      </ActivityNode>
+                    </Children>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="SequenceNode">
+                    <Id>f5f25913-8199-4b43-b458-e1ea443801e1</Id>
+                    <DisplayName>Sequential Block</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="StartProcessNode">
+                        <Id>ff733344-efd5-4257-a23b-b400f7f883eb</Id>
+                        <DisplayName>Get Outbound ACL Policy</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                            <Id>7ab6c8ba-6a5a-41cf-bb57-0d52967e6088</Id>
+                            <ProcessNodeId>ff733344-efd5-4257-a23b-b400f7f883eb</ProcessNodeId>
+                            <CompletedId>37b123a4-f7a9-4a6e-8439-52c551c8c586</CompletedId>
+                          </ActivityNode>
+                        </Children>
+                        <ProcessId>278de494-6eb1-4bd9-8458-e4183bbc2d13</ProcessId>
+                        <InputVariableTable>
+                          <VariableAssignmentsAsArray>
+                            <InputVariableAssignment>
+                              <InputVariableId>97743146-65c3-42b1-8242-c64aa44dd5fd</InputVariableId>
+                              <VariableValue xsi:type="SubstitutableBoolean">
+                                <HardcodedValue>true</HardcodedValue>
+                              </VariableValue>
+                            </InputVariableAssignment>
+                            <InputVariableAssignment>
+                              <InputVariableId>ee753695-ba9d-4675-9e0b-f15601e3ebe7</InputVariableId>
+                              <VariableValue xsi:type="SubstitutableString">
+                                <HardcodedValue>policy-mgr</HardcodedValue>
+                              </VariableValue>
+                            </InputVariableAssignment>
+                            <InputVariableAssignment>
+                              <InputVariableId>372395cb-5aed-43f3-b09b-74922bf39e59</InputVariableId>
+                              <VariableValue xsi:type="SubstitutableString">
+                                <FormattedCode>{0}/pol-{1}_ACL</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Process.Variables.Local.PNSC Parent Distinguished Name</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>4152e922-1cb2-4858-a86d-ee7a7d7cc958</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableReference>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Process.Variables.Local.Outbound Policy Name</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>fb0a63df-e236-4a2a-bd2b-0a9a49c0d681</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </VariableValue>
+                            </InputVariableAssignment>
+                            <InputVariableAssignment>
+                              <InputVariableId>ad6e7eb3-3fce-4430-a821-0f82a5b002e9</InputVariableId>
+                              <VariableValue xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Login to Prime NSC.pnsc-cookie</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="ProcessOutputVariableLink">
+                                        <LaunchingActivityId>ac17f62c-edd3-4c49-82b1-b74471070e05</LaunchingActivityId>
+                                        <OutputVariableId>47c30024-30a5-47db-8eff-91f701676cfd</OutputVariableId>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>ac17f62c-edd3-4c49-82b1-b74471070e05</ObjectId>
+                                    <ObjectType>WorkflowNode</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </VariableValue>
+                            </InputVariableAssignment>
+                          </VariableAssignmentsAsArray>
+                        </InputVariableTable>
+                        <Asynchronous>false</Asynchronous>
+                        <InheritTarget>false</InheritTarget>
+                        <TargetLoadBalancer xsi:type="ActivityTargetLoadBalancer">
+                          <ActivityId>00000000-0000-0000-0000-000000000000</ActivityId>
+                          <ChildProcessNodeId>ac17f62c-edd3-4c49-82b1-b74471070e05</ChildProcessNodeId>
+                        </TargetLoadBalancer>
+                        <InheritPriorityClass>true</InheritPriorityClass>
+                        <RuntimeUserId>
+                          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                        </RuntimeUserId>
+                        <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                        <StartPointId>
+                          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                        </StartPointId>
+                        <StartPointName>
+                          <FormattedCode />
+                        </StartPointName>
+                      </ActivityNode>
+                      <ActivityNode xsi:type="ConditionBranchNode">
+                        <Id>350cc2f6-1d78-4b49-bda9-45aa3c7ac7c4</Id>
+                        <DisplayName>Exists?</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="StartProcessNode">
+                            <Id>57ebe6bd-3d1c-4dd4-9306-a153ef859820</Id>
+                            <DisplayName>Delete outbound ACL Policy</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                <Id>10bec6ff-b58f-4f1e-abe3-39f9f326e5a2</Id>
+                                <ProcessNodeId>57ebe6bd-3d1c-4dd4-9306-a153ef859820</ProcessNodeId>
+                                <CompletedId>658e5891-270a-4d24-a1c6-e499fd3308d0</CompletedId>
+                              </ActivityNode>
+                            </Children>
+                            <ProcessId>38e4530c-bb1a-428f-aa34-5c7c7da52a6e</ProcessId>
+                            <InputVariableTable>
+                              <VariableAssignmentsAsArray>
+                                <InputVariableAssignment>
+                                  <InputVariableId>ae204c2d-99cc-4c24-baaa-30d2d5a17b30</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableString">
+                                    <FormattedCode>&lt;configConfMos cookie="{0}" inHierarchical="false"&gt;
+&lt;inConfigs&gt;
+&lt;pair key="{1}/pol-{2}_ACL"&gt;
+&lt;policyRuleBasedPolicy dn="{3}/pol-{4}_ACL" status="deleted" /&gt;
+&lt;/pair&gt;
+&lt;/inConfigs&gt;
+&lt;/configConfMos&gt;</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.Login to Prime NSC.pnsc-cookie</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="ProcessOutputVariableLink">
+                                            <LaunchingActivityId>ac17f62c-edd3-4c49-82b1-b74471070e05</LaunchingActivityId>
+                                            <OutputVariableId>47c30024-30a5-47db-8eff-91f701676cfd</OutputVariableId>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>ac17f62c-edd3-4c49-82b1-b74471070e05</ObjectId>
+                                        <ObjectType>WorkflowNode</ObjectType>
+                                      </VariableReference>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Local.PNSC Parent Distinguished Name</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>4152e922-1cb2-4858-a86d-ee7a7d7cc958</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Local.Outbound Policy Name</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>fb0a63df-e236-4a2a-bd2b-0a9a49c0d681</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Local.PNSC Parent Distinguished Name</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>4152e922-1cb2-4858-a86d-ee7a7d7cc958</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Local.Outbound Policy Name</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>fb0a63df-e236-4a2a-bd2b-0a9a49c0d681</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                                <InputVariableAssignment>
+                                  <InputVariableId>ff0dbe03-3e6a-4227-a663-1bbebe6a12f8</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableString">
+                                    <HardcodedValue>policy-mgr</HardcodedValue>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                              </VariableAssignmentsAsArray>
+                            </InputVariableTable>
+                            <Asynchronous>false</Asynchronous>
+                            <InheritTarget>true</InheritTarget>
+                            <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+                            <InheritPriorityClass>true</InheritPriorityClass>
+                            <RuntimeUserId>
+                              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                            </RuntimeUserId>
+                            <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                            <StartPointId>
+                              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                            </StartPointId>
+                            <StartPointName>
+                              <FormattedCode />
+                            </StartPointName>
+                          </ActivityNode>
+                        </Children>
+                        <Condition>
+                          <Id>d28f570b-192e-4c0f-b1a5-5f66379a5eb4</Id>
+                          <Conditions>
+                            <ConditionDefinition xsi:type="VariableConditionDefinition">
+                              <Id>99fe7025-9c7e-4997-a5ad-070aae1beca8</Id>
+                              <Expression xsi:type="SubstitutableString">
+                                <HardcodedValue />
+                              </Expression>
+                              <Comparison>NotEquals</Comparison>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.Get Outbound ACL Policy.Object XML</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="ProcessOutputVariableLink">
+                                    <LaunchingActivityId>ff733344-efd5-4257-a23b-b400f7f883eb</LaunchingActivityId>
+                                    <OutputVariableId>004915b1-3d5b-41ff-b70f-0e5ddc8b4c82</OutputVariableId>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>ff733344-efd5-4257-a23b-b400f7f883eb</ObjectId>
+                                <ObjectType>WorkflowNode</ObjectType>
+                              </VariableReference>
+                            </ConditionDefinition>
+                          </Conditions>
+                        </Condition>
+                      </ActivityNode>
+                    </Children>
+                  </ActivityNode>
+                </Children>
+              </ActivityNode>
+              <ActivityNode xsi:type="ParallelNode">
+                <Id>07d50518-51b8-41d5-bd48-ba92f4bd5860</Id>
+                <DisplayName>Parallel Block</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="SequenceNode">
+                    <Id>957613d2-bc9d-4348-836f-9bf5edeee767</Id>
+                    <DisplayName>Inbound</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="StartProcessNode">
+                        <Id>cf91a9a8-8d87-4f8f-af59-1a94fc57cf9b</Id>
+                        <DisplayName>Get Inbound Class Map</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                            <Id>90c3d419-2b1f-4ad7-87ee-ae77d855c9b2</Id>
+                            <ProcessNodeId>cf91a9a8-8d87-4f8f-af59-1a94fc57cf9b</ProcessNodeId>
+                            <CompletedId>d7448c16-c9c3-4183-b440-492b87e8c16e</CompletedId>
+                          </ActivityNode>
+                        </Children>
+                        <ProcessId>278de494-6eb1-4bd9-8458-e4183bbc2d13</ProcessId>
+                        <InputVariableTable>
+                          <VariableAssignmentsAsArray>
+                            <InputVariableAssignment>
+                              <InputVariableId>97743146-65c3-42b1-8242-c64aa44dd5fd</InputVariableId>
+                              <VariableValue xsi:type="SubstitutableBoolean">
+                                <HardcodedValue>false</HardcodedValue>
+                              </VariableValue>
+                            </InputVariableAssignment>
+                            <InputVariableAssignment>
+                              <InputVariableId>ee753695-ba9d-4675-9e0b-f15601e3ebe7</InputVariableId>
+                              <VariableValue xsi:type="SubstitutableString">
+                                <HardcodedValue>policy-mgr</HardcodedValue>
+                              </VariableValue>
+                            </InputVariableAssignment>
+                            <InputVariableAssignment>
+                              <InputVariableId>372395cb-5aed-43f3-b09b-74922bf39e59</InputVariableId>
+                              <VariableValue xsi:type="SubstitutableString">
+                                <FormattedCode>{0}/cmap-{1}_CMAP</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Process.Variables.Local.PNSC Parent Distinguished Name</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>4152e922-1cb2-4858-a86d-ee7a7d7cc958</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableReference>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Process.Variables.Local.Inbound Policy Name</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>e915f070-ebaa-4aec-96db-3763ef2d5ac7</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </VariableValue>
+                            </InputVariableAssignment>
+                            <InputVariableAssignment>
+                              <InputVariableId>ad6e7eb3-3fce-4430-a821-0f82a5b002e9</InputVariableId>
+                              <VariableValue xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Login to Prime NSC.pnsc-cookie</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="ProcessOutputVariableLink">
+                                        <LaunchingActivityId>ac17f62c-edd3-4c49-82b1-b74471070e05</LaunchingActivityId>
+                                        <OutputVariableId>47c30024-30a5-47db-8eff-91f701676cfd</OutputVariableId>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>ac17f62c-edd3-4c49-82b1-b74471070e05</ObjectId>
+                                    <ObjectType>WorkflowNode</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </VariableValue>
+                            </InputVariableAssignment>
+                          </VariableAssignmentsAsArray>
+                        </InputVariableTable>
+                        <Asynchronous>false</Asynchronous>
+                        <InheritTarget>false</InheritTarget>
+                        <TargetLoadBalancer xsi:type="ActivityTargetLoadBalancer">
+                          <ActivityId>00000000-0000-0000-0000-000000000000</ActivityId>
+                          <ChildProcessNodeId>ac17f62c-edd3-4c49-82b1-b74471070e05</ChildProcessNodeId>
+                        </TargetLoadBalancer>
+                        <InheritPriorityClass>true</InheritPriorityClass>
+                        <RuntimeUserId>
+                          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                        </RuntimeUserId>
+                        <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                        <StartPointId>
+                          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                        </StartPointId>
+                        <StartPointName>
+                          <FormattedCode />
+                        </StartPointName>
+                      </ActivityNode>
+                      <ActivityNode xsi:type="ConditionBranchNode">
+                        <Id>f59abe8b-6189-4bcb-b5a3-76b4e3fa6e2d</Id>
+                        <DisplayName>Exist?</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="StartProcessNode">
+                            <Id>c06c549d-03e2-4c8e-9510-27823ce288e2</Id>
+                            <DisplayName>Delete Inbound Class Map</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                <Id>bfce2384-759e-46ef-83c3-e19aabdf0c73</Id>
+                                <ProcessNodeId>c06c549d-03e2-4c8e-9510-27823ce288e2</ProcessNodeId>
+                                <CompletedId>f83c3cd0-8a6d-4b40-b782-d8263ff8fb06</CompletedId>
+                              </ActivityNode>
+                            </Children>
+                            <ProcessId>38e4530c-bb1a-428f-aa34-5c7c7da52a6e</ProcessId>
+                            <InputVariableTable>
+                              <VariableAssignmentsAsArray>
+                                <InputVariableAssignment>
+                                  <InputVariableId>ae204c2d-99cc-4c24-baaa-30d2d5a17b30</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableString">
+                                    <FormattedCode>&lt;configConfMos cookie="{0}" inHierarchical="false"&gt;
+&lt;inConfigs&gt;
+&lt;pair key="{1}/cmap-{2}_CMAP"&gt;
+&lt;policyClassMap dn="{3}/cmap-{4}_CMAP" status="deleted" /&gt;
+&lt;/pair&gt;
+&lt;/inConfigs&gt;
+&lt;/configConfMos&gt;</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.Login to Prime NSC.pnsc-cookie</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="ProcessOutputVariableLink">
+                                            <LaunchingActivityId>ac17f62c-edd3-4c49-82b1-b74471070e05</LaunchingActivityId>
+                                            <OutputVariableId>47c30024-30a5-47db-8eff-91f701676cfd</OutputVariableId>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>ac17f62c-edd3-4c49-82b1-b74471070e05</ObjectId>
+                                        <ObjectType>WorkflowNode</ObjectType>
+                                      </VariableReference>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Local.PNSC Parent Distinguished Name</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>4152e922-1cb2-4858-a86d-ee7a7d7cc958</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Local.Inbound Policy Name</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>e915f070-ebaa-4aec-96db-3763ef2d5ac7</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Local.PNSC Parent Distinguished Name</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>4152e922-1cb2-4858-a86d-ee7a7d7cc958</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Local.Inbound Policy Name</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>e915f070-ebaa-4aec-96db-3763ef2d5ac7</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                                <InputVariableAssignment>
+                                  <InputVariableId>ff0dbe03-3e6a-4227-a663-1bbebe6a12f8</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableString">
+                                    <HardcodedValue>policy-mgr</HardcodedValue>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                              </VariableAssignmentsAsArray>
+                            </InputVariableTable>
+                            <Asynchronous>false</Asynchronous>
+                            <InheritTarget>true</InheritTarget>
+                            <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+                            <InheritPriorityClass>true</InheritPriorityClass>
+                            <RuntimeUserId>
+                              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                            </RuntimeUserId>
+                            <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                            <StartPointId>
+                              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                            </StartPointId>
+                            <StartPointName>
+                              <FormattedCode />
+                            </StartPointName>
+                          </ActivityNode>
+                        </Children>
+                        <Condition>
+                          <Id>656530d1-66d7-46a1-8c0c-e27c0f1e63ea</Id>
+                          <Conditions>
+                            <ConditionDefinition xsi:type="VariableConditionDefinition">
+                              <Id>71ad5f57-5882-4547-a367-207e48681ae4</Id>
+                              <Expression xsi:type="SubstitutableString">
+                                <HardcodedValue />
+                              </Expression>
+                              <Comparison>NotEquals</Comparison>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.Get Inbound Class Map.Object XML</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="ProcessOutputVariableLink">
+                                    <LaunchingActivityId>cf91a9a8-8d87-4f8f-af59-1a94fc57cf9b</LaunchingActivityId>
+                                    <OutputVariableId>004915b1-3d5b-41ff-b70f-0e5ddc8b4c82</OutputVariableId>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>cf91a9a8-8d87-4f8f-af59-1a94fc57cf9b</ObjectId>
+                                <ObjectType>WorkflowNode</ObjectType>
+                              </VariableReference>
+                            </ConditionDefinition>
+                          </Conditions>
+                        </Condition>
+                      </ActivityNode>
+                    </Children>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="SequenceNode">
+                    <Id>ceb424b0-1d91-4cf8-977b-e31647f11335</Id>
+                    <DisplayName>Outbound</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="StartProcessNode">
+                        <Id>d2f920af-5b22-4a56-8f98-a435e638ebc8</Id>
+                        <DisplayName>Get Outbound Class Map</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                            <Id>6b2489bc-0142-4a5a-b0d2-52924fd69c78</Id>
+                            <ProcessNodeId>d2f920af-5b22-4a56-8f98-a435e638ebc8</ProcessNodeId>
+                            <CompletedId>9825323a-502e-48d5-b9c9-40d3ded2c7f8</CompletedId>
+                          </ActivityNode>
+                        </Children>
+                        <ProcessId>278de494-6eb1-4bd9-8458-e4183bbc2d13</ProcessId>
+                        <InputVariableTable>
+                          <VariableAssignmentsAsArray>
+                            <InputVariableAssignment>
+                              <InputVariableId>97743146-65c3-42b1-8242-c64aa44dd5fd</InputVariableId>
+                              <VariableValue xsi:type="SubstitutableBoolean">
+                                <HardcodedValue>false</HardcodedValue>
+                              </VariableValue>
+                            </InputVariableAssignment>
+                            <InputVariableAssignment>
+                              <InputVariableId>ee753695-ba9d-4675-9e0b-f15601e3ebe7</InputVariableId>
+                              <VariableValue xsi:type="SubstitutableString">
+                                <HardcodedValue>policy-mgr</HardcodedValue>
+                              </VariableValue>
+                            </InputVariableAssignment>
+                            <InputVariableAssignment>
+                              <InputVariableId>372395cb-5aed-43f3-b09b-74922bf39e59</InputVariableId>
+                              <VariableValue xsi:type="SubstitutableString">
+                                <FormattedCode>{0}/cmap-{1}_CMAP</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Process.Variables.Local.PNSC Parent Distinguished Name</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>4152e922-1cb2-4858-a86d-ee7a7d7cc958</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableReference>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Process.Variables.Local.Outbound Policy Name</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>fb0a63df-e236-4a2a-bd2b-0a9a49c0d681</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </VariableValue>
+                            </InputVariableAssignment>
+                            <InputVariableAssignment>
+                              <InputVariableId>ad6e7eb3-3fce-4430-a821-0f82a5b002e9</InputVariableId>
+                              <VariableValue xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Login to Prime NSC.pnsc-cookie</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="ProcessOutputVariableLink">
+                                        <LaunchingActivityId>ac17f62c-edd3-4c49-82b1-b74471070e05</LaunchingActivityId>
+                                        <OutputVariableId>47c30024-30a5-47db-8eff-91f701676cfd</OutputVariableId>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>ac17f62c-edd3-4c49-82b1-b74471070e05</ObjectId>
+                                    <ObjectType>WorkflowNode</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </VariableValue>
+                            </InputVariableAssignment>
+                          </VariableAssignmentsAsArray>
+                        </InputVariableTable>
+                        <Asynchronous>false</Asynchronous>
+                        <InheritTarget>false</InheritTarget>
+                        <TargetLoadBalancer xsi:type="ActivityTargetLoadBalancer">
+                          <ActivityId>00000000-0000-0000-0000-000000000000</ActivityId>
+                          <ChildProcessNodeId>ac17f62c-edd3-4c49-82b1-b74471070e05</ChildProcessNodeId>
+                        </TargetLoadBalancer>
+                        <InheritPriorityClass>true</InheritPriorityClass>
+                        <RuntimeUserId>
+                          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                        </RuntimeUserId>
+                        <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                        <StartPointId>
+                          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                        </StartPointId>
+                        <StartPointName>
+                          <FormattedCode />
+                        </StartPointName>
+                      </ActivityNode>
+                      <ActivityNode xsi:type="ConditionBranchNode">
+                        <Id>076acb8a-09c5-47ff-b484-3c7e73298c70</Id>
+                        <DisplayName>Exist?</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="StartProcessNode">
+                            <Id>7bf61a1b-a7c7-4fc3-a597-b12a44e5aeb0</Id>
+                            <DisplayName>Delete Outbound Class Map</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                <Id>1e964d2f-3433-47d0-b9dc-e564076ff7f2</Id>
+                                <ProcessNodeId>7bf61a1b-a7c7-4fc3-a597-b12a44e5aeb0</ProcessNodeId>
+                                <CompletedId>8b208de5-e007-441a-ae66-376005d81b90</CompletedId>
+                              </ActivityNode>
+                            </Children>
+                            <ProcessId>38e4530c-bb1a-428f-aa34-5c7c7da52a6e</ProcessId>
+                            <InputVariableTable>
+                              <VariableAssignmentsAsArray>
+                                <InputVariableAssignment>
+                                  <InputVariableId>ae204c2d-99cc-4c24-baaa-30d2d5a17b30</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableString">
+                                    <FormattedCode>&lt;configConfMos cookie="{0}" inHierarchical="false"&gt;
+&lt;inConfigs&gt;
+&lt;pair key="{1}/cmap-{2}_CMAP"&gt;
+&lt;policyClassMap dn="{3}/cmap-{4}_CMAP" status="deleted" /&gt;
+&lt;/pair&gt;
+&lt;/inConfigs&gt;
+&lt;/configConfMos&gt;</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.Login to Prime NSC.pnsc-cookie</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="ProcessOutputVariableLink">
+                                            <LaunchingActivityId>ac17f62c-edd3-4c49-82b1-b74471070e05</LaunchingActivityId>
+                                            <OutputVariableId>47c30024-30a5-47db-8eff-91f701676cfd</OutputVariableId>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>ac17f62c-edd3-4c49-82b1-b74471070e05</ObjectId>
+                                        <ObjectType>WorkflowNode</ObjectType>
+                                      </VariableReference>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Local.PNSC Parent Distinguished Name</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>4152e922-1cb2-4858-a86d-ee7a7d7cc958</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Local.Outbound Policy Name</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>fb0a63df-e236-4a2a-bd2b-0a9a49c0d681</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Local.PNSC Parent Distinguished Name</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>4152e922-1cb2-4858-a86d-ee7a7d7cc958</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Local.Outbound Policy Name</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>fb0a63df-e236-4a2a-bd2b-0a9a49c0d681</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                                <InputVariableAssignment>
+                                  <InputVariableId>ff0dbe03-3e6a-4227-a663-1bbebe6a12f8</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableString">
+                                    <HardcodedValue>policy-mgr</HardcodedValue>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                              </VariableAssignmentsAsArray>
+                            </InputVariableTable>
+                            <Asynchronous>false</Asynchronous>
+                            <InheritTarget>true</InheritTarget>
+                            <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+                            <InheritPriorityClass>true</InheritPriorityClass>
+                            <RuntimeUserId>
+                              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                            </RuntimeUserId>
+                            <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                            <StartPointId>
+                              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                            </StartPointId>
+                            <StartPointName>
+                              <FormattedCode />
+                            </StartPointName>
+                          </ActivityNode>
+                        </Children>
+                        <Condition>
+                          <Id>656530d1-66d7-46a1-8c0c-e27c0f1e63ea</Id>
+                          <Conditions>
+                            <ConditionDefinition xsi:type="VariableConditionDefinition">
+                              <Id>71ad5f57-5882-4547-a367-207e48681ae4</Id>
+                              <Expression xsi:type="SubstitutableString">
+                                <HardcodedValue />
+                              </Expression>
+                              <Comparison>NotEquals</Comparison>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.Get Outbound Class Map.Object XML</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="ProcessOutputVariableLink">
+                                    <LaunchingActivityId>d2f920af-5b22-4a56-8f98-a435e638ebc8</LaunchingActivityId>
+                                    <OutputVariableId>004915b1-3d5b-41ff-b70f-0e5ddc8b4c82</OutputVariableId>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>d2f920af-5b22-4a56-8f98-a435e638ebc8</ObjectId>
+                                <ObjectType>WorkflowNode</ObjectType>
+                              </VariableReference>
+                            </ConditionDefinition>
+                          </Conditions>
+                        </Condition>
+                      </ActivityNode>
+                    </Children>
+                  </ActivityNode>
+                </Children>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>1924fe09-05cf-4911-be6d-7defc6633a2f</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>e16eed94-3c8d-47b7-bb63-ccb5afe3e121</Id>
+                  <Expression xsi:type="SubstitutableString">
+                    <HardcodedValue>VIP</HardcodedValue>
+                  </Expression>
+                  <Comparison>Equals</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Input.Type</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>6539fcf2-2fe5-4f73-8ab7-1aa8385c87b5</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>71752537-16ec-42fa-a578-478afc7a235e</Id>
+            <DisplayName>Other</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="CompletedNode">
+                <Id>7330f61b-e53d-4e65-b0eb-787719bf932b</Id>
+                <CompletedType>FailedNotCompleted</CompletedType>
+                <ResultMessage>
+                  <HardcodedValue>Invalid type. Valid types are SNIP and VIP</HardcodedValue>
+                </ResultMessage>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>8d1f53cd-c9d8-43a1-82fa-a8ffe06ee74d</Id>
+              <Conditions />
+            </Condition>
+          </ActivityNode>
+        </Children>
+      </ActivityNode>
+      <ActivityNode xsi:type="StartProcessNode">
+        <Id>ef489e93-2f08-47cf-b72b-0533599347f1</Id>
+        <DisplayName>Logout of Prime NSC</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>1f8e8ee5-992a-4a2a-8432-d547bdb968ea</Id>
+            <ProcessNodeId>ef489e93-2f08-47cf-b72b-0533599347f1</ProcessNodeId>
+            <CompletedId>7d10cc5f-b563-4b9f-83e7-650f355c3941</CompletedId>
+          </ActivityNode>
+        </Children>
+        <ProcessId>86bda686-8f5e-4ab1-b1a2-6901d6310df2</ProcessId>
+        <InputVariableTable>
+          <VariableAssignmentsAsArray>
+            <InputVariableAssignment>
+              <InputVariableId>2438f9f1-854a-4ba7-bc28-748c73288819</InputVariableId>
+              <VariableValue xsi:type="SubstitutableString">
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Login to Prime NSC.pnsc-cookie</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="ProcessOutputVariableLink">
+                        <LaunchingActivityId>ac17f62c-edd3-4c49-82b1-b74471070e05</LaunchingActivityId>
+                        <OutputVariableId>47c30024-30a5-47db-8eff-91f701676cfd</OutputVariableId>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>ac17f62c-edd3-4c49-82b1-b74471070e05</ObjectId>
+                    <ObjectType>WorkflowNode</ObjectType>
+                  </VariableReference>
+                </References>
+              </VariableValue>
+            </InputVariableAssignment>
+          </VariableAssignmentsAsArray>
+        </InputVariableTable>
+        <Asynchronous>false</Asynchronous>
+        <InheritTarget>false</InheritTarget>
+        <TargetLoadBalancer xsi:type="ActivityTargetLoadBalancer">
+          <ActivityId>00000000-0000-0000-0000-000000000000</ActivityId>
+          <ChildProcessNodeId>ac17f62c-edd3-4c49-82b1-b74471070e05</ChildProcessNodeId>
+        </TargetLoadBalancer>
+        <InheritPriorityClass>true</InheritPriorityClass>
+        <RuntimeUserId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </RuntimeUserId>
+        <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+        <StartPointId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </StartPointId>
+        <StartPointName>
+          <FormattedCode />
+        </StartPointName>
+      </ActivityNode>
+    </Children>
+  </FirstActivity>
+  <ProcessId>9c96d3dd-5593-43ab-8ce6-22308f715d29</ProcessId>
+</WorkflowConfiguration>

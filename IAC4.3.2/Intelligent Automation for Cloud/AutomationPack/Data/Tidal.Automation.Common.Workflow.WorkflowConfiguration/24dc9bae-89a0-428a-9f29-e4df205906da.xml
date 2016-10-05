@@ -1,0 +1,3420 @@
+<?xml version="1.0"?>
+<WorkflowConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>24dc9bae-89a0-428a-9f29-e4df205906da</Id>
+  <DisplayName>Decommission Organization</DisplayName>
+  <CreatedTime>2016-02-15T20:45:26.910875Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:45:45.1201171Z</ModifiedTime>
+  <FirstActivity xsi:type="RootNode">
+    <Id>64e18d55-16ae-4119-968c-3a53cc87ccad</Id>
+    <DisplayName />
+    <Children>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>a45fe0e4-2c81-4914-b6db-ba9636342b50</Id>
+        <DisplayName>Add Note - Process Started</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>472ba84f-015b-452b-9631-4aaf661b3576</Id>
+            <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+            <DisplayName>Ignore Error</DisplayName>
+            <Children />
+            <Condition>
+              <Id>bca90b3f-bdc5-4e9b-8a62-4ef8a5fe89c2</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>d00dc03d-e7e4-4392-83a9-68ccdb2ac69e</Id>
+                  <Expression xsi:type="SubstitutableBoolean">
+                    <HardcodedValue>true</HardcodedValue>
+                  </Expression>
+                  <Comparison>Equals</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>InstanceFailed</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>3dc72fd3-68e5-4b1f-93b2-90be07327749</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="UpdateChangeRequestActivityConfiguration" xml:space="preserve">
+          <Id>3dc72fd3-68e5-4b1f-93b2-90be07327749</Id>
+          <DisplayName>Add Note - Process Started</DisplayName>
+          <Description>This activity adds a note that appears in the PO console indicating to the user the progress of the process.</Description>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>6d25deb5-2f72-40ec-b767-bdabe50f7ee6</ContainingProcessId>
+          <TaskId>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Target.Cloud.Service.General.ChangeRequestID</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>ResolvedTarget</PropertyName>
+                  </Link>
+                  <Link xsi:type="ObjectReferenceLink">
+                    <ObjectLink>
+                      <Id>2924872b-3254-4306-9160-e08f75efa691</Id>
+                      <ObjectType>PropertyExtension</ObjectType>
+                    </ObjectLink>
+                  </Link>
+                </LinkChain>
+                <ObjectType>ProcessInstance</ObjectType>
+              </VariableReference>
+            </References>
+          </TaskId>
+          <ModificationGroup>
+            <ObjectId>00000000-0000-0000-0000-000000000000</ObjectId>
+            <ObjectType>Task</ObjectType>
+            <Modifications>
+              <PropertyModification>
+                <DisplayPath>New Note</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>NewNote</PropertyName>
+                  </Link>
+                </LinkChain>
+                <Action>Set</Action>
+                <Value xsi:type="SubstitutableString">
+                  <FormattedCode>{0} started on {1}.
+Querying XML.</FormattedCode>
+                  <References>
+                    <VariableReference xsi:type="PropertyReference">
+                      <DisplayPath>Process.Instance Name</DisplayPath>
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>DisplayName</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectType>ProcessInstance</ObjectType>
+                    </VariableReference>
+                    <VariableReference xsi:type="PropertyReference">
+                      <DisplayPath>Process.Start Time</DisplayPath>
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>StartTime</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectType>ProcessInstance</ObjectType>
+                    </VariableReference>
+                  </References>
+                </Value>
+              </PropertyModification>
+            </Modifications>
+          </ModificationGroup>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="StartPointNode">
+        <Id>e55f8f59-daea-4dca-8155-0039274b6dc7</Id>
+        <DisplayName>Query Service Parameters</DisplayName>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>0bb8271a-2939-4af4-b0a8-347c6a14106e</Id>
+        <DisplayName>Query ServiceRequestXML</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>00788bf5-e8dc-4cce-973a-9fc0586aa6b4</Id>
+            <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+            <DisplayName>If Execution Fails</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>e66a8450-b1e7-4e30-a5c8-49417347f521</Id>
+                <DisplayName>Set Remediation Settings</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>f8cb41f3-8e40-44d7-a76a-e68fb87ac39d</Id>
+                    <ActivityNodeId>000261f1-0322-4602-92dd-ad2d60918997</ActivityNodeId>
+                    <CompletedId>59363e48-5e86-43b1-8595-80b993992f34</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+                  <Id>000261f1-0322-4602-92dd-ad2d60918997</Id>
+                  <DisplayName>Set Remediation Settings</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>6d25deb5-2f72-40ec-b767-bdabe50f7ee6</ContainingProcessId>
+                  <Assignments>
+                    <PropertyReferenceValuePair>
+                      <VariableToSet>
+                        <DisplayPath>Process.Target.Cloud.Service.General.ErrorCode</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="ObjectReferenceLink">
+                            <ObjectLink>
+                              <Id>7ad8347e-4936-4962-ab6d-3ec987d2737a</Id>
+                              <ObjectType>PropertyExtension</ObjectType>
+                            </ObjectLink>
+                          </Link>
+                        </LinkChain>
+                        <ObjectType>ProcessInstance</ObjectType>
+                      </VariableToSet>
+                      <NewValue xsi:type="SubstitutableNumber">
+                        <HardcodedValue>5000</HardcodedValue>
+                      </NewValue>
+                    </PropertyReferenceValuePair>
+                    <PropertyReferenceValuePair>
+                      <VariableToSet>
+                        <DisplayPath>Process.Target.Cloud.Service.General.ErrorRemediation.Actions</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="ObjectReferenceLink">
+                            <ObjectLink>
+                              <Id>d3e16466-5e76-4adf-9738-9d3faf351bce</Id>
+                              <ObjectType>PropertyExtension</ObjectType>
+                            </ObjectLink>
+                          </Link>
+                        </LinkChain>
+                        <ObjectType>ProcessInstance</ObjectType>
+                      </VariableToSet>
+                      <NewValue xsi:type="SubstitutableString">
+                        <HardcodedValue>Cancel</HardcodedValue>
+                      </NewValue>
+                    </PropertyReferenceValuePair>
+                  </Assignments>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="CompletedNode">
+                <Id>911f8ab9-a9dd-45ae-88ad-a22a42d0df20</Id>
+                <Notes>Fail the entire process</Notes>
+                <CompletedType>FailedNotCompleted</CompletedType>
+                <ResultMessage>
+                  <FormattedCode>Failed to parse Cloud Portal service request XML.
+{0}</FormattedCode>
+                  <References>
+                    <VariableReference xsi:type="PropertyReference">
+                      <DisplayPath>Workflow.Query ServiceRequestXML.Error Information</DisplayPath>
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>ErrorInformation</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectId>ae96795d-da84-4ee3-8686-226b2cbe11f6</ObjectId>
+                      <ObjectType>ActivityInstance</ObjectType>
+                    </VariableReference>
+                  </References>
+                </ResultMessage>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>275d70ac-6321-4053-8f29-24095557ec25</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>3fc471be-344c-45b2-8691-b8590e23693b</Id>
+                  <Expression xsi:type="SubstitutableBoolean">
+                    <HardcodedValue>true</HardcodedValue>
+                  </Expression>
+                  <Comparison>Equals</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>InstanceFailed</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>ae96795d-da84-4ee3-8686-226b2cbe11f6</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="XPathQueryActivityConfiguration" xml:space="preserve">
+          <Id>ae96795d-da84-4ee3-8686-226b2cbe11f6</Id>
+          <DisplayName>Query ServiceRequestXML</DisplayName>
+          <Description>Information required for the process is passed to it through an input parameter list as an XML fragment. This activity parses that XML to retrieve individual parameters.</Description>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <KnowledgeBaseId>367785ad-dc93-45ba-b9fc-16baf718623f</KnowledgeBaseId>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>6d25deb5-2f72-40ec-b767-bdabe50f7ee6</ContainingProcessId>
+          <SourceXml>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Target.Cloud.Service.General.ServiceRequestXML</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>ResolvedTarget</PropertyName>
+                  </Link>
+                  <Link xsi:type="ObjectReferenceLink">
+                    <ObjectLink>
+                      <Id>e5988c6a-0497-4e11-92fb-8bf107b20995</Id>
+                      <ObjectType>PropertyExtension</ObjectType>
+                    </ObjectLink>
+                  </Link>
+                </LinkChain>
+                <ObjectType>ProcessInstance</ObjectType>
+              </VariableReference>
+            </References>
+          </SourceXml>
+          <Namespaces />
+          <Queries>
+            <XPathQueryDefinition>
+              <DisplayName>Action</DisplayName>
+              <Query>
+                <HardcodedValue>root/Common/Action</HardcodedValue>
+              </Query>
+              <ReturnType>String</ReturnType>
+              <DefaultBehavior>Fail</DefaultBehavior>
+            </XPathQueryDefinition>
+            <XPathQueryDefinition>
+              <DisplayName>Requistion ID</DisplayName>
+              <Query>
+                <HardcodedValue>root/Common/RequisitionID</HardcodedValue>
+              </Query>
+              <ReturnType>String</ReturnType>
+              <DefaultBehavior>Fail</DefaultBehavior>
+            </XPathQueryDefinition>
+            <XPathQueryDefinition>
+              <DisplayName>Channel ID</DisplayName>
+              <Query>
+                <HardcodedValue>root/Common/ChannelID</HardcodedValue>
+              </Query>
+              <ReturnType>String</ReturnType>
+              <DefaultBehavior>Fail</DefaultBehavior>
+            </XPathQueryDefinition>
+            <XPathQueryDefinition>
+              <DisplayName>TenantSIName</DisplayName>
+              <Query>
+                <HardcodedValue>root/FormData/CustomerOrganization.TenantSIName</HardcodedValue>
+              </Query>
+              <ReturnType>String</ReturnType>
+              <DefaultBehavior>Fail</DefaultBehavior>
+            </XPathQueryDefinition>
+            <XPathQueryDefinition>
+              <DisplayName>OrganizationName</DisplayName>
+              <Query>
+                <HardcodedValue>root/FormData/CustomerOrganization.OrganizationName</HardcodedValue>
+              </Query>
+              <ReturnType>String</ReturnType>
+              <DefaultBehavior>Fail</DefaultBehavior>
+            </XPathQueryDefinition>
+            <XPathQueryDefinition>
+              <DisplayName>TenantName</DisplayName>
+              <Query>
+                <HardcodedValue>root/FormData/CustomerOrganization.TenantName</HardcodedValue>
+              </Query>
+              <ReturnType>String</ReturnType>
+              <DefaultBehavior>Fail</DefaultBehavior>
+            </XPathQueryDefinition>
+          </Queries>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>7524fdb0-44e7-4fcf-bb9a-137f0bcd76f7</Id>
+        <DisplayName>Set Organization Name</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>fa85d59c-e10a-4755-8671-d86686c0059d</Id>
+            <ActivityNodeId>2320f338-25f6-4519-a5e4-2b637e0d8021</ActivityNodeId>
+            <CompletedId>118788df-dee4-4d88-96ec-f54f90aea44e</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+          <Id>2320f338-25f6-4519-a5e4-2b637e0d8021</Id>
+          <DisplayName>Set Organization Name</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>6d25deb5-2f72-40ec-b767-bdabe50f7ee6</ContainingProcessId>
+          <VariableToSet>
+            <DisplayPath>Process.Target.Cloud.Service.General.Tenant.Organization</DisplayPath>
+            <LinkChain>
+              <Link xsi:type="PropertyNameLink">
+                <PropertyName>ResolvedTarget</PropertyName>
+              </Link>
+              <Link xsi:type="ObjectReferenceLink">
+                <ObjectLink>
+                  <Id>a91ae90b-8874-4a26-819d-f7db488d2dcb</Id>
+                  <ObjectType>PropertyExtension</ObjectType>
+                </ObjectLink>
+              </Link>
+            </LinkChain>
+            <ObjectType>ProcessInstance</ObjectType>
+          </VariableToSet>
+          <NewValue xsi:type="SubstitutableString">
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Query ServiceRequestXML.Results.OrganizationName</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>Results</PropertyName>
+                  </Link>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>OrganizationName</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>ae96795d-da84-4ee3-8686-226b2cbe11f6</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </VariableReference>
+            </References>
+          </NewValue>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="StartPointNode">
+        <Id>9b255199-77f9-4083-bf41-f9b603c61867</Id>
+        <DisplayName>User Pre Processing Extension Point</DisplayName>
+      </ActivityNode>
+      <ActivityNode xsi:type="StartProcessNode">
+        <Id>d52f00a7-af41-487b-805f-7f74caaeeafc</Id>
+        <DisplayName> Decommission Organization &gt;&gt; Pre-decommission</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>f4296f8e-2ecb-428a-bd2e-27adebb0519d</Id>
+            <ProcessNodeId>d52f00a7-af41-487b-805f-7f74caaeeafc</ProcessNodeId>
+            <CompletedId>a6d07c3f-ed2d-40d8-b276-8b0fad24d522</CompletedId>
+          </ActivityNode>
+        </Children>
+        <ProcessId>f26a95c3-12ac-489c-a8dc-e5735914d1f0</ProcessId>
+        <InputVariableTable>
+          <VariableAssignmentsAsArray />
+        </InputVariableTable>
+        <Asynchronous>false</Asynchronous>
+        <InheritTarget>true</InheritTarget>
+        <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+        <InheritPriorityClass>true</InheritPriorityClass>
+        <RuntimeUserId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </RuntimeUserId>
+        <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+        <StartPointId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </StartPointId>
+        <StartPointName>
+          <FormattedCode />
+        </StartPointName>
+      </ActivityNode>
+      <ActivityNode xsi:type="StartPointNode">
+        <Id>e5f6e8d5-4a27-4324-b754-34b868790995</Id>
+        <DisplayName>Decommission Organization Users</DisplayName>
+      </ActivityNode>
+      <ActivityNode xsi:type="ConditionBranchNode">
+        <Id>f9c750fb-bd1c-453c-8ebb-81818feb0678</Id>
+        <DisplayName>Condition Branch</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="StartProcessNode">
+            <Id>f5fcc0ba-1a99-4b1c-91ba-b6658bd9a26e</Id>
+            <DisplayName>Decommission Organization Users</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ConditionBranchNode">
+                <Id>4f09d165-8466-4047-bde8-bd48e3e07184</Id>
+                <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                <DisplayName>If Execution Fails</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="ExecuteActivityNode">
+                    <Id>f27f4111-0b4e-4d3c-a9a9-15dd64893e2d</Id>
+                    <DisplayName>Set Remediation Settings</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                        <Id>cff21ace-4fd7-48b1-841d-c87b65876e85</Id>
+                        <ActivityNodeId>1863cf41-17ce-463a-8737-f0dc900a92f8</ActivityNodeId>
+                        <CompletedId>637dc51f-c712-427b-8b26-7b91347fb776</CompletedId>
+                      </ActivityNode>
+                    </Children>
+                    <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+                      <Id>1863cf41-17ce-463a-8737-f0dc900a92f8</Id>
+                      <DisplayName>Set Remediation Settings</DisplayName>
+                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                        <SingleTargetId>
+                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                        </SingleTargetId>
+                      </TargetLoadBalancer>
+                      <InheritTarget>false</InheritTarget>
+                      <ContainingProcessId>6d25deb5-2f72-40ec-b767-bdabe50f7ee6</ContainingProcessId>
+                      <Assignments>
+                        <PropertyReferenceValuePair>
+                          <VariableToSet>
+                            <DisplayPath>Process.Target.Cloud.Service.General.ErrorCode</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResolvedTarget</PropertyName>
+                              </Link>
+                              <Link xsi:type="ObjectReferenceLink">
+                                <ObjectLink>
+                                  <Id>7ad8347e-4936-4962-ab6d-3ec987d2737a</Id>
+                                  <ObjectType>PropertyExtension</ObjectType>
+                                </ObjectLink>
+                              </Link>
+                            </LinkChain>
+                            <ObjectType>ProcessInstance</ObjectType>
+                          </VariableToSet>
+                          <NewValue xsi:type="SubstitutableNumber">
+                            <HardcodedValue>5104</HardcodedValue>
+                          </NewValue>
+                        </PropertyReferenceValuePair>
+                        <PropertyReferenceValuePair>
+                          <VariableToSet>
+                            <DisplayPath>Process.Target.Cloud.Service.General.ErrorRemediation.UserSet.StartPoint.Retry</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResolvedTarget</PropertyName>
+                              </Link>
+                              <Link xsi:type="ObjectReferenceLink">
+                                <ObjectLink>
+                                  <Id>08ae6527-2766-4769-ac49-4cd7fc45040c</Id>
+                                  <ObjectType>PropertyExtension</ObjectType>
+                                </ObjectLink>
+                              </Link>
+                            </LinkChain>
+                            <ObjectType>ProcessInstance</ObjectType>
+                          </VariableToSet>
+                          <NewValue xsi:type="SubstitutableString">
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.Decommission Organization Users.Name</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>DisplayName</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>e5f6e8d5-4a27-4324-b754-34b868790995</ObjectId>
+                                <ObjectType>WorkflowNode</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </NewValue>
+                        </PropertyReferenceValuePair>
+                      </Assignments>
+                    </Configuration>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="CompletedNode">
+                    <Id>ff9ca62e-55bd-4082-aabb-28eff82e821c</Id>
+                    <Notes>Fail the entire process</Notes>
+                    <CompletedType>FailedNotCompleted</CompletedType>
+                    <ResultMessage>
+                      <FormattedCode>{0}</FormattedCode>
+                      <References>
+                        <VariableReference xsi:type="PropertyReference">
+                          <LinkChain>
+                            <Link xsi:type="PropertyNameLink">
+                              <PropertyName>ErrorInformation</PropertyName>
+                            </Link>
+                          </LinkChain>
+                          <ObjectId>f5fcc0ba-1a99-4b1c-91ba-b6658bd9a26e</ObjectId>
+                          <ObjectType>ProcessInstance</ObjectType>
+                        </VariableReference>
+                      </References>
+                    </ResultMessage>
+                  </ActivityNode>
+                </Children>
+                <Condition>
+                  <Id>82a42e90-c85d-4600-a6a1-a01450af5a82</Id>
+                  <Conditions>
+                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                      <Id>c9c1d6e0-389a-464a-8bea-9ba5c9a8b4ab</Id>
+                      <Expression xsi:type="SubstitutableBoolean">
+                        <HardcodedValue>true</HardcodedValue>
+                      </Expression>
+                      <Comparison>Equals</Comparison>
+                      <VariableReference xsi:type="PropertyReference">
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>InstanceFailed</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>f5fcc0ba-1a99-4b1c-91ba-b6658bd9a26e</ObjectId>
+                        <ObjectType>ProcessInstance</ObjectType>
+                      </VariableReference>
+                    </ConditionDefinition>
+                  </Conditions>
+                </Condition>
+              </ActivityNode>
+            </Children>
+            <ProcessId>9835898e-187d-4d86-abaa-cb57427b8e1a</ProcessId>
+            <InputVariableTable>
+              <VariableAssignmentsAsArray />
+            </InputVariableTable>
+            <Asynchronous>false</Asynchronous>
+            <InheritTarget>false</InheritTarget>
+            <TargetLoadBalancer xsi:type="VariableBasedSingleTargetLoadBalancer">
+              <TargetGroupId>7fd4e91c-5249-4dcc-9848-a43114bc4df4</TargetGroupId>
+              <Criteria />
+            </TargetLoadBalancer>
+            <InheritPriorityClass>true</InheritPriorityClass>
+            <RuntimeUserId>
+              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+            </RuntimeUserId>
+            <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+            <StartPointId>
+              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+            </StartPointId>
+            <StartPointName>
+              <FormattedCode />
+            </StartPointName>
+          </ActivityNode>
+        </Children>
+        <Condition>
+          <Id>fd72299e-a485-4255-a9b1-bfda2893fb99</Id>
+          <Operator>Or</Operator>
+          <Conditions />
+        </Condition>
+      </ActivityNode>
+      <ActivityNode xsi:type="StartPointNode">
+        <Id>fcceb76d-014b-4591-8c4c-d8706dbd91a9</Id>
+        <DisplayName>Decommmision Organization Folders / SIs</DisplayName>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>0c45a971-fad9-414e-885d-6c3af4f5769a</Id>
+        <DisplayName>Find Organization Service Options</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>2d1e40db-aa28-4ead-bd97-42ee0e66ea08</Id>
+            <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+            <DisplayName>If Execution Fails</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>5874154c-7f89-437d-a099-f3f7d27756a5</Id>
+                <DisplayName>Set Remediation Settings (2)</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>1c85c788-509a-4b45-b6ba-c439c35bfc23</Id>
+                    <ActivityNodeId>a5d9d167-3eea-4a9b-9b4f-dd359d223e70</ActivityNodeId>
+                    <CompletedId>4f598ed9-62cc-44e7-9a16-bcc6d6395a4a</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+                  <Id>a5d9d167-3eea-4a9b-9b4f-dd359d223e70</Id>
+                  <DisplayName>Set Remediation Settings (2)</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>6d25deb5-2f72-40ec-b767-bdabe50f7ee6</ContainingProcessId>
+                  <Assignments>
+                    <PropertyReferenceValuePair>
+                      <VariableToSet>
+                        <DisplayPath>Process.Target.Cloud.Service.General.ErrorCode</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="ObjectReferenceLink">
+                            <ObjectLink>
+                              <Id>7ad8347e-4936-4962-ab6d-3ec987d2737a</Id>
+                              <ObjectType>PropertyExtension</ObjectType>
+                            </ObjectLink>
+                          </Link>
+                        </LinkChain>
+                        <ObjectType>ProcessInstance</ObjectType>
+                      </VariableToSet>
+                      <NewValue xsi:type="SubstitutableNumber">
+                        <HardcodedValue>1012</HardcodedValue>
+                      </NewValue>
+                    </PropertyReferenceValuePair>
+                    <PropertyReferenceValuePair>
+                      <VariableToSet>
+                        <DisplayPath>Process.Target.Cloud.Service.General.ErrorRemediation.UserSet.StartPoint.Retry</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="ObjectReferenceLink">
+                            <ObjectLink>
+                              <Id>08ae6527-2766-4769-ac49-4cd7fc45040c</Id>
+                              <ObjectType>PropertyExtension</ObjectType>
+                            </ObjectLink>
+                          </Link>
+                        </LinkChain>
+                        <ObjectType>ProcessInstance</ObjectType>
+                      </VariableToSet>
+                      <NewValue xsi:type="SubstitutableString">
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.Query Service Parameters.Name</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>DisplayName</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>e55f8f59-daea-4dca-8155-0039274b6dc7</ObjectId>
+                            <ObjectType>WorkflowNode</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </NewValue>
+                    </PropertyReferenceValuePair>
+                  </Assignments>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="CompletedNode">
+                <Id>32f1c8ca-d5fe-48ec-a763-b7061a5afe58</Id>
+                <Notes>Fail the entire process</Notes>
+                <CompletedType>FailedNotCompleted</CompletedType>
+                <ResultMessage>
+                  <FormattedCode>{0}</FormattedCode>
+                  <References>
+                    <VariableReference xsi:type="PropertyReference">
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>ErrorInformation</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectId>7410225b-9e7d-4f5b-8450-7a70452d97ec</ObjectId>
+                      <ObjectType>ActivityInstance</ObjectType>
+                    </VariableReference>
+                  </References>
+                </ResultMessage>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>a1d5e575-56b4-4729-a19c-55e64fbe4998</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>d8cc7087-5aae-4918-8805-a3bc8aa62cf6</Id>
+                  <Expression xsi:type="SubstitutableBoolean">
+                    <HardcodedValue>true</HardcodedValue>
+                  </Expression>
+                  <Comparison>Equals</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>InstanceFailed</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>7410225b-9e7d-4f5b-8450-7a70452d97ec</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="FindServiceItemsActivityConfiguration" xml:space="preserve">
+          <Id>7410225b-9e7d-4f5b-8450-7a70452d97ec</Id>
+          <DisplayName>Find Organization Service Options</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+            <SingleTargetReference>
+              <FormattedCode />
+              <HardcodedValue>
+                <Id>b3216113-bb0f-4cb3-b7c2-93b9074ef87b</Id>
+                <ObjectType>Target</ObjectType>
+              </HardcodedValue>
+            </SingleTargetReference>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>6d25deb5-2f72-40ec-b767-bdabe50f7ee6</ContainingProcessId>
+          <RetryTimePeriod>
+            <DisplayUnits>Minutes</DisplayUnits>
+            <Period>
+              <FormattedCode>{0}</FormattedCode>
+              <References>
+                <VariableReference xsi:type="PropertyReference">
+                  <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Time Period (minutes)</DisplayPath>
+                  <LinkChain>
+                    <Link xsi:type="PropertyNameLink">
+                      <PropertyName>DefaultRetryMinutes</PropertyName>
+                    </Link>
+                  </LinkChain>
+                  <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                  <ObjectType>Adapter</ObjectType>
+                </VariableReference>
+              </References>
+            </Period>
+          </RetryTimePeriod>
+          <RetryFrequency>
+            <DisplayUnits>Seconds</DisplayUnits>
+            <Period>
+              <FormattedCode>{0}</FormattedCode>
+              <References>
+                <VariableReference xsi:type="PropertyReference">
+                  <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Frequency (seconds)</DisplayPath>
+                  <LinkChain>
+                    <Link xsi:type="PropertyNameLink">
+                      <PropertyName>DefaultRetryFrequency</PropertyName>
+                    </Link>
+                  </LinkChain>
+                  <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                  <ObjectType>Adapter</ObjectType>
+                </VariableReference>
+              </References>
+            </Period>
+          </RetryFrequency>
+          <Timeout>
+            <DisplayUnits>Seconds</DisplayUnits>
+            <Period>
+              <HardcodedValue>100</HardcodedValue>
+            </Period>
+          </Timeout>
+          <ItemType>
+            <HardcodedValue>SetOrgWideServiceOptions</HardcodedValue>
+          </ItemType>
+          <ItemName>
+            <FormattedCode />
+          </ItemName>
+          <BrowseServiceItemName>SetOrgWideServiceOptions</BrowseServiceItemName>
+          <Properties>
+            <ServiceItemProperty>
+              <Name>
+                <HardcodedValue>SharedZone</HardcodedValue>
+              </Name>
+            </ServiceItemProperty>
+            <ServiceItemProperty>
+              <Name>
+                <HardcodedValue>VMTemplate</HardcodedValue>
+              </Name>
+            </ServiceItemProperty>
+            <ServiceItemProperty>
+              <Name>
+                <HardcodedValue>VDCOrdering</HardcodedValue>
+              </Name>
+            </ServiceItemProperty>
+            <ServiceItemProperty>
+              <Name>
+                <HardcodedValue>TenantName</HardcodedValue>
+              </Name>
+            </ServiceItemProperty>
+            <ServiceItemProperty>
+              <Name>
+                <HardcodedValue>Layer2FirewallingVSG</HardcodedValue>
+              </Name>
+            </ServiceItemProperty>
+            <ServiceItemProperty>
+              <Name>
+                <HardcodedValue>VMOS</HardcodedValue>
+              </Name>
+            </ServiceItemProperty>
+            <ServiceItemProperty>
+              <Name>
+                <HardcodedValue>OrganizationName</HardcodedValue>
+              </Name>
+            </ServiceItemProperty>
+            <ServiceItemProperty>
+              <Name>
+                <HardcodedValue>MultipleSecurityZones</HardcodedValue>
+              </Name>
+            </ServiceItemProperty>
+            <ServiceItemProperty>
+              <Name>
+                <HardcodedValue>HighPerformanceNetworking</HardcodedValue>
+              </Name>
+            </ServiceItemProperty>
+            <ServiceItemProperty>
+              <Name>
+                <HardcodedValue>PhysicalServerOrdering</HardcodedValue>
+              </Name>
+            </ServiceItemProperty>
+            <ServiceItemProperty>
+              <Name>
+                <HardcodedValue>VpxHaMode</HardcodedValue>
+              </Name>
+            </ServiceItemProperty>
+            <ServiceItemProperty>
+              <Name>
+                <HardcodedValue>VsgHaMode</HardcodedValue>
+              </Name>
+            </ServiceItemProperty>
+            <ServiceItemProperty>
+              <Name>
+                <HardcodedValue>HighAvailabilityServices</HardcodedValue>
+              </Name>
+            </ServiceItemProperty>
+            <ServiceItemProperty>
+              <Name>
+                <HardcodedValue>OptionalCustomerMessage</HardcodedValue>
+              </Name>
+            </ServiceItemProperty>
+            <ServiceItemProperty>
+              <Name>
+                <HardcodedValue>ESXiProvisioning</HardcodedValue>
+              </Name>
+            </ServiceItemProperty>
+            <ServiceItemProperty>
+              <Name>
+                <HardcodedValue>CsrHaMode</HardcodedValue>
+              </Name>
+            </ServiceItemProperty>
+            <ServiceItemProperty>
+              <Name>
+                <HardcodedValue>AdvancedNetworkServices</HardcodedValue>
+              </Name>
+            </ServiceItemProperty>
+            <ServiceItemProperty>
+              <Name>
+                <HardcodedValue>LoadbalancingServicesVPX</HardcodedValue>
+              </Name>
+            </ServiceItemProperty>
+            <ServiceItemProperty>
+              <Name>
+                <HardcodedValue>Name</HardcodedValue>
+              </Name>
+            </ServiceItemProperty>
+          </Properties>
+          <SearchCriteria>
+            <ServiceItemSearchCriteria>
+              <Name>
+                <HardcodedValue>OrganizationName</HardcodedValue>
+              </Name>
+              <Value xsi:type="SubstitutableString">
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Target.Cloud.Service.General.Tenant.Organization</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResolvedTarget</PropertyName>
+                      </Link>
+                      <Link xsi:type="ObjectReferenceLink">
+                        <ObjectLink>
+                          <Id>a91ae90b-8874-4a26-819d-f7db488d2dcb</Id>
+                          <ObjectType>PropertyExtension</ObjectType>
+                        </ObjectLink>
+                      </Link>
+                    </LinkChain>
+                    <ObjectType>ProcessInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </Value>
+              <Comparison>Equal</Comparison>
+            </ServiceItemSearchCriteria>
+          </SearchCriteria>
+          <Subscriber>
+            <HardcodedValue />
+          </Subscriber>
+          <SubscriberOuName>
+            <HardcodedValue />
+          </SubscriberOuName>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ConditionBranchNode">
+        <Id>3b491e2d-5269-4bc9-bbc5-c8184d7b75b0</Id>
+        <DisplayName>If ANS is selected for ORG?</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>cb0bde81-ef56-40c1-a67e-4878473acc9b</Id>
+            <DisplayName>Find CSR Edge router name</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>aafd9881-16bf-4091-ad7a-05a7a2a986e3</Id>
+                <ActivityNodeId>e7c609f8-fcfe-406d-8fea-e88fc29968ba</ActivityNodeId>
+                <CompletedId>fdf8fe4d-6077-4536-a635-9f5b4e31f99f</CompletedId>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="FindServiceItemsActivityConfiguration" xml:space="preserve">
+              <Id>e7c609f8-fcfe-406d-8fea-e88fc29968ba</Id>
+              <DisplayName>Find CSR Edge router name</DisplayName>
+              <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                <SingleTargetReference>
+                  <FormattedCode />
+                  <HardcodedValue>
+                    <Id>b3216113-bb0f-4cb3-b7c2-93b9074ef87b</Id>
+                    <ObjectType>Target</ObjectType>
+                  </HardcodedValue>
+                </SingleTargetReference>
+              </TargetLoadBalancer>
+              <InheritTarget>false</InheritTarget>
+              <ContainingProcessId>6d25deb5-2f72-40ec-b767-bdabe50f7ee6</ContainingProcessId>
+              <RetryTimePeriod>
+                <DisplayUnits>Minutes</DisplayUnits>
+                <Period>
+                  <FormattedCode>{0}</FormattedCode>
+                  <References>
+                    <VariableReference xsi:type="PropertyReference">
+                      <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Time Period (minutes)</DisplayPath>
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>DefaultRetryMinutes</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                      <ObjectType>Adapter</ObjectType>
+                    </VariableReference>
+                  </References>
+                </Period>
+              </RetryTimePeriod>
+              <RetryFrequency>
+                <DisplayUnits>Seconds</DisplayUnits>
+                <Period>
+                  <FormattedCode>{0}</FormattedCode>
+                  <References>
+                    <VariableReference xsi:type="PropertyReference">
+                      <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Frequency (seconds)</DisplayPath>
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>DefaultRetryFrequency</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                      <ObjectType>Adapter</ObjectType>
+                    </VariableReference>
+                  </References>
+                </Period>
+              </RetryFrequency>
+              <Timeout>
+                <DisplayUnits>Seconds</DisplayUnits>
+                <Period>
+                  <HardcodedValue>100</HardcodedValue>
+                </Period>
+              </Timeout>
+              <ItemType>
+                <HardcodedValue>CiscoCSR</HardcodedValue>
+              </ItemType>
+              <ItemName>
+                <FormattedCode />
+              </ItemName>
+              <BrowseServiceItemName>CiscoCSR</BrowseServiceItemName>
+              <Properties>
+                <ServiceItemProperty>
+                  <Name>
+                    <HardcodedValue>EdgerouterName</HardcodedValue>
+                  </Name>
+                </ServiceItemProperty>
+              </Properties>
+              <SearchCriteria>
+                <ServiceItemSearchCriteria>
+                  <Name>
+                    <HardcodedValue>OrganizationName</HardcodedValue>
+                  </Name>
+                  <Value xsi:type="SubstitutableString">
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Target.Cloud.Service.General.Tenant.Organization</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="ObjectReferenceLink">
+                            <ObjectLink>
+                              <Id>a91ae90b-8874-4a26-819d-f7db488d2dcb</Id>
+                              <ObjectType>PropertyExtension</ObjectType>
+                            </ObjectLink>
+                          </Link>
+                        </LinkChain>
+                        <ObjectType>ProcessInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </Value>
+                  <Comparison>Equal</Comparison>
+                </ServiceItemSearchCriteria>
+              </SearchCriteria>
+              <Subscriber>
+                <HardcodedValue />
+              </Subscriber>
+              <SubscriberOuName>
+                <HardcodedValue />
+              </SubscriberOuName>
+            </Configuration>
+          </ActivityNode>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>cf8f271a-19f1-438b-9cd3-64668465ed06</Id>
+            <DisplayName>If CSR found?</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>a6b9b63f-11c1-40e5-88b0-091e8c332509</Id>
+                <DisplayName>Find Internet SI in IPAddress SI</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>c3ab9a7b-7a54-41cc-8a15-b13b60013d17</Id>
+                    <ActivityNodeId>62ba8841-a436-472e-8f90-3299bd2acfec</ActivityNodeId>
+                    <CompletedId>93d04683-1827-40ff-b45c-e9b182ac17db</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="FindServiceItemsActivityConfiguration" xml:space="preserve">
+                  <Id>62ba8841-a436-472e-8f90-3299bd2acfec</Id>
+                  <DisplayName>Find Internet SI in IPAddress SI</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                    <SingleTargetReference>
+                      <FormattedCode />
+                      <HardcodedValue>
+                        <Id>b3216113-bb0f-4cb3-b7c2-93b9074ef87b</Id>
+                        <ObjectType>Target</ObjectType>
+                      </HardcodedValue>
+                    </SingleTargetReference>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>6d25deb5-2f72-40ec-b767-bdabe50f7ee6</ContainingProcessId>
+                  <RetryTimePeriod>
+                    <DisplayUnits>Minutes</DisplayUnits>
+                    <Period>
+                      <FormattedCode>{0}</FormattedCode>
+                      <References>
+                        <VariableReference xsi:type="PropertyReference">
+                          <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Time Period (minutes)</DisplayPath>
+                          <LinkChain>
+                            <Link xsi:type="PropertyNameLink">
+                              <PropertyName>DefaultRetryMinutes</PropertyName>
+                            </Link>
+                          </LinkChain>
+                          <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                          <ObjectType>Adapter</ObjectType>
+                        </VariableReference>
+                      </References>
+                    </Period>
+                  </RetryTimePeriod>
+                  <RetryFrequency>
+                    <DisplayUnits>Seconds</DisplayUnits>
+                    <Period>
+                      <FormattedCode>{0}</FormattedCode>
+                      <References>
+                        <VariableReference xsi:type="PropertyReference">
+                          <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Frequency (seconds)</DisplayPath>
+                          <LinkChain>
+                            <Link xsi:type="PropertyNameLink">
+                              <PropertyName>DefaultRetryFrequency</PropertyName>
+                            </Link>
+                          </LinkChain>
+                          <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                          <ObjectType>Adapter</ObjectType>
+                        </VariableReference>
+                      </References>
+                    </Period>
+                  </RetryFrequency>
+                  <Timeout>
+                    <DisplayUnits>Seconds</DisplayUnits>
+                    <Period>
+                      <HardcodedValue>100</HardcodedValue>
+                    </Period>
+                  </Timeout>
+                  <ItemType>
+                    <HardcodedValue>IPAddress</HardcodedValue>
+                  </ItemType>
+                  <ItemName>
+                    <FormattedCode />
+                  </ItemName>
+                  <BrowseServiceItemName>IPAddress</BrowseServiceItemName>
+                  <Properties>
+                    <ServiceItemProperty>
+                      <Name>
+                        <HardcodedValue>Name</HardcodedValue>
+                      </Name>
+                    </ServiceItemProperty>
+                    <ServiceItemProperty>
+                      <Name>
+                        <HardcodedValue>IPAddress</HardcodedValue>
+                      </Name>
+                    </ServiceItemProperty>
+                    <ServiceItemProperty>
+                      <Name>
+                        <HardcodedValue>UsedByMachine</HardcodedValue>
+                      </Name>
+                    </ServiceItemProperty>
+                    <ServiceItemProperty>
+                      <Name>
+                        <HardcodedValue>Usage</HardcodedValue>
+                      </Name>
+                    </ServiceItemProperty>
+                    <ServiceItemProperty>
+                      <Name>
+                        <HardcodedValue>VLAN</HardcodedValue>
+                      </Name>
+                    </ServiceItemProperty>
+                  </Properties>
+                  <SearchCriteria>
+                    <ServiceItemSearchCriteria>
+                      <Name>
+                        <HardcodedValue>UsedByMachine</HardcodedValue>
+                      </Name>
+                      <Value xsi:type="SubstitutableString">
+                        <FormattedCode>Internet_{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.Find CSR Edge router name.Service Items.First Row.EdgerouterName</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResultsTable</PropertyName>
+                              </Link>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>FirstRow</PropertyName>
+                              </Link>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>EdgerouterName</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>e7c609f8-fcfe-406d-8fea-e88fc29968ba</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </Value>
+                      <Comparison>Equal</Comparison>
+                    </ServiceItemSearchCriteria>
+                  </SearchCriteria>
+                  <Subscriber>
+                    <HardcodedValue />
+                  </Subscriber>
+                  <SubscriberOuName>
+                    <HardcodedValue />
+                  </SubscriberOuName>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="ConditionBranchNode">
+                <Id>ec84b988-78ac-42e2-a9b2-1f970ab0101d</Id>
+                <DisplayName>If Internet SI found?</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="ExecuteActivityNode">
+                    <Id>5836a9f9-1f8a-4808-b33a-62f51808be6d</Id>
+                    <DisplayName>Delete Internet SI from IPAddress SI table</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                        <Id>79a1f242-c705-42d2-a48a-a772716429dd</Id>
+                        <ActivityNodeId>f44cdc55-d45d-468f-a4da-4780f08cb99f</ActivityNodeId>
+                        <CompletedId>6b309a1f-cde8-4d0b-b09c-e1ecef341f1a</CompletedId>
+                      </ActivityNode>
+                    </Children>
+                    <Configuration xsi:type="DeleteServiceItemsFromTableActivityConfiguration" xml:space="preserve">
+                      <Id>f44cdc55-d45d-468f-a4da-4780f08cb99f</Id>
+                      <DisplayName>Delete Internet SI from IPAddress SI table</DisplayName>
+                      <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                        <SingleTargetReference>
+                          <FormattedCode />
+                          <HardcodedValue>
+                            <Id>b3216113-bb0f-4cb3-b7c2-93b9074ef87b</Id>
+                            <ObjectType>Target</ObjectType>
+                          </HardcodedValue>
+                        </SingleTargetReference>
+                      </TargetLoadBalancer>
+                      <InheritTarget>false</InheritTarget>
+                      <ContainingProcessId>6d25deb5-2f72-40ec-b767-bdabe50f7ee6</ContainingProcessId>
+                      <RetryTimePeriod>
+                        <DisplayUnits>Minutes</DisplayUnits>
+                        <Period>
+                          <FormattedCode>{0}</FormattedCode>
+                          <References>
+                            <VariableReference xsi:type="PropertyReference">
+                              <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Time Period (minutes)</DisplayPath>
+                              <LinkChain>
+                                <Link xsi:type="PropertyNameLink">
+                                  <PropertyName>DefaultRetryMinutes</PropertyName>
+                                </Link>
+                              </LinkChain>
+                              <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                              <ObjectType>Adapter</ObjectType>
+                            </VariableReference>
+                          </References>
+                        </Period>
+                      </RetryTimePeriod>
+                      <RetryFrequency>
+                        <DisplayUnits>Seconds</DisplayUnits>
+                        <Period>
+                          <FormattedCode>{0}</FormattedCode>
+                          <References>
+                            <VariableReference xsi:type="PropertyReference">
+                              <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Frequency (seconds)</DisplayPath>
+                              <LinkChain>
+                                <Link xsi:type="PropertyNameLink">
+                                  <PropertyName>DefaultRetryFrequency</PropertyName>
+                                </Link>
+                              </LinkChain>
+                              <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                              <ObjectType>Adapter</ObjectType>
+                            </VariableReference>
+                          </References>
+                        </Period>
+                      </RetryFrequency>
+                      <Timeout>
+                        <DisplayUnits>Seconds</DisplayUnits>
+                        <Period>
+                          <HardcodedValue>100</HardcodedValue>
+                        </Period>
+                      </Timeout>
+                      <ChannelId>
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Global Variables.Cloud Service Item Update Channel ID</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>c070b5b6-0120-48f1-8b36-2319f9348a4a</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </ChannelId>
+                      <ItemType>
+                        <HardcodedValue>IPAddress</HardcodedValue>
+                      </ItemType>
+                      <Table>
+                        <DisplayPath>Workflow.Find Internet SI in IPAddress SI.Service Items</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResultsTable</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>62ba8841-a436-472e-8f90-3299bd2acfec</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </Table>
+                    </Configuration>
+                  </ActivityNode>
+                </Children>
+                <Condition>
+                  <Id>ce0425f0-83fe-45d4-83ce-38fa9210778d</Id>
+                  <Conditions>
+                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                      <Id>4ea11ed9-15a5-4998-b89c-76e1c6ecc86c</Id>
+                      <Expression xsi:type="SubstitutableNumber">
+                        <HardcodedValue>0</HardcodedValue>
+                      </Expression>
+                      <Comparison>GreaterThan</Comparison>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.Find Internet SI in IPAddress SI.Service Items.Row Count</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResultsTable</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>RowCount</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>62ba8841-a436-472e-8f90-3299bd2acfec</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </ConditionDefinition>
+                  </Conditions>
+                </Condition>
+              </ActivityNode>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>49ab1749-52fa-4e51-960b-65724f45d6f1</Id>
+                <DisplayName>Find Enterprise SI in IPAddress SI</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>8834851e-cfd6-4dce-b9a2-a72d2d41bd86</Id>
+                    <ActivityNodeId>8bd63d08-8ce9-4e69-b8d6-7d4a496d52c8</ActivityNodeId>
+                    <CompletedId>09fbfcc3-153b-4e14-95b2-50cc0d9fa0ed</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="FindServiceItemsActivityConfiguration" xml:space="preserve">
+                  <Id>8bd63d08-8ce9-4e69-b8d6-7d4a496d52c8</Id>
+                  <DisplayName>Find Enterprise SI in IPAddress SI</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                    <SingleTargetReference>
+                      <FormattedCode />
+                      <HardcodedValue>
+                        <Id>b3216113-bb0f-4cb3-b7c2-93b9074ef87b</Id>
+                        <ObjectType>Target</ObjectType>
+                      </HardcodedValue>
+                    </SingleTargetReference>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>6d25deb5-2f72-40ec-b767-bdabe50f7ee6</ContainingProcessId>
+                  <RetryTimePeriod>
+                    <DisplayUnits>Minutes</DisplayUnits>
+                    <Period>
+                      <FormattedCode>{0}</FormattedCode>
+                      <References>
+                        <VariableReference xsi:type="PropertyReference">
+                          <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Time Period (minutes)</DisplayPath>
+                          <LinkChain>
+                            <Link xsi:type="PropertyNameLink">
+                              <PropertyName>DefaultRetryMinutes</PropertyName>
+                            </Link>
+                          </LinkChain>
+                          <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                          <ObjectType>Adapter</ObjectType>
+                        </VariableReference>
+                      </References>
+                    </Period>
+                  </RetryTimePeriod>
+                  <RetryFrequency>
+                    <DisplayUnits>Seconds</DisplayUnits>
+                    <Period>
+                      <FormattedCode>{0}</FormattedCode>
+                      <References>
+                        <VariableReference xsi:type="PropertyReference">
+                          <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Frequency (seconds)</DisplayPath>
+                          <LinkChain>
+                            <Link xsi:type="PropertyNameLink">
+                              <PropertyName>DefaultRetryFrequency</PropertyName>
+                            </Link>
+                          </LinkChain>
+                          <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                          <ObjectType>Adapter</ObjectType>
+                        </VariableReference>
+                      </References>
+                    </Period>
+                  </RetryFrequency>
+                  <Timeout>
+                    <DisplayUnits>Seconds</DisplayUnits>
+                    <Period>
+                      <HardcodedValue>100</HardcodedValue>
+                    </Period>
+                  </Timeout>
+                  <ItemType>
+                    <HardcodedValue>IPAddress</HardcodedValue>
+                  </ItemType>
+                  <ItemName>
+                    <FormattedCode />
+                  </ItemName>
+                  <BrowseServiceItemName>IPAddress</BrowseServiceItemName>
+                  <Properties>
+                    <ServiceItemProperty>
+                      <Name>
+                        <HardcodedValue>VLAN</HardcodedValue>
+                      </Name>
+                    </ServiceItemProperty>
+                    <ServiceItemProperty>
+                      <Name>
+                        <HardcodedValue>UsedByMachine</HardcodedValue>
+                      </Name>
+                    </ServiceItemProperty>
+                    <ServiceItemProperty>
+                      <Name>
+                        <HardcodedValue>Usage</HardcodedValue>
+                      </Name>
+                    </ServiceItemProperty>
+                    <ServiceItemProperty>
+                      <Name>
+                        <HardcodedValue>Name</HardcodedValue>
+                      </Name>
+                    </ServiceItemProperty>
+                    <ServiceItemProperty>
+                      <Name>
+                        <HardcodedValue>IPAddress</HardcodedValue>
+                      </Name>
+                    </ServiceItemProperty>
+                  </Properties>
+                  <SearchCriteria>
+                    <ServiceItemSearchCriteria>
+                      <Name>
+                        <HardcodedValue>UsedByMachine</HardcodedValue>
+                      </Name>
+                      <Value xsi:type="SubstitutableString">
+                        <FormattedCode>Enterprise_{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.Find CSR Edge router name.Service Items.First Row.EdgerouterName</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResultsTable</PropertyName>
+                              </Link>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>FirstRow</PropertyName>
+                              </Link>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>EdgerouterName</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>e7c609f8-fcfe-406d-8fea-e88fc29968ba</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </Value>
+                      <Comparison>Equal</Comparison>
+                    </ServiceItemSearchCriteria>
+                  </SearchCriteria>
+                  <Subscriber>
+                    <HardcodedValue />
+                  </Subscriber>
+                  <SubscriberOuName>
+                    <HardcodedValue />
+                  </SubscriberOuName>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="ConditionBranchNode">
+                <Id>1ba52543-88fa-463c-b636-6804999c989d</Id>
+                <DisplayName>If Enterprise SI found?</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="ExecuteActivityNode">
+                    <Id>5261af9a-f51e-4318-b051-98206315f401</Id>
+                    <DisplayName>Delete Enterprise SI from IPAddress SI table</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                        <Id>6c6f9e09-b4f7-4bb7-b5d8-6cebb48748f0</Id>
+                        <ActivityNodeId>be1b8750-63cf-45fa-b666-b222baf93ea9</ActivityNodeId>
+                        <CompletedId>2a998e0d-729d-48f1-a66a-20c0b960641e</CompletedId>
+                      </ActivityNode>
+                    </Children>
+                    <Configuration xsi:type="DeleteServiceItemsFromTableActivityConfiguration" xml:space="preserve">
+                      <Id>be1b8750-63cf-45fa-b666-b222baf93ea9</Id>
+                      <DisplayName>Delete Enterprise SI from IPAddress SI table</DisplayName>
+                      <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                        <SingleTargetReference>
+                          <FormattedCode />
+                          <HardcodedValue>
+                            <Id>b3216113-bb0f-4cb3-b7c2-93b9074ef87b</Id>
+                            <ObjectType>Target</ObjectType>
+                          </HardcodedValue>
+                        </SingleTargetReference>
+                      </TargetLoadBalancer>
+                      <InheritTarget>false</InheritTarget>
+                      <ContainingProcessId>6d25deb5-2f72-40ec-b767-bdabe50f7ee6</ContainingProcessId>
+                      <RetryTimePeriod>
+                        <DisplayUnits>Minutes</DisplayUnits>
+                        <Period>
+                          <FormattedCode>{0}</FormattedCode>
+                          <References>
+                            <VariableReference xsi:type="PropertyReference">
+                              <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Time Period (minutes)</DisplayPath>
+                              <LinkChain>
+                                <Link xsi:type="PropertyNameLink">
+                                  <PropertyName>DefaultRetryMinutes</PropertyName>
+                                </Link>
+                              </LinkChain>
+                              <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                              <ObjectType>Adapter</ObjectType>
+                            </VariableReference>
+                          </References>
+                        </Period>
+                      </RetryTimePeriod>
+                      <RetryFrequency>
+                        <DisplayUnits>Seconds</DisplayUnits>
+                        <Period>
+                          <FormattedCode>{0}</FormattedCode>
+                          <References>
+                            <VariableReference xsi:type="PropertyReference">
+                              <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Frequency (seconds)</DisplayPath>
+                              <LinkChain>
+                                <Link xsi:type="PropertyNameLink">
+                                  <PropertyName>DefaultRetryFrequency</PropertyName>
+                                </Link>
+                              </LinkChain>
+                              <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                              <ObjectType>Adapter</ObjectType>
+                            </VariableReference>
+                          </References>
+                        </Period>
+                      </RetryFrequency>
+                      <Timeout>
+                        <DisplayUnits>Seconds</DisplayUnits>
+                        <Period>
+                          <HardcodedValue>100</HardcodedValue>
+                        </Period>
+                      </Timeout>
+                      <ChannelId>
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Global Variables.Cloud Service Item Update Channel ID</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>c070b5b6-0120-48f1-8b36-2319f9348a4a</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </ChannelId>
+                      <ItemType>
+                        <HardcodedValue>IPAddress</HardcodedValue>
+                      </ItemType>
+                      <Table>
+                        <DisplayPath>Workflow.Find Enterprise SI in IPAddress SI.Service Items</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResultsTable</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>8bd63d08-8ce9-4e69-b8d6-7d4a496d52c8</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </Table>
+                    </Configuration>
+                  </ActivityNode>
+                </Children>
+                <Condition>
+                  <Id>25e3a6d9-e630-46bf-938d-a128ad25b43f</Id>
+                  <Conditions>
+                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                      <Id>6af1c01e-f992-4d41-a212-c9f42f26c05e</Id>
+                      <Expression xsi:type="SubstitutableNumber">
+                        <HardcodedValue>0</HardcodedValue>
+                      </Expression>
+                      <Comparison>GreaterThan</Comparison>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.Find Enterprise SI in IPAddress SI.Service Items.Row Count</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResultsTable</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>RowCount</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>8bd63d08-8ce9-4e69-b8d6-7d4a496d52c8</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </ConditionDefinition>
+                  </Conditions>
+                </Condition>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>998d64ed-7644-46b9-b603-a21f59301561</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>eef2f0ba-ac04-4d18-974e-e0484e6ade43</Id>
+                  <Expression xsi:type="SubstitutableString">
+                    <HardcodedValue />
+                  </Expression>
+                  <Comparison>NotEquals</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Find CSR Edge router name.Service Items.First Row.EdgerouterName</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResultsTable</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>FirstRow</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>EdgerouterName</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>e7c609f8-fcfe-406d-8fea-e88fc29968ba</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>161b6052-dc3f-4479-ae5e-620e03bdbf36</Id>
+                  <Expression xsi:type="SubstitutableString">
+                    <HardcodedValue>null</HardcodedValue>
+                  </Expression>
+                  <Comparison>NotEquals</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Find CSR Edge router name.Service Items.First Row.EdgerouterName</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResultsTable</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>FirstRow</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>EdgerouterName</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>e7c609f8-fcfe-406d-8fea-e88fc29968ba</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+        </Children>
+        <Condition>
+          <Id>ab164b4e-1e65-4649-af52-51faf12c0b61</Id>
+          <Conditions>
+            <ConditionDefinition xsi:type="VariableConditionDefinition">
+              <Id>3f98ec51-10d6-42a9-b4d2-5d8c05a3900d</Id>
+              <Expression xsi:type="SubstitutableString">
+                <HardcodedValue>Yes</HardcodedValue>
+              </Expression>
+              <Comparison>Equals</Comparison>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Find Organization Service Options.Service Items.First Row.AdvancedNetworkServices</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>ResultsTable</PropertyName>
+                  </Link>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>FirstRow</PropertyName>
+                  </Link>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>AdvancedNetworkServices</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>7410225b-9e7d-4f5b-8450-7a70452d97ec</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </VariableReference>
+            </ConditionDefinition>
+          </Conditions>
+        </Condition>
+      </ActivityNode>
+      <ActivityNode xsi:type="StartProcessNode">
+        <Id>f6d4ce4f-4711-4ca9-8594-065494a2f800</Id>
+        <DisplayName>Decommmision Organization Cloud Folders</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>9d621e70-9231-4cf7-a127-fa60161619f7</Id>
+            <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+            <DisplayName>If Execution Fails</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>9c3d165f-0f3c-42a8-91d2-1286e8baec08</Id>
+                <DisplayName>Set Remediation Settings</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>98c38315-9572-4e45-9d9b-8916cb6b50b3</Id>
+                    <ActivityNodeId>426770c2-093d-4c2c-b6da-8890cbc35d36</ActivityNodeId>
+                    <CompletedId>a72ba577-2656-4e7c-ae56-757c712bcac2</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+                  <Id>426770c2-093d-4c2c-b6da-8890cbc35d36</Id>
+                  <DisplayName>Set Remediation Settings</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>6d25deb5-2f72-40ec-b767-bdabe50f7ee6</ContainingProcessId>
+                  <Assignments>
+                    <PropertyReferenceValuePair>
+                      <VariableToSet>
+                        <DisplayPath>Process.Target.Cloud.Service.General.ErrorCode</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="ObjectReferenceLink">
+                            <ObjectLink>
+                              <Id>7ad8347e-4936-4962-ab6d-3ec987d2737a</Id>
+                              <ObjectType>PropertyExtension</ObjectType>
+                            </ObjectLink>
+                          </Link>
+                        </LinkChain>
+                        <ObjectType>ProcessInstance</ObjectType>
+                      </VariableToSet>
+                      <NewValue xsi:type="SubstitutableNumber">
+                        <HardcodedValue>5105</HardcodedValue>
+                      </NewValue>
+                    </PropertyReferenceValuePair>
+                    <PropertyReferenceValuePair>
+                      <VariableToSet>
+                        <DisplayPath>Process.Target.Cloud.Service.General.ErrorRemediation.UserSet.StartPoint.Retry</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="ObjectReferenceLink">
+                            <ObjectLink>
+                              <Id>08ae6527-2766-4769-ac49-4cd7fc45040c</Id>
+                              <ObjectType>PropertyExtension</ObjectType>
+                            </ObjectLink>
+                          </Link>
+                        </LinkChain>
+                        <ObjectType>ProcessInstance</ObjectType>
+                      </VariableToSet>
+                      <NewValue xsi:type="SubstitutableString">
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.Decommmision Organization Folders / SIs.Name</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>DisplayName</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>fcceb76d-014b-4591-8c4c-d8706dbd91a9</ObjectId>
+                            <ObjectType>WorkflowNode</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </NewValue>
+                    </PropertyReferenceValuePair>
+                  </Assignments>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="CompletedNode">
+                <Id>744067d7-a48a-4f45-8203-7415c41635c7</Id>
+                <Notes>Fail the entire process</Notes>
+                <CompletedType>FailedNotCompleted</CompletedType>
+                <ResultMessage>
+                  <FormattedCode>{0}</FormattedCode>
+                  <References>
+                    <VariableReference xsi:type="PropertyReference">
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>ErrorInformation</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectId>f6d4ce4f-4711-4ca9-8594-065494a2f800</ObjectId>
+                      <ObjectType>ProcessInstance</ObjectType>
+                    </VariableReference>
+                  </References>
+                </ResultMessage>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>9ceb0a4b-c05c-4182-9773-8e6ecda9bfdf</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>cfdf6d78-f86f-4eb2-bc6c-d259c8911786</Id>
+                  <Expression xsi:type="SubstitutableBoolean">
+                    <HardcodedValue>true</HardcodedValue>
+                  </Expression>
+                  <Comparison>Equals</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>InstanceFailed</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>f6d4ce4f-4711-4ca9-8594-065494a2f800</ObjectId>
+                    <ObjectType>ProcessInstance</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+        </Children>
+        <ProcessId>cb550c49-71b8-41b8-97b4-3d3df18f6158</ProcessId>
+        <InputVariableTable>
+          <VariableAssignmentsAsArray />
+        </InputVariableTable>
+        <Asynchronous>false</Asynchronous>
+        <InheritTarget>true</InheritTarget>
+        <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+        <InheritPriorityClass>true</InheritPriorityClass>
+        <RuntimeUserId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </RuntimeUserId>
+        <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+        <StartPointId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </StartPointId>
+        <StartPointName>
+          <FormattedCode />
+        </StartPointName>
+      </ActivityNode>
+      <ActivityNode xsi:type="StartPointNode">
+        <Id>479ef2dc-faa7-411f-a110-5f831f8f0865</Id>
+        <DisplayName>Decommission Remianing Network Components</DisplayName>
+      </ActivityNode>
+      <ActivityNode xsi:type="ConditionBranchNode">
+        <Id>0c26f232-dbd6-48b3-b31b-effad48f07ae</Id>
+        <DisplayName>Condition Branch</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="StartProcessNode">
+            <Id>ab44e9f8-edbc-42a8-adae-cd5b88bf938f</Id>
+            <DisplayName>Decommission Organization Network Components</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ConditionBranchNode">
+                <Id>5badd60c-98a7-4218-a093-c14c066078f9</Id>
+                <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                <DisplayName>If Execution Fails</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="ExecuteActivityNode">
+                    <Id>0fc74a3e-cddb-4cb7-8e66-fa3d84e4201f</Id>
+                    <DisplayName>Set Remediation Settings</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                        <Id>eef6ca31-a716-4cff-8a04-c3259850519b</Id>
+                        <ActivityNodeId>2bfdac96-e899-46de-9d31-be2bf8cc9c2d</ActivityNodeId>
+                        <CompletedId>5320b1f6-f846-406a-ac9a-9ae48eaf1bab</CompletedId>
+                      </ActivityNode>
+                    </Children>
+                    <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+                      <Id>2bfdac96-e899-46de-9d31-be2bf8cc9c2d</Id>
+                      <DisplayName>Set Remediation Settings</DisplayName>
+                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                        <SingleTargetId>
+                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                        </SingleTargetId>
+                      </TargetLoadBalancer>
+                      <InheritTarget>false</InheritTarget>
+                      <ContainingProcessId>6d25deb5-2f72-40ec-b767-bdabe50f7ee6</ContainingProcessId>
+                      <Assignments>
+                        <PropertyReferenceValuePair>
+                          <VariableToSet>
+                            <DisplayPath>Process.Target.Cloud.Service.General.ErrorCode</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResolvedTarget</PropertyName>
+                              </Link>
+                              <Link xsi:type="ObjectReferenceLink">
+                                <ObjectLink>
+                                  <Id>7ad8347e-4936-4962-ab6d-3ec987d2737a</Id>
+                                  <ObjectType>PropertyExtension</ObjectType>
+                                </ObjectLink>
+                              </Link>
+                            </LinkChain>
+                            <ObjectType>ProcessInstance</ObjectType>
+                          </VariableToSet>
+                          <NewValue xsi:type="SubstitutableNumber">
+                            <HardcodedValue>5106</HardcodedValue>
+                          </NewValue>
+                        </PropertyReferenceValuePair>
+                        <PropertyReferenceValuePair>
+                          <VariableToSet>
+                            <DisplayPath>Process.Target.Cloud.Service.General.ErrorRemediation.UserSet.StartPoint.Retry</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResolvedTarget</PropertyName>
+                              </Link>
+                              <Link xsi:type="ObjectReferenceLink">
+                                <ObjectLink>
+                                  <Id>08ae6527-2766-4769-ac49-4cd7fc45040c</Id>
+                                  <ObjectType>PropertyExtension</ObjectType>
+                                </ObjectLink>
+                              </Link>
+                            </LinkChain>
+                            <ObjectType>ProcessInstance</ObjectType>
+                          </VariableToSet>
+                          <NewValue xsi:type="SubstitutableString">
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.Decommission Remianing Network Components.Name</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>DisplayName</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>479ef2dc-faa7-411f-a110-5f831f8f0865</ObjectId>
+                                <ObjectType>WorkflowNode</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </NewValue>
+                        </PropertyReferenceValuePair>
+                      </Assignments>
+                    </Configuration>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="CompletedNode">
+                    <Id>cc90ddfa-8c51-47d6-98a4-184f1a0da80d</Id>
+                    <Notes>Fail the entire process</Notes>
+                    <CompletedType>FailedNotCompleted</CompletedType>
+                    <ResultMessage>
+                      <FormattedCode>{0}</FormattedCode>
+                      <References>
+                        <VariableReference xsi:type="PropertyReference">
+                          <LinkChain>
+                            <Link xsi:type="PropertyNameLink">
+                              <PropertyName>ErrorInformation</PropertyName>
+                            </Link>
+                          </LinkChain>
+                          <ObjectId>ab44e9f8-edbc-42a8-adae-cd5b88bf938f</ObjectId>
+                          <ObjectType>ProcessInstance</ObjectType>
+                        </VariableReference>
+                      </References>
+                    </ResultMessage>
+                  </ActivityNode>
+                </Children>
+                <Condition>
+                  <Id>8108c2f0-0dfa-49b9-80fb-35ed90b1da7a</Id>
+                  <Conditions>
+                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                      <Id>9254980b-9b64-4fdf-b8a0-3a5fb86aa8c6</Id>
+                      <Expression xsi:type="SubstitutableBoolean">
+                        <HardcodedValue>true</HardcodedValue>
+                      </Expression>
+                      <Comparison>Equals</Comparison>
+                      <VariableReference xsi:type="PropertyReference">
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>InstanceFailed</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>ab44e9f8-edbc-42a8-adae-cd5b88bf938f</ObjectId>
+                        <ObjectType>ProcessInstance</ObjectType>
+                      </VariableReference>
+                    </ConditionDefinition>
+                  </Conditions>
+                </Condition>
+              </ActivityNode>
+            </Children>
+            <ProcessId>8e49310a-a700-4331-a10d-50e648fe1711</ProcessId>
+            <InputVariableTable>
+              <VariableAssignmentsAsArray />
+            </InputVariableTable>
+            <Asynchronous>false</Asynchronous>
+            <InheritTarget>true</InheritTarget>
+            <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+            <InheritPriorityClass>true</InheritPriorityClass>
+            <RuntimeUserId>
+              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+            </RuntimeUserId>
+            <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+            <StartPointId>
+              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+            </StartPointId>
+            <StartPointName>
+              <FormattedCode />
+            </StartPointName>
+          </ActivityNode>
+        </Children>
+        <Condition>
+          <Id>ab164b4e-1e65-4649-af52-51faf12c0b61</Id>
+          <Conditions>
+            <ConditionDefinition xsi:type="VariableConditionDefinition">
+              <Id>3f98ec51-10d6-42a9-b4d2-5d8c05a3900d</Id>
+              <Expression xsi:type="SubstitutableString">
+                <HardcodedValue>Yes</HardcodedValue>
+              </Expression>
+              <Comparison>Equals</Comparison>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Find Organization Service Options.Service Items.First Row.AdvancedNetworkServices</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>ResultsTable</PropertyName>
+                  </Link>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>FirstRow</PropertyName>
+                  </Link>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>AdvancedNetworkServices</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>7410225b-9e7d-4f5b-8450-7a70452d97ec</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </VariableReference>
+            </ConditionDefinition>
+          </Conditions>
+        </Condition>
+      </ActivityNode>
+      <ActivityNode xsi:type="StartPointNode">
+        <Id>c0830c79-8eaf-4ad5-aa83-aea65101d0fc</Id>
+        <DisplayName>Service State</DisplayName>
+      </ActivityNode>
+      <ActivityNode xsi:type="SequenceNode">
+        <Id>3f65ec2c-808d-4a90-b84c-2463c890e549</Id>
+        <DisplayName>Service Item State</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>bfd95139-d5c6-4a48-9b39-1647a4649c8f</Id>
+            <DisplayName>Find Organization</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ConditionBranchNode">
+                <Id>0578b4be-d527-422e-aedb-d65363b23840</Id>
+                <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                <DisplayName>If Execution Fails</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="ExecuteActivityNode">
+                    <Id>3598e45a-45ce-458a-af67-690e87230aba</Id>
+                    <DisplayName>Set Remediation Settings</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                        <Id>28e820ea-a6ae-4110-9c30-ecad4a3dcfe2</Id>
+                        <ActivityNodeId>22cf3007-4a69-4b8e-bc47-02232c8d0832</ActivityNodeId>
+                        <CompletedId>a9e0b425-f8dc-4bd7-b88f-b09647f6e4a9</CompletedId>
+                      </ActivityNode>
+                    </Children>
+                    <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+                      <Id>22cf3007-4a69-4b8e-bc47-02232c8d0832</Id>
+                      <DisplayName>Set Remediation Settings</DisplayName>
+                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                        <SingleTargetId>
+                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                        </SingleTargetId>
+                      </TargetLoadBalancer>
+                      <InheritTarget>false</InheritTarget>
+                      <ContainingProcessId>6d25deb5-2f72-40ec-b767-bdabe50f7ee6</ContainingProcessId>
+                      <Assignments>
+                        <PropertyReferenceValuePair>
+                          <VariableToSet>
+                            <DisplayPath>Process.Target.Cloud.Service.General.ErrorCode</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResolvedTarget</PropertyName>
+                              </Link>
+                              <Link xsi:type="ObjectReferenceLink">
+                                <ObjectLink>
+                                  <Id>7ad8347e-4936-4962-ab6d-3ec987d2737a</Id>
+                                  <ObjectType>PropertyExtension</ObjectType>
+                                </ObjectLink>
+                              </Link>
+                            </LinkChain>
+                            <ObjectType>ProcessInstance</ObjectType>
+                          </VariableToSet>
+                          <NewValue xsi:type="SubstitutableNumber">
+                            <HardcodedValue>1012</HardcodedValue>
+                          </NewValue>
+                        </PropertyReferenceValuePair>
+                        <PropertyReferenceValuePair>
+                          <VariableToSet>
+                            <DisplayPath>Process.Target.Cloud.Service.General.ErrorRemediation.UserSet.StartPoint.Retry</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResolvedTarget</PropertyName>
+                              </Link>
+                              <Link xsi:type="ObjectReferenceLink">
+                                <ObjectLink>
+                                  <Id>08ae6527-2766-4769-ac49-4cd7fc45040c</Id>
+                                  <ObjectType>PropertyExtension</ObjectType>
+                                </ObjectLink>
+                              </Link>
+                            </LinkChain>
+                            <ObjectType>ProcessInstance</ObjectType>
+                          </VariableToSet>
+                          <NewValue xsi:type="SubstitutableString">
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.Service State.Name</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>DisplayName</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>c0830c79-8eaf-4ad5-aa83-aea65101d0fc</ObjectId>
+                                <ObjectType>WorkflowNode</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </NewValue>
+                        </PropertyReferenceValuePair>
+                      </Assignments>
+                    </Configuration>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="CompletedNode">
+                    <Id>2c6511e6-9603-46c9-9822-35b693d3d1ad</Id>
+                    <Notes>Fail the entire process</Notes>
+                    <CompletedType>FailedNotCompleted</CompletedType>
+                    <ResultMessage>
+                      <FormattedCode>{0}</FormattedCode>
+                      <References>
+                        <VariableReference xsi:type="PropertyReference">
+                          <LinkChain>
+                            <Link xsi:type="PropertyNameLink">
+                              <PropertyName>ErrorInformation</PropertyName>
+                            </Link>
+                          </LinkChain>
+                          <ObjectId>da9f2915-32b6-4988-a922-649c99f38731</ObjectId>
+                          <ObjectType>ActivityInstance</ObjectType>
+                        </VariableReference>
+                      </References>
+                    </ResultMessage>
+                  </ActivityNode>
+                </Children>
+                <Condition>
+                  <Id>7072dd0d-1fc7-432b-9e3e-9893f0e1373b</Id>
+                  <Conditions>
+                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                      <Id>465ef1d2-7ffa-4ea6-bb88-212fcb8bc795</Id>
+                      <Expression xsi:type="SubstitutableBoolean">
+                        <HardcodedValue>true</HardcodedValue>
+                      </Expression>
+                      <Comparison>Equals</Comparison>
+                      <VariableReference xsi:type="PropertyReference">
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>InstanceFailed</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>da9f2915-32b6-4988-a922-649c99f38731</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </ConditionDefinition>
+                  </Conditions>
+                </Condition>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="FindServiceItemsActivityConfiguration" xml:space="preserve">
+              <Id>da9f2915-32b6-4988-a922-649c99f38731</Id>
+              <DisplayName>Find Organization</DisplayName>
+              <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                <SingleTargetReference>
+                  <FormattedCode />
+                  <HardcodedValue>
+                    <Id>b3216113-bb0f-4cb3-b7c2-93b9074ef87b</Id>
+                    <ObjectType>Target</ObjectType>
+                  </HardcodedValue>
+                </SingleTargetReference>
+              </TargetLoadBalancer>
+              <InheritTarget>false</InheritTarget>
+              <ContainingProcessId>6d25deb5-2f72-40ec-b767-bdabe50f7ee6</ContainingProcessId>
+              <RetryTimePeriod>
+                <DisplayUnits>Minutes</DisplayUnits>
+                <Period>
+                  <FormattedCode>{0}</FormattedCode>
+                  <References>
+                    <VariableReference xsi:type="PropertyReference">
+                      <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Time Period (minutes)</DisplayPath>
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>DefaultRetryMinutes</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                      <ObjectType>Adapter</ObjectType>
+                    </VariableReference>
+                  </References>
+                </Period>
+              </RetryTimePeriod>
+              <RetryFrequency>
+                <DisplayUnits>Seconds</DisplayUnits>
+                <Period>
+                  <FormattedCode>{0}</FormattedCode>
+                  <References>
+                    <VariableReference xsi:type="PropertyReference">
+                      <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Frequency (seconds)</DisplayPath>
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>DefaultRetryFrequency</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                      <ObjectType>Adapter</ObjectType>
+                    </VariableReference>
+                  </References>
+                </Period>
+              </RetryFrequency>
+              <Timeout>
+                <DisplayUnits>Seconds</DisplayUnits>
+                <Period>
+                  <HardcodedValue>100</HardcodedValue>
+                </Period>
+              </Timeout>
+              <ItemType>
+                <HardcodedValue>CustomerOrganization</HardcodedValue>
+              </ItemType>
+              <ItemName>
+                <FormattedCode />
+              </ItemName>
+              <BrowseServiceItemName>CustomerOrganization</BrowseServiceItemName>
+              <Properties>
+                <ServiceItemProperty>
+                  <Name>
+                    <HardcodedValue>Name</HardcodedValue>
+                  </Name>
+                </ServiceItemProperty>
+              </Properties>
+              <SearchCriteria>
+                <ServiceItemSearchCriteria>
+                  <Name>
+                    <HardcodedValue>OrganizationName</HardcodedValue>
+                  </Name>
+                  <Value xsi:type="SubstitutableString">
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Target.Cloud.Service.General.Tenant.Organization</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="ObjectReferenceLink">
+                            <ObjectLink>
+                              <Id>a91ae90b-8874-4a26-819d-f7db488d2dcb</Id>
+                              <ObjectType>PropertyExtension</ObjectType>
+                            </ObjectLink>
+                          </Link>
+                        </LinkChain>
+                        <ObjectType>ProcessInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </Value>
+                  <Comparison>Equal</Comparison>
+                </ServiceItemSearchCriteria>
+              </SearchCriteria>
+              <Subscriber>
+                <HardcodedValue />
+              </Subscriber>
+              <SubscriberOuName>
+                <HardcodedValue />
+              </SubscriberOuName>
+            </Configuration>
+          </ActivityNode>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>c253a844-34c2-4782-a713-f28fa6fdcf95</Id>
+            <DisplayName>If Organization found</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>fb1cae55-3007-42d1-9533-b5dcfe4e94b4</Id>
+                <DisplayName>Update Service Item </DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="ConditionBranchNode">
+                    <Id>74c06139-8261-4fbc-a431-f2c0db3896e3</Id>
+                    <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                    <DisplayName>If Execution Fails</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ExecuteActivityNode">
+                        <Id>954f914d-6e3f-4099-a863-326ab41400b0</Id>
+                        <DisplayName>Set Remediation Settings</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                            <Id>5d1c1d29-c5ce-4643-bf90-6e2e467c8d47</Id>
+                            <ActivityNodeId>08cfb025-4715-407a-9578-5561ade81de9</ActivityNodeId>
+                            <CompletedId>e4de60f6-3d1d-498c-9431-8fd110269bb8</CompletedId>
+                          </ActivityNode>
+                        </Children>
+                        <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+                          <Id>08cfb025-4715-407a-9578-5561ade81de9</Id>
+                          <DisplayName>Set Remediation Settings</DisplayName>
+                          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                            <SingleTargetId>
+                              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                            </SingleTargetId>
+                          </TargetLoadBalancer>
+                          <InheritTarget>false</InheritTarget>
+                          <ContainingProcessId>6d25deb5-2f72-40ec-b767-bdabe50f7ee6</ContainingProcessId>
+                          <Assignments>
+                            <PropertyReferenceValuePair>
+                              <VariableToSet>
+                                <DisplayPath>Process.Target.Cloud.Service.General.ErrorCode</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>ResolvedTarget</PropertyName>
+                                  </Link>
+                                  <Link xsi:type="ObjectReferenceLink">
+                                    <ObjectLink>
+                                      <Id>7ad8347e-4936-4962-ab6d-3ec987d2737a</Id>
+                                      <ObjectType>PropertyExtension</ObjectType>
+                                    </ObjectLink>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectType>ProcessInstance</ObjectType>
+                              </VariableToSet>
+                              <NewValue xsi:type="SubstitutableNumber">
+                                <HardcodedValue>1014</HardcodedValue>
+                              </NewValue>
+                            </PropertyReferenceValuePair>
+                            <PropertyReferenceValuePair>
+                              <VariableToSet>
+                                <DisplayPath>Process.Target.Cloud.Service.General.ErrorRemediation.UserSet.StartPoint.Retry</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>ResolvedTarget</PropertyName>
+                                  </Link>
+                                  <Link xsi:type="ObjectReferenceLink">
+                                    <ObjectLink>
+                                      <Id>08ae6527-2766-4769-ac49-4cd7fc45040c</Id>
+                                      <ObjectType>PropertyExtension</ObjectType>
+                                    </ObjectLink>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectType>ProcessInstance</ObjectType>
+                              </VariableToSet>
+                              <NewValue xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Service State.Name</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>DisplayName</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>c0830c79-8eaf-4ad5-aa83-aea65101d0fc</ObjectId>
+                                    <ObjectType>WorkflowNode</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </NewValue>
+                            </PropertyReferenceValuePair>
+                          </Assignments>
+                        </Configuration>
+                      </ActivityNode>
+                      <ActivityNode xsi:type="CompletedNode">
+                        <Id>0b805023-6e1b-4fbe-8c5d-440a1df1d4e6</Id>
+                        <Notes>Fail the entire process</Notes>
+                        <CompletedType>FailedNotCompleted</CompletedType>
+                        <ResultMessage>
+                          <FormattedCode>{0}</FormattedCode>
+                          <References>
+                            <VariableReference xsi:type="PropertyReference">
+                              <LinkChain>
+                                <Link xsi:type="PropertyNameLink">
+                                  <PropertyName>ErrorInformation</PropertyName>
+                                </Link>
+                              </LinkChain>
+                              <ObjectId>98f46e8f-9740-4255-905d-b2bca97ccecf</ObjectId>
+                              <ObjectType>ActivityInstance</ObjectType>
+                            </VariableReference>
+                          </References>
+                        </ResultMessage>
+                      </ActivityNode>
+                    </Children>
+                    <Condition>
+                      <Id>8905b247-f9a8-4461-b892-5b0271e2f08e</Id>
+                      <Conditions>
+                        <ConditionDefinition xsi:type="VariableConditionDefinition">
+                          <Id>eb3ce846-172b-4e74-a9e8-635d19a4962f</Id>
+                          <Expression xsi:type="SubstitutableBoolean">
+                            <HardcodedValue>true</HardcodedValue>
+                          </Expression>
+                          <Comparison>Equals</Comparison>
+                          <VariableReference xsi:type="PropertyReference">
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>InstanceFailed</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>98f46e8f-9740-4255-905d-b2bca97ccecf</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </ConditionDefinition>
+                      </Conditions>
+                    </Condition>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="UpdateServiceItemActivityConfiguration" xml:space="preserve">
+                  <Id>98f46e8f-9740-4255-905d-b2bca97ccecf</Id>
+                  <DisplayName>Update Service Item </DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                    <SingleTargetReference>
+                      <FormattedCode />
+                      <HardcodedValue>
+                        <Id>b3216113-bb0f-4cb3-b7c2-93b9074ef87b</Id>
+                        <ObjectType>Target</ObjectType>
+                      </HardcodedValue>
+                    </SingleTargetReference>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>6d25deb5-2f72-40ec-b767-bdabe50f7ee6</ContainingProcessId>
+                  <RetryTimePeriod>
+                    <DisplayUnits>Minutes</DisplayUnits>
+                    <Period>
+                      <FormattedCode>{0}</FormattedCode>
+                      <References>
+                        <VariableReference xsi:type="PropertyReference">
+                          <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Time Period (minutes)</DisplayPath>
+                          <LinkChain>
+                            <Link xsi:type="PropertyNameLink">
+                              <PropertyName>DefaultRetryMinutes</PropertyName>
+                            </Link>
+                          </LinkChain>
+                          <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                          <ObjectType>Adapter</ObjectType>
+                        </VariableReference>
+                      </References>
+                    </Period>
+                  </RetryTimePeriod>
+                  <RetryFrequency>
+                    <DisplayUnits>Seconds</DisplayUnits>
+                    <Period>
+                      <FormattedCode>{0}</FormattedCode>
+                      <References>
+                        <VariableReference xsi:type="PropertyReference">
+                          <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Frequency (seconds)</DisplayPath>
+                          <LinkChain>
+                            <Link xsi:type="PropertyNameLink">
+                              <PropertyName>DefaultRetryFrequency</PropertyName>
+                            </Link>
+                          </LinkChain>
+                          <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                          <ObjectType>Adapter</ObjectType>
+                        </VariableReference>
+                      </References>
+                    </Period>
+                  </RetryFrequency>
+                  <Timeout>
+                    <DisplayUnits>Seconds</DisplayUnits>
+                    <Period>
+                      <HardcodedValue>100</HardcodedValue>
+                    </Period>
+                  </Timeout>
+                  <ItemType>
+                    <HardcodedValue>CustomerOrganization</HardcodedValue>
+                  </ItemType>
+                  <ItemName>
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.Find Organization.Service Items.First Row.Name</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResultsTable</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>FirstRow</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>Name</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>da9f2915-32b6-4988-a922-649c99f38731</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </ItemName>
+                  <BrowseServiceItemName>VirtualServer</BrowseServiceItemName>
+                  <ItemAttributes>
+                    <ServiceItemPropertyInformation>
+                      <Name>
+                        <HardcodedValue>Status</HardcodedValue>
+                      </Name>
+                      <Value xsi:type="SubstitutableString">
+                        <HardcodedValue>INACTIVE</HardcodedValue>
+                      </Value>
+                    </ServiceItemPropertyInformation>
+                  </ItemAttributes>
+                  <Subscriber>
+                    <HardcodedValue />
+                  </Subscriber>
+                  <SubscriberOuName>
+                    <HardcodedValue />
+                  </SubscriberOuName>
+                  <SubscriberRequisitionEntryId>
+                    <FormattedCode />
+                  </SubscriberRequisitionEntryId>
+                  <ChannelId>
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Global Variables.Cloud Service Item Update Channel ID</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>c070b5b6-0120-48f1-8b36-2319f9348a4a</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </ChannelId>
+                </Configuration>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>d98725ad-185d-4608-9eb8-130b6b2c859d</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>9f79a533-51df-4a2e-9be1-f4df46a9b9cc</Id>
+                  <Expression xsi:type="SubstitutableNumber">
+                    <HardcodedValue>0</HardcodedValue>
+                  </Expression>
+                  <Comparison>GreaterThan</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Find Organization.Service Items.Row Count</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResultsTable</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>RowCount</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>da9f2915-32b6-4988-a922-649c99f38731</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+          <ActivityNode xsi:type="StartPointNode">
+            <Id>5d99246a-0407-472a-bfe1-a32637aaa02a</Id>
+            <DisplayName>Update RunRate</DisplayName>
+          </ActivityNode>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>b2b399ed-64e4-47cc-9a81-cee7ccaa12e2</Id>
+            <DisplayName>Find LB Virtual Server</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ConditionBranchNode">
+                <Id>05537b14-66a4-44e3-9c10-f975af78c05b</Id>
+                <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                <DisplayName>If Execution Fails</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="ExecuteActivityNode">
+                    <Id>dd8929dc-f24e-4ae1-b587-75e6c3c23147</Id>
+                    <DisplayName>Set Remediation Settings</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                        <Id>f28f22c8-8f28-450a-8232-5f551a19e328</Id>
+                        <ActivityNodeId>ac3c129f-0407-4c12-974b-231fdf068a6e</ActivityNodeId>
+                        <CompletedId>668f6cdb-1dff-4c6d-9e37-89eedf5f3c15</CompletedId>
+                      </ActivityNode>
+                    </Children>
+                    <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+                      <Id>ac3c129f-0407-4c12-974b-231fdf068a6e</Id>
+                      <DisplayName>Set Remediation Settings</DisplayName>
+                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                        <SingleTargetId>
+                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                        </SingleTargetId>
+                      </TargetLoadBalancer>
+                      <InheritTarget>false</InheritTarget>
+                      <ContainingProcessId>6d25deb5-2f72-40ec-b767-bdabe50f7ee6</ContainingProcessId>
+                      <Assignments>
+                        <PropertyReferenceValuePair>
+                          <VariableToSet>
+                            <DisplayPath>Process.Target.Cloud.Service.General.ErrorCode</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResolvedTarget</PropertyName>
+                              </Link>
+                              <Link xsi:type="ObjectReferenceLink">
+                                <ObjectLink>
+                                  <Id>7ad8347e-4936-4962-ab6d-3ec987d2737a</Id>
+                                  <ObjectType>PropertyExtension</ObjectType>
+                                </ObjectLink>
+                              </Link>
+                            </LinkChain>
+                            <ObjectType>ProcessInstance</ObjectType>
+                          </VariableToSet>
+                          <NewValue xsi:type="SubstitutableNumber">
+                            <HardcodedValue>1012</HardcodedValue>
+                          </NewValue>
+                        </PropertyReferenceValuePair>
+                        <PropertyReferenceValuePair>
+                          <VariableToSet>
+                            <DisplayPath>Process.Target.Cloud.Service.General.ErrorRemediation.UserSet.StartPoint.Retry</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResolvedTarget</PropertyName>
+                              </Link>
+                              <Link xsi:type="ObjectReferenceLink">
+                                <ObjectLink>
+                                  <Id>08ae6527-2766-4769-ac49-4cd7fc45040c</Id>
+                                  <ObjectType>PropertyExtension</ObjectType>
+                                </ObjectLink>
+                              </Link>
+                            </LinkChain>
+                            <ObjectType>ProcessInstance</ObjectType>
+                          </VariableToSet>
+                          <NewValue xsi:type="SubstitutableString">
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.Update RunRate.Name</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>DisplayName</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>5d99246a-0407-472a-bfe1-a32637aaa02a</ObjectId>
+                                <ObjectType>WorkflowNode</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </NewValue>
+                        </PropertyReferenceValuePair>
+                      </Assignments>
+                    </Configuration>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="CompletedNode">
+                    <Id>993fc01c-46c4-4bb7-bf55-006a8d607999</Id>
+                    <Notes>Fail the entire process</Notes>
+                    <CompletedType>FailedNotCompleted</CompletedType>
+                    <ResultMessage>
+                      <FormattedCode>{0}</FormattedCode>
+                      <References>
+                        <VariableReference xsi:type="PropertyReference">
+                          <LinkChain>
+                            <Link xsi:type="PropertyNameLink">
+                              <PropertyName>ErrorInformation</PropertyName>
+                            </Link>
+                          </LinkChain>
+                          <ObjectId>caefd284-2fb2-4cc6-8f05-4c327ba7126b</ObjectId>
+                          <ObjectType>ActivityInstance</ObjectType>
+                        </VariableReference>
+                      </References>
+                    </ResultMessage>
+                  </ActivityNode>
+                </Children>
+                <Condition>
+                  <Id>dfa2cd96-a3b6-4ed0-a0c8-1abcfba92020</Id>
+                  <Conditions>
+                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                      <Id>326b50df-3872-412e-ac63-1d345d97c1ad</Id>
+                      <Expression xsi:type="SubstitutableBoolean">
+                        <HardcodedValue>true</HardcodedValue>
+                      </Expression>
+                      <Comparison>Equals</Comparison>
+                      <VariableReference xsi:type="PropertyReference">
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>InstanceFailed</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>caefd284-2fb2-4cc6-8f05-4c327ba7126b</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </ConditionDefinition>
+                  </Conditions>
+                </Condition>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="FindServiceItemsActivityConfiguration" xml:space="preserve">
+              <Id>caefd284-2fb2-4cc6-8f05-4c327ba7126b</Id>
+              <DisplayName>Find LB Virtual Server</DisplayName>
+              <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                <SingleTargetReference>
+                  <FormattedCode />
+                  <HardcodedValue>
+                    <Id>b3216113-bb0f-4cb3-b7c2-93b9074ef87b</Id>
+                    <ObjectType>Target</ObjectType>
+                  </HardcodedValue>
+                </SingleTargetReference>
+              </TargetLoadBalancer>
+              <InheritTarget>false</InheritTarget>
+              <ContainingProcessId>6d25deb5-2f72-40ec-b767-bdabe50f7ee6</ContainingProcessId>
+              <RetryTimePeriod>
+                <DisplayUnits>Minutes</DisplayUnits>
+                <Period>
+                  <FormattedCode>{0}</FormattedCode>
+                  <References>
+                    <VariableReference xsi:type="PropertyReference">
+                      <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Time Period (minutes)</DisplayPath>
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>DefaultRetryMinutes</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                      <ObjectType>Adapter</ObjectType>
+                    </VariableReference>
+                  </References>
+                </Period>
+              </RetryTimePeriod>
+              <RetryFrequency>
+                <DisplayUnits>Seconds</DisplayUnits>
+                <Period>
+                  <FormattedCode>{0}</FormattedCode>
+                  <References>
+                    <VariableReference xsi:type="PropertyReference">
+                      <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Frequency (seconds)</DisplayPath>
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>DefaultRetryFrequency</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                      <ObjectType>Adapter</ObjectType>
+                    </VariableReference>
+                  </References>
+                </Period>
+              </RetryFrequency>
+              <Timeout>
+                <DisplayUnits>Seconds</DisplayUnits>
+                <Period>
+                  <HardcodedValue>100</HardcodedValue>
+                </Period>
+              </Timeout>
+              <ItemType>
+                <HardcodedValue>VPXLBVirtualServers</HardcodedValue>
+              </ItemType>
+              <ItemName>
+                <FormattedCode />
+              </ItemName>
+              <BrowseServiceItemName>VPXLBVirtualServers</BrowseServiceItemName>
+              <Properties>
+                <ServiceItemProperty>
+                  <Name>
+                    <HardcodedValue>Name</HardcodedValue>
+                  </Name>
+                </ServiceItemProperty>
+              </Properties>
+              <SearchCriteria>
+                <ServiceItemSearchCriteria>
+                  <Name>
+                    <HardcodedValue>OrgSIName</HardcodedValue>
+                  </Name>
+                  <Value xsi:type="SubstitutableString">
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Target.Cloud.Service.General.Tenant.Organization</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="ObjectReferenceLink">
+                            <ObjectLink>
+                              <Id>a91ae90b-8874-4a26-819d-f7db488d2dcb</Id>
+                              <ObjectType>PropertyExtension</ObjectType>
+                            </ObjectLink>
+                          </Link>
+                        </LinkChain>
+                        <ObjectType>ProcessInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </Value>
+                  <Comparison>Equal</Comparison>
+                </ServiceItemSearchCriteria>
+              </SearchCriteria>
+              <Subscriber>
+                <HardcodedValue />
+              </Subscriber>
+              <SubscriberOuName>
+                <HardcodedValue />
+              </SubscriberOuName>
+            </Configuration>
+          </ActivityNode>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>065a6cb9-9a47-4a4e-a0b1-1788984314d4</Id>
+            <DisplayName>If LB server found</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>b466241e-150d-4d2d-bbae-3dd1a718fb89</Id>
+                <DisplayName>Find Rate SI</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="ConditionBranchNode">
+                    <Id>7e78748b-62d1-4043-9998-cd349b103405</Id>
+                    <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                    <DisplayName>If Execution Fails</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ExecuteActivityNode">
+                        <Id>9060cee1-a520-49ce-96b5-62cad94a0609</Id>
+                        <DisplayName>Set Remediation Settings</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                            <Id>6b17e32a-e73e-458d-9f68-97a591e66c92</Id>
+                            <ActivityNodeId>82b47d50-2d7c-4291-833b-274798bf1112</ActivityNodeId>
+                            <CompletedId>3fd2e186-c7f1-45d9-b5f9-918436003ed9</CompletedId>
+                          </ActivityNode>
+                        </Children>
+                        <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+                          <Id>82b47d50-2d7c-4291-833b-274798bf1112</Id>
+                          <DisplayName>Set Remediation Settings</DisplayName>
+                          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                            <SingleTargetId>
+                              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                            </SingleTargetId>
+                          </TargetLoadBalancer>
+                          <InheritTarget>false</InheritTarget>
+                          <ContainingProcessId>6d25deb5-2f72-40ec-b767-bdabe50f7ee6</ContainingProcessId>
+                          <Assignments>
+                            <PropertyReferenceValuePair>
+                              <VariableToSet>
+                                <DisplayPath>Process.Target.Cloud.Service.General.ErrorCode</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>ResolvedTarget</PropertyName>
+                                  </Link>
+                                  <Link xsi:type="ObjectReferenceLink">
+                                    <ObjectLink>
+                                      <Id>7ad8347e-4936-4962-ab6d-3ec987d2737a</Id>
+                                      <ObjectType>PropertyExtension</ObjectType>
+                                    </ObjectLink>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectType>ProcessInstance</ObjectType>
+                              </VariableToSet>
+                              <NewValue xsi:type="SubstitutableNumber">
+                                <HardcodedValue>1012</HardcodedValue>
+                              </NewValue>
+                            </PropertyReferenceValuePair>
+                            <PropertyReferenceValuePair>
+                              <VariableToSet>
+                                <DisplayPath>Process.Target.Cloud.Service.General.ErrorRemediation.UserSet.StartPoint.Retry</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>ResolvedTarget</PropertyName>
+                                  </Link>
+                                  <Link xsi:type="ObjectReferenceLink">
+                                    <ObjectLink>
+                                      <Id>08ae6527-2766-4769-ac49-4cd7fc45040c</Id>
+                                      <ObjectType>PropertyExtension</ObjectType>
+                                    </ObjectLink>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectType>ProcessInstance</ObjectType>
+                              </VariableToSet>
+                              <NewValue xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Update RunRate.Name</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>DisplayName</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>5d99246a-0407-472a-bfe1-a32637aaa02a</ObjectId>
+                                    <ObjectType>WorkflowNode</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </NewValue>
+                            </PropertyReferenceValuePair>
+                          </Assignments>
+                        </Configuration>
+                      </ActivityNode>
+                      <ActivityNode xsi:type="CompletedNode">
+                        <Id>62f33a12-c6af-48a0-912b-7764ed81c8b4</Id>
+                        <Notes>Fail the entire process</Notes>
+                        <CompletedType>FailedNotCompleted</CompletedType>
+                        <ResultMessage>
+                          <FormattedCode>{0}</FormattedCode>
+                          <References>
+                            <VariableReference xsi:type="PropertyReference">
+                              <LinkChain>
+                                <Link xsi:type="PropertyNameLink">
+                                  <PropertyName>ErrorInformation</PropertyName>
+                                </Link>
+                              </LinkChain>
+                              <ObjectId>08eb6457-c329-437e-bec2-3f40ad641dd3</ObjectId>
+                              <ObjectType>ActivityInstance</ObjectType>
+                            </VariableReference>
+                          </References>
+                        </ResultMessage>
+                      </ActivityNode>
+                    </Children>
+                    <Condition>
+                      <Id>9c290419-e3d3-43d0-99ca-d96c58a63ae0</Id>
+                      <Conditions>
+                        <ConditionDefinition xsi:type="VariableConditionDefinition">
+                          <Id>ecd462be-999e-4810-8090-95af09dba38e</Id>
+                          <Expression xsi:type="SubstitutableBoolean">
+                            <HardcodedValue>true</HardcodedValue>
+                          </Expression>
+                          <Comparison>Equals</Comparison>
+                          <VariableReference xsi:type="PropertyReference">
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>InstanceFailed</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>08eb6457-c329-437e-bec2-3f40ad641dd3</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </ConditionDefinition>
+                      </Conditions>
+                    </Condition>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="FindServiceItemsActivityConfiguration" xml:space="preserve">
+                  <Id>08eb6457-c329-437e-bec2-3f40ad641dd3</Id>
+                  <DisplayName>Find Rate SI</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                    <SingleTargetReference>
+                      <FormattedCode />
+                      <HardcodedValue>
+                        <Id>b3216113-bb0f-4cb3-b7c2-93b9074ef87b</Id>
+                        <ObjectType>Target</ObjectType>
+                      </HardcodedValue>
+                    </SingleTargetReference>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>6d25deb5-2f72-40ec-b767-bdabe50f7ee6</ContainingProcessId>
+                  <RetryTimePeriod>
+                    <DisplayUnits>Minutes</DisplayUnits>
+                    <Period>
+                      <FormattedCode>{0}</FormattedCode>
+                      <References>
+                        <VariableReference xsi:type="PropertyReference">
+                          <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Time Period (minutes)</DisplayPath>
+                          <LinkChain>
+                            <Link xsi:type="PropertyNameLink">
+                              <PropertyName>DefaultRetryMinutes</PropertyName>
+                            </Link>
+                          </LinkChain>
+                          <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                          <ObjectType>Adapter</ObjectType>
+                        </VariableReference>
+                      </References>
+                    </Period>
+                  </RetryTimePeriod>
+                  <RetryFrequency>
+                    <DisplayUnits>Seconds</DisplayUnits>
+                    <Period>
+                      <FormattedCode>{0}</FormattedCode>
+                      <References>
+                        <VariableReference xsi:type="PropertyReference">
+                          <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Frequency (seconds)</DisplayPath>
+                          <LinkChain>
+                            <Link xsi:type="PropertyNameLink">
+                              <PropertyName>DefaultRetryFrequency</PropertyName>
+                            </Link>
+                          </LinkChain>
+                          <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                          <ObjectType>Adapter</ObjectType>
+                        </VariableReference>
+                      </References>
+                    </Period>
+                  </RetryFrequency>
+                  <Timeout>
+                    <DisplayUnits>Seconds</DisplayUnits>
+                    <Period>
+                      <HardcodedValue>100</HardcodedValue>
+                    </Period>
+                  </Timeout>
+                  <ItemType>
+                    <HardcodedValue>RunRate</HardcodedValue>
+                  </ItemType>
+                  <ItemName>
+                    <FormattedCode />
+                  </ItemName>
+                  <BrowseServiceItemName>RunRate</BrowseServiceItemName>
+                  <Properties>
+                    <ServiceItemProperty>
+                      <Name>
+                        <HardcodedValue>CurrentRate</HardcodedValue>
+                      </Name>
+                      <VariableType>Number</VariableType>
+                    </ServiceItemProperty>
+                    <ServiceItemProperty>
+                      <Name>
+                        <HardcodedValue>Name</HardcodedValue>
+                      </Name>
+                    </ServiceItemProperty>
+                  </Properties>
+                  <SearchCriteria>
+                    <ServiceItemSearchCriteria>
+                      <Name>
+                        <HardcodedValue>ServiceItemName</HardcodedValue>
+                      </Name>
+                      <Value xsi:type="SubstitutableString">
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.Find LB Virtual Server.Service Items.First Row.Name</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResultsTable</PropertyName>
+                              </Link>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>FirstRow</PropertyName>
+                              </Link>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>Name</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>caefd284-2fb2-4cc6-8f05-4c327ba7126b</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </Value>
+                      <Comparison>Equal</Comparison>
+                    </ServiceItemSearchCriteria>
+                  </SearchCriteria>
+                  <Subscriber>
+                    <HardcodedValue />
+                  </Subscriber>
+                  <SubscriberOuName>
+                    <HardcodedValue />
+                  </SubscriberOuName>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="ConditionBranchNode">
+                <Id>837f6e04-52c7-4eac-8917-0e2d45a073d6</Id>
+                <DisplayName>Rate SI Found?</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="ExecuteActivityNode">
+                    <Id>9465ab3b-e4b7-44f6-b32a-d60a19f55f6b</Id>
+                    <DisplayName>Update Rate SI</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ConditionBranchNode">
+                        <Id>02c680db-499a-46b5-80fd-585ee8f31b7f</Id>
+                        <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                        <DisplayName>If Execution Fails</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="ExecuteActivityNode">
+                            <Id>100cc6ce-e8e9-4bc2-8ed2-24a383159976</Id>
+                            <DisplayName>Set Remediation Settings (3)</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                <Id>3dc0016b-4c8d-4720-94da-b0865f7e4a1e</Id>
+                                <ActivityNodeId>b07fd100-4997-4087-90bd-f0bd9dbbe451</ActivityNodeId>
+                                <CompletedId>543496aa-f412-4d20-b911-1fd91e24946f</CompletedId>
+                              </ActivityNode>
+                            </Children>
+                            <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+                              <Id>b07fd100-4997-4087-90bd-f0bd9dbbe451</Id>
+                              <DisplayName>Set Remediation Settings (3)</DisplayName>
+                              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                <SingleTargetId>
+                                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                </SingleTargetId>
+                              </TargetLoadBalancer>
+                              <InheritTarget>false</InheritTarget>
+                              <ContainingProcessId>6d25deb5-2f72-40ec-b767-bdabe50f7ee6</ContainingProcessId>
+                              <Assignments>
+                                <PropertyReferenceValuePair>
+                                  <VariableToSet>
+                                    <DisplayPath>Process.Target.Cloud.Service.General.ErrorCode</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ResolvedTarget</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="ObjectReferenceLink">
+                                        <ObjectLink>
+                                          <Id>7ad8347e-4936-4962-ab6d-3ec987d2737a</Id>
+                                          <ObjectType>PropertyExtension</ObjectType>
+                                        </ObjectLink>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectType>ProcessInstance</ObjectType>
+                                  </VariableToSet>
+                                  <NewValue xsi:type="SubstitutableNumber">
+                                    <HardcodedValue>1014</HardcodedValue>
+                                  </NewValue>
+                                </PropertyReferenceValuePair>
+                                <PropertyReferenceValuePair>
+                                  <VariableToSet>
+                                    <DisplayPath>Process.Target.Cloud.Service.General.ErrorRemediation.UserSet.StartPoint.Retry</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ResolvedTarget</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="ObjectReferenceLink">
+                                        <ObjectLink>
+                                          <Id>08ae6527-2766-4769-ac49-4cd7fc45040c</Id>
+                                          <ObjectType>PropertyExtension</ObjectType>
+                                        </ObjectLink>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectType>ProcessInstance</ObjectType>
+                                  </VariableToSet>
+                                  <NewValue xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.Update RunRate.Name</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>DisplayName</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>5d99246a-0407-472a-bfe1-a32637aaa02a</ObjectId>
+                                        <ObjectType>WorkflowNode</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </NewValue>
+                                </PropertyReferenceValuePair>
+                              </Assignments>
+                            </Configuration>
+                          </ActivityNode>
+                          <ActivityNode xsi:type="CompletedNode">
+                            <Id>02529832-d863-4461-9abe-a630247ed576</Id>
+                            <Notes>Fail the entire process</Notes>
+                            <CompletedType>FailedNotCompleted</CompletedType>
+                            <ResultMessage>
+                              <FormattedCode>{0}</FormattedCode>
+                              <References>
+                                <VariableReference xsi:type="PropertyReference">
+                                  <LinkChain>
+                                    <Link xsi:type="PropertyNameLink">
+                                      <PropertyName>ErrorInformation</PropertyName>
+                                    </Link>
+                                  </LinkChain>
+                                  <ObjectId>e0f64cdd-bdfe-4f1f-823b-5ae395cd6269</ObjectId>
+                                  <ObjectType>ActivityInstance</ObjectType>
+                                </VariableReference>
+                              </References>
+                            </ResultMessage>
+                          </ActivityNode>
+                        </Children>
+                        <Condition>
+                          <Id>765b5159-2ff5-4001-91b1-fa0a7ff43b07</Id>
+                          <Conditions>
+                            <ConditionDefinition xsi:type="VariableConditionDefinition">
+                              <Id>3dbe8ffb-50ae-4f21-96bc-3e86a9eee90b</Id>
+                              <Expression xsi:type="SubstitutableBoolean">
+                                <HardcodedValue>true</HardcodedValue>
+                              </Expression>
+                              <Comparison>Equals</Comparison>
+                              <VariableReference xsi:type="PropertyReference">
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>InstanceFailed</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>e0f64cdd-bdfe-4f1f-823b-5ae395cd6269</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </ConditionDefinition>
+                          </Conditions>
+                        </Condition>
+                      </ActivityNode>
+                    </Children>
+                    <Configuration xsi:type="UpdateServiceItemActivityConfiguration" xml:space="preserve">
+                      <Id>e0f64cdd-bdfe-4f1f-823b-5ae395cd6269</Id>
+                      <DisplayName>Update Rate SI</DisplayName>
+                      <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                        <SingleTargetReference>
+                          <FormattedCode />
+                          <HardcodedValue>
+                            <Id>b3216113-bb0f-4cb3-b7c2-93b9074ef87b</Id>
+                            <ObjectType>Target</ObjectType>
+                          </HardcodedValue>
+                        </SingleTargetReference>
+                      </TargetLoadBalancer>
+                      <InheritTarget>false</InheritTarget>
+                      <ContainingProcessId>6d25deb5-2f72-40ec-b767-bdabe50f7ee6</ContainingProcessId>
+                      <RetryTimePeriod>
+                        <DisplayUnits>Minutes</DisplayUnits>
+                        <Period>
+                          <FormattedCode>{0}</FormattedCode>
+                          <References>
+                            <VariableReference xsi:type="PropertyReference">
+                              <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Time Period (minutes)</DisplayPath>
+                              <LinkChain>
+                                <Link xsi:type="PropertyNameLink">
+                                  <PropertyName>DefaultRetryMinutes</PropertyName>
+                                </Link>
+                              </LinkChain>
+                              <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                              <ObjectType>Adapter</ObjectType>
+                            </VariableReference>
+                          </References>
+                        </Period>
+                      </RetryTimePeriod>
+                      <RetryFrequency>
+                        <DisplayUnits>Seconds</DisplayUnits>
+                        <Period>
+                          <FormattedCode>{0}</FormattedCode>
+                          <References>
+                            <VariableReference xsi:type="PropertyReference">
+                              <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Frequency (seconds)</DisplayPath>
+                              <LinkChain>
+                                <Link xsi:type="PropertyNameLink">
+                                  <PropertyName>DefaultRetryFrequency</PropertyName>
+                                </Link>
+                              </LinkChain>
+                              <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                              <ObjectType>Adapter</ObjectType>
+                            </VariableReference>
+                          </References>
+                        </Period>
+                      </RetryFrequency>
+                      <Timeout>
+                        <DisplayUnits>Seconds</DisplayUnits>
+                        <Period>
+                          <HardcodedValue>100</HardcodedValue>
+                        </Period>
+                      </Timeout>
+                      <ItemType>
+                        <HardcodedValue>RunRate</HardcodedValue>
+                      </ItemType>
+                      <ItemName>
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.Find Rate SI.Service Items.First Row.Name</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResultsTable</PropertyName>
+                              </Link>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>FirstRow</PropertyName>
+                              </Link>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>Name</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>08eb6457-c329-437e-bec2-3f40ad641dd3</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </ItemName>
+                      <BrowseServiceItemName>RunRate</BrowseServiceItemName>
+                      <ItemAttributes>
+                        <ServiceItemPropertyInformation>
+                          <Name>
+                            <HardcodedValue>CurrentRate</HardcodedValue>
+                          </Name>
+                          <VariableType>Number</VariableType>
+                          <Value xsi:type="SubstitutableNumber">
+                            <HardcodedValue>0</HardcodedValue>
+                          </Value>
+                        </ServiceItemPropertyInformation>
+                      </ItemAttributes>
+                      <Subscriber>
+                        <HardcodedValue />
+                      </Subscriber>
+                      <SubscriberOuName>
+                        <HardcodedValue />
+                      </SubscriberOuName>
+                      <SubscriberRequisitionEntryId>
+                        <FormattedCode />
+                      </SubscriberRequisitionEntryId>
+                      <ChannelId>
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Global Variables.Cloud Service Item Update Channel ID</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>c070b5b6-0120-48f1-8b36-2319f9348a4a</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </ChannelId>
+                    </Configuration>
+                  </ActivityNode>
+                </Children>
+                <Condition>
+                  <Id>51e63236-de1d-422c-aca7-c1c4a61f0ea2</Id>
+                  <Conditions>
+                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                      <Id>6a70202c-0274-4032-89a4-0519ee6b99c5</Id>
+                      <Expression xsi:type="SubstitutableNumber">
+                        <HardcodedValue>0</HardcodedValue>
+                      </Expression>
+                      <Comparison>GreaterThan</Comparison>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.Find Rate SI.Service Items.Row Count</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResultsTable</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>RowCount</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>08eb6457-c329-437e-bec2-3f40ad641dd3</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </ConditionDefinition>
+                  </Conditions>
+                </Condition>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>1d458b0e-d800-4c73-9468-0c3b1bde5535</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>959e2838-a2c9-49ba-8411-9e1997a93798</Id>
+                  <Expression xsi:type="SubstitutableNumber">
+                    <HardcodedValue>0</HardcodedValue>
+                  </Expression>
+                  <Comparison>GreaterThan</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Find LB Virtual Server.Service Items.Row Count</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResultsTable</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>RowCount</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>caefd284-2fb2-4cc6-8f05-4c327ba7126b</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+        </Children>
+      </ActivityNode>
+      <ActivityNode xsi:type="StartPointNode">
+        <Id>ff6b6acd-0e95-494e-a02f-679b416c4a37</Id>
+        <DisplayName>User Post Processing Extension Point</DisplayName>
+      </ActivityNode>
+      <ActivityNode xsi:type="StartProcessNode">
+        <Id>4b913766-c6ac-46b6-b3b7-87c23477a55e</Id>
+        <DisplayName>Decommission Organization &gt;&gt; Post-decommission</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>120d915e-231b-4bad-8ae8-c778e0b798ef</Id>
+            <ProcessNodeId>4b913766-c6ac-46b6-b3b7-87c23477a55e</ProcessNodeId>
+            <CompletedId>c52dc82e-e526-49fa-84b9-963bae972086</CompletedId>
+          </ActivityNode>
+        </Children>
+        <ProcessId>4531f686-7412-4063-adf0-3746262c69ab</ProcessId>
+        <InputVariableTable>
+          <VariableAssignmentsAsArray />
+        </InputVariableTable>
+        <Asynchronous>false</Asynchronous>
+        <InheritTarget>true</InheritTarget>
+        <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+        <InheritPriorityClass>true</InheritPriorityClass>
+        <RuntimeUserId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </RuntimeUserId>
+        <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+        <StartPointId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </StartPointId>
+        <StartPointName>
+          <FormattedCode />
+        </StartPointName>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>7f82a6e4-42f3-4f76-b320-f80c8a4e9710</Id>
+        <DisplayName>Add Note - Process Complete</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>9532bb59-7f1c-4a99-a69f-abc742acd7f0</Id>
+            <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+            <DisplayName>Ignore Error</DisplayName>
+            <Children />
+            <Condition>
+              <Id>bca90b3f-bdc5-4e9b-8a62-4ef8a5fe89c2</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>d00dc03d-e7e4-4392-83a9-68ccdb2ac69e</Id>
+                  <Expression xsi:type="SubstitutableBoolean">
+                    <HardcodedValue>true</HardcodedValue>
+                  </Expression>
+                  <Comparison>Equals</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>InstanceFailed</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>2da9df73-6bc7-447d-bd54-a50cdcc4421c</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="UpdateChangeRequestActivityConfiguration" xml:space="preserve">
+          <Id>2da9df73-6bc7-447d-bd54-a50cdcc4421c</Id>
+          <DisplayName>Add Note - Process Complete</DisplayName>
+          <Description>This is a note indicating that the process has completed. It will appear in the PO console as the process is running and is an indicator of the progress of the process.</Description>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>6d25deb5-2f72-40ec-b767-bdabe50f7ee6</ContainingProcessId>
+          <TaskId>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Target.Cloud.Service.General.ChangeRequestID</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>ResolvedTarget</PropertyName>
+                  </Link>
+                  <Link xsi:type="ObjectReferenceLink">
+                    <ObjectLink>
+                      <Id>2924872b-3254-4306-9160-e08f75efa691</Id>
+                      <ObjectType>PropertyExtension</ObjectType>
+                    </ObjectLink>
+                  </Link>
+                </LinkChain>
+                <ObjectType>ProcessInstance</ObjectType>
+              </VariableReference>
+            </References>
+          </TaskId>
+          <ModificationGroup>
+            <ObjectId>00000000-0000-0000-0000-000000000000</ObjectId>
+            <ObjectType>Task</ObjectType>
+            <Modifications>
+              <PropertyModification>
+                <DisplayPath>New Note</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>NewNote</PropertyName>
+                  </Link>
+                </LinkChain>
+                <Action>Set</Action>
+                <Value xsi:type="SubstitutableString">
+                  <HardcodedValue>Organization has been decommissioned. Completing request.</HardcodedValue>
+                </Value>
+              </PropertyModification>
+            </Modifications>
+          </ModificationGroup>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>c2ce3d80-4dda-48d0-b910-00271907b588</Id>
+        <DisplayName>Process Complete</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>90b29720-7ad5-4c0b-8d91-426e3126a358</Id>
+            <ActivityNodeId>d0320e69-62fe-44f8-ba0c-f6a73d0d79c1</ActivityNodeId>
+            <CompletedId>1c19444f-404b-464e-b128-680af01b7eec</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+          <Id>d0320e69-62fe-44f8-ba0c-f6a73d0d79c1</Id>
+          <DisplayName>Process Complete</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>6d25deb5-2f72-40ec-b767-bdabe50f7ee6</ContainingProcessId>
+          <VariableToSet>
+            <DisplayPath>Process.Target.Cloud.Service.General.ErrorRemediation.UserSet.Retry</DisplayPath>
+            <LinkChain>
+              <Link xsi:type="PropertyNameLink">
+                <PropertyName>ResolvedTarget</PropertyName>
+              </Link>
+              <Link xsi:type="ObjectReferenceLink">
+                <ObjectLink>
+                  <Id>dfd0c20a-58bd-4a1f-b242-7658e642dcd1</Id>
+                  <ObjectType>PropertyExtension</ObjectType>
+                </ObjectLink>
+              </Link>
+            </LinkChain>
+            <ObjectType>ProcessInstance</ObjectType>
+          </VariableToSet>
+          <NewValue xsi:type="SubstitutableBoolean">
+            <HardcodedValue>false</HardcodedValue>
+          </NewValue>
+        </Configuration>
+      </ActivityNode>
+    </Children>
+  </FirstActivity>
+  <ProcessId>6d25deb5-2f72-40ec-b767-bdabe50f7ee6</ProcessId>
+</WorkflowConfiguration>

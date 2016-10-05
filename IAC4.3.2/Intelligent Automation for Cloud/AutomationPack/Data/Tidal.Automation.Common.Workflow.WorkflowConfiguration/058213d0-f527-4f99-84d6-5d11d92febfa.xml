@@ -1,0 +1,439 @@
+<?xml version="1.0"?>
+<WorkflowConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>058213d0-f527-4f99-84d6-5d11d92febfa</Id>
+  <DisplayName>Create BGP Private AS Pool</DisplayName>
+  <CreatedTime>2016-02-15T20:45:56.942125Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:46:15.1513671Z</ModifiedTime>
+  <FirstActivity xsi:type="RootNode">
+    <Id>06a780fb-25b1-4d6c-8425-df35c5caccb8</Id>
+    <DisplayName />
+    <Children>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>b97c52ea-907d-4bf8-b135-8d6d03d38961</Id>
+        <DisplayName>Get Request Properties</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>d894c4ab-1804-4bdb-bc82-d8369d4353df</Id>
+            <ActivityNodeId>b97c52ea-907d-4bf8-b135-8d6d03d38961</ActivityNodeId>
+            <CompletedId>a744385d-0dbd-4158-8955-a71f6d5792d0</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="XPathQueryActivityConfiguration" xml:space="preserve">
+          <Id>b97c52ea-907d-4bf8-b135-8d6d03d38961</Id>
+          <DisplayName>Get Request Properties</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>9a59538f-0e3c-4cb8-a6af-9f1ff2e4d56b</ContainingProcessId>
+          <SourceXml>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Target.Cloud.Service.General.ServiceRequestXML</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>ResolvedTarget</PropertyName>
+                  </Link>
+                  <Link xsi:type="ObjectReferenceLink">
+                    <ObjectLink>
+                      <Id>e5988c6a-0497-4e11-92fb-8bf107b20995</Id>
+                      <ObjectType>PropertyExtension</ObjectType>
+                    </ObjectLink>
+                  </Link>
+                </LinkChain>
+                <ObjectType>ProcessInstance</ObjectType>
+              </VariableReference>
+            </References>
+          </SourceXml>
+          <Namespaces />
+          <Queries>
+            <XPathQueryDefinition>
+              <DisplayName>Local AS Number Space</DisplayName>
+              <Query>
+                <HardcodedValue>//SIBDNetworkServicesSettings.LocalASNumberSpace</HardcodedValue>
+              </Query>
+              <ReturnType>String</ReturnType>
+              <DefaultBehavior>Fail</DefaultBehavior>
+            </XPathQueryDefinition>
+          </Queries>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>359abb90-6ce4-45ed-94a0-cb51102fdda2</Id>
+        <DisplayName>Split AS Number Space String</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>5a3484d6-526a-4d5e-a2f8-a3bdc4993042</Id>
+            <ActivityNodeId>359abb90-6ce4-45ed-94a0-cb51102fdda2</ActivityNodeId>
+            <CompletedId>ce2847c4-74cb-42c6-85a6-908d372f0f79</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="SplitStringActivityConfiguration" xml:space="preserve">
+          <Id>359abb90-6ce4-45ed-94a0-cb51102fdda2</Id>
+          <DisplayName>Split AS Number Space String</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>9a59538f-0e3c-4cb8-a6af-9f1ff2e4d56b</ContainingProcessId>
+          <InputString>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Get Request Properties.Results.Local AS Number Space</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>Results</PropertyName>
+                  </Link>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>Local AS Number Space</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>b97c52ea-907d-4bf8-b135-8d6d03d38961</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </VariableReference>
+            </References>
+          </InputString>
+          <IsCharDelimiter>true</IsCharDelimiter>
+          <CharDelimiters>
+            <HardcodedValue>-</HardcodedValue>
+          </CharDelimiters>
+          <ReturnEmptyString>false</ReturnEmptyString>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>aa4c41ec-d328-464a-a31b-d3414762c362</Id>
+        <DisplayName>Set Counter Variables</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>4a3c080e-da26-4308-804a-86f6a3cf1e7b</Id>
+            <ActivityNodeId>aa4c41ec-d328-464a-a31b-d3414762c362</ActivityNodeId>
+            <CompletedId>766d4a24-ab2d-4105-9138-0ecdf1964d11</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+          <Id>aa4c41ec-d328-464a-a31b-d3414762c362</Id>
+          <DisplayName>Set Counter Variables</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>9a59538f-0e3c-4cb8-a6af-9f1ff2e4d56b</ContainingProcessId>
+          <Assignments>
+            <PropertyReferenceValuePair>
+              <VariableToSet>
+                <DisplayPath>Process.Variables.Local.Current Counter</DisplayPath>
+                <LinkChain />
+                <ObjectId>533dd61c-a100-4496-9867-dcaf840c26e4</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableToSet>
+              <NewValue xsi:type="SubstitutableNumber">
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Split AS Number Space String.Results Table.First Row.Value</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResultTable</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>FirstRow</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>Value</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>359abb90-6ce4-45ed-94a0-cb51102fdda2</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </NewValue>
+            </PropertyReferenceValuePair>
+            <PropertyReferenceValuePair>
+              <VariableToSet>
+                <DisplayPath>Process.Variables.Local.End Counter</DisplayPath>
+                <LinkChain />
+                <ObjectId>fe0da6ef-30fb-4a5e-976d-475caddc8723</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableToSet>
+              <NewValue xsi:type="SubstitutableNumber">
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Split AS Number Space String.Results Table.Last Row.Value</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResultTable</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>LastRow</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>Value</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>359abb90-6ce4-45ed-94a0-cb51102fdda2</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </NewValue>
+            </PropertyReferenceValuePair>
+          </Assignments>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="WhileNode">
+        <Id>0170ccf0-26d4-4a58-97ff-8abe76021c68</Id>
+        <DisplayName>While Block</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>c31a28b4-f2b0-4527-8356-84356107d532</Id>
+            <DisplayName>Add Row to Table</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>7d4fffa9-69ec-4296-b2ab-19755bf0cfa0</Id>
+                <ActivityNodeId>c31a28b4-f2b0-4527-8356-84356107d532</ActivityNodeId>
+                <CompletedId>6eb9d481-5c3b-416c-b810-e8d59306982e</CompletedId>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="AddTableRowActivityConfiguration" xml:space="preserve">
+              <Id>c31a28b4-f2b0-4527-8356-84356107d532</Id>
+              <DisplayName>Add Row to Table</DisplayName>
+              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                <SingleTargetId>
+                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                </SingleTargetId>
+              </TargetLoadBalancer>
+              <InheritTarget>false</InheritTarget>
+              <ContainingProcessId>9a59538f-0e3c-4cb8-a6af-9f1ff2e4d56b</ContainingProcessId>
+              <TableVariable>
+                <DisplayPath>Process.Variables.Local.BGP ASs</DisplayPath>
+                <LinkChain />
+                <ObjectId>2171e5ea-b0c3-4acf-90d8-510e61f9a46e</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </TableVariable>
+              <Values>
+                <BuiltinDataCellValue>
+                  <ColumnName>Status</ColumnName>
+                  <Value xsi:type="SubstitutableString">
+                    <HardcodedValue>Unassigned</HardcodedValue>
+                  </Value>
+                </BuiltinDataCellValue>
+                <BuiltinDataCellValue>
+                  <ColumnName>ASNumber</ColumnName>
+                  <Value xsi:type="SubstitutableNumber">
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Variables.Local.Current Counter</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>533dd61c-a100-4496-9867-dcaf840c26e4</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </Value>
+                </BuiltinDataCellValue>
+                <BuiltinDataCellValue>
+                  <ColumnName>Name</ColumnName>
+                  <Value xsi:type="SubstitutableString">
+                    <FormattedCode>{0}:{1}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Process Instance Id</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>Id</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectType>ProcessInstance</ObjectType>
+                      </VariableReference>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Variables.Local.Current Counter</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>533dd61c-a100-4496-9867-dcaf840c26e4</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </Value>
+                </BuiltinDataCellValue>
+              </Values>
+            </Configuration>
+          </ActivityNode>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>a298af54-2534-44ee-a6d3-499841919513</Id>
+            <DisplayName>Increase Counter</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>7d11822b-f131-4eb0-b183-d7d451657638</Id>
+                <ActivityNodeId>a298af54-2534-44ee-a6d3-499841919513</ActivityNodeId>
+                <CompletedId>ea8fb140-5c4b-4843-abde-3516e5afb746</CompletedId>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+              <Id>a298af54-2534-44ee-a6d3-499841919513</Id>
+              <DisplayName>Increase Counter</DisplayName>
+              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                <SingleTargetId>
+                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                </SingleTargetId>
+              </TargetLoadBalancer>
+              <InheritTarget>false</InheritTarget>
+              <ContainingProcessId>9a59538f-0e3c-4cb8-a6af-9f1ff2e4d56b</ContainingProcessId>
+              <VariableToSet>
+                <DisplayPath>Process.Variables.Local.Current Counter</DisplayPath>
+                <LinkChain />
+                <ObjectId>533dd61c-a100-4496-9867-dcaf840c26e4</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableToSet>
+              <NewValue xsi:type="SubstitutableNumber">
+                <FormattedCode>{0} + 1</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Local.Current Counter</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>533dd61c-a100-4496-9867-dcaf840c26e4</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                </References>
+              </NewValue>
+            </Configuration>
+          </ActivityNode>
+        </Children>
+        <Condition>
+          <Id>422c7e71-193a-459c-a89a-ec8be24d559f</Id>
+          <Operator>Or</Operator>
+          <Conditions>
+            <ConditionDefinition xsi:type="VariableConditionDefinition">
+              <Id>b79e6a17-d7d4-4346-8d74-4857004a3421</Id>
+              <Expression xsi:type="SubstitutableNumber">
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Local.End Counter</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>fe0da6ef-30fb-4a5e-976d-475caddc8723</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                </References>
+              </Expression>
+              <Comparison>LessThanOrEquals</Comparison>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Local.Current Counter</DisplayPath>
+                <LinkChain />
+                <ObjectId>533dd61c-a100-4496-9867-dcaf840c26e4</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </ConditionDefinition>
+          </Conditions>
+        </Condition>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>fab1260a-7190-4118-85a9-6860c2f86602</Id>
+        <DisplayName>Create Service Items from Table</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>ab622bcd-acb8-4078-a651-4177ce51a44a</Id>
+            <ActivityNodeId>fab1260a-7190-4118-85a9-6860c2f86602</ActivityNodeId>
+            <CompletedId>9f888791-87e5-434f-bdb8-2b935a48b3c7</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="CreateServiceItemsFromTableActivityConfiguration" xml:space="preserve">
+          <Id>fab1260a-7190-4118-85a9-6860c2f86602</Id>
+          <DisplayName>Create Service Items from Table</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+            <SingleTargetReference>
+              <FormattedCode />
+              <HardcodedValue>
+                <Id>b3216113-bb0f-4cb3-b7c2-93b9074ef87b</Id>
+                <ObjectType>Target</ObjectType>
+              </HardcodedValue>
+            </SingleTargetReference>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>9a59538f-0e3c-4cb8-a6af-9f1ff2e4d56b</ContainingProcessId>
+          <RetryTimePeriod>
+            <DisplayUnits>Minutes</DisplayUnits>
+            <Period>
+              <FormattedCode>{0}</FormattedCode>
+              <References>
+                <VariableReference xsi:type="PropertyReference">
+                  <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Time Period (minutes)</DisplayPath>
+                  <LinkChain>
+                    <Link xsi:type="PropertyNameLink">
+                      <PropertyName>DefaultRetryMinutes</PropertyName>
+                    </Link>
+                  </LinkChain>
+                  <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                  <ObjectType>Adapter</ObjectType>
+                </VariableReference>
+              </References>
+            </Period>
+          </RetryTimePeriod>
+          <RetryFrequency>
+            <DisplayUnits>Seconds</DisplayUnits>
+            <Period>
+              <FormattedCode>{0}</FormattedCode>
+              <References>
+                <VariableReference xsi:type="PropertyReference">
+                  <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Frequency (seconds)</DisplayPath>
+                  <LinkChain>
+                    <Link xsi:type="PropertyNameLink">
+                      <PropertyName>DefaultRetryFrequency</PropertyName>
+                    </Link>
+                  </LinkChain>
+                  <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                  <ObjectType>Adapter</ObjectType>
+                </VariableReference>
+              </References>
+            </Period>
+          </RetryFrequency>
+          <Timeout>
+            <DisplayUnits>Seconds</DisplayUnits>
+            <Period>
+              <HardcodedValue>100</HardcodedValue>
+            </Period>
+          </Timeout>
+          <ChannelId>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Global Variables.Cloud Service Item Update Channel ID</DisplayPath>
+                <LinkChain />
+                <ObjectId>c070b5b6-0120-48f1-8b36-2319f9348a4a</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </ChannelId>
+          <ItemType>
+            <HardcodedValue>BGPAutonomousSystem</HardcodedValue>
+          </ItemType>
+          <Table>
+            <DisplayPath>Process.Variables.Local.BGP ASs</DisplayPath>
+            <LinkChain />
+            <ObjectId>2171e5ea-b0c3-4acf-90d8-510e61f9a46e</ObjectId>
+            <ObjectType>GlobalVariable</ObjectType>
+          </Table>
+          <Subscriber>
+            <HardcodedValue />
+          </Subscriber>
+          <SubscriberOuName>
+            <HardcodedValue />
+          </SubscriberOuName>
+          <SubscriberRequisitionId>
+            <FormattedCode />
+          </SubscriberRequisitionId>
+          <SubscriberRequisitionEntryId>
+            <FormattedCode />
+          </SubscriberRequisitionEntryId>
+        </Configuration>
+      </ActivityNode>
+    </Children>
+  </FirstActivity>
+  <ProcessId>9a59538f-0e3c-4cb8-a6af-9f1ff2e4d56b</ProcessId>
+</WorkflowConfiguration>

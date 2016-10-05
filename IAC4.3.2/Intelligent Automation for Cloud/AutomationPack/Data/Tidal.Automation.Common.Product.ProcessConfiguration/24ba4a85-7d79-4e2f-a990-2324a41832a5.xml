@@ -1,0 +1,252 @@
+<?xml version="1.0"?>
+<ProcessConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>24ba4a85-7d79-4e2f-a990-2324a41832a5</Id>
+  <DisplayName>CloudSync Discover Infrastructure -&gt; Cisco UCS VLANs</DisplayName>
+  <Description>This process collects UCS VLANs from associated UCS managers and synchronizes the data with the Cloud Portal.</Description>
+  <CreatedTime>2016-02-15T20:41:50.02025Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:42:08.2294921Z</ModifiedTime>
+  <Version>4.3.1.9733</Version>
+  <TargetLoadBalancer xsi:type="RequireOverrideLoadBalancer" />
+  <AuditStarts>true</AuditStarts>
+  <AuditSuccesses>true</AuditSuccesses>
+  <WorkflowId>8ecb9836-c374-4138-9a1c-be2254f73cbf</WorkflowId>
+  <CategoryIds>
+    <guid>a222897c-7e90-474d-a2a9-fcdf3948bb1b</guid>
+  </CategoryIds>
+  <TriggerOwner>74d6de41-8d7c-42dd-b0df-37578a8885eb</TriggerOwner>
+  <Triggers>
+    <TriggerDefinition>
+      <Event xsi:type="StartProcessEventDefinition">
+        <Id>9d1077ae-dbc6-4739-811f-593ab9c88edc</Id>
+        <DisplayName>Started by Parent Process</DisplayName>
+        <Imported>true</Imported>
+        <ProcessIds />
+      </Event>
+      <Condition xsi:type="RootConditionDefinition">
+        <Id>7b6fee90-a99e-4dea-ab06-6a9d0caae66a</Id>
+        <Conditions />
+      </Condition>
+      <TriggerId>ba0b59cb-cf89-4bcc-a97c-4ecedb4a67fe</TriggerId>
+    </TriggerDefinition>
+    <TriggerDefinition>
+      <Event xsi:type="AdHocEventDefinition">
+        <Id>996d76bb-6cb7-410c-9b7c-3aaacfd17952</Id>
+        <DisplayName>Started by User</DisplayName>
+        <Imported>true</Imported>
+        <Identities />
+      </Event>
+      <Condition xsi:type="RootConditionDefinition">
+        <Id>127bc601-d10a-449f-a4a8-610c3e21da4d</Id>
+        <Conditions />
+      </Condition>
+      <TriggerId>77e2289c-dd74-4d71-8864-cb5a374ff921</TriggerId>
+    </TriggerDefinition>
+  </Triggers>
+  <VariableDefinitions>
+    <VariableConfiguration xsi:type="StringVariableConfiguration" xml:space="preserve">
+      <Id>4c8aa5e8-90a7-4637-beef-c7cfdf305cda</Id>
+      <DisplayName>Cloud Portal Channel ID</DisplayName>
+      <ModifiedTime>2012-08-06T19:49:13.082256Z</ModifiedTime>
+      <string />
+      <Scope>
+        <Family>ProcessInstanceIn</Family>
+        <ControllingItemId>24ba4a85-7d79-4e2f-a990-2324a41832a5</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="NumberVariableConfiguration" xml:space="preserve">
+      <Id>e4cb5431-8870-4ca6-bdab-094f3168619b</Id>
+      <DisplayName>Error Code</DisplayName>
+      <double>0</double>
+      <Scope>
+        <Family>ProcessInstanceOut</Family>
+        <ControllingItemId>24ba4a85-7d79-4e2f-a990-2324a41832a5</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="NumberVariableConfiguration" xml:space="preserve">
+      <Id>901906a4-154d-4240-9d95-2b290470ef27</Id>
+      <DisplayName>GUIDCount</DisplayName>
+      <double>0</double>
+      <Scope>
+        <Family>ProcessInstanceLocal</Family>
+        <ControllingItemId>24ba4a85-7d79-4e2f-a990-2324a41832a5</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="TableVariableConfiguration" xml:space="preserve">
+      <Id>49626c98-ced7-4cbf-9c60-8031e6fbc3d8</Id>
+      <DisplayName>Create Records</DisplayName>
+      <ModifiedTime>2013-07-15T03:09:10.5222835Z</ModifiedTime>
+      <FixedSchemaDataTable>
+        <FixedSchema>
+          <Columns>
+            <TableSchemaColumn>
+              <Name>Name</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>PlatformElementID</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>VLANID</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>VLANName</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>ServerDN</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>UCSManager</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>FSMStatus</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>UniqueID</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>LastDiscovery</Name>
+              <DataType>Tidal.Automation.Common.Product.UtcDateTime</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>FirstDiscovered</Name>
+              <DataType>Tidal.Automation.Common.Product.UtcDateTime</DataType>
+            </TableSchemaColumn>
+          </Columns>
+        </FixedSchema>
+      </FixedSchemaDataTable>
+      <Scope>
+        <Family>ProcessInstanceLocal</Family>
+        <ControllingItemId>24ba4a85-7d79-4e2f-a990-2324a41832a5</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="TableVariableConfiguration" xml:space="preserve">
+      <Id>3663698a-895c-4e28-ac95-46314dc1ff68</Id>
+      <DisplayName>Update Records</DisplayName>
+      <ModifiedTime>2013-07-15T03:09:28.649096Z</ModifiedTime>
+      <FixedSchemaDataTable>
+        <FixedSchema>
+          <Columns>
+            <TableSchemaColumn>
+              <Name>Name</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>PlatformElementID</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>VLANID</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>VLANName</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>ServerDN</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>UCSManager</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>FSMStatus</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>UniqueID</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>LastDiscovery</Name>
+              <DataType>Tidal.Automation.Common.Product.UtcDateTime</DataType>
+            </TableSchemaColumn>
+          </Columns>
+        </FixedSchema>
+      </FixedSchemaDataTable>
+      <Scope>
+        <Family>ProcessInstanceLocal</Family>
+        <ControllingItemId>24ba4a85-7d79-4e2f-a990-2324a41832a5</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="TableVariableConfiguration" xml:space="preserve">
+      <Id>08ef4514-a0c2-48b0-89f0-07ccd0546571</Id>
+      <DisplayName>Update Records - NotFound</DisplayName>
+      <ModifiedTime>2014-01-08T21:44:07.5973081Z</ModifiedTime>
+      <FixedSchemaDataTable>
+        <FixedSchema>
+          <Columns>
+            <TableSchemaColumn>
+              <Name>Name</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>FSMStatus</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>LastDiscovery</Name>
+              <DataType>Tidal.Automation.Common.Product.UtcDateTime</DataType>
+            </TableSchemaColumn>
+          </Columns>
+        </FixedSchema>
+      </FixedSchemaDataTable>
+      <Scope>
+        <Family>ProcessInstanceLocal</Family>
+        <ControllingItemId>24ba4a85-7d79-4e2f-a990-2324a41832a5</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="BooleanVariableConfiguration" xml:space="preserve">
+      <Id>131b9bb3-dd5b-42a8-ae65-f35a95f05786</Id>
+      <DisplayName>Scheduled</DisplayName>
+      <CustomizationSetting>Yes</CustomizationSetting>
+      <boolean>false</boolean>
+      <Scope>
+        <Family>ProcessInstanceIn</Family>
+        <ControllingItemId>24ba4a85-7d79-4e2f-a990-2324a41832a5</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+  </VariableDefinitions>
+  <Notes />
+  <GeneralHelp xsi:type="CustomHelpAlias">
+    <Alias />
+  </GeneralHelp>
+  <GeneralInstanceHelp xsi:type="CustomHelpAlias">
+    <Alias />
+  </GeneralInstanceHelp>
+  <InputHelp xsi:type="CustomHelpAlias">
+    <Alias />
+  </InputHelp>
+  <InputInstanceHelp xsi:type="CustomHelpAlias">
+    <Alias />
+  </InputInstanceHelp>
+  <OutputHelp xsi:type="CustomHelpAlias">
+    <Alias />
+  </OutputHelp>
+  <ValidTargetTypeNames>
+    <string>Tidal.Automation.Ucs.Common.UcsManagerTargetConfiguration, Tidal.Automation.Ucs.Common</string>
+  </ValidTargetTypeNames>
+  <ValidTargetTypeExtensionIds>
+    <guid>7fbd1c2a-606e-5531-7dcd-91400d793fe1</guid>
+  </ValidTargetTypeExtensionIds>
+  <ValidRuntimeUserTypeNames>
+    <string>Tidal.Automation.Ssh.Common.PublicKeyAdminUserConfiguration, Tidal.Automation.Ssh.Common</string>
+    <string>Tidal.Automation.Ssh.Common.IOSUserConfiguration, Tidal.Automation.Ssh.Common</string>
+    <string>Tidal.Automation.BuiltinAdapter.Common.GenericRuntimeUserConfiguration, Tidal.Automation.BuiltinAdapter.Common</string>
+    <string>Tidal.Automation.Sap.Common.Users.SAPUserConfiguration, Tidal.Automation.Sap.Common</string>
+    <string>Tidal.Automation.Snmp.Common.SnmpUserConfiguration, Tidal.Automation.Snmp.Common</string>
+    <string>Tidal.Automation.Windows.Common.WindowsUserConfiguration, Tidal.Automation.Windows.Common</string>
+  </ValidRuntimeUserTypeNames>
+  <GroupName>Cloud Portal Service Catalog</GroupName>
+  <ResumeWhenInterrupted>false</ResumeWhenInterrupted>
+  <StoreWhenCompleted>false</StoreWhenCompleted>
+  <MustStoreOnError>true</MustStoreOnError>
+</ProcessConfiguration>

@@ -1,0 +1,829 @@
+<?xml version="1.0"?>
+<WorkflowConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>82c206ae-77bf-4e9d-8678-c60a930a5549</Id>
+  <DisplayName>Create Logical Edge Router</DisplayName>
+  <CreatedTime>2016-02-15T20:43:20.098375Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:43:38.3076171Z</ModifiedTime>
+  <FirstActivity xsi:type="RootNode">
+    <Id>fd9014f9-bb84-4eeb-b033-d02f960b27b9</Id>
+    <DisplayName />
+    <Children>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>06dc4791-20c6-46c8-86d3-acb104192d85</Id>
+        <DisplayName>Set DN</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>97cedde9-0fc4-4e7b-90a3-162fdd1e8a40</Id>
+            <ActivityNodeId>06dc4791-20c6-46c8-86d3-acb104192d85</ActivityNodeId>
+            <CompletedId>d1e58a0d-3175-4e4a-bed1-20cec9631e61</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+          <Id>06dc4791-20c6-46c8-86d3-acb104192d85</Id>
+          <DisplayName>Set DN</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>cd19ff80-ca7a-4f25-b0f3-9cb45bcd5b48</ContainingProcessId>
+          <VariableToSet>
+            <DisplayPath>Process.Variables.Output.Distinguished Name</DisplayPath>
+            <LinkChain />
+            <ObjectId>79075dfb-bc0e-4f58-b1b3-a6510d6cdad0</ObjectId>
+            <ObjectType>GlobalVariable</ObjectType>
+          </VariableToSet>
+          <NewValue xsi:type="SubstitutableString">
+            <FormattedCode>{0}/edgerouter-{1}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.Parent Distinguished Name</DisplayPath>
+                <LinkChain />
+                <ObjectId>e3023568-23e0-4a6c-b1fa-0cc581ea9ce4</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.Edge Router Name</DisplayPath>
+                <LinkChain />
+                <ObjectId>cd4ae62b-8169-41a0-9a86-0c0562d98d82</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </NewValue>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ConditionBranchNode">
+        <Id>77d86d71-3a7b-48f9-8f42-56e0348df9db</Id>
+        <DisplayName>Creating first interface?</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>83adc76d-38bb-45d6-8a35-88f7287fa1dc</Id>
+            <DisplayName>Set Interface Config XML</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>50e95bfe-f8bd-4490-8bba-a79ccd9a452b</Id>
+                <ActivityNodeId>83adc76d-38bb-45d6-8a35-88f7287fa1dc</ActivityNodeId>
+                <CompletedId>dcf3118d-10cc-4275-adc2-3682549d58d3</CompletedId>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+              <Id>83adc76d-38bb-45d6-8a35-88f7287fa1dc</Id>
+              <DisplayName>Set Interface Config XML</DisplayName>
+              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                <SingleTargetId>
+                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                </SingleTargetId>
+              </TargetLoadBalancer>
+              <InheritTarget>false</InheritTarget>
+              <ContainingProcessId>cd19ff80-ca7a-4f25-b0f3-9cb45bcd5b48</ContainingProcessId>
+              <VariableToSet>
+                <DisplayPath>Process.Variables.Local.Interface Config XML</DisplayPath>
+                <LinkChain />
+                <ObjectId>8892edaa-b8a9-4f35-a2da-ef0409d6f720</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableToSet>
+              <NewValue xsi:type="SubstitutableString">
+                <FormattedCode>      &lt;logicalRouterInterface adminState="enable" descr="" dn="{0}/router-intf-{1}" index="1" isIpViaDHCP="no" name="{2}" status="created" zoneMembership="{3}"&gt;
+        &lt;logicalIp dn="{4}/router-intf-{5}/ip-{6}" gateway="0.0.0.0" ip="{7}" ipSubnet="{8}" isPrimary="yes" status="created"/&gt;
+        &lt;logicalInterfaceServiceProfileAssociation descr="" dn="{9}/router-intf-{10}/interface-service-profile" name="" profileRef="{11}" status="created"/&gt;
+      &lt;/logicalRouterInterface&gt;
+</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Output.Distinguished Name</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>79075dfb-bc0e-4f58-b1b3-a6510d6cdad0</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Input.First Interface Name</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>33d5a487-65a8-46cb-be69-6b1a6a6c35a0</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Input.First Interface Name</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>33d5a487-65a8-46cb-be69-6b1a6a6c35a0</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Input.First Interface Zone</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>cc2be784-b99c-4336-adaf-58929c6151dd</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Output.Distinguished Name</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>79075dfb-bc0e-4f58-b1b3-a6510d6cdad0</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Input.First Interface Name</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>33d5a487-65a8-46cb-be69-6b1a6a6c35a0</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Input.First Interface IP Address</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>81925e44-2d74-4c9e-8d46-ac64e31343ce</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Input.First Interface IP Address</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>81925e44-2d74-4c9e-8d46-ac64e31343ce</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Input.First Interface Subnet Mask</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>99656c4c-6b1f-4fde-84ea-aec1c8e1e013</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Output.Distinguished Name</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>79075dfb-bc0e-4f58-b1b3-a6510d6cdad0</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Input.First Interface Name</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>33d5a487-65a8-46cb-be69-6b1a6a6c35a0</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Input.First Interface Service Profile Name</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>b2f9a273-9b34-4635-b53f-463dd5e9d0e9</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                </References>
+              </NewValue>
+            </Configuration>
+          </ActivityNode>
+        </Children>
+        <Condition>
+          <Id>66d4eb46-86a1-4080-ba7f-a1038e275376</Id>
+          <Conditions>
+            <ConditionDefinition xsi:type="VariableConditionDefinition">
+              <Id>56d2be68-4303-49a2-84fb-6444e948f83f</Id>
+              <Expression xsi:type="SubstitutableString">
+                <HardcodedValue />
+              </Expression>
+              <Comparison>NotEquals</Comparison>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.First Interface Name</DisplayPath>
+                <LinkChain />
+                <ObjectId>33d5a487-65a8-46cb-be69-6b1a6a6c35a0</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </ConditionDefinition>
+            <ConditionDefinition xsi:type="VariableConditionDefinition">
+              <Id>6bb5539f-cdac-4c6a-a562-306fba552eaf</Id>
+              <Expression xsi:type="SubstitutableString">
+                <HardcodedValue />
+              </Expression>
+              <Comparison>NotEquals</Comparison>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.First Interface IP Address</DisplayPath>
+                <LinkChain />
+                <ObjectId>81925e44-2d74-4c9e-8d46-ac64e31343ce</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </ConditionDefinition>
+            <ConditionDefinition xsi:type="VariableConditionDefinition">
+              <Id>4af5951c-0628-4826-8d9f-0fcda7016435</Id>
+              <Expression xsi:type="SubstitutableString">
+                <HardcodedValue />
+              </Expression>
+              <Comparison>NotEquals</Comparison>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.First Interface Service Profile Name</DisplayPath>
+                <LinkChain />
+                <ObjectId>b2f9a273-9b34-4635-b53f-463dd5e9d0e9</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </ConditionDefinition>
+            <ConditionDefinition xsi:type="VariableConditionDefinition">
+              <Id>60cf6495-25cf-4f16-882c-7e6efbe9b241</Id>
+              <Expression xsi:type="SubstitutableString">
+                <HardcodedValue />
+              </Expression>
+              <Comparison>NotEquals</Comparison>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.First Interface Subnet Mask</DisplayPath>
+                <LinkChain />
+                <ObjectId>99656c4c-6b1f-4fde-84ea-aec1c8e1e013</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </ConditionDefinition>
+          </Conditions>
+        </Condition>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>1b2c3bc1-67b2-4fbb-a993-ec881aded45b</Id>
+        <DisplayName>Create Edge Router Request</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>3e4df8e4-bc1e-4657-88ad-b16275bedbc3</Id>
+            <ActivityNodeId>1b2c3bc1-67b2-4fbb-a993-ec881aded45b</ActivityNodeId>
+            <CompletedId>14022631-1a61-464e-9472-c2f22b85cad9</CompletedId>
+          </ActivityNode>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>8632c9ab-852e-4247-9cf2-a784636ad28b</Id>
+            <DisplayName>If VNMC Error</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>0d517c66-d0df-4dea-b06a-cc1cc6f5d48f</Id>
+                <DisplayName>XPath Query</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>be97618a-a992-41bb-a28b-05a5c0923dec</Id>
+                    <ActivityNodeId>0d517c66-d0df-4dea-b06a-cc1cc6f5d48f</ActivityNodeId>
+                    <CompletedId>f20bfedd-807a-430a-9edf-eeb1346d0b7c</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="XPathQueryActivityConfiguration" xml:space="preserve">
+                  <Id>0d517c66-d0df-4dea-b06a-cc1cc6f5d48f</Id>
+                  <DisplayName>XPath Query</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>cd19ff80-ca7a-4f25-b0f3-9cb45bcd5b48</ContainingProcessId>
+                  <SourceXml>
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.Create Edge Router Request.Response</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>Response</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>1b2c3bc1-67b2-4fbb-a993-ec881aded45b</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </SourceXml>
+                  <Namespaces />
+                  <Queries>
+                    <XPathQueryDefinition>
+                      <DisplayName>errorCode</DisplayName>
+                      <Query>
+                        <HardcodedValue>configConfMos/@errorCode</HardcodedValue>
+                      </Query>
+                      <ReturnType>String</ReturnType>
+                      <DefaultBehavior>Fail</DefaultBehavior>
+                    </XPathQueryDefinition>
+                    <XPathQueryDefinition>
+                      <DisplayName>errorDesc</DisplayName>
+                      <Query>
+                        <HardcodedValue>configConfMos/@errorDescr</HardcodedValue>
+                      </Query>
+                      <ReturnType>String</ReturnType>
+                      <DefaultBehavior>Fail</DefaultBehavior>
+                    </XPathQueryDefinition>
+                  </Queries>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>4d2ef635-65b0-4350-a538-705c4e8086d7</Id>
+                <DisplayName>Set Error Code</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>f2eb440e-5b3d-4aae-8cb8-348cd97cbf95</Id>
+                    <ActivityNodeId>4d2ef635-65b0-4350-a538-705c4e8086d7</ActivityNodeId>
+                    <CompletedId>57068d4a-f48e-4a48-b583-851ea9ef177b</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                  <Id>4d2ef635-65b0-4350-a538-705c4e8086d7</Id>
+                  <DisplayName>Set Error Code</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>cd19ff80-ca7a-4f25-b0f3-9cb45bcd5b48</ContainingProcessId>
+                  <VariableToSet>
+                    <DisplayPath>Process.Variables.Output.errorCode</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>fb2be582-f93f-4220-a0ca-9fa5c0803f0d</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableToSet>
+                  <NewValue xsi:type="SubstitutableNumber">
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.XPath Query.Results.errorCode</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>Results</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>errorCode</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>0d517c66-d0df-4dea-b06a-cc1cc6f5d48f</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </NewValue>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>d71a9dc4-5829-4fba-ad3f-cde41c8c5e35</Id>
+                <DisplayName>Set Error Type</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>b0c1c4e0-48a6-47d8-99ad-2b6774a216cd</Id>
+                    <ActivityNodeId>d71a9dc4-5829-4fba-ad3f-cde41c8c5e35</ActivityNodeId>
+                    <CompletedId>f3774927-6d8c-444e-a901-ff9585498dcc</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                  <Id>d71a9dc4-5829-4fba-ad3f-cde41c8c5e35</Id>
+                  <DisplayName>Set Error Type</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>cd19ff80-ca7a-4f25-b0f3-9cb45bcd5b48</ContainingProcessId>
+                  <VariableToSet>
+                    <DisplayPath>Process.Variables.Output.errorType</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>75240755-1f3c-4193-a76b-a5c12f88d154</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableToSet>
+                  <NewValue xsi:type="SubstitutableString">
+                    <HardcodedValue>VNMC</HardcodedValue>
+                  </NewValue>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>c115576a-8909-4a87-84e1-ede52ebf4609</Id>
+                <DisplayName>Set Error Message</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>9f7ddefe-eb58-4756-86f8-0ce91270d320</Id>
+                    <ActivityNodeId>c115576a-8909-4a87-84e1-ede52ebf4609</ActivityNodeId>
+                    <CompletedId>a7b74f5f-789c-4d31-b095-d48aacf7a160</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                  <Id>c115576a-8909-4a87-84e1-ede52ebf4609</Id>
+                  <DisplayName>Set Error Message</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>cd19ff80-ca7a-4f25-b0f3-9cb45bcd5b48</ContainingProcessId>
+                  <VariableToSet>
+                    <DisplayPath>Process.Variables.Output.message</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>07b676c2-ffbe-4630-82f5-d9e6169d8be2</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableToSet>
+                  <NewValue xsi:type="SubstitutableString">
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.XPath Query.Results.errorDesc</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>Results</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>errorDesc</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>0d517c66-d0df-4dea-b06a-cc1cc6f5d48f</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </NewValue>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="CompletedNode">
+                <Id>86459a88-9619-4105-841d-d16140f23265</Id>
+                <CompletedType>Failed</CompletedType>
+                <ResultMessage>
+                  <FormattedCode>Create Edge Router "{0}" creation failed with VNMC error {1} : {2}</FormattedCode>
+                  <References>
+                    <VariableReference xsi:type="PropertyReference">
+                      <DisplayPath>Process.Variables.Input.Edge Router Name</DisplayPath>
+                      <LinkChain />
+                      <ObjectId>cd4ae62b-8169-41a0-9a86-0c0562d98d82</ObjectId>
+                      <ObjectType>GlobalVariable</ObjectType>
+                    </VariableReference>
+                    <VariableReference xsi:type="PropertyReference">
+                      <DisplayPath>Workflow.XPath Query.Results.errorCode</DisplayPath>
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>Results</PropertyName>
+                        </Link>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>errorCode</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectId>0d517c66-d0df-4dea-b06a-cc1cc6f5d48f</ObjectId>
+                      <ObjectType>ActivityInstance</ObjectType>
+                    </VariableReference>
+                    <VariableReference xsi:type="PropertyReference">
+                      <DisplayPath>Workflow.XPath Query.Results.errorDesc</DisplayPath>
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>Results</PropertyName>
+                        </Link>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>errorDesc</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectId>0d517c66-d0df-4dea-b06a-cc1cc6f5d48f</ObjectId>
+                      <ObjectType>ActivityInstance</ObjectType>
+                    </VariableReference>
+                  </References>
+                </ResultMessage>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>c9e1c307-ca90-42c1-b0ed-e1e59ef5db66</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>fef1182c-cbc3-4902-94f8-0dd8d92fc736</Id>
+                  <Expression xsi:type="SubstitutableString">
+                    <HardcodedValue>&lt;configConfMos[\w\W\n\r]*errorCode=[\w\W\n\r]*</HardcodedValue>
+                  </Expression>
+                  <Comparison>RegularExpression</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Delete Tenant Request.Response</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>Response</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>1b2c3bc1-67b2-4fbb-a993-ec881aded45b</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>ad564005-1581-4e54-b0b6-48651acee626</Id>
+            <DisplayName>If VNMC created</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>d135b8fc-3e76-4a2d-bd54-4993addd65d7</Id>
+                <DisplayName>Set Result</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>38956eb6-8d47-4f0d-a4dd-8f9e8eafc471</Id>
+                    <ActivityNodeId>d135b8fc-3e76-4a2d-bd54-4993addd65d7</ActivityNodeId>
+                    <CompletedId>747d6229-8724-48d1-8e2e-8ab1c2dacfef</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                  <Id>d135b8fc-3e76-4a2d-bd54-4993addd65d7</Id>
+                  <DisplayName>Set Result</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>cd19ff80-ca7a-4f25-b0f3-9cb45bcd5b48</ContainingProcessId>
+                  <VariableToSet>
+                    <DisplayPath>Process.Variables.Output.message</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>07b676c2-ffbe-4630-82f5-d9e6169d8be2</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableToSet>
+                  <NewValue xsi:type="SubstitutableString">
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.Create Edge Router Request.Response</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>Response</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>1b2c3bc1-67b2-4fbb-a993-ec881aded45b</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </NewValue>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="CompletedNode">
+                <Id>ff1402e0-b034-4ee2-b382-37bc3ebfb0f4</Id>
+                <CompletedType>Succeeded</CompletedType>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>c9e1c307-ca90-42c1-b0ed-e1e59ef5db66</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>fef1182c-cbc3-4902-94f8-0dd8d92fc736</Id>
+                  <Expression xsi:type="SubstitutableString">
+                    <HardcodedValue>&lt;configConfMo[\w\W\n\r]*status="created"[\w\W\n\r]*</HardcodedValue>
+                  </Expression>
+                  <Comparison>RegularExpression</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Create Edge Router Request.Response</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>Response</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>1b2c3bc1-67b2-4fbb-a993-ec881aded45b</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>4b7e600a-2fdd-4f46-b267-272280d352b1</Id>
+            <Notes>For example, if request URL is not correct, response may be:
+"Invalid application name:&lt;invalid-relative-url-provided&gt;, please make sure URL format is correct."</Notes>
+            <DisplayName>If Other Error</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>b17a89c9-5d17-41e7-a46e-5e4ea192bdcf</Id>
+                <DisplayName>Set Error Code</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>6dbe5a83-91dc-44b5-bc52-9af6c5bd1687</Id>
+                    <ActivityNodeId>b17a89c9-5d17-41e7-a46e-5e4ea192bdcf</ActivityNodeId>
+                    <CompletedId>3c7c12cc-18cb-4077-8f49-7f38ea8593f6</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                  <Id>b17a89c9-5d17-41e7-a46e-5e4ea192bdcf</Id>
+                  <DisplayName>Set Error Code</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>cd19ff80-ca7a-4f25-b0f3-9cb45bcd5b48</ContainingProcessId>
+                  <VariableToSet>
+                    <DisplayPath>Process.Variables.Output.errorCode</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>fb2be582-f93f-4220-a0ca-9fa5c0803f0d</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableToSet>
+                  <NewValue xsi:type="SubstitutableNumber">
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.Create Edge Router Request.Status Code</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>StatusCode</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>1b2c3bc1-67b2-4fbb-a993-ec881aded45b</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </NewValue>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>5385f3fa-e6ed-4bc0-9a17-02cc453a1fdd</Id>
+                <DisplayName>Set Error Type</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>0e925982-9c57-428f-a111-feb5f165fc0b</Id>
+                    <ActivityNodeId>5385f3fa-e6ed-4bc0-9a17-02cc453a1fdd</ActivityNodeId>
+                    <CompletedId>aa7cd8ec-1d37-4423-af56-8b701027d45e</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                  <Id>5385f3fa-e6ed-4bc0-9a17-02cc453a1fdd</Id>
+                  <DisplayName>Set Error Type</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>cd19ff80-ca7a-4f25-b0f3-9cb45bcd5b48</ContainingProcessId>
+                  <VariableToSet>
+                    <DisplayPath>Process.Variables.Output.errorType</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>75240755-1f3c-4193-a76b-a5c12f88d154</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableToSet>
+                  <NewValue xsi:type="SubstitutableString">
+                    <HardcodedValue>HTTP</HardcodedValue>
+                  </NewValue>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>f0b2e54c-b61d-4d48-86e3-bc547dfbbde0</Id>
+                <DisplayName>Set Error Message</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>419c1f37-7e32-430b-a6e2-d4758b75ad08</Id>
+                    <ActivityNodeId>f0b2e54c-b61d-4d48-86e3-bc547dfbbde0</ActivityNodeId>
+                    <CompletedId>ac14c2fc-adb1-4c99-8747-c4c2e9db772b</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                  <Id>f0b2e54c-b61d-4d48-86e3-bc547dfbbde0</Id>
+                  <DisplayName>Set Error Message</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>cd19ff80-ca7a-4f25-b0f3-9cb45bcd5b48</ContainingProcessId>
+                  <VariableToSet>
+                    <DisplayPath>Process.Variables.Output.message</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>07b676c2-ffbe-4630-82f5-d9e6169d8be2</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableToSet>
+                  <NewValue xsi:type="SubstitutableString">
+                    <FormattedCode>{0} / {1}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.Create Edge Router Request.Response</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>Response</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>1b2c3bc1-67b2-4fbb-a993-ec881aded45b</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.Create Edge Router Request.Status Description</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>StatusDescription</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>1b2c3bc1-67b2-4fbb-a993-ec881aded45b</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </NewValue>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="CompletedNode">
+                <Id>2a87cc8e-17e0-4c8a-8f94-88d64e5ae2ff</Id>
+                <CompletedType>FailedNotCompleted</CompletedType>
+                <ResultMessage>
+                  <FormattedCode>{0}</FormattedCode>
+                  <References>
+                    <VariableReference xsi:type="PropertyReference">
+                      <DisplayPath>Workflow.Create Edge Router Request.Response</DisplayPath>
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>Response</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectId>1b2c3bc1-67b2-4fbb-a993-ec881aded45b</ObjectId>
+                      <ObjectType>ActivityInstance</ObjectType>
+                    </VariableReference>
+                  </References>
+                </ResultMessage>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>c9e1c307-ca90-42c1-b0ed-e1e59ef5db66</Id>
+              <Conditions />
+            </Condition>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="WebHttpTargetAwareRequestActivityConfiguration" xml:space="preserve">
+          <Id>1b2c3bc1-67b2-4fbb-a993-ec881aded45b</Id>
+          <DisplayName>Create Edge Router Request</DisplayName>
+          <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+          <ContainingProcessId>cd19ff80-ca7a-4f25-b0f3-9cb45bcd5b48</ContainingProcessId>
+          <UseCredentials>true</UseCredentials>
+          <RelativeUrl>
+            <FormattedCode>/resource-mgr</FormattedCode>
+          </RelativeUrl>
+          <ContentType>
+            <HardcodedValue>application/xml; charset=utf-8</HardcodedValue>
+          </ContentType>
+          <Method>
+            <HardcodedValue>POST</HardcodedValue>
+          </Method>
+          <UserAgent>
+            <HardcodedValue />
+          </UserAgent>
+          <Request>
+            <FormattedCode>&lt;configConfMo cookie="{0}" inHierarchical="false"&gt;
+  &lt;inConfig&gt;
+    &lt;logicalEdgeRouter descr="{1}" dn="{2}" haMode="unknown" hostname="{3}" name="{4}" status="created"&gt;
+      &lt;logicalDeviceProfileAssociation descr="" dn="{5}/device-profile" name="" profileRef="{6}" status="created"/&gt;
+      &lt;logicalDeviceServiceProfileAssociation descr="" dn="{7}/device-service-profile" name="" profileRef="{8}" status="created"/&gt;
+{9}
+    &lt;/logicalEdgeRouter&gt;
+  &lt;/inConfig&gt;
+&lt;/configConfMo&gt;</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.cookie</DisplayPath>
+                <LinkChain />
+                <ObjectId>1f337821-9228-41c2-852f-9b6b91a3b855</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.Description</DisplayPath>
+                <LinkChain />
+                <ObjectId>d5d085a5-2c9d-459a-96ff-0d5f33c42ba5</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Output.Distinguished Name</DisplayPath>
+                <LinkChain />
+                <ObjectId>79075dfb-bc0e-4f58-b1b3-a6510d6cdad0</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.Edge Router Name</DisplayPath>
+                <LinkChain />
+                <ObjectId>cd4ae62b-8169-41a0-9a86-0c0562d98d82</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.Edge Router Name</DisplayPath>
+                <LinkChain />
+                <ObjectId>cd4ae62b-8169-41a0-9a86-0c0562d98d82</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Output.Distinguished Name</DisplayPath>
+                <LinkChain />
+                <ObjectId>79075dfb-bc0e-4f58-b1b3-a6510d6cdad0</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.Device Profile Name</DisplayPath>
+                <LinkChain />
+                <ObjectId>d3a4898f-0263-47c6-b784-e6fe0ac1b0ef</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Output.Distinguished Name</DisplayPath>
+                <LinkChain />
+                <ObjectId>79075dfb-bc0e-4f58-b1b3-a6510d6cdad0</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.Device Service Profile Name</DisplayPath>
+                <LinkChain />
+                <ObjectId>7220c56b-f2dd-49cc-a60f-9dc3dbc1f700</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Local.Interface Config XML</DisplayPath>
+                <LinkChain />
+                <ObjectId>8892edaa-b8a9-4f35-a2da-ef0409d6f720</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </Request>
+          <ProtocolVersion>Version11</ProtocolVersion>
+          <AllowAutoRedirect>true</AllowAutoRedirect>
+          <Timeout>
+            <DisplayUnits>Seconds</DisplayUnits>
+            <Period>
+              <HardcodedValue>100</HardcodedValue>
+            </Period>
+          </Timeout>
+          <Accept>
+            <HardcodedValue />
+          </Accept>
+          <AcceptCookies>false</AcceptCookies>
+          <Headers />
+          <OutputFormat>Xml</OutputFormat>
+        </Configuration>
+      </ActivityNode>
+    </Children>
+  </FirstActivity>
+  <ProcessId>cd19ff80-ca7a-4f25-b0f3-9cb45bcd5b48</ProcessId>
+</WorkflowConfiguration>

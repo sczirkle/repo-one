@@ -1,0 +1,484 @@
+<?xml version="1.0"?>
+<WorkflowConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>a88e6ca5-90a8-4273-8ceb-f8aa6caabf62</Id>
+  <DisplayName>Assign VLAN to vNIC Template</DisplayName>
+  <CreatedTime>2016-02-15T20:41:49.239Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:42:07.4482421Z</ModifiedTime>
+  <FirstActivity xsi:type="RootNode">
+    <Id>0f67f021-2a1d-4e52-bcdf-805b97ab5194</Id>
+    <DisplayName />
+    <Children>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>f0c93022-1cf5-4e54-a65c-ba63274399aa</Id>
+        <DisplayName>Get Existing Network Mappings</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>d6205d27-ed7b-44a8-8d8e-de776bb2ff98</Id>
+            <ActivityNodeId>f0c93022-1cf5-4e54-a65c-ba63274399aa</ActivityNodeId>
+            <CompletedId>f9e326ec-44d0-49ae-81b7-fe2b4044ee61</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="ExecuteUcsCommandActivityConfiguration" xml:space="preserve">
+          <Id>f0c93022-1cf5-4e54-a65c-ba63274399aa</Id>
+          <DisplayName>Get Existing Network Mappings</DisplayName>
+          <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+          <ContainingProcessId>0d8b7e43-4dfc-4b0a-9cd5-dd2ba35535fa</ContainingProcessId>
+          <CollectXmlOutput>true</CollectXmlOutput>
+          <CommandText>
+            <FormattedCode>&lt;configResolveChildren inDn="{0}" classId="vnicEtherIf" inHierarchical="false" /&gt;</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.vNic Template DN</DisplayPath>
+                <LinkChain />
+                <ObjectId>6551cc32-77fb-44d2-bb85-136c194c0de0</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </CommandText>
+          <XmlRowElementName>
+            <HardcodedValue>vnicEtherIf</HardcodedValue>
+          </XmlRowElementName>
+          <Columns>
+            <BuiltinTableColumn>
+              <Name>name</Name>
+              <DataType>System.String</DataType>
+            </BuiltinTableColumn>
+          </Columns>
+          <TransformXmlResponse>true</TransformXmlResponse>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ConditionBranchNode">
+        <Id>85407370-b8fa-4ab3-ba15-b56bf58b1f85</Id>
+        <DisplayName>Has Entries?</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>034a1c08-9ecc-4387-90cb-b2d8d57f94aa</Id>
+            <DisplayName>Select from Table</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>0f341120-1f66-46b4-b109-f12fc5ca2cd7</Id>
+                <ActivityNodeId>034a1c08-9ecc-4387-90cb-b2d8d57f94aa</ActivityNodeId>
+                <CompletedId>beedebdb-1f86-468e-8571-e5bdcc24fb05</CompletedId>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="ExtractTableActivityConfiguration" xml:space="preserve">
+              <Id>034a1c08-9ecc-4387-90cb-b2d8d57f94aa</Id>
+              <DisplayName>Select from Table</DisplayName>
+              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                <SingleTargetId>
+                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                </SingleTargetId>
+              </TargetLoadBalancer>
+              <InheritTarget>false</InheritTarget>
+              <ContainingProcessId>0d8b7e43-4dfc-4b0a-9cd5-dd2ba35535fa</ContainingProcessId>
+              <Columns>
+                <BuiltinTableColumn>
+                  <Name>name</Name>
+                  <DataType>System.String</DataType>
+                </BuiltinTableColumn>
+              </Columns>
+              <SourceTable xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Get Existing Network Mappings.Result Table</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>ResultTable</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>f0c93022-1cf5-4e54-a65c-ba63274399aa</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </SourceTable>
+              <WhereClause>
+                <FormattedCode>[name]='{0}'</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Input.VLAN Name</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>e4e2bb47-c0b7-4caf-9b3f-af5c939f47eb</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                </References>
+              </WhereClause>
+              <SortColumn />
+              <SortOrder>Ascending</SortOrder>
+              <MaxRows>
+                <HardcodedValue>1</HardcodedValue>
+              </MaxRows>
+            </Configuration>
+          </ActivityNode>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>d4950781-9b10-4e5e-8bfd-3a89dc94752c</Id>
+            <DisplayName>Vlan match?</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>e89837f9-4428-4684-9477-dd1c1ca09255</Id>
+                <DisplayName>Set Variable hasvalue to true</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>1bbc8887-54ef-46f8-be86-f55aa71b878a</Id>
+                    <ActivityNodeId>e89837f9-4428-4684-9477-dd1c1ca09255</ActivityNodeId>
+                    <CompletedId>d4807b2b-e730-401c-8f18-37ad7aba0074</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                  <Id>e89837f9-4428-4684-9477-dd1c1ca09255</Id>
+                  <DisplayName>Set Variable hasvalue to true</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>0d8b7e43-4dfc-4b0a-9cd5-dd2ba35535fa</ContainingProcessId>
+                  <VariableToSet>
+                    <DisplayPath>Process.Variables.Local.hasvalue</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>cac4b616-18b4-4fe2-ad2f-af5c8a988138</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableToSet>
+                  <NewValue xsi:type="SubstitutableBoolean">
+                    <HardcodedValue>true</HardcodedValue>
+                  </NewValue>
+                </Configuration>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>7f2aa6e9-b445-46b8-90bb-7d135475f032</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>7de1f7a2-13d1-4d1c-87df-b6bd9c01661d</Id>
+                  <Expression xsi:type="SubstitutableNumber">
+                    <HardcodedValue>0</HardcodedValue>
+                  </Expression>
+                  <Comparison>GreaterThan</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Select from Table.Result Table.Row Count</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResultTable</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>RowCount</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>034a1c08-9ecc-4387-90cb-b2d8d57f94aa</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+        </Children>
+        <Condition>
+          <Id>324171fa-d42b-426c-b401-b89dfadd2bbe</Id>
+          <Conditions>
+            <ConditionDefinition xsi:type="VariableConditionDefinition">
+              <Id>a5edbc11-17bb-44d3-9e74-340156a10407</Id>
+              <Expression xsi:type="SubstitutableNumber">
+                <HardcodedValue>0</HardcodedValue>
+              </Expression>
+              <Comparison>GreaterThan</Comparison>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Get Existing Network Mappings.Result Table.Row Count</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>ResultTable</PropertyName>
+                  </Link>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>RowCount</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>f0c93022-1cf5-4e54-a65c-ba63274399aa</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </VariableReference>
+            </ConditionDefinition>
+          </Conditions>
+        </Condition>
+      </ActivityNode>
+      <ActivityNode xsi:type="ConditionBranchNode">
+        <Id>7b1e781f-23b4-4be7-aee6-0b13dc247c6f</Id>
+        <DisplayName>If no mapping exists</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>8a2ac9e0-e278-4bc5-86f3-2464f1b8bc5c</Id>
+            <DisplayName>Get existing template configuration</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>f67d773a-b186-4b73-8227-61d4dc563329</Id>
+                <ActivityNodeId>8a2ac9e0-e278-4bc5-86f3-2464f1b8bc5c</ActivityNodeId>
+                <CompletedId>2066c597-cd19-4d87-b76a-8c5b7cf49d92</CompletedId>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="ExecuteUcsCommandActivityConfiguration" xml:space="preserve">
+              <Id>8a2ac9e0-e278-4bc5-86f3-2464f1b8bc5c</Id>
+              <DisplayName>Get existing template configuration</DisplayName>
+              <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+              <ContainingProcessId>0d8b7e43-4dfc-4b0a-9cd5-dd2ba35535fa</ContainingProcessId>
+              <CollectXmlOutput>true</CollectXmlOutput>
+              <CommandText>
+                <FormattedCode>&lt;configResolveDn dn="{0}"
+inHierarchical="false"&gt;
+&lt;/configResolveDn&gt;</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Input.vNic Template DN</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>6551cc32-77fb-44d2-bb85-136c194c0de0</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                </References>
+              </CommandText>
+              <XmlRowElementName>
+                <HardcodedValue>vnicLanConnTempl</HardcodedValue>
+              </XmlRowElementName>
+              <Columns>
+                <BuiltinTableColumn>
+                  <Name>descr</Name>
+                  <DataType>System.String</DataType>
+                </BuiltinTableColumn>
+                <BuiltinTableColumn>
+                  <Name>identPoolName</Name>
+                  <DataType>System.String</DataType>
+                </BuiltinTableColumn>
+                <BuiltinTableColumn>
+                  <Name>mtu</Name>
+                  <DataType>System.String</DataType>
+                </BuiltinTableColumn>
+                <BuiltinTableColumn>
+                  <Name>nwCtrlPolicyName</Name>
+                  <DataType>System.String</DataType>
+                </BuiltinTableColumn>
+                <BuiltinTableColumn>
+                  <Name>pinToGroupName</Name>
+                  <DataType>System.String</DataType>
+                </BuiltinTableColumn>
+                <BuiltinTableColumn>
+                  <Name>qosPolicyName</Name>
+                  <DataType>System.String</DataType>
+                </BuiltinTableColumn>
+                <BuiltinTableColumn>
+                  <Name>statsPolicyName</Name>
+                  <DataType>System.String</DataType>
+                </BuiltinTableColumn>
+                <BuiltinTableColumn>
+                  <Name>switchId</Name>
+                  <DataType>System.String</DataType>
+                </BuiltinTableColumn>
+                <BuiltinTableColumn>
+                  <Name>templType</Name>
+                  <DataType>System.String</DataType>
+                </BuiltinTableColumn>
+              </Columns>
+              <TransformXmlResponse>true</TransformXmlResponse>
+            </Configuration>
+          </ActivityNode>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>45c8407c-c7df-4d52-8295-9e876d5cb9ed</Id>
+            <DisplayName>Update template</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>48da2bb4-58e0-4c6d-81fb-cd386b5745db</Id>
+                <ActivityNodeId>45c8407c-c7df-4d52-8295-9e876d5cb9ed</ActivityNodeId>
+                <CompletedId>18affb9d-3e6f-45f0-a1c5-93d8ff9948bb</CompletedId>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="ExecuteUcsCommandActivityConfiguration" xml:space="preserve">
+              <Id>45c8407c-c7df-4d52-8295-9e876d5cb9ed</Id>
+              <DisplayName>Update template</DisplayName>
+              <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+              <ContainingProcessId>0d8b7e43-4dfc-4b0a-9cd5-dd2ba35535fa</ContainingProcessId>
+              <CollectXmlOutput>true</CollectXmlOutput>
+              <CommandText>
+                <FormattedCode>&lt;configConfMo inHierarchical="false"&gt;
+    &lt;inConfig&gt;
+	&lt;vnicLanConnTempl descr="{0}" dn="{1}" identPoolName="{2}" mtu="{3}" nwCtrlPolicyName="{4}" pinToGroupName="{5}" qosPolicyName="{6}" statsPolicyName="{7}" switchId="{8}" templType="{9}"&gt;
+&lt;vnicEtherIf rn="if-{10}" status="created" /&gt;
+&lt;/vnicLanConnTempl&gt;
+    &lt;/inConfig&gt;
+&lt;/configConfMo&gt;</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Get existing template configuration.Result Table.First Row.descr</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResultTable</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>FirstRow</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>descr</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>8a2ac9e0-e278-4bc5-86f3-2464f1b8bc5c</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Input.vNic Template DN</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>6551cc32-77fb-44d2-bb85-136c194c0de0</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Get existing template configuration.Result Table.First Row.identPoolName</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResultTable</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>FirstRow</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>identPoolName</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>8a2ac9e0-e278-4bc5-86f3-2464f1b8bc5c</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Get existing template configuration.Result Table.First Row.mtu</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResultTable</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>FirstRow</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>mtu</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>8a2ac9e0-e278-4bc5-86f3-2464f1b8bc5c</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Get existing template configuration.Result Table.First Row.nwCtrlPolicyName</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResultTable</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>FirstRow</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>nwCtrlPolicyName</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>8a2ac9e0-e278-4bc5-86f3-2464f1b8bc5c</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Get existing template configuration.Result Table.First Row.pinToGroupName</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResultTable</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>FirstRow</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>pinToGroupName</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>8a2ac9e0-e278-4bc5-86f3-2464f1b8bc5c</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Get existing template configuration.Result Table.First Row.qosPolicyName</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResultTable</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>FirstRow</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>qosPolicyName</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>8a2ac9e0-e278-4bc5-86f3-2464f1b8bc5c</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Get existing template configuration.Result Table.First Row.statsPolicyName</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResultTable</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>FirstRow</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>statsPolicyName</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>8a2ac9e0-e278-4bc5-86f3-2464f1b8bc5c</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Get existing template configuration.Result Table.First Row.switchId</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResultTable</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>FirstRow</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>switchId</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>8a2ac9e0-e278-4bc5-86f3-2464f1b8bc5c</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Get existing template configuration.Result Table.First Row.templType</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResultTable</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>FirstRow</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>templType</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>8a2ac9e0-e278-4bc5-86f3-2464f1b8bc5c</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Input.VLAN Name</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>e4e2bb47-c0b7-4caf-9b3f-af5c939f47eb</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                </References>
+              </CommandText>
+              <Columns />
+              <TransformXmlResponse>false</TransformXmlResponse>
+            </Configuration>
+          </ActivityNode>
+        </Children>
+        <Condition>
+          <Id>136e2cb8-5555-4b2f-8583-417cf315d9a3</Id>
+          <Conditions>
+            <ConditionDefinition xsi:type="VariableConditionDefinition">
+              <Id>d4a5c078-6c18-4b6d-afe9-cfc5879c49ca</Id>
+              <Expression xsi:type="SubstitutableBoolean">
+                <HardcodedValue>false</HardcodedValue>
+              </Expression>
+              <Comparison>Equals</Comparison>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Local.hasvalue</DisplayPath>
+                <LinkChain />
+                <ObjectId>cac4b616-18b4-4fe2-ad2f-af5c8a988138</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </ConditionDefinition>
+          </Conditions>
+        </Condition>
+      </ActivityNode>
+    </Children>
+  </FirstActivity>
+  <ProcessId>0d8b7e43-4dfc-4b0a-9cd5-dd2ba35535fa</ProcessId>
+</WorkflowConfiguration>

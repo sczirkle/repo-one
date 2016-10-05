@@ -1,0 +1,374 @@
+<?xml version="1.0"?>
+<ProcessConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>9cb81a92-3e99-48bb-9302-def66cce9e3a</Id>
+  <DisplayName>Manage Virtual Data Center (VCD)</DisplayName>
+  <Description>Instead of creating a resource pool, create an Organization VDC in vCloud Director. Uses Allocation Pool model for this new Organization VDC for consistency with the way IAC works with resource pools when working with vCenter directly. To override this behavior, implement the "Custom Manage Resource Pool (VCD)" extension point, and set "Handled" to true.</Description>
+  <CreatedTime>2016-02-15T20:42:16.692125Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:42:34.9013671Z</ModifiedTime>
+  <Version>4.3.1.9733</Version>
+  <TargetLoadBalancer xsi:type="RequireOverrideLoadBalancer" />
+  <AuditStarts>true</AuditStarts>
+  <AuditSuccesses>true</AuditSuccesses>
+  <WorkflowId>0223502a-6762-4a9a-833a-f05783a870ce</WorkflowId>
+  <CategoryIds>
+    <guid>ccc92586-e898-48a6-a4b7-1b82bf1a25da</guid>
+  </CategoryIds>
+  <TriggerOwner>74d6de41-8d7c-42dd-b0df-37578a8885eb</TriggerOwner>
+  <Triggers>
+    <TriggerDefinition>
+      <Event xsi:type="StartProcessEventDefinition">
+        <Id>d1b20d9b-8a36-46bb-966d-879c5d93841c</Id>
+        <DisplayName>Started by Parent Process</DisplayName>
+        <Imported>true</Imported>
+        <ProcessIds />
+      </Event>
+      <Condition xsi:type="RootConditionDefinition">
+        <Id>1296d174-336c-4225-be37-00dac5ffae34</Id>
+        <Conditions />
+      </Condition>
+      <TriggerId>7df9bcc8-7a83-42ec-a0ef-50b05065a6ff</TriggerId>
+    </TriggerDefinition>
+    <TriggerDefinition>
+      <Event xsi:type="AdHocEventDefinition">
+        <Id>c4bb593c-6fba-4372-a6d6-bec160858b8a</Id>
+        <DisplayName>Started by User</DisplayName>
+        <Imported>true</Imported>
+        <Identities />
+      </Event>
+      <Condition xsi:type="RootConditionDefinition">
+        <Id>ae416645-93a2-427a-bda3-fecc88c378a6</Id>
+        <Conditions />
+      </Condition>
+      <TriggerId>294c19d0-9362-499a-a542-9d896094657f</TriggerId>
+    </TriggerDefinition>
+  </Triggers>
+  <VariableDefinitions>
+    <VariableConfiguration xsi:type="BooleanVariableConfiguration" xml:space="preserve">
+      <Id>7a7a7e77-aba8-49bb-b120-052098ab040b</Id>
+      <DisplayName>Thin Provisioning</DisplayName>
+      <boolean>false</boolean>
+      <Scope>
+        <Family>ProcessInstanceLocal</Family>
+        <ControllingItemId>9cb81a92-3e99-48bb-9302-def66cce9e3a</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="StringVariableConfiguration" xml:space="preserve">
+      <Id>2ea4fad3-8b22-45d1-8d0e-0be71f13b584</Id>
+      <DisplayName>Org Href</DisplayName>
+      <string />
+      <Scope>
+        <Family>ProcessInstanceLocal</Family>
+        <ControllingItemId>9cb81a92-3e99-48bb-9302-def66cce9e3a</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="TableVariableConfiguration" xml:space="preserve">
+      <Id>25157d8f-4aa0-4f0f-a244-a47639814162</Id>
+      <DisplayName>Create Org</DisplayName>
+      <ModifiedTime>2014-08-18T21:15:24.3379116Z</ModifiedTime>
+      <FixedSchemaDataTable>
+        <FixedSchema>
+          <Columns>
+            <TableSchemaColumn>
+              <Name>Name</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>PlatformElementID</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>FSMStatus</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>LastDiscovery</Name>
+              <DataType>Tidal.Automation.Common.Product.UtcDateTime</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>href</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>OrgName</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>FirstDiscovered</Name>
+              <DataType>Tidal.Automation.Common.Product.UtcDateTime</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>Description</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>UniqueID</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+          </Columns>
+        </FixedSchema>
+      </FixedSchemaDataTable>
+      <Scope>
+        <Family>ProcessInstanceLocal</Family>
+        <ControllingItemId>9cb81a92-3e99-48bb-9302-def66cce9e3a</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="TableVariableConfiguration" xml:space="preserve">
+      <Id>17247373-efda-4b67-b6b0-b5ce519cb47d</Id>
+      <DisplayName>vCloudOrgVDC</DisplayName>
+      <ModifiedTime>2014-12-22T19:08:36.0160724Z</ModifiedTime>
+      <FixedSchemaDataTable>
+        <FixedSchema>
+          <Columns>
+            <TableSchemaColumn>
+              <Name>Name</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>VdcName</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>Description</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>PlatformElementID</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>ProviderVdcName</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>FSMStatus</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>LastDiscovery</Name>
+              <DataType>Tidal.Automation.Common.Product.UtcDateTime</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>VmQuota</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>CPUPctGuaranteed</Name>
+              <DataType>System.Double</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>CPULimit</Name>
+              <DataType>System.Int32</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>MemoryAllocated</Name>
+              <DataType>System.Double</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>href</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>OrgName</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>FirstDiscovered</Name>
+              <DataType>Tidal.Automation.Common.Product.UtcDateTime</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>StorageLimit</Name>
+              <DataType>System.Int32</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>ThinProvisioning</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>CPUAllocated</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>MemoryPctGuaranteed</Name>
+              <DataType>System.Double</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>StorageAllocated</Name>
+              <DataType>System.Int32</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>FastProvisioning</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>OrgHref</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>UniqueID</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>MemoryLimit</Name>
+              <DataType>System.Int32</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>MemoryUnused</Name>
+              <DataType>System.Int32</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>StorageUnused</Name>
+              <DataType>System.Int32</DataType>
+            </TableSchemaColumn>
+          </Columns>
+        </FixedSchema>
+      </FixedSchemaDataTable>
+      <Scope>
+        <Family>ProcessInstanceLocal</Family>
+        <ControllingItemId>9cb81a92-3e99-48bb-9302-def66cce9e3a</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="TableVariableConfiguration" xml:space="preserve">
+      <Id>b2e231c3-fa4b-45f4-a276-a4299dcc100f</Id>
+      <DisplayName>vCloudOrgNetwork</DisplayName>
+      <ModifiedTime>2014-08-01T01:09:32.0300011Z</ModifiedTime>
+      <FixedSchemaDataTable>
+        <FixedSchema>
+          <Columns>
+            <TableSchemaColumn>
+              <Name>Name</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>PlatformElementID</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>FSMStatus</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>LastDiscovery</Name>
+              <DataType>Tidal.Automation.Common.Product.UtcDateTime</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>Href</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>OrgName</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>FirstDiscovered</Name>
+              <DataType>Tidal.Automation.Common.Product.UtcDateTime</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>RoutingPrefix</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>CIDRSuffix</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>BroadcastAddress</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>NetworkName</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>UniqueID</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>CIDR</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>NetMask</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>Subnet</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>ParentNetwork</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>ParentHref</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>Gateway</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>OrgHref</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>Description</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+          </Columns>
+        </FixedSchema>
+      </FixedSchemaDataTable>
+      <Scope>
+        <Family>ProcessInstanceLocal</Family>
+        <ControllingItemId>9cb81a92-3e99-48bb-9302-def66cce9e3a</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="BooleanVariableConfiguration" xml:space="preserve">
+      <Id>ebdaadc2-aefb-4d35-9e35-defe55e90ee0</Id>
+      <DisplayName>Fast Provisioning</DisplayName>
+      <boolean>false</boolean>
+      <Scope>
+        <Family>ProcessInstanceLocal</Family>
+        <ControllingItemId>9cb81a92-3e99-48bb-9302-def66cce9e3a</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+  </VariableDefinitions>
+  <Notes />
+  <SmallImageReference xsi:type="ImageReferenceContained">
+    <FriendlyName>vCloud16x16.bmp</FriendlyName>
+    <Bitmap>iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAZ1JREFUOE+VUj1Iw1AQPqGDY8eujo4du9bJioMBBwUHEQcRBykOpbiE0iGEDCV0KKGLpILgmA6FOtpBaIdCx6y61bHbed/L37M2BR985PLu3fe+d/ftsKyj5wkNVyXSV6XwTe8XZbV18DSjt1WRqJCdqO5+0fisQgQC6ocRugk+mR4Drh1Wkd6azyEQovZ4C0GWzwh6ugKJzTUFOfmIoLfI5DtTJqCtEaRPE+K1vCKoWj7TnadkK9y4XLM89ro22wPJmbIHJHnpT9GSC45rTMFozO4sZG++5NIgVPAlBoyRNFNuL5ue6ocO49Rg12kx+fOQXTkMAsI7BYjVP4pfQlVYv79VE1lfiuAcN3WkGEjeKzH2oQ5PSkcdj3zPCaIR/4tA90k8ZsINGxXonf9jtMgHxok00f1Y5D5ByUZfkq9OmiqYxAQOZhz3Ab2QGMrUdK6l2yjuiF8szScYY2sSclNgz5a52G9IE8WZqQ8ar5HRQOAPA26OptwSJQBiHcblFTcf6gq/vCDFtiXKMAq/J86TjfQAYg1+393oAWz+ALMrhLKRd88FAAAAAElFTkSuQmCC</Bitmap>
+  </SmallImageReference>
+  <LargeImageReference xsi:type="ImageReferenceContained">
+    <FriendlyName>vcd.bmp</FriendlyName>
+    <Bitmap>iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAA5lJREFUWEft12lIFGEYB/DZXM901VzIzSSovhiIiUdZ0GGFISSYhoESnVDYJVZGRkXa6YZlHrm66a7t4barKbWudlF22GGXZVSglUlBkBZRUOS/9511ptlVYqld+9ILf1jegXl+8zwzw44IZDF2q/VVP/P2mxvZFfFHxG4iJtTPk/EY9WuPHhwg6fv+gxmwO8vAwGfGV9zHuLvR81iXzNufGT860LYaBdgvZeNlhCufIEDRxSaosguhNS+RdLEfW299Qe6dr3xybn/Bwgv9iG/p4xPX1INQfR2mGQ5gdWs1Mm9q2DS+fjCkFjMcwHy2Ccd0ZkQoH0NKio9TdSPkVDdmWT4g5fJHbBMg7AFx5h5Iay0I1NRgfGUOomvzeITDgCYCMBlMLCJW3YlgdRcPmEeulCK4TggBbHFDM7y0JhYQUpEDmWILovR7seaayvEOcACKOK43I6qmkwdwrV5MO0HazwGExYWAYEU2QWQTRB5M3e2OjUAIoIiSWjNiNE/ZEQhnnUwQW8g4ZlusbaeFuXAdoAAuBe2WPwNQRBlBpDbcR3yjbRLO3IbseAU8Co/CXRCJfD/Gbl8K6bYUPvss2j8HUISi1og0nQ7xWg2bOLUK0gI5/JelQ7xhLZisTD4+61ciKDECAQvC+OSfLPw7AEWUDyKmq1SQkCv22H8QfqnJ8FmaCvHGX4ghgLmTsass/+8BFHFCfxrhxaVgDsutgJRkeC1KJIglPMIGQIqLoyTYUbzbOQCKKNLoMaGwyAZAEaPTaCfWgQKkdASDxZmpXs4FUEQpQUwqOAIJGYE3Kc7Fl4zDf91ySBOmwD1aAlGkN5tcZ3aAAmiK1RrEZmZClp7OZ1xGOubkpiJjZwRSssL4aM8ddd4IOAD7slJWI2ZTFoJXrGIzc08ajlyJgvmuDBWmaBRr49i0PTzhGgCHiN60GTN2p2HvpWkouxOO1meeaG4PgsIY43oA+4iqq3DofCLkNyOtgOceuPGCQcu9MSg/HevaDnAj0dcpcexqgg2AIs7fD0R7Z4nrRiC8J3T15VBeX0A64Ek6IOLz8v2ukQFQjLGhFA1ts1B/byKfzl75yAEowlBXgqpL81HZGsamratoZAFWRClBxOOgJRINj1z4GArvAfvfOqMC2fok1LnyPfA7AD2mMlSg5aFx5EcghHV0dDgGePf2HXrf9Do9nz5+cgww3F91V+0N+13gqmLDnfc/4H8H/nkHfgIDh+OFLj0zAQAAAABJRU5ErkJggg==</Bitmap>
+  </LargeImageReference>
+  <GeneralHelp xsi:type="CustomHelpAlias">
+    <Alias />
+  </GeneralHelp>
+  <GeneralInstanceHelp xsi:type="CustomHelpAlias">
+    <Alias />
+  </GeneralInstanceHelp>
+  <InputHelp xsi:type="CustomHelpAlias">
+    <Alias />
+  </InputHelp>
+  <InputInstanceHelp xsi:type="CustomHelpAlias">
+    <Alias />
+  </InputInstanceHelp>
+  <OutputHelp xsi:type="CustomHelpAlias">
+    <Alias />
+  </OutputHelp>
+  <ValidTargetTypeNames>
+    <string>Tidal.Automation.BuiltinAdapter.Common.ServiceTargetConfiguration, Tidal.Automation.BuiltinAdapter.Common</string>
+  </ValidTargetTypeNames>
+  <ValidTargetTypeExtensionIds>
+    <guid>2144f9f9-e556-424e-bb95-709d41dcc237</guid>
+  </ValidTargetTypeExtensionIds>
+  <ValidRuntimeUserTypeNames>
+    <string>Tidal.Automation.Ssh.Common.PublicKeyAdminUserConfiguration, Tidal.Automation.Ssh.Common</string>
+    <string>Tidal.Automation.Ssh.Common.IOSUserConfiguration, Tidal.Automation.Ssh.Common</string>
+    <string>Tidal.Automation.BuiltinAdapter.Common.GenericRuntimeUserConfiguration, Tidal.Automation.BuiltinAdapter.Common</string>
+    <string>Tidal.Automation.Sap.Common.Users.SAPUserConfiguration, Tidal.Automation.Sap.Common</string>
+    <string>Tidal.Automation.Snmp.Common.SnmpUserConfiguration, Tidal.Automation.Snmp.Common</string>
+    <string>Tidal.Automation.Windows.Common.WindowsUserConfiguration, Tidal.Automation.Windows.Common</string>
+  </ValidRuntimeUserTypeNames>
+  <GroupName>Cloud Virtual Server Automation</GroupName>
+</ProcessConfiguration>

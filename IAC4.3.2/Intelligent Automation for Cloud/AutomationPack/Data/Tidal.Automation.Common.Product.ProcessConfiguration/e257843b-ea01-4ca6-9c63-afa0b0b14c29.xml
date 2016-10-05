@@ -1,0 +1,455 @@
+<?xml version="1.0"?>
+<ProcessConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>e257843b-ea01-4ca6-9c63-afa0b0b14c29</Id>
+  <DisplayName>CloudSync Discover Infrastructure -&gt; vCenter ResourcePools</DisplayName>
+  <Description>This process collects VM vCenter Resource Pools from associated VM vSpheres and synchronizes the data with the Cloud Portal.</Description>
+  <VersionNumber>-1</VersionNumber>
+  <CreatedTime>2016-02-15T20:44:31.660875Z</CreatedTime>
+  <ModifiedTime>2016-05-03T22:17:08.2155078Z</ModifiedTime>
+  <Version>4.3.1.9733</Version>
+  <TargetLoadBalancer xsi:type="RequireOverrideLoadBalancer" />
+  <AuditStarts>true</AuditStarts>
+  <AuditSuccesses>true</AuditSuccesses>
+  <WorkflowId>520d88f4-f8b5-429c-b3a2-4d642dbe15cc</WorkflowId>
+  <CategoryIds>
+    <guid>a222897c-7e90-474d-a2a9-fcdf3948bb1b</guid>
+  </CategoryIds>
+  <TriggerOwner>74d6de41-8d7c-42dd-b0df-37578a8885eb</TriggerOwner>
+  <Triggers>
+    <TriggerDefinition>
+      <Event xsi:type="AdHocEventDefinition">
+        <Id>b081fd99-4931-42ab-bddc-c5c1a8e68703</Id>
+        <DisplayName>Started by User</DisplayName>
+        <Imported>true</Imported>
+        <Identities />
+      </Event>
+      <Condition xsi:type="RootConditionDefinition">
+        <Id>617e90de-9fad-4a9c-b260-e84b5749327a</Id>
+        <Conditions />
+      </Condition>
+      <TriggerId>e8646e3b-83ed-41b2-aafc-29e193437661</TriggerId>
+    </TriggerDefinition>
+    <TriggerDefinition>
+      <Event xsi:type="StartProcessEventDefinition">
+        <Id>ce2f0cf7-ab78-475f-bda0-2fb628a5bacf</Id>
+        <DisplayName>Started by Parent Process</DisplayName>
+        <Imported>true</Imported>
+        <ProcessIds />
+      </Event>
+      <Condition xsi:type="RootConditionDefinition">
+        <Id>a2c059ee-f7ba-49fb-8732-6bb7ade10232</Id>
+        <Conditions />
+      </Condition>
+      <TriggerId>8cdf150a-4407-4b0d-a405-c103f361fc25</TriggerId>
+    </TriggerDefinition>
+    <TriggerDefinition>
+      <Event xsi:type="NorthboundEventDefinition">
+        <Id>b9c1c573-c4ee-478c-9725-bff8dd85680b</Id>
+        <DisplayName>Started by Web Service</DisplayName>
+        <Imported>true</Imported>
+      </Event>
+      <Condition xsi:type="RootConditionDefinition">
+        <Id>4ca5a8fd-00c0-4d75-b1b1-9b931173f74e</Id>
+        <Conditions />
+      </Condition>
+      <TriggerId>b65407a7-2991-4c83-90ca-cf44e63fe446</TriggerId>
+    </TriggerDefinition>
+    <TriggerDefinition>
+      <Event xsi:type="NorthboundEventDefinition">
+        <Id>316fbfaf-7a15-4b7e-b7c8-aa1c026b7cd1</Id>
+        <DisplayName>Started by Web Service</DisplayName>
+        <Imported>true</Imported>
+        <NorthboundName>CloudSyncDiscoverInfrastructureVCenterResourcePools</NorthboundName>
+      </Event>
+      <Condition xsi:type="RootConditionDefinition">
+        <Id>caf8faad-712e-44fd-ba29-e090f0366a31</Id>
+        <Conditions />
+      </Condition>
+      <TriggerId>a2bad383-a867-411c-b7fb-9009f5abc8cf</TriggerId>
+    </TriggerDefinition>
+    <TriggerDefinition>
+      <Event xsi:type="NorthboundEventDefinition">
+        <Id>5239340e-d9f8-4186-89b0-c5c550770053</Id>
+        <DisplayName>Started by Web Service</DisplayName>
+      </Event>
+      <Condition xsi:type="RootConditionDefinition">
+        <Id>cd4454d2-e15e-4199-9f44-23791c407e7a</Id>
+        <Conditions />
+      </Condition>
+      <TriggerId>3257cf29-94ed-44b2-9460-03bbb04c36d9</TriggerId>
+    </TriggerDefinition>
+  </Triggers>
+  <VariableDefinitions>
+    <VariableConfiguration xsi:type="StringVariableConfiguration" xml:space="preserve">
+      <Id>ed37155e-8391-440a-89bd-691310676299</Id>
+      <DisplayName>Cloud Portal Channel ID</DisplayName>
+      <string />
+      <Scope>
+        <Family>ProcessInstanceIn</Family>
+        <ControllingItemId>e257843b-ea01-4ca6-9c63-afa0b0b14c29</ControllingItemId>
+      </Scope>
+      <ValueRequired>true</ValueRequired>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="StringVariableConfiguration" xml:space="preserve">
+      <Id>180b84c8-a9b3-4b16-8774-8c00e0bdceb4</Id>
+      <DisplayName>Datacenter</DisplayName>
+      <ModifiedTime>2012-08-07T16:32:04.4071874Z</ModifiedTime>
+      <string>*</string>
+      <Scope>
+        <Family>ProcessInstanceIn</Family>
+        <ControllingItemId>e257843b-ea01-4ca6-9c63-afa0b0b14c29</ControllingItemId>
+      </Scope>
+      <ValueRequired>true</ValueRequired>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="StringVariableConfiguration" xml:space="preserve">
+      <Id>0c7a725a-7a9b-4c81-9cfc-37dbb9367e0c</Id>
+      <DisplayName>ResourcePools Data XML</DisplayName>
+      <ModifiedTime>2012-08-08T05:24:51.1914157Z</ModifiedTime>
+      <string />
+      <Scope>
+        <Family>ProcessInstanceOut</Family>
+        <ControllingItemId>e257843b-ea01-4ca6-9c63-afa0b0b14c29</ControllingItemId>
+      </Scope>
+      <Multiline>true</Multiline>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="TableVariableConfiguration" xml:space="preserve">
+      <Id>fbc79cc7-54ed-4b01-98d0-4a3287fbe4fe</Id>
+      <DisplayName>ResourcePools</DisplayName>
+      <ModifiedTime>2013-05-23T01:38:11.8605942Z</ModifiedTime>
+      <FixedSchemaDataTable>
+        <FixedSchema>
+          <Columns>
+            <TableSchemaColumn>
+              <Name>ResourcePoolName</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>CPUShares</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>CPUReservation</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>CPULimit</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>MemoryReservation</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>MemoryLimit</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>ResourcePoolPath</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>ClusterID</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>Datacenter</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>vCenterName</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>PlatformElementID</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>MORef</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>UniqueID</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>Name</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+          </Columns>
+        </FixedSchema>
+      </FixedSchemaDataTable>
+      <Scope>
+        <Family>ProcessInstanceLocal</Family>
+        <ControllingItemId>e257843b-ea01-4ca6-9c63-afa0b0b14c29</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="NumberVariableConfiguration" xml:space="preserve">
+      <Id>8a1e0750-9ac2-4666-a9d6-e8192fcab376</Id>
+      <DisplayName>Error Code</DisplayName>
+      <double>0</double>
+      <Scope>
+        <Family>ProcessInstanceOut</Family>
+        <ControllingItemId>e257843b-ea01-4ca6-9c63-afa0b0b14c29</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="NumberVariableConfiguration" xml:space="preserve">
+      <Id>26634e76-38f7-4728-a0d0-d02b275c0610</Id>
+      <DisplayName>GUIDCount</DisplayName>
+      <double>0</double>
+      <Scope>
+        <Family>ProcessInstanceLocal</Family>
+        <ControllingItemId>e257843b-ea01-4ca6-9c63-afa0b0b14c29</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="TableVariableConfiguration" xml:space="preserve">
+      <Id>3e150aa8-8434-436f-9554-fc74499264e8</Id>
+      <DisplayName>Create Records</DisplayName>
+      <ModifiedTime>2013-07-14T13:40:08.7212414Z</ModifiedTime>
+      <FixedSchemaDataTable>
+        <FixedSchema>
+          <Columns>
+            <TableSchemaColumn>
+              <Name>Name</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>ResourcePoolName</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>CPUShares</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>CPUReservation</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>CPULimit</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>MemoryReservation</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>MemoryLimit</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>ResourcePoolPath</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>Datacenter</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>vCenterName</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>PlatformElementID</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>FSMStatus</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>ClusterID</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>MORef</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>UniqueID</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>LastDiscovery</Name>
+              <DataType>Tidal.Automation.Common.Product.UtcDateTime</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>FirstDiscovered</Name>
+              <DataType>Tidal.Automation.Common.Product.UtcDateTime</DataType>
+            </TableSchemaColumn>
+          </Columns>
+        </FixedSchema>
+      </FixedSchemaDataTable>
+      <Scope>
+        <Family>ProcessInstanceLocal</Family>
+        <ControllingItemId>e257843b-ea01-4ca6-9c63-afa0b0b14c29</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="TableVariableConfiguration" xml:space="preserve">
+      <Id>7a135cc4-ce70-471f-8528-8fa95546a2c3</Id>
+      <DisplayName>Update Records</DisplayName>
+      <ModifiedTime>2013-07-14T13:42:56.4142414Z</ModifiedTime>
+      <FixedSchemaDataTable>
+        <FixedSchema>
+          <Columns>
+            <TableSchemaColumn>
+              <Name>Name</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>ResourcePoolName</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>CPUShares</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>CPUReservation</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>CPULimit</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>MemoryReservation</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>MemoryLimit</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>ResourcePoolPath</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>Datacenter</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>vCenterName</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>PlatformElementID</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>FSMStatus</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>ClusterID</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>MORef</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>UniqueID</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>LastDiscovery</Name>
+              <DataType>Tidal.Automation.Common.Product.UtcDateTime</DataType>
+            </TableSchemaColumn>
+          </Columns>
+        </FixedSchema>
+      </FixedSchemaDataTable>
+      <Scope>
+        <Family>ProcessInstanceLocal</Family>
+        <ControllingItemId>e257843b-ea01-4ca6-9c63-afa0b0b14c29</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="TableVariableConfiguration" xml:space="preserve">
+      <Id>736198c1-23e5-426e-8234-da58a1de091b</Id>
+      <DisplayName>Update Records - NotFound</DisplayName>
+      <ModifiedTime>2014-01-08T23:56:17.4004847Z</ModifiedTime>
+      <FixedSchemaDataTable>
+        <FixedSchema>
+          <Columns>
+            <TableSchemaColumn>
+              <Name>Name</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>FSMStatus</Name>
+              <DataType>System.String</DataType>
+            </TableSchemaColumn>
+            <TableSchemaColumn>
+              <Name>LastDiscovery</Name>
+              <DataType>Tidal.Automation.Common.Product.UtcDateTime</DataType>
+            </TableSchemaColumn>
+          </Columns>
+        </FixedSchema>
+      </FixedSchemaDataTable>
+      <Scope>
+        <Family>ProcessInstanceLocal</Family>
+        <ControllingItemId>e257843b-ea01-4ca6-9c63-afa0b0b14c29</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="StringVariableConfiguration" xml:space="preserve">
+      <Id>8950d857-5c60-435c-880e-6aee83360aab</Id>
+      <DisplayName>Datacenter Filter Name</DisplayName>
+      <string />
+      <Scope>
+        <Family>ProcessInstanceLocal</Family>
+        <ControllingItemId>e257843b-ea01-4ca6-9c63-afa0b0b14c29</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="StringVariableConfiguration" xml:space="preserve">
+      <Id>9a7157c9-f9c0-49de-a538-3fd6a926f393</Id>
+      <DisplayName>Datacenter Filter Value</DisplayName>
+      <string />
+      <Scope>
+        <Family>ProcessInstanceLocal</Family>
+        <ControllingItemId>e257843b-ea01-4ca6-9c63-afa0b0b14c29</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="BooleanVariableConfiguration" xml:space="preserve">
+      <Id>4cf44d97-f246-46c9-a8fa-141e4af1fe03</Id>
+      <DisplayName>Scheduled</DisplayName>
+      <boolean>false</boolean>
+      <Scope>
+        <Family>ProcessInstanceIn</Family>
+        <ControllingItemId>e257843b-ea01-4ca6-9c63-afa0b0b14c29</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+  </VariableDefinitions>
+  <Notes />
+  <GeneralHelp xsi:type="CustomHelpAlias">
+    <Alias />
+  </GeneralHelp>
+  <GeneralInstanceHelp xsi:type="CustomHelpAlias">
+    <Alias />
+  </GeneralInstanceHelp>
+  <InputHelp xsi:type="CustomHelpAlias">
+    <Alias />
+  </InputHelp>
+  <InputInstanceHelp xsi:type="CustomHelpAlias">
+    <Alias />
+  </InputInstanceHelp>
+  <OutputHelp xsi:type="CustomHelpAlias">
+    <Alias />
+  </OutputHelp>
+  <ValidTargetTypeNames>
+    <string>Tidal.Automation.VMware.Common.VCTargetConfiguration, Tidal.Automation.VMware.Common</string>
+  </ValidTargetTypeNames>
+  <ValidTargetTypeExtensionIds>
+    <guid>a7fc2f5a-1e30-7968-b60a-1860da88e13d</guid>
+  </ValidTargetTypeExtensionIds>
+  <ValidRuntimeUserTypeNames>
+    <string>Tidal.Automation.Ssh.Common.PublicKeyAdminUserConfiguration, Tidal.Automation.Ssh.Common</string>
+    <string>Tidal.Automation.Ssh.Common.IOSUserConfiguration, Tidal.Automation.Ssh.Common</string>
+    <string>Tidal.Automation.BuiltinAdapter.Common.GenericRuntimeUserConfiguration, Tidal.Automation.BuiltinAdapter.Common</string>
+    <string>Tidal.Automation.Sap.Common.Users.SAPUserConfiguration, Tidal.Automation.Sap.Common</string>
+    <string>Tidal.Automation.Snmp.Common.SnmpUserConfiguration, Tidal.Automation.Snmp.Common</string>
+    <string>Tidal.Automation.Windows.Common.WindowsUserConfiguration, Tidal.Automation.Windows.Common</string>
+  </ValidRuntimeUserTypeNames>
+  <GroupName>Cloud Portal Service Catalog</GroupName>
+  <ResumeWhenInterrupted>false</ResumeWhenInterrupted>
+  <StoreWhenCompleted>false</StoreWhenCompleted>
+  <MustStoreOnError>true</MustStoreOnError>
+</ProcessConfiguration>

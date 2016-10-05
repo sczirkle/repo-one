@@ -1,0 +1,421 @@
+<?xml version="1.0"?>
+<WorkflowConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>5bf86d17-b86e-4921-a84d-d58baf7e535a</Id>
+  <DisplayName>Provision Stack Single VM - Throttled - Wrapper</DisplayName>
+  <CreatedTime>2016-02-15T20:44:59.223375Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:45:17.4326171Z</ModifiedTime>
+  <FirstActivity xsi:type="RootNode">
+    <Id>cc770b0b-64cb-4e89-aebf-224990f0967c</Id>
+    <DisplayName />
+    <Children>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>1550574b-2dd8-4477-aa10-3dba9a1a9792</Id>
+        <DisplayName>Set Process Instance ID Target Variable</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>8b33d76c-d950-481b-9163-f4eca38cea15</Id>
+            <ActivityNodeId>1550574b-2dd8-4477-aa10-3dba9a1a9792</ActivityNodeId>
+            <CompletedId>fa651e0d-ba99-4e43-8753-c544dfebbd90</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+          <Id>1550574b-2dd8-4477-aa10-3dba9a1a9792</Id>
+          <DisplayName>Set Process Instance ID Target Variable</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>e241f649-a620-436b-aa60-ecd013dd81f7</ContainingProcessId>
+          <VariableToSet>
+            <DisplayPath>Process.Target.Cloud.Service.General.ProcessInstanceID</DisplayPath>
+            <LinkChain>
+              <Link xsi:type="PropertyNameLink">
+                <PropertyName>ResolvedTarget</PropertyName>
+              </Link>
+              <Link xsi:type="ObjectReferenceLink">
+                <ObjectLink>
+                  <Id>9a700f4d-2521-4dad-bcf4-9fd7608a6fd3</Id>
+                  <ObjectType>PropertyExtension</ObjectType>
+                </ObjectLink>
+              </Link>
+            </LinkChain>
+            <ObjectType>ProcessInstance</ObjectType>
+          </VariableToSet>
+          <NewValue xsi:type="SubstitutableString">
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Process Instance Id</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>Id</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectType>ProcessInstance</ObjectType>
+              </VariableReference>
+            </References>
+          </NewValue>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ConditionBranchNode">
+        <Id>caf98880-bf67-4991-ad29-2fd8eebd7825</Id>
+        <DisplayName>Retry from Point of Failure?</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>1be14ed0-f95f-437f-8fe0-865eaf515248</Id>
+            <DisplayName>Set Start Point</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>0e1cad21-52ed-427c-b5a0-bbc560b12833</Id>
+                <ActivityNodeId>1be14ed0-f95f-437f-8fe0-865eaf515248</ActivityNodeId>
+                <CompletedId>0f5a1c4e-fe6e-4e3e-9fbf-02658cfabb1d</CompletedId>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+              <Id>1be14ed0-f95f-437f-8fe0-865eaf515248</Id>
+              <DisplayName>Set Start Point</DisplayName>
+              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                <SingleTargetId>
+                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                </SingleTargetId>
+              </TargetLoadBalancer>
+              <InheritTarget>false</InheritTarget>
+              <ContainingProcessId>e241f649-a620-436b-aa60-ecd013dd81f7</ContainingProcessId>
+              <VariableToSet>
+                <DisplayPath>Process.Variables.Local.Start Point</DisplayPath>
+                <LinkChain />
+                <ObjectId>82ec40dd-cf7b-42c6-9711-158f9345a94c</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableToSet>
+              <NewValue xsi:type="SubstitutableString">
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Target.Cloud.Service.General.ErrorRemediation.UserSet.StartPoint.Retry</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResolvedTarget</PropertyName>
+                      </Link>
+                      <Link xsi:type="ObjectReferenceLink">
+                        <ObjectLink>
+                          <Id>08ae6527-2766-4769-ac49-4cd7fc45040c</Id>
+                          <ObjectType>PropertyExtension</ObjectType>
+                        </ObjectLink>
+                      </Link>
+                    </LinkChain>
+                    <ObjectType>ProcessInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </NewValue>
+            </Configuration>
+          </ActivityNode>
+        </Children>
+        <Condition>
+          <Id>ad038354-7df1-4370-81ee-815fff76e748</Id>
+          <Conditions>
+            <ConditionDefinition xsi:type="VariableConditionDefinition">
+              <Id>6a5a987d-1cea-4df3-87dd-21341afd9b46</Id>
+              <Expression xsi:type="SubstitutableBoolean">
+                <HardcodedValue>true</HardcodedValue>
+              </Expression>
+              <Comparison>Equals</Comparison>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.Retry</DisplayPath>
+                <LinkChain />
+                <ObjectId>f5da779a-6c97-4992-a47b-80501db37f53</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </ConditionDefinition>
+          </Conditions>
+        </Condition>
+      </ActivityNode>
+      <ActivityNode xsi:type="StartProcessNode">
+        <Id>5396ad0c-99c1-440e-915b-8f0c81fce2e2</Id>
+        <DisplayName>Commission Virtual Server from Template</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>89fef52a-073b-43b1-9cb9-8049ad5f8922</Id>
+            <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+            <DisplayName>If Execution Fails</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="SwitchNode">
+                <Id>8a6b84c1-fd36-4366-8b09-975693162394</Id>
+                <DisplayName />
+                <Children>
+                  <ActivityNode xsi:type="ConditionBranchNode">
+                    <Id>ee410549-bf12-491a-920f-d6556c68975c</Id>
+                    <DisplayName>Unhandled Exception?</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ExecuteActivityNode">
+                        <Id>a1bae299-1ced-4b2d-a58f-c23723fcc5a5</Id>
+                        <DisplayName>Set Multiple Variables</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                            <Id>c7d3401a-6b68-4b86-aea6-5e0b74d899f8</Id>
+                            <ActivityNodeId>a1bae299-1ced-4b2d-a58f-c23723fcc5a5</ActivityNodeId>
+                            <CompletedId>2fcbfeef-8f75-4a48-a746-f02da36b0690</CompletedId>
+                          </ActivityNode>
+                        </Children>
+                        <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+                          <Id>a1bae299-1ced-4b2d-a58f-c23723fcc5a5</Id>
+                          <DisplayName>Set Multiple Variables</DisplayName>
+                          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                            <SingleTargetId>
+                              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                            </SingleTargetId>
+                          </TargetLoadBalancer>
+                          <InheritTarget>false</InheritTarget>
+                          <ContainingProcessId>e241f649-a620-436b-aa60-ecd013dd81f7</ContainingProcessId>
+                          <Assignments>
+                            <PropertyReferenceValuePair>
+                              <VariableToSet>
+                                <DisplayPath>Process.Target.Cloud.Service.General.ErrorCode</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>ResolvedTarget</PropertyName>
+                                  </Link>
+                                  <Link xsi:type="ObjectReferenceLink">
+                                    <ObjectLink>
+                                      <Id>7ad8347e-4936-4962-ab6d-3ec987d2737a</Id>
+                                      <ObjectType>PropertyExtension</ObjectType>
+                                    </ObjectLink>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectType>ProcessInstance</ObjectType>
+                              </VariableToSet>
+                              <NewValue xsi:type="SubstitutableNumber">
+                                <HardcodedValue>9200</HardcodedValue>
+                              </NewValue>
+                            </PropertyReferenceValuePair>
+                            <PropertyReferenceValuePair>
+                              <VariableToSet>
+                                <DisplayPath>Process.Target.Cloud.Service.General.ErrorDescription</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>ResolvedTarget</PropertyName>
+                                  </Link>
+                                  <Link xsi:type="ObjectReferenceLink">
+                                    <ObjectLink>
+                                      <Id>05385a56-169a-4946-9e3e-8de36ceaa838</Id>
+                                      <ObjectType>PropertyExtension</ObjectType>
+                                    </ObjectLink>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectType>ProcessInstance</ObjectType>
+                              </VariableToSet>
+                              <NewValue xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Commission Virtual Server from Template.Error Information</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ErrorInformation</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>5396ad0c-99c1-440e-915b-8f0c81fce2e2</ObjectId>
+                                    <ObjectType>ProcessInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </NewValue>
+                            </PropertyReferenceValuePair>
+                          </Assignments>
+                        </Configuration>
+                      </ActivityNode>
+                    </Children>
+                    <Condition>
+                      <Id>7a8a30a1-53c3-4998-b433-dbf94a5af885</Id>
+                      <Conditions>
+                        <ConditionDefinition xsi:type="VariableConditionDefinition">
+                          <Id>b9909164-2fba-4512-ba59-8d1c52b0ac8a</Id>
+                          <Expression xsi:type="SubstitutableNumber">
+                            <HardcodedValue>0</HardcodedValue>
+                          </Expression>
+                          <Comparison>Equals</Comparison>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Target.Properties.Cloud.Service.General.ErrorCode</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResolvedTarget</PropertyName>
+                              </Link>
+                              <Link xsi:type="ObjectReferenceLink">
+                                <ObjectLink>
+                                  <Id>7ad8347e-4936-4962-ab6d-3ec987d2737a</Id>
+                                  <ObjectType>PropertyExtension</ObjectType>
+                                </ObjectLink>
+                              </Link>
+                            </LinkChain>
+                            <ObjectType>ProcessInstance</ObjectType>
+                          </VariableReference>
+                        </ConditionDefinition>
+                      </Conditions>
+                    </Condition>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="ConditionBranchNode">
+                    <Id>891dff19-4786-43ed-91de-76b78755cb4d</Id>
+                    <DisplayName>Error Message Not Set</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ExecuteActivityNode">
+                        <Id>959cd344-881d-49fc-8003-b11353e627a3</Id>
+                        <DisplayName>Set Error Description</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                            <Id>538b9e34-b744-4cec-9d1d-7ea33110aa03</Id>
+                            <ActivityNodeId>959cd344-881d-49fc-8003-b11353e627a3</ActivityNodeId>
+                            <CompletedId>8afa148d-ae77-4a6b-9a7f-039479534d20</CompletedId>
+                          </ActivityNode>
+                        </Children>
+                        <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+                          <Id>959cd344-881d-49fc-8003-b11353e627a3</Id>
+                          <DisplayName>Set Error Description</DisplayName>
+                          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                            <SingleTargetId>
+                              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                            </SingleTargetId>
+                          </TargetLoadBalancer>
+                          <InheritTarget>false</InheritTarget>
+                          <ContainingProcessId>e241f649-a620-436b-aa60-ecd013dd81f7</ContainingProcessId>
+                          <Assignments>
+                            <PropertyReferenceValuePair>
+                              <VariableToSet>
+                                <DisplayPath>Process.Target.Cloud.Service.General.ErrorDescription</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>ResolvedTarget</PropertyName>
+                                  </Link>
+                                  <Link xsi:type="ObjectReferenceLink">
+                                    <ObjectLink>
+                                      <Id>05385a56-169a-4946-9e3e-8de36ceaa838</Id>
+                                      <ObjectType>PropertyExtension</ObjectType>
+                                    </ObjectLink>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectType>ProcessInstance</ObjectType>
+                              </VariableToSet>
+                              <NewValue xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Commission Virtual Server from Template.Error Information</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ErrorInformation</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>5396ad0c-99c1-440e-915b-8f0c81fce2e2</ObjectId>
+                                    <ObjectType>ProcessInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </NewValue>
+                            </PropertyReferenceValuePair>
+                          </Assignments>
+                        </Configuration>
+                      </ActivityNode>
+                    </Children>
+                    <Condition>
+                      <Id>a2da0632-e389-4e49-8e9a-47090a369347</Id>
+                      <Conditions>
+                        <ConditionDefinition xsi:type="VariableConditionDefinition">
+                          <Id>7d9212dc-e48d-4cd3-ae15-2262e4e0b962</Id>
+                          <Expression xsi:type="SubstitutableString">
+                            <HardcodedValue />
+                          </Expression>
+                          <Comparison>Equals</Comparison>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Target.Properties.Cloud.Service.General.ErrorDescription</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResolvedTarget</PropertyName>
+                              </Link>
+                              <Link xsi:type="ObjectReferenceLink">
+                                <ObjectLink>
+                                  <Id>05385a56-169a-4946-9e3e-8de36ceaa838</Id>
+                                  <ObjectType>PropertyExtension</ObjectType>
+                                </ObjectLink>
+                              </Link>
+                            </LinkChain>
+                            <ObjectType>ProcessInstance</ObjectType>
+                          </VariableReference>
+                        </ConditionDefinition>
+                      </Conditions>
+                    </Condition>
+                  </ActivityNode>
+                </Children>
+              </ActivityNode>
+              <ActivityNode xsi:type="CompletedNode">
+                <Id>0bf309d8-c1a7-49c3-88e9-4423320912c2</Id>
+                <Notes>Fail the entire process</Notes>
+                <CompletedType>FailedNotCompleted</CompletedType>
+                <ResultMessage>
+                  <FormattedCode>{0}</FormattedCode>
+                  <References>
+                    <VariableReference xsi:type="PropertyReference">
+                      <DisplayPath>Workflow.Commission Virtual Server from Template.Error Information</DisplayPath>
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>ErrorInformation</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectId>5396ad0c-99c1-440e-915b-8f0c81fce2e2</ObjectId>
+                      <ObjectType>ProcessInstance</ObjectType>
+                    </VariableReference>
+                  </References>
+                </ResultMessage>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>6a15b4ef-36f4-45ff-ad86-6fa4fd931370</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>764e7805-d9df-41dd-ac64-72129386d3b7</Id>
+                  <Expression xsi:type="SubstitutableBoolean">
+                    <HardcodedValue>true</HardcodedValue>
+                  </Expression>
+                  <Comparison>Equals</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>InstanceFailed</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>5396ad0c-99c1-440e-915b-8f0c81fce2e2</ObjectId>
+                    <ObjectType>ProcessInstance</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+        </Children>
+        <ProcessId>c74cf982-6cc7-4f85-9421-8631a3b120cf</ProcessId>
+        <InputVariableTable>
+          <VariableAssignmentsAsArray />
+        </InputVariableTable>
+        <Asynchronous>false</Asynchronous>
+        <InheritTarget>true</InheritTarget>
+        <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+        <InheritPriorityClass>true</InheritPriorityClass>
+        <RuntimeUserId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </RuntimeUserId>
+        <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+        <StartPointId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </StartPointId>
+        <StartPointName>
+          <FormattedCode>{0}</FormattedCode>
+          <References>
+            <VariableReference xsi:type="PropertyReference">
+              <DisplayPath>Process.Variables.Local.Start Point</DisplayPath>
+              <LinkChain />
+              <ObjectId>82ec40dd-cf7b-42c6-9711-158f9345a94c</ObjectId>
+              <ObjectType>GlobalVariable</ObjectType>
+            </VariableReference>
+          </References>
+        </StartPointName>
+      </ActivityNode>
+    </Children>
+  </FirstActivity>
+  <ProcessId>e241f649-a620-436b-aa60-ecd013dd81f7</ProcessId>
+</WorkflowConfiguration>

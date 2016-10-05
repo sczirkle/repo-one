@@ -1,0 +1,2053 @@
+<?xml version="1.0"?>
+<WorkflowConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>8ecb9836-c374-4138-9a1c-be2254f73cbf</Id>
+  <DisplayName>CloudSync Discover Infrastructure -&gt; Cisco UCS VLANs</DisplayName>
+  <CreatedTime>2016-02-15T20:41:49.598375Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:42:07.8076171Z</ModifiedTime>
+  <FirstActivity xsi:type="RootNode">
+    <Id>badff6c7-8f7b-4864-ae39-e9886fa430ac</Id>
+    <DisplayName />
+    <Children>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>aa399d45-a580-449d-8073-c6758ab60ac5</Id>
+        <DisplayName>Get All UCS Server Objects</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>eb502c14-a07c-4312-b316-272aa47ae0d6</Id>
+            <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+            <DisplayName>If Execution Fails</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>7d7b99f5-bd25-483c-810f-e3808457b4e1</Id>
+                <DisplayName>Failed to get all UCS server objects (8012)</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>497153b9-c4ef-4ecc-822b-fe3744aeb9db</Id>
+                    <ActivityNodeId>7d7b99f5-bd25-483c-810f-e3808457b4e1</ActivityNodeId>
+                    <CompletedId>7708c0a9-54e3-4a61-afae-c2a81fcc7057</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                  <Id>7d7b99f5-bd25-483c-810f-e3808457b4e1</Id>
+                  <DisplayName>Failed to get all UCS server objects (8012)</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>24ba4a85-7d79-4e2f-a990-2324a41832a5</ContainingProcessId>
+                  <VariableToSet>
+                    <DisplayPath>Process.Variables.Output.Error Code</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>e4cb5431-8870-4ca6-bdab-094f3168619b</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableToSet>
+                  <NewValue xsi:type="SubstitutableNumber">
+                    <HardcodedValue>8012</HardcodedValue>
+                  </NewValue>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="CompletedNode">
+                <Id>a4cbf889-db9d-4b32-98c4-78abd594ddbf</Id>
+                <Notes>Fail the entire process</Notes>
+                <CompletedType>FailedNotCompleted</CompletedType>
+                <ResultMessage>
+                  <FormattedCode>{0}</FormattedCode>
+                  <References>
+                    <VariableReference xsi:type="PropertyReference">
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>ErrorInformation</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectId>aa399d45-a580-449d-8073-c6758ab60ac5</ObjectId>
+                      <ObjectType>ActivityInstance</ObjectType>
+                    </VariableReference>
+                  </References>
+                </ResultMessage>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>e5f92412-8a7b-4c48-b06a-b989a25fd242</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>e0412699-801c-48cb-a06c-b0d838142169</Id>
+                  <Expression xsi:type="SubstitutableBoolean">
+                    <HardcodedValue>true</HardcodedValue>
+                  </Expression>
+                  <Comparison>Equals</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>InstanceFailed</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>aa399d45-a580-449d-8073-c6758ab60ac5</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="GetManagedObjectActivityConfiguration" xml:space="preserve">
+          <Id>aa399d45-a580-449d-8073-c6758ab60ac5</Id>
+          <DisplayName>Get All UCS Server Objects</DisplayName>
+          <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+          <ContainingProcessId>24ba4a85-7d79-4e2f-a990-2324a41832a5</ContainingProcessId>
+          <CollectXmlOutput>true</CollectXmlOutput>
+          <Criterias>
+            <CriteriaInfo>
+              <Name>Distinguished &amp;name:</Name>
+              <AttributeName>dn</AttributeName>
+              <IsRequired>false</IsRequired>
+              <ValueTypeName>System.String</ValueTypeName>
+              <ConfigurationTypeName>Tidal.Automation.Common.Product.SubstitutableWildcard</ConfigurationTypeName>
+            </CriteriaInfo>
+          </Criterias>
+          <ClassName>Tidal.Automation.Ucs.Common.UCSFabricVLAN</ClassName>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>8e1a077c-9b2c-42af-8532-12b0b80fc320</Id>
+        <DisplayName>XSL - UCSM Command</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>2fc4ba2b-5ab4-4f4b-82b1-dfbb493baae0</Id>
+            <ActivityNodeId>8e1a077c-9b2c-42af-8532-12b0b80fc320</ActivityNodeId>
+            <CompletedId>bffd933c-729b-4388-8399-93f25911cd9e</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="XslTransformActivityConfiguration" xml:space="preserve">
+          <Id>8e1a077c-9b2c-42af-8532-12b0b80fc320</Id>
+          <DisplayName>XSL - UCSM Command</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>24ba4a85-7d79-4e2f-a990-2324a41832a5</ContainingProcessId>
+          <SourceText>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Get All UCS Server Objects.XML Output</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>Result</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>aa399d45-a580-449d-8073-c6758ab60ac5</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </VariableReference>
+            </References>
+          </SourceText>
+          <TransformPath>
+            <HardcodedValue />
+          </TransformPath>
+          <XSLDocument>
+            <FormattedCode>&lt;?xml version="1.0"?&gt;
+&lt;xsl:stylesheet version="1.0"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+	&lt;xsl:template match="/"&gt;
+		&lt;results&gt;
+			&lt;xsl:for-each select="//fabricVlan"&gt;
+				&lt;row&gt;
+					&lt;VLANID&gt;
+						&lt;xsl:value-of select="@id"/&gt;
+					&lt;/VLANID&gt;
+					&lt;VLANName&gt;
+						&lt;xsl:value-of select="@name"/&gt;
+					&lt;/VLANName&gt;
+					&lt;UniqueID&gt;
+						&lt;xsl:value-of select="@dn"/&gt;
+					&lt;/UniqueID&gt;
+					&lt;ServerDN&gt;
+						&lt;xsl:value-of select="@dn"/&gt;
+					&lt;/ServerDN&gt;
+					&lt;PlatformElementID&gt;{0}&lt;/PlatformElementID&gt;
+				&lt;/row&gt;
+			&lt;/xsl:for-each&gt;
+		&lt;/results&gt;
+	&lt;/xsl:template&gt;
+&lt;/xsl:stylesheet&gt;
+
+</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Target.Target Id</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>ResolvedTarget</PropertyName>
+                  </Link>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>Id</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectType>ProcessInstance</ObjectType>
+              </VariableReference>
+            </References>
+          </XSLDocument>
+          <OutputFormat>Xml</OutputFormat>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>bb2b2d38-3c53-4476-930c-6ed8c0da6da3</Id>
+        <DisplayName>Update UniqueID Field</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>81d14ee9-21ba-492b-aca9-f672714e324d</Id>
+            <ActivityNodeId>bb2b2d38-3c53-4476-930c-6ed8c0da6da3</ActivityNodeId>
+            <CompletedId>10cb9c1d-d9c7-4330-9b8e-928c25de0989</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="ReplaceStringActivityConfiguration" xml:space="preserve">
+          <Id>bb2b2d38-3c53-4476-930c-6ed8c0da6da3</Id>
+          <DisplayName>Update UniqueID Field</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>24ba4a85-7d79-4e2f-a990-2324a41832a5</ContainingProcessId>
+          <InputString>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.XSL - UCSM Command.Output</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>Output</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>8e1a077c-9b2c-42af-8532-12b0b80fc320</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </VariableReference>
+            </References>
+          </InputString>
+          <ReplaceList>
+            <SubstitutableRepaceItem>
+              <ReplacedString>
+                <HardcodedValue>&lt;UniqueID&gt;</HardcodedValue>
+              </ReplacedString>
+              <ReplacementString>
+                <FormattedCode>&lt;UniqueID&gt;{0}:</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Target.Target Id</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResolvedTarget</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>Id</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectType>ProcessInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </ReplacementString>
+            </SubstitutableRepaceItem>
+            <SubstitutableRepaceItem>
+              <ReplacedString>
+                <HardcodedValue>&lt;/row&gt;</HardcodedValue>
+              </ReplacedString>
+              <ReplacementString>
+                <FormattedCode>&lt;UCSManager&gt;{0}&lt;/UCSManager&gt;&lt;/row&gt;</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Target.UCS Manager Host Name</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResolvedTarget</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>UcsManagerHost</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectType>ProcessInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </ReplacementString>
+            </SubstitutableRepaceItem>
+          </ReplaceList>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="StartProcessNode">
+        <Id>294285df-43fb-4ee4-b929-6aa8ab4befbe</Id>
+        <DisplayName>Update Service Item by Discovery Table XML - VM</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>9693cd34-b0f3-4ed1-a833-685e39640a7d</Id>
+            <ProcessNodeId>294285df-43fb-4ee4-b929-6aa8ab4befbe</ProcessNodeId>
+            <CompletedId>a5b57286-e953-4051-a8ef-8287dd4590e1</CompletedId>
+          </ActivityNode>
+        </Children>
+        <ProcessId>c52eb259-cd26-48e9-935a-4745b7fd1d8a</ProcessId>
+        <InputVariableTable>
+          <VariableAssignmentsAsArray>
+            <InputVariableAssignment>
+              <InputVariableId>d81fa286-b3be-4d3a-ab70-9eb21ed667af</InputVariableId>
+              <VariableValue xsi:type="SubstitutableBoolean">
+                <HardcodedValue>false</HardcodedValue>
+              </VariableValue>
+            </InputVariableAssignment>
+            <InputVariableAssignment>
+              <InputVariableId>f13a2610-769d-4fe1-a7f4-ff1c342fab1b</InputVariableId>
+              <VariableValue xsi:type="SubstitutableString">
+                <HardcodedValue />
+              </VariableValue>
+            </InputVariableAssignment>
+            <InputVariableAssignment>
+              <InputVariableId>bccd18cf-51a4-4333-be71-44151b6638d4</InputVariableId>
+              <VariableValue xsi:type="SubstitutableString">
+                <HardcodedValue />
+              </VariableValue>
+            </InputVariableAssignment>
+            <InputVariableAssignment>
+              <InputVariableId>06b6e6f8-6bac-4098-bf02-bf4fafc371e7</InputVariableId>
+              <VariableValue xsi:type="SubstitutableString">
+                <HardcodedValue />
+              </VariableValue>
+            </InputVariableAssignment>
+            <InputVariableAssignment>
+              <InputVariableId>7655509d-3465-451d-921b-83bd3b611cab</InputVariableId>
+              <VariableValue xsi:type="SubstitutableString">
+                <HardcodedValue />
+              </VariableValue>
+            </InputVariableAssignment>
+            <InputVariableAssignment>
+              <InputVariableId>18e8725d-e57d-4ba3-a5ea-5ef62fe6d5c7</InputVariableId>
+              <VariableValue xsi:type="SubstitutableString">
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Target.Target Id</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResolvedTarget</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>Id</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectType>ProcessInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </VariableValue>
+            </InputVariableAssignment>
+            <InputVariableAssignment>
+              <InputVariableId>e75ff706-8f8f-4579-afb4-f904a5771853</InputVariableId>
+              <VariableValue xsi:type="SubstitutableString">
+                <HardcodedValue>PlatformElementID</HardcodedValue>
+              </VariableValue>
+            </InputVariableAssignment>
+            <InputVariableAssignment>
+              <InputVariableId>af9d0c3d-3681-4268-a191-86763cd8d44e</InputVariableId>
+              <VariableValue xsi:type="SubstitutableBoolean">
+                <HardcodedValue>true</HardcodedValue>
+              </VariableValue>
+            </InputVariableAssignment>
+            <InputVariableAssignment>
+              <InputVariableId>f95a1ec5-7848-490f-af58-a8eac6bd47cb</InputVariableId>
+              <VariableValue xsi:type="SubstitutableBoolean">
+                <HardcodedValue>false</HardcodedValue>
+              </VariableValue>
+            </InputVariableAssignment>
+            <InputVariableAssignment>
+              <InputVariableId>9b98fd25-dca2-4384-8e79-8aa0251b1dd8</InputVariableId>
+              <VariableValue xsi:type="SubstitutableString">
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Update UniqueID Field.Replaced Result</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>Result</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>bb2b2d38-3c53-4476-930c-6ed8c0da6da3</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </VariableValue>
+            </InputVariableAssignment>
+            <InputVariableAssignment>
+              <InputVariableId>194e6469-ba18-4214-968c-bf937ccee274</InputVariableId>
+              <VariableValue xsi:type="SubstitutableString">
+                <HardcodedValue>UCSVLAN</HardcodedValue>
+              </VariableValue>
+            </InputVariableAssignment>
+          </VariableAssignmentsAsArray>
+        </InputVariableTable>
+        <Asynchronous>false</Asynchronous>
+        <InheritTarget>false</InheritTarget>
+        <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+          <SingleTargetReference>
+            <FormattedCode />
+            <HardcodedValue>
+              <Id>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</Id>
+              <ObjectType>Target</ObjectType>
+            </HardcodedValue>
+          </SingleTargetReference>
+        </TargetLoadBalancer>
+        <InheritPriorityClass>true</InheritPriorityClass>
+        <RuntimeUserId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </RuntimeUserId>
+        <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+        <StartPointId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </StartPointId>
+        <StartPointName>
+          <FormattedCode />
+        </StartPointName>
+      </ActivityNode>
+      <ActivityNode xsi:type="ParallelNode">
+        <Id>49517e4c-3c50-43bf-865f-f3e2160bc92c</Id>
+        <DisplayName>Handle SI Tables</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="SequenceNode">
+            <Id>f301c144-2d85-490e-a8f1-8638a9f952a7</Id>
+            <DisplayName>Create SIs </DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ConditionBranchNode">
+                <Id>e9dde08b-648f-40ee-a14e-b153e96b500b</Id>
+                <DisplayName>If SIs to Create </DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="ExecuteActivityNode">
+                    <Id>d5ad85e1-2340-4a8f-bfa5-a694c5c494d4</Id>
+                    <DisplayName>Read Table from XML - Create</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                        <Id>34ea71db-adc3-41e6-9fe8-32a1bec0f44a</Id>
+                        <ActivityNodeId>a4b8b536-8b65-44b2-87a0-9426e4ccb7a4</ActivityNodeId>
+                        <CompletedId>227d77af-83a0-47f9-9e20-102be2925ba7</CompletedId>
+                      </ActivityNode>
+                    </Children>
+                    <Configuration xsi:type="ReadTableFromXmlActivityConfiguration" xml:space="preserve">
+                      <Id>d5ad85e1-2340-4a8f-bfa5-a694c5c494d4</Id>
+                      <DisplayName>Read Table from XML - Create</DisplayName>
+                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                        <SingleTargetId>
+                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                        </SingleTargetId>
+                      </TargetLoadBalancer>
+                      <InheritTarget>false</InheritTarget>
+                      <ContainingProcessId>24ba4a85-7d79-4e2f-a990-2324a41832a5</ContainingProcessId>
+                      <Columns>
+                        <BuiltinTableColumn>
+                          <Name>Name</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>PlatformElementID</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>LastDiscovery</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>VLANID</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>VLANName</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>ServerDN</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>UCSManager</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>FirstDiscovered</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>FSMStatus</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>UniqueID</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                      </Columns>
+                      <XmlRowElementName>
+                        <HardcodedValue>row</HardcodedValue>
+                      </XmlRowElementName>
+                      <XmlString>
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.Update Service Item by Discovery Table XML - VM.Create Record Set (Table XML)</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="ProcessOutputVariableLink">
+                                <LaunchingActivityId>294285df-43fb-4ee4-b929-6aa8ab4befbe</LaunchingActivityId>
+                                <OutputVariableId>4a286f6d-5629-4ac4-a4f0-a6dbd3c9332a</OutputVariableId>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>294285df-43fb-4ee4-b929-6aa8ab4befbe</ObjectId>
+                            <ObjectType>WorkflowNode</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </XmlString>
+                    </Configuration>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="ForEachNode">
+                    <Id>30e2fbec-b288-4753-bd61-9276403fcc02</Id>
+                    <DisplayName>Add Unique SI Name</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ExecuteActivityNode">
+                        <Id>75d1a037-b904-4f03-a0a0-7d5527921f91</Id>
+                        <DisplayName>Add Row to Table - Create Records</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                            <Id>cac56bf9-5437-4bef-9483-0fa8245c589c</Id>
+                            <ActivityNodeId>75d1a037-b904-4f03-a0a0-7d5527921f91</ActivityNodeId>
+                            <CompletedId>4dba3818-0409-4192-b1f7-9df7f3104d4c</CompletedId>
+                          </ActivityNode>
+                        </Children>
+                        <Configuration xsi:type="AddTableRowActivityConfiguration" xml:space="preserve">
+                          <Id>75d1a037-b904-4f03-a0a0-7d5527921f91</Id>
+                          <DisplayName>Add Row to Table - Create Records</DisplayName>
+                          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                            <SingleTargetId>
+                              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                            </SingleTargetId>
+                          </TargetLoadBalancer>
+                          <InheritTarget>false</InheritTarget>
+                          <ContainingProcessId>24ba4a85-7d79-4e2f-a990-2324a41832a5</ContainingProcessId>
+                          <TableVariable>
+                            <DisplayPath>Process.Variables.Local.Create Records</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>49626c98-ced7-4cbf-9c60-8031e6fbc3d8</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </TableVariable>
+                          <Values>
+                            <BuiltinDataCellValue>
+                              <ColumnName>FirstDiscovered</ColumnName>
+                              <Value xsi:type="SubstitutableDate">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Process.Start Time</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>StartTime</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectType>ProcessInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>FSMStatus</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Add Unique SI Name.Item.FSMStatus</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>FSMStatus</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>30e2fbec-b288-4753-bd61-9276403fcc02</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>LastDiscovery</ColumnName>
+                              <Value xsi:type="SubstitutableDate">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Process.Start Time</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>StartTime</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectType>ProcessInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>Name</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}{1}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Process.Process Instance Id</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>Id</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectType>ProcessInstance</ObjectType>
+                                  </VariableReference>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Process.Variables.Local.GUIDCount</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>901906a4-154d-4240-9d95-2b290470ef27</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>PlatformElementID</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Add Unique SI Name.Item.PlatformElementID</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>PlatformElementID</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>30e2fbec-b288-4753-bd61-9276403fcc02</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>ServerDN</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Add Unique SI Name.Item.ServerDN</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ServerDN</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>30e2fbec-b288-4753-bd61-9276403fcc02</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>UCSManager</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Add Unique SI Name.Item.UCSManager</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>UCSManager</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>30e2fbec-b288-4753-bd61-9276403fcc02</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>UniqueID</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Add Unique SI Name.Item.UniqueID</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>UniqueID</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>30e2fbec-b288-4753-bd61-9276403fcc02</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>VLANID</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Add Unique SI Name.Item.VLANID</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>VLANID</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>30e2fbec-b288-4753-bd61-9276403fcc02</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>VLANName</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Add Unique SI Name.Item.VLANName</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>VLANName</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>30e2fbec-b288-4753-bd61-9276403fcc02</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                          </Values>
+                        </Configuration>
+                      </ActivityNode>
+                      <ActivityNode xsi:type="ExecuteActivityNode">
+                        <Id>7ccad112-35cb-488a-ba8a-33eebfe9550f</Id>
+                        <DisplayName>Increment GUIDCount</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                            <Id>520923f6-3577-4cea-a0cc-59c5ad22b7e7</Id>
+                            <ActivityNodeId>7ccad112-35cb-488a-ba8a-33eebfe9550f</ActivityNodeId>
+                            <CompletedId>93b4ddff-4451-4427-a883-a9deffafcd7f</CompletedId>
+                          </ActivityNode>
+                        </Children>
+                        <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                          <Id>7ccad112-35cb-488a-ba8a-33eebfe9550f</Id>
+                          <DisplayName>Increment GUIDCount</DisplayName>
+                          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                            <SingleTargetId>
+                              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                            </SingleTargetId>
+                          </TargetLoadBalancer>
+                          <InheritTarget>false</InheritTarget>
+                          <ContainingProcessId>24ba4a85-7d79-4e2f-a990-2324a41832a5</ContainingProcessId>
+                          <VariableToSet>
+                            <DisplayPath>Process.Variables.Local.GUIDCount</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>901906a4-154d-4240-9d95-2b290470ef27</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableToSet>
+                          <NewValue xsi:type="SubstitutableNumber">
+                            <FormattedCode>{0} + 1</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Variables.Local.GUIDCount</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>901906a4-154d-4240-9d95-2b290470ef27</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </NewValue>
+                        </Configuration>
+                      </ActivityNode>
+                    </Children>
+                    <ForEachSource xsi:type="PropertyReference">
+                      <DisplayPath>Workflow.Read Table from XML - Create.Result Table.Rows</DisplayPath>
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>ResultTable</PropertyName>
+                        </Link>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>TIARows</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectId>d5ad85e1-2340-4a8f-bfa5-a694c5c494d4</ObjectId>
+                      <ObjectType>ActivityInstance</ObjectType>
+                    </ForEachSource>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="ConditionBranchNode">
+                    <Id>8db006ea-5f5a-41e7-9517-f37f29e038c9</Id>
+                    <DisplayName>If Records</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ExecuteActivityNode">
+                        <Id>141faea4-c180-4825-b822-64e527400165</Id>
+                        <DisplayName>Create Service Items</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="ConditionBranchNode">
+                            <Id>04c92bf2-2729-43c2-aeea-ab8b63807b5a</Id>
+                            <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                            <DisplayName>If Execution Fails</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="ExecuteActivityNode">
+                                <Id>47d1bf07-73b5-4cb4-9eb8-a3c2a65f290e</Id>
+                                <DisplayName>Failed to Create Service Items (1013)</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                    <Id>904424e4-e0ba-4fa5-ad23-e09fa5d62037</Id>
+                                    <ActivityNodeId>47d1bf07-73b5-4cb4-9eb8-a3c2a65f290e</ActivityNodeId>
+                                    <CompletedId>052fdb4b-270a-403a-a67d-46538faaed63</CompletedId>
+                                  </ActivityNode>
+                                </Children>
+                                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                                  <Id>47d1bf07-73b5-4cb4-9eb8-a3c2a65f290e</Id>
+                                  <DisplayName>Failed to Create Service Items (1013)</DisplayName>
+                                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                    <SingleTargetId>
+                                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                    </SingleTargetId>
+                                  </TargetLoadBalancer>
+                                  <InheritTarget>false</InheritTarget>
+                                  <ContainingProcessId>24ba4a85-7d79-4e2f-a990-2324a41832a5</ContainingProcessId>
+                                  <VariableToSet>
+                                    <DisplayPath>Process.Variables.Output.Error Code</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>e4cb5431-8870-4ca6-bdab-094f3168619b</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableToSet>
+                                  <NewValue xsi:type="SubstitutableNumber">
+                                    <HardcodedValue>1013</HardcodedValue>
+                                  </NewValue>
+                                </Configuration>
+                              </ActivityNode>
+                              <ActivityNode xsi:type="CompletedNode">
+                                <Id>a61dfe46-a9d4-4407-aafb-cdf2d4076e73</Id>
+                                <Notes>Fail the entire process</Notes>
+                                <CompletedType>FailedNotCompleted</CompletedType>
+                                <ResultMessage>
+                                  <FormattedCode>Failed to Create Service Items:
+{0}</FormattedCode>
+                                  <References>
+                                    <VariableReference xsi:type="PropertyReference">
+                                      <DisplayPath>Workflow.Create Service Items.Error Information</DisplayPath>
+                                      <LinkChain>
+                                        <Link xsi:type="PropertyNameLink">
+                                          <PropertyName>ErrorInformation</PropertyName>
+                                        </Link>
+                                      </LinkChain>
+                                      <ObjectId>141faea4-c180-4825-b822-64e527400165</ObjectId>
+                                      <ObjectType>ActivityInstance</ObjectType>
+                                    </VariableReference>
+                                  </References>
+                                </ResultMessage>
+                              </ActivityNode>
+                            </Children>
+                            <Condition>
+                              <Id>b10325a4-f5f0-471a-af28-c7b1ea3cf987</Id>
+                              <Conditions>
+                                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                                  <Id>feb66006-6fcd-4a1b-b75a-bc61654da8a7</Id>
+                                  <Expression xsi:type="SubstitutableBoolean">
+                                    <HardcodedValue>true</HardcodedValue>
+                                  </Expression>
+                                  <Comparison>Equals</Comparison>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Create Service Items.Instance Failed</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>InstanceFailed</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>141faea4-c180-4825-b822-64e527400165</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </ConditionDefinition>
+                              </Conditions>
+                            </Condition>
+                          </ActivityNode>
+                        </Children>
+                        <Configuration xsi:type="CreateServiceItemsFromTableActivityConfiguration" xml:space="preserve">
+                          <Id>141faea4-c180-4825-b822-64e527400165</Id>
+                          <DisplayName>Create Service Items</DisplayName>
+                          <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                            <SingleTargetReference>
+                              <FormattedCode />
+                              <HardcodedValue>
+                                <Id>b3216113-bb0f-4cb3-b7c2-93b9074ef87b</Id>
+                                <ObjectType>Target</ObjectType>
+                              </HardcodedValue>
+                            </SingleTargetReference>
+                          </TargetLoadBalancer>
+                          <InheritTarget>false</InheritTarget>
+                          <ContainingProcessId>24ba4a85-7d79-4e2f-a990-2324a41832a5</ContainingProcessId>
+                          <RetryTimePeriod>
+                            <DisplayUnits>Minutes</DisplayUnits>
+                            <Period>
+                              <FormattedCode>{0}</FormattedCode>
+                              <References>
+                                <VariableReference xsi:type="PropertyReference">
+                                  <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Time Period (minutes)</DisplayPath>
+                                  <LinkChain>
+                                    <Link xsi:type="PropertyNameLink">
+                                      <PropertyName>DefaultRetryMinutes</PropertyName>
+                                    </Link>
+                                  </LinkChain>
+                                  <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                                  <ObjectType>Adapter</ObjectType>
+                                </VariableReference>
+                              </References>
+                            </Period>
+                          </RetryTimePeriod>
+                          <RetryFrequency>
+                            <DisplayUnits>Seconds</DisplayUnits>
+                            <Period>
+                              <FormattedCode>{0}</FormattedCode>
+                              <References>
+                                <VariableReference xsi:type="PropertyReference">
+                                  <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Frequency (seconds)</DisplayPath>
+                                  <LinkChain>
+                                    <Link xsi:type="PropertyNameLink">
+                                      <PropertyName>DefaultRetryFrequency</PropertyName>
+                                    </Link>
+                                  </LinkChain>
+                                  <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                                  <ObjectType>Adapter</ObjectType>
+                                </VariableReference>
+                              </References>
+                            </Period>
+                          </RetryFrequency>
+                          <Timeout>
+                            <DisplayUnits>Seconds</DisplayUnits>
+                            <Period>
+                              <HardcodedValue>100</HardcodedValue>
+                            </Period>
+                          </Timeout>
+                          <ChannelId>
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Variables.Input.Cloud Portal Channel ID</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>4c8aa5e8-90a7-4637-beef-c7cfdf305cda</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </ChannelId>
+                          <ItemType>
+                            <HardcodedValue>UCSVLAN</HardcodedValue>
+                          </ItemType>
+                          <Table>
+                            <DisplayPath>Process.Variables.Local.Create Records</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>49626c98-ced7-4cbf-9c60-8031e6fbc3d8</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </Table>
+                          <Subscriber>
+                            <HardcodedValue />
+                          </Subscriber>
+                          <SubscriberOuName>
+                            <HardcodedValue />
+                          </SubscriberOuName>
+                          <SubscriberRequisitionId>
+                            <FormattedCode />
+                          </SubscriberRequisitionId>
+                          <SubscriberRequisitionEntryId>
+                            <FormattedCode />
+                          </SubscriberRequisitionEntryId>
+                        </Configuration>
+                      </ActivityNode>
+                    </Children>
+                    <Condition>
+                      <Id>4972c743-b231-42e4-82a9-3fdbedd659ef</Id>
+                      <Conditions>
+                        <ConditionDefinition xsi:type="VariableConditionDefinition">
+                          <Id>93cc9b9f-47dd-4465-837a-90584dec5032</Id>
+                          <Expression xsi:type="SubstitutableNumber">
+                            <HardcodedValue>0</HardcodedValue>
+                          </Expression>
+                          <Comparison>GreaterThan</Comparison>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Local.Create Records.Row Count</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>RowCount</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>49626c98-ced7-4cbf-9c60-8031e6fbc3d8</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                        </ConditionDefinition>
+                      </Conditions>
+                    </Condition>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="StartProcessNode">
+                    <Id>c7200f9a-a289-4a15-9394-1af6c168b432</Id>
+                    <DisplayName>Create  &gt;&gt; Post-Discovery</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                        <Id>93e8502b-e7b3-473d-a7b4-cbc587ca8c19</Id>
+                        <ProcessNodeId>c7200f9a-a289-4a15-9394-1af6c168b432</ProcessNodeId>
+                        <CompletedId>7cbf7499-1346-4198-b357-da7b799b4ca0</CompletedId>
+                      </ActivityNode>
+                    </Children>
+                    <ProcessId>437b200d-25cb-4bbd-84ac-29da3d82a771</ProcessId>
+                    <InputVariableTable>
+                      <VariableAssignmentsAsArray>
+                        <InputVariableAssignment>
+                          <InputVariableId>0c1af29f-5d66-465a-89ad-c6ad130394cd</InputVariableId>
+                          <VariableValue xsi:type="SubstitutableString">
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Variables.Local.Create Records.Table Data XML</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>TableDataXml</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>49626c98-ced7-4cbf-9c60-8031e6fbc3d8</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </VariableValue>
+                        </InputVariableAssignment>
+                        <InputVariableAssignment>
+                          <InputVariableId>28c57a2b-8408-4a93-82a9-47965add2df7</InputVariableId>
+                          <VariableValue xsi:type="SubstitutableString">
+                            <HardcodedValue>Create</HardcodedValue>
+                          </VariableValue>
+                        </InputVariableAssignment>
+                      </VariableAssignmentsAsArray>
+                    </InputVariableTable>
+                    <Asynchronous>false</Asynchronous>
+                    <InheritTarget>true</InheritTarget>
+                    <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+                    <InheritPriorityClass>true</InheritPriorityClass>
+                    <RuntimeUserId>
+                      <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                    </RuntimeUserId>
+                    <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                    <StartPointId>
+                      <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                    </StartPointId>
+                    <StartPointName>
+                      <FormattedCode />
+                    </StartPointName>
+                  </ActivityNode>
+                </Children>
+                <Condition>
+                  <Id>53f9297a-aac6-48f2-b49d-a683e0a79e3c</Id>
+                  <Conditions>
+                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                      <Id>3a55277c-eb9c-4221-99df-d76b2b5b4725</Id>
+                      <Expression xsi:type="SubstitutableString">
+                        <HardcodedValue />
+                      </Expression>
+                      <Comparison>NotEquals</Comparison>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.Update Service Item by Discovery Table XML - VM.Create Record Set (Table XML)</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="ProcessOutputVariableLink">
+                            <LaunchingActivityId>294285df-43fb-4ee4-b929-6aa8ab4befbe</LaunchingActivityId>
+                            <OutputVariableId>4a286f6d-5629-4ac4-a4f0-a6dbd3c9332a</OutputVariableId>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>294285df-43fb-4ee4-b929-6aa8ab4befbe</ObjectId>
+                        <ObjectType>WorkflowNode</ObjectType>
+                      </VariableReference>
+                    </ConditionDefinition>
+                  </Conditions>
+                </Condition>
+              </ActivityNode>
+            </Children>
+          </ActivityNode>
+          <ActivityNode xsi:type="SequenceNode">
+            <Id>8f847c9e-4c3b-43f3-8002-3e33f7cbd52c</Id>
+            <DisplayName>Update SIs</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ConditionBranchNode">
+                <Id>5c71ab61-e44e-4888-866d-e295bedcdd52</Id>
+                <DisplayName>If SIs to Update </DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="ExecuteActivityNode">
+                    <Id>bd6a9b3c-0bf5-43bb-8327-efe1f07dfa97</Id>
+                    <DisplayName>Read Table from XML - Update</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                        <Id>9adb98c3-c4e1-4899-b91c-bd3bfb1492ab</Id>
+                        <ActivityNodeId>a4b8b536-8b65-44b2-87a0-9426e4ccb7a4</ActivityNodeId>
+                        <CompletedId>e508d6bd-35d8-4c11-bf9c-e1f7711ea336</CompletedId>
+                      </ActivityNode>
+                    </Children>
+                    <Configuration xsi:type="ReadTableFromXmlActivityConfiguration" xml:space="preserve">
+                      <Id>bd6a9b3c-0bf5-43bb-8327-efe1f07dfa97</Id>
+                      <DisplayName>Read Table from XML - Update</DisplayName>
+                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                        <SingleTargetId>
+                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                        </SingleTargetId>
+                      </TargetLoadBalancer>
+                      <InheritTarget>false</InheritTarget>
+                      <ContainingProcessId>24ba4a85-7d79-4e2f-a990-2324a41832a5</ContainingProcessId>
+                      <Columns>
+                        <BuiltinTableColumn>
+                          <Name>Name</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>PlatformElementID</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>LastDiscovery</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>VLANID</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>VLANName</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>ServerDN</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>UCSManager</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>FirstDiscovered</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>FSMStatus</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>UniqueID</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                      </Columns>
+                      <XmlRowElementName>
+                        <HardcodedValue>row</HardcodedValue>
+                      </XmlRowElementName>
+                      <XmlString>
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.Update Service Item by Discovery Table XML - VM.Update Record Set (Table XML)</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="ProcessOutputVariableLink">
+                                <LaunchingActivityId>294285df-43fb-4ee4-b929-6aa8ab4befbe</LaunchingActivityId>
+                                <OutputVariableId>38cd1186-aba2-4a56-ae91-52cd53bb67ff</OutputVariableId>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>294285df-43fb-4ee4-b929-6aa8ab4befbe</ObjectId>
+                            <ObjectType>WorkflowNode</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </XmlString>
+                    </Configuration>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="ForEachNode">
+                    <Id>9419177c-e3c7-49a6-a292-37e2573c8c57</Id>
+                    <DisplayName>For Each Block - Update</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="SwitchNode">
+                        <Id>3d32d71e-aa0b-459b-b042-bcd599c61baf</Id>
+                        <DisplayName>FSMStatus = NotFound?</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="ConditionBranchNode">
+                            <Id>a4873824-bb65-4356-8790-994afb3062b0</Id>
+                            <DisplayName>Yes</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="ExecuteActivityNode">
+                                <Id>01b64a2b-a552-48ab-898f-dd06ac292ae8</Id>
+                                <DisplayName>Add Row to Table - Update - NotFound</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                    <Id>4b91420c-c240-4925-8194-f44194f8f2f9</Id>
+                                    <ActivityNodeId>01b64a2b-a552-48ab-898f-dd06ac292ae8</ActivityNodeId>
+                                    <CompletedId>80b6adf6-d05a-4fa0-b771-7ce89a87fb0a</CompletedId>
+                                  </ActivityNode>
+                                </Children>
+                                <Configuration xsi:type="AddTableRowActivityConfiguration" xml:space="preserve">
+                                  <Id>01b64a2b-a552-48ab-898f-dd06ac292ae8</Id>
+                                  <DisplayName>Add Row to Table - Update - NotFound</DisplayName>
+                                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                    <SingleTargetId>
+                                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                    </SingleTargetId>
+                                  </TargetLoadBalancer>
+                                  <InheritTarget>false</InheritTarget>
+                                  <ContainingProcessId>24ba4a85-7d79-4e2f-a990-2324a41832a5</ContainingProcessId>
+                                  <TableVariable>
+                                    <DisplayPath>Process.Variables.Local.Update Records - NotFound</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>08ef4514-a0c2-48b0-89f0-07ccd0546571</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </TableVariable>
+                                  <Values>
+                                    <BuiltinDataCellValue>
+                                      <ColumnName>LastDiscovery</ColumnName>
+                                      <Value xsi:type="SubstitutableDate">
+                                        <FormattedCode>{0}</FormattedCode>
+                                        <References>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Process.Start Time</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>StartTime</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectType>ProcessInstance</ObjectType>
+                                          </VariableReference>
+                                        </References>
+                                      </Value>
+                                    </BuiltinDataCellValue>
+                                    <BuiltinDataCellValue>
+                                      <ColumnName>FSMStatus</ColumnName>
+                                      <Value xsi:type="SubstitutableString">
+                                        <FormattedCode>{0}</FormattedCode>
+                                        <References>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.For Each Block - Update.Item.FSMStatus</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>FSMStatus</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>9419177c-e3c7-49a6-a292-37e2573c8c57</ObjectId>
+                                            <ObjectType>ActivityInstance</ObjectType>
+                                          </VariableReference>
+                                        </References>
+                                      </Value>
+                                    </BuiltinDataCellValue>
+                                    <BuiltinDataCellValue>
+                                      <ColumnName>Name</ColumnName>
+                                      <Value xsi:type="SubstitutableString">
+                                        <FormattedCode>{0}</FormattedCode>
+                                        <References>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.For Each Block - Update.Item.Name</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>Name</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>9419177c-e3c7-49a6-a292-37e2573c8c57</ObjectId>
+                                            <ObjectType>ActivityInstance</ObjectType>
+                                          </VariableReference>
+                                        </References>
+                                      </Value>
+                                    </BuiltinDataCellValue>
+                                  </Values>
+                                </Configuration>
+                              </ActivityNode>
+                            </Children>
+                            <Condition>
+                              <Id>5e9adfc6-ee8d-472e-800d-8ef51c6d59d2</Id>
+                              <Conditions>
+                                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                                  <Id>038239c1-78e4-4703-a32b-0ff1943e88a8</Id>
+                                  <Expression xsi:type="SubstitutableString">
+                                    <HardcodedValue>NotFound</HardcodedValue>
+                                  </Expression>
+                                  <Comparison>Equals</Comparison>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.For Each Block - Update.Item.FSMStatus</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>FSMStatus</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>9419177c-e3c7-49a6-a292-37e2573c8c57</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </ConditionDefinition>
+                              </Conditions>
+                            </Condition>
+                          </ActivityNode>
+                          <ActivityNode xsi:type="ConditionBranchNode">
+                            <Id>b0ff8a7b-ec8b-40a7-98dd-4814989fa7f5</Id>
+                            <DisplayName>No</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="ExecuteActivityNode">
+                                <Id>804744c9-46ed-4d50-841a-5a3b7cc53fa4</Id>
+                                <DisplayName>Add Row to Table - Update</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                    <Id>37ed16e0-f71d-4887-be80-7f706a010966</Id>
+                                    <ActivityNodeId>804744c9-46ed-4d50-841a-5a3b7cc53fa4</ActivityNodeId>
+                                    <CompletedId>29891364-6a28-43e9-ae73-3f079d534704</CompletedId>
+                                  </ActivityNode>
+                                </Children>
+                                <Configuration xsi:type="AddTableRowActivityConfiguration" xml:space="preserve">
+                                  <Id>804744c9-46ed-4d50-841a-5a3b7cc53fa4</Id>
+                                  <DisplayName>Add Row to Table - Update</DisplayName>
+                                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                    <SingleTargetId>
+                                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                    </SingleTargetId>
+                                  </TargetLoadBalancer>
+                                  <InheritTarget>false</InheritTarget>
+                                  <ContainingProcessId>24ba4a85-7d79-4e2f-a990-2324a41832a5</ContainingProcessId>
+                                  <TableVariable>
+                                    <DisplayPath>Process.Variables.Local.Update Records</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>3663698a-895c-4e28-ac95-46314dc1ff68</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </TableVariable>
+                                  <Values>
+                                    <BuiltinDataCellValue>
+                                      <ColumnName>FSMStatus</ColumnName>
+                                      <Value xsi:type="SubstitutableString">
+                                        <FormattedCode>{0}</FormattedCode>
+                                        <References>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.For Each Block - Update.Item.FSMStatus</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>FSMStatus</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>9419177c-e3c7-49a6-a292-37e2573c8c57</ObjectId>
+                                            <ObjectType>ActivityInstance</ObjectType>
+                                          </VariableReference>
+                                        </References>
+                                      </Value>
+                                    </BuiltinDataCellValue>
+                                    <BuiltinDataCellValue>
+                                      <ColumnName>LastDiscovery</ColumnName>
+                                      <Value xsi:type="SubstitutableDate">
+                                        <FormattedCode>{0}</FormattedCode>
+                                        <References>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Process.Start Time</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>StartTime</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectType>ProcessInstance</ObjectType>
+                                          </VariableReference>
+                                        </References>
+                                      </Value>
+                                    </BuiltinDataCellValue>
+                                    <BuiltinDataCellValue>
+                                      <ColumnName>Name</ColumnName>
+                                      <Value xsi:type="SubstitutableString">
+                                        <FormattedCode>{0}</FormattedCode>
+                                        <References>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.For Each Block - Update.Item.Name</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>Name</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>9419177c-e3c7-49a6-a292-37e2573c8c57</ObjectId>
+                                            <ObjectType>ActivityInstance</ObjectType>
+                                          </VariableReference>
+                                        </References>
+                                      </Value>
+                                    </BuiltinDataCellValue>
+                                    <BuiltinDataCellValue>
+                                      <ColumnName>PlatformElementID</ColumnName>
+                                      <Value xsi:type="SubstitutableString">
+                                        <FormattedCode>{0}</FormattedCode>
+                                        <References>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.For Each Block - Update.Item.PlatformElementID</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>PlatformElementID</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>9419177c-e3c7-49a6-a292-37e2573c8c57</ObjectId>
+                                            <ObjectType>ActivityInstance</ObjectType>
+                                          </VariableReference>
+                                        </References>
+                                      </Value>
+                                    </BuiltinDataCellValue>
+                                    <BuiltinDataCellValue>
+                                      <ColumnName>ServerDN</ColumnName>
+                                      <Value xsi:type="SubstitutableString">
+                                        <FormattedCode>{0}</FormattedCode>
+                                        <References>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.For Each Block - Update.Item.ServerDN</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>ServerDN</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>9419177c-e3c7-49a6-a292-37e2573c8c57</ObjectId>
+                                            <ObjectType>ActivityInstance</ObjectType>
+                                          </VariableReference>
+                                        </References>
+                                      </Value>
+                                    </BuiltinDataCellValue>
+                                    <BuiltinDataCellValue>
+                                      <ColumnName>UCSManager</ColumnName>
+                                      <Value xsi:type="SubstitutableString">
+                                        <FormattedCode>{0}</FormattedCode>
+                                        <References>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.For Each Block - Update.Item.UCSManager</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>UCSManager</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>9419177c-e3c7-49a6-a292-37e2573c8c57</ObjectId>
+                                            <ObjectType>ActivityInstance</ObjectType>
+                                          </VariableReference>
+                                        </References>
+                                      </Value>
+                                    </BuiltinDataCellValue>
+                                    <BuiltinDataCellValue>
+                                      <ColumnName>UniqueID</ColumnName>
+                                      <Value xsi:type="SubstitutableString">
+                                        <FormattedCode>{0}</FormattedCode>
+                                        <References>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.For Each Block - Update.Item.UniqueID</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>UniqueID</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>9419177c-e3c7-49a6-a292-37e2573c8c57</ObjectId>
+                                            <ObjectType>ActivityInstance</ObjectType>
+                                          </VariableReference>
+                                        </References>
+                                      </Value>
+                                    </BuiltinDataCellValue>
+                                    <BuiltinDataCellValue>
+                                      <ColumnName>VLANID</ColumnName>
+                                      <Value xsi:type="SubstitutableString">
+                                        <FormattedCode>{0}</FormattedCode>
+                                        <References>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.For Each Block - Update.Item.VLANID</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>VLANID</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>9419177c-e3c7-49a6-a292-37e2573c8c57</ObjectId>
+                                            <ObjectType>ActivityInstance</ObjectType>
+                                          </VariableReference>
+                                        </References>
+                                      </Value>
+                                    </BuiltinDataCellValue>
+                                    <BuiltinDataCellValue>
+                                      <ColumnName>VLANName</ColumnName>
+                                      <Value xsi:type="SubstitutableString">
+                                        <FormattedCode>{0}</FormattedCode>
+                                        <References>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.For Each Block - Update.Item.VLANName</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>VLANName</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>9419177c-e3c7-49a6-a292-37e2573c8c57</ObjectId>
+                                            <ObjectType>ActivityInstance</ObjectType>
+                                          </VariableReference>
+                                        </References>
+                                      </Value>
+                                    </BuiltinDataCellValue>
+                                  </Values>
+                                </Configuration>
+                              </ActivityNode>
+                            </Children>
+                            <Condition>
+                              <Id>85b81ccf-d116-40b3-9ca9-bd1a6595538e</Id>
+                              <Conditions />
+                            </Condition>
+                          </ActivityNode>
+                        </Children>
+                      </ActivityNode>
+                    </Children>
+                    <ForEachSource xsi:type="PropertyReference">
+                      <DisplayPath>Workflow.Read Table from XML - Update.Result Table.Rows</DisplayPath>
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>ResultTable</PropertyName>
+                        </Link>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>TIARows</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectId>bd6a9b3c-0bf5-43bb-8327-efe1f07dfa97</ObjectId>
+                      <ObjectType>ActivityInstance</ObjectType>
+                    </ForEachSource>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="ConditionBranchNode">
+                    <Id>c145d868-1586-4efd-b37d-35a7da4ba647</Id>
+                    <DisplayName>If Records - NotFound</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ExecuteActivityNode">
+                        <Id>bfdb7a27-2f56-48fe-abff-d5dc1b4e9304</Id>
+                        <DisplayName>Update Service Items - NotFound</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="ConditionBranchNode">
+                            <Id>39895f10-638a-4346-934c-714dcb4a5913</Id>
+                            <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                            <DisplayName>If Execution Fails</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="ExecuteActivityNode">
+                                <Id>e238b718-418f-4c7d-8707-55cdedc67b1d</Id>
+                                <DisplayName>Failed to Update Service Items (1014) (2)</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                    <Id>d8066a55-c68a-4e21-8682-f9e9a763dccd</Id>
+                                    <ActivityNodeId>e238b718-418f-4c7d-8707-55cdedc67b1d</ActivityNodeId>
+                                    <CompletedId>48dbfd1e-ac6b-42dc-a0bc-8070de04e619</CompletedId>
+                                  </ActivityNode>
+                                </Children>
+                                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                                  <Id>e238b718-418f-4c7d-8707-55cdedc67b1d</Id>
+                                  <DisplayName>Failed to Update Service Items (1014) (2)</DisplayName>
+                                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                    <SingleTargetId>
+                                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                    </SingleTargetId>
+                                  </TargetLoadBalancer>
+                                  <InheritTarget>false</InheritTarget>
+                                  <ContainingProcessId>24ba4a85-7d79-4e2f-a990-2324a41832a5</ContainingProcessId>
+                                  <VariableToSet>
+                                    <DisplayPath>Process.Variables.Output.Error Code</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>e4cb5431-8870-4ca6-bdab-094f3168619b</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableToSet>
+                                  <NewValue xsi:type="SubstitutableNumber">
+                                    <HardcodedValue>1014</HardcodedValue>
+                                  </NewValue>
+                                </Configuration>
+                              </ActivityNode>
+                              <ActivityNode xsi:type="CompletedNode">
+                                <Id>d0db5933-7e45-4054-aac2-80d7c775fc67</Id>
+                                <Notes>Fail the entire process</Notes>
+                                <CompletedType>FailedNotCompleted</CompletedType>
+                                <ResultMessage>
+                                  <FormattedCode>Failed to Update Service Items:
+{0}</FormattedCode>
+                                  <References>
+                                    <VariableReference xsi:type="PropertyReference">
+                                      <DisplayPath>Workflow.Update Service Items.Error Information</DisplayPath>
+                                      <LinkChain>
+                                        <Link xsi:type="PropertyNameLink">
+                                          <PropertyName>ErrorInformation</PropertyName>
+                                        </Link>
+                                      </LinkChain>
+                                      <ObjectId>bfdb7a27-2f56-48fe-abff-d5dc1b4e9304</ObjectId>
+                                      <ObjectType>ActivityInstance</ObjectType>
+                                    </VariableReference>
+                                  </References>
+                                </ResultMessage>
+                              </ActivityNode>
+                            </Children>
+                            <Condition>
+                              <Id>1df6e420-d129-4bf5-b05f-95ad05031cf6</Id>
+                              <Conditions>
+                                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                                  <Id>cd1e0a8a-5981-4223-88eb-34920214db57</Id>
+                                  <Expression xsi:type="SubstitutableBoolean">
+                                    <HardcodedValue>true</HardcodedValue>
+                                  </Expression>
+                                  <Comparison>Equals</Comparison>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Update Service Items.Instance Failed</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>InstanceFailed</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>bfdb7a27-2f56-48fe-abff-d5dc1b4e9304</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </ConditionDefinition>
+                              </Conditions>
+                            </Condition>
+                          </ActivityNode>
+                        </Children>
+                        <Configuration xsi:type="UpdateServiceItemsFromTableActivityConfiguration" xml:space="preserve">
+                          <Id>bfdb7a27-2f56-48fe-abff-d5dc1b4e9304</Id>
+                          <DisplayName>Update Service Items - NotFound</DisplayName>
+                          <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                            <SingleTargetReference>
+                              <FormattedCode />
+                              <HardcodedValue>
+                                <Id>b3216113-bb0f-4cb3-b7c2-93b9074ef87b</Id>
+                                <ObjectType>Target</ObjectType>
+                              </HardcodedValue>
+                            </SingleTargetReference>
+                          </TargetLoadBalancer>
+                          <InheritTarget>false</InheritTarget>
+                          <ContainingProcessId>24ba4a85-7d79-4e2f-a990-2324a41832a5</ContainingProcessId>
+                          <RetryTimePeriod>
+                            <DisplayUnits>Minutes</DisplayUnits>
+                            <Period>
+                              <FormattedCode>{0}</FormattedCode>
+                              <References>
+                                <VariableReference xsi:type="PropertyReference">
+                                  <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Time Period (minutes)</DisplayPath>
+                                  <LinkChain>
+                                    <Link xsi:type="PropertyNameLink">
+                                      <PropertyName>DefaultRetryMinutes</PropertyName>
+                                    </Link>
+                                  </LinkChain>
+                                  <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                                  <ObjectType>Adapter</ObjectType>
+                                </VariableReference>
+                              </References>
+                            </Period>
+                          </RetryTimePeriod>
+                          <RetryFrequency>
+                            <DisplayUnits>Seconds</DisplayUnits>
+                            <Period>
+                              <FormattedCode>{0}</FormattedCode>
+                              <References>
+                                <VariableReference xsi:type="PropertyReference">
+                                  <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Frequency (seconds)</DisplayPath>
+                                  <LinkChain>
+                                    <Link xsi:type="PropertyNameLink">
+                                      <PropertyName>DefaultRetryFrequency</PropertyName>
+                                    </Link>
+                                  </LinkChain>
+                                  <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                                  <ObjectType>Adapter</ObjectType>
+                                </VariableReference>
+                              </References>
+                            </Period>
+                          </RetryFrequency>
+                          <Timeout>
+                            <DisplayUnits>Seconds</DisplayUnits>
+                            <Period>
+                              <HardcodedValue>100</HardcodedValue>
+                            </Period>
+                          </Timeout>
+                          <ChannelId>
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Variables.Input.Cloud Portal Channel ID</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>4c8aa5e8-90a7-4637-beef-c7cfdf305cda</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </ChannelId>
+                          <ItemType>
+                            <HardcodedValue>UCSVLAN</HardcodedValue>
+                          </ItemType>
+                          <Table>
+                            <DisplayPath>Process.Variables.Local.Update Records - NotFound</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>08ef4514-a0c2-48b0-89f0-07ccd0546571</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </Table>
+                          <Subscriber>
+                            <HardcodedValue />
+                          </Subscriber>
+                          <SubscriberOuName>
+                            <HardcodedValue />
+                          </SubscriberOuName>
+                          <SubscriberRequisitionId>
+                            <FormattedCode />
+                          </SubscriberRequisitionId>
+                          <SubscriberRequisitionEntryId>
+                            <FormattedCode />
+                          </SubscriberRequisitionEntryId>
+                        </Configuration>
+                      </ActivityNode>
+                    </Children>
+                    <Condition>
+                      <Id>ab69ef62-7dc6-44f8-80f6-3013531b3815</Id>
+                      <Conditions>
+                        <ConditionDefinition xsi:type="VariableConditionDefinition">
+                          <Id>7f6b9c49-5a32-445d-ad73-0c145adb42a9</Id>
+                          <Expression xsi:type="SubstitutableNumber">
+                            <HardcodedValue>0</HardcodedValue>
+                          </Expression>
+                          <Comparison>GreaterThan</Comparison>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Local.Update Records - NotFound.Row Count</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>RowCount</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>08ef4514-a0c2-48b0-89f0-07ccd0546571</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                        </ConditionDefinition>
+                      </Conditions>
+                    </Condition>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="ConditionBranchNode">
+                    <Id>bbf2ca54-1957-452c-9e36-2467315cd448</Id>
+                    <DisplayName>If Records</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ExecuteActivityNode">
+                        <Id>c06da78f-8bdb-4429-aa51-d413f1f0baf1</Id>
+                        <DisplayName>Update Service Items</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="ConditionBranchNode">
+                            <Id>4a685216-8848-46c4-962e-06a7e90321bc</Id>
+                            <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                            <DisplayName>If Execution Fails</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="ExecuteActivityNode">
+                                <Id>e187c8b6-f7ad-418f-a4cd-e65fa50560ab</Id>
+                                <DisplayName>Failed to Update Service Items (1014)</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                    <Id>8b383997-e95c-40b9-b37d-20216cb5dda6</Id>
+                                    <ActivityNodeId>e187c8b6-f7ad-418f-a4cd-e65fa50560ab</ActivityNodeId>
+                                    <CompletedId>97edd3c4-2b86-4360-a40d-b1956fdc4439</CompletedId>
+                                  </ActivityNode>
+                                </Children>
+                                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                                  <Id>e187c8b6-f7ad-418f-a4cd-e65fa50560ab</Id>
+                                  <DisplayName>Failed to Update Service Items (1014)</DisplayName>
+                                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                    <SingleTargetId>
+                                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                    </SingleTargetId>
+                                  </TargetLoadBalancer>
+                                  <InheritTarget>false</InheritTarget>
+                                  <ContainingProcessId>24ba4a85-7d79-4e2f-a990-2324a41832a5</ContainingProcessId>
+                                  <VariableToSet>
+                                    <DisplayPath>Process.Variables.Output.Error Code</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>e4cb5431-8870-4ca6-bdab-094f3168619b</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableToSet>
+                                  <NewValue xsi:type="SubstitutableNumber">
+                                    <HardcodedValue>1014</HardcodedValue>
+                                  </NewValue>
+                                </Configuration>
+                              </ActivityNode>
+                              <ActivityNode xsi:type="CompletedNode">
+                                <Id>f40ffc10-c1d5-4bd6-9199-0a6174657e5b</Id>
+                                <Notes>Fail the entire process</Notes>
+                                <CompletedType>FailedNotCompleted</CompletedType>
+                                <ResultMessage>
+                                  <FormattedCode>Failed to Update Service Items:
+{0}</FormattedCode>
+                                  <References>
+                                    <VariableReference xsi:type="PropertyReference">
+                                      <DisplayPath>Workflow.Update Service Items.Error Information</DisplayPath>
+                                      <LinkChain>
+                                        <Link xsi:type="PropertyNameLink">
+                                          <PropertyName>ErrorInformation</PropertyName>
+                                        </Link>
+                                      </LinkChain>
+                                      <ObjectId>c06da78f-8bdb-4429-aa51-d413f1f0baf1</ObjectId>
+                                      <ObjectType>ActivityInstance</ObjectType>
+                                    </VariableReference>
+                                  </References>
+                                </ResultMessage>
+                              </ActivityNode>
+                            </Children>
+                            <Condition>
+                              <Id>1df6e420-d129-4bf5-b05f-95ad05031cf6</Id>
+                              <Conditions>
+                                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                                  <Id>cd1e0a8a-5981-4223-88eb-34920214db57</Id>
+                                  <Expression xsi:type="SubstitutableBoolean">
+                                    <HardcodedValue>true</HardcodedValue>
+                                  </Expression>
+                                  <Comparison>Equals</Comparison>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Update Service Items.Instance Failed</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>InstanceFailed</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>c06da78f-8bdb-4429-aa51-d413f1f0baf1</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </ConditionDefinition>
+                              </Conditions>
+                            </Condition>
+                          </ActivityNode>
+                        </Children>
+                        <Configuration xsi:type="UpdateServiceItemsFromTableActivityConfiguration" xml:space="preserve">
+                          <Id>c06da78f-8bdb-4429-aa51-d413f1f0baf1</Id>
+                          <DisplayName>Update Service Items</DisplayName>
+                          <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                            <SingleTargetReference>
+                              <FormattedCode />
+                              <HardcodedValue>
+                                <Id>b3216113-bb0f-4cb3-b7c2-93b9074ef87b</Id>
+                                <ObjectType>Target</ObjectType>
+                              </HardcodedValue>
+                            </SingleTargetReference>
+                          </TargetLoadBalancer>
+                          <InheritTarget>false</InheritTarget>
+                          <ContainingProcessId>24ba4a85-7d79-4e2f-a990-2324a41832a5</ContainingProcessId>
+                          <RetryTimePeriod>
+                            <DisplayUnits>Minutes</DisplayUnits>
+                            <Period>
+                              <FormattedCode>{0}</FormattedCode>
+                              <References>
+                                <VariableReference xsi:type="PropertyReference">
+                                  <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Time Period (minutes)</DisplayPath>
+                                  <LinkChain>
+                                    <Link xsi:type="PropertyNameLink">
+                                      <PropertyName>DefaultRetryMinutes</PropertyName>
+                                    </Link>
+                                  </LinkChain>
+                                  <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                                  <ObjectType>Adapter</ObjectType>
+                                </VariableReference>
+                              </References>
+                            </Period>
+                          </RetryTimePeriod>
+                          <RetryFrequency>
+                            <DisplayUnits>Seconds</DisplayUnits>
+                            <Period>
+                              <FormattedCode>{0}</FormattedCode>
+                              <References>
+                                <VariableReference xsi:type="PropertyReference">
+                                  <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Frequency (seconds)</DisplayPath>
+                                  <LinkChain>
+                                    <Link xsi:type="PropertyNameLink">
+                                      <PropertyName>DefaultRetryFrequency</PropertyName>
+                                    </Link>
+                                  </LinkChain>
+                                  <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                                  <ObjectType>Adapter</ObjectType>
+                                </VariableReference>
+                              </References>
+                            </Period>
+                          </RetryFrequency>
+                          <Timeout>
+                            <DisplayUnits>Seconds</DisplayUnits>
+                            <Period>
+                              <HardcodedValue>100</HardcodedValue>
+                            </Period>
+                          </Timeout>
+                          <ChannelId>
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Variables.Input.Cloud Portal Channel ID</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>4c8aa5e8-90a7-4637-beef-c7cfdf305cda</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </ChannelId>
+                          <ItemType>
+                            <HardcodedValue>UCSVLAN</HardcodedValue>
+                          </ItemType>
+                          <Table>
+                            <DisplayPath>Process.Variables.Local.Update Records</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>3663698a-895c-4e28-ac95-46314dc1ff68</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </Table>
+                          <Subscriber>
+                            <HardcodedValue />
+                          </Subscriber>
+                          <SubscriberOuName>
+                            <HardcodedValue />
+                          </SubscriberOuName>
+                          <SubscriberRequisitionId>
+                            <FormattedCode />
+                          </SubscriberRequisitionId>
+                          <SubscriberRequisitionEntryId>
+                            <FormattedCode />
+                          </SubscriberRequisitionEntryId>
+                        </Configuration>
+                      </ActivityNode>
+                    </Children>
+                    <Condition>
+                      <Id>ab69ef62-7dc6-44f8-80f6-3013531b3815</Id>
+                      <Conditions>
+                        <ConditionDefinition xsi:type="VariableConditionDefinition">
+                          <Id>7f6b9c49-5a32-445d-ad73-0c145adb42a9</Id>
+                          <Expression xsi:type="SubstitutableNumber">
+                            <HardcodedValue>0</HardcodedValue>
+                          </Expression>
+                          <Comparison>GreaterThan</Comparison>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Local.Update Records.Row Count</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>RowCount</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>3663698a-895c-4e28-ac95-46314dc1ff68</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                        </ConditionDefinition>
+                      </Conditions>
+                    </Condition>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="StartProcessNode">
+                    <Id>a252644b-3a72-4c83-a336-6fe99536e2fb</Id>
+                    <DisplayName>Update &gt;&gt; Post-Discovery</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                        <Id>e81e440c-0879-4356-803c-3be618d6bc86</Id>
+                        <ProcessNodeId>a252644b-3a72-4c83-a336-6fe99536e2fb</ProcessNodeId>
+                        <CompletedId>76b73167-fcae-4b33-8c1a-00fe4aa1a14f</CompletedId>
+                      </ActivityNode>
+                    </Children>
+                    <ProcessId>437b200d-25cb-4bbd-84ac-29da3d82a771</ProcessId>
+                    <InputVariableTable>
+                      <VariableAssignmentsAsArray>
+                        <InputVariableAssignment>
+                          <InputVariableId>0c1af29f-5d66-465a-89ad-c6ad130394cd</InputVariableId>
+                          <VariableValue xsi:type="SubstitutableString">
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.Read Table from XML - Update.Result Table.Table Data XML</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>ResultTable</PropertyName>
+                                  </Link>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>TableDataXml</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>bd6a9b3c-0bf5-43bb-8327-efe1f07dfa97</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </VariableValue>
+                        </InputVariableAssignment>
+                        <InputVariableAssignment>
+                          <InputVariableId>28c57a2b-8408-4a93-82a9-47965add2df7</InputVariableId>
+                          <VariableValue xsi:type="SubstitutableString">
+                            <HardcodedValue>Update</HardcodedValue>
+                          </VariableValue>
+                        </InputVariableAssignment>
+                      </VariableAssignmentsAsArray>
+                    </InputVariableTable>
+                    <Asynchronous>false</Asynchronous>
+                    <InheritTarget>true</InheritTarget>
+                    <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+                    <InheritPriorityClass>true</InheritPriorityClass>
+                    <RuntimeUserId>
+                      <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                    </RuntimeUserId>
+                    <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                    <StartPointId>
+                      <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                    </StartPointId>
+                    <StartPointName>
+                      <FormattedCode />
+                    </StartPointName>
+                  </ActivityNode>
+                </Children>
+                <Condition>
+                  <Id>bcd05bca-e652-44fc-83b3-514289bea012</Id>
+                  <Conditions>
+                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                      <Id>a082e456-c280-4dca-89d3-2025160fc4d6</Id>
+                      <Expression xsi:type="SubstitutableString">
+                        <HardcodedValue />
+                      </Expression>
+                      <Comparison>NotEquals</Comparison>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.Update Service Item by Discovery Table XML - VM.Update Record Set (Table XML)</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="ProcessOutputVariableLink">
+                            <LaunchingActivityId>294285df-43fb-4ee4-b929-6aa8ab4befbe</LaunchingActivityId>
+                            <OutputVariableId>38cd1186-aba2-4a56-ae91-52cd53bb67ff</OutputVariableId>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>294285df-43fb-4ee4-b929-6aa8ab4befbe</ObjectId>
+                        <ObjectType>WorkflowNode</ObjectType>
+                      </VariableReference>
+                    </ConditionDefinition>
+                  </Conditions>
+                </Condition>
+              </ActivityNode>
+            </Children>
+          </ActivityNode>
+        </Children>
+      </ActivityNode>
+      <ActivityNode xsi:type="ConditionBranchNode">
+        <Id>0dfd7f2c-7140-478b-ba4b-9b2b118309f5</Id>
+        <DisplayName>If Scheduled</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="StartProcessNode">
+            <Id>58f55134-cd02-40ab-acc7-725ffd5a170b</Id>
+            <DisplayName>Update Discovery Schedules - Cisco UCS VLANs</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>89ba53fa-08a9-450f-9469-14056d838073</Id>
+                <ProcessNodeId>58f55134-cd02-40ab-acc7-725ffd5a170b</ProcessNodeId>
+                <CompletedId>b8bde76d-3619-4c76-8ed0-76abc3d5d01b</CompletedId>
+              </ActivityNode>
+            </Children>
+            <ProcessId>209159f8-5610-4057-acc7-52d66081f1f5</ProcessId>
+            <InputVariableTable>
+              <VariableAssignmentsAsArray>
+                <InputVariableAssignment>
+                  <InputVariableId>cf8bfd65-0e18-47d7-a8a1-81307119556f</InputVariableId>
+                  <VariableValue xsi:type="SubstitutableString">
+                    <HardcodedValue>Cisco UCS VLANs</HardcodedValue>
+                  </VariableValue>
+                </InputVariableAssignment>
+              </VariableAssignmentsAsArray>
+            </InputVariableTable>
+            <Asynchronous>false</Asynchronous>
+            <InheritTarget>false</InheritTarget>
+            <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+              <SingleTargetReference>
+                <FormattedCode />
+                <HardcodedValue>
+                  <Id>b3216113-bb0f-4cb3-b7c2-93b9074ef87b</Id>
+                  <ObjectType>Target</ObjectType>
+                </HardcodedValue>
+              </SingleTargetReference>
+            </TargetLoadBalancer>
+            <InheritPriorityClass>true</InheritPriorityClass>
+            <RuntimeUserId>
+              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+            </RuntimeUserId>
+            <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+            <StartPointId>
+              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+            </StartPointId>
+            <StartPointName>
+              <FormattedCode />
+            </StartPointName>
+          </ActivityNode>
+        </Children>
+        <Condition>
+          <Id>ace7c36b-343d-46fb-a2c2-df26ff8e3a11</Id>
+          <Conditions>
+            <ConditionDefinition xsi:type="VariableConditionDefinition">
+              <Id>db662faa-70dd-461c-85ac-ac8b21e2af00</Id>
+              <Expression xsi:type="SubstitutableBoolean">
+                <HardcodedValue>true</HardcodedValue>
+              </Expression>
+              <Comparison>Equals</Comparison>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.Scheduled</DisplayPath>
+                <LinkChain />
+                <ObjectId>131b9bb3-dd5b-42a8-ae65-f35a95f05786</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </ConditionDefinition>
+          </Conditions>
+        </Condition>
+      </ActivityNode>
+    </Children>
+  </FirstActivity>
+  <ProcessId>24ba4a85-7d79-4e2f-a990-2324a41832a5</ProcessId>
+</WorkflowConfiguration>

@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<ProcessConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>30d9b6a2-708f-4ce5-852d-a09815b47d70</Id>
+  <DisplayName>VDC Request Handler</DisplayName>
+  <Description>This process manages the change request for this service and catches all errors produced by it and its child processes.</Description>
+  <CreatedTime>2016-02-15T20:43:31.9265Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:43:50.1357421Z</ModifiedTime>
+  <Version>4.3.1.9733</Version>
+  <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+    <SingleTargetReference>
+      <FormattedCode>{0}</FormattedCode>
+      <References>
+        <VariableReference xsi:type="PropertyReference">
+          <DisplayPath>Process.Triggers.Change Request Created.Task.Affected Target</DisplayPath>
+          <LinkChain>
+            <Link xsi:type="PropertyNameLink">
+              <PropertyName>Task</PropertyName>
+            </Link>
+            <Link xsi:type="PropertyNameLink">
+              <PropertyName>AffectedTargetReference</PropertyName>
+            </Link>
+          </LinkChain>
+          <ObjectType>EventInstance</ObjectType>
+        </VariableReference>
+      </References>
+    </SingleTargetReference>
+  </TargetLoadBalancer>
+  <AuditStarts>true</AuditStarts>
+  <AuditSuccesses>true</AuditSuccesses>
+  <WorkflowId>855e9d48-5cc0-4600-819f-83d4e835a2e6</WorkflowId>
+  <CategoryIds>
+    <guid>88ec7048-a64c-49c7-be30-a8fe17b5fa4d</guid>
+  </CategoryIds>
+  <TriggerOwner>74d6de41-8d7c-42dd-b0df-37578a8885eb</TriggerOwner>
+  <Triggers>
+    <TriggerDefinition>
+      <Event xsi:type="ChangeRequestTaskCreatedEventDefinition">
+        <Id>13881992-797c-4eb9-b14b-c87ceda8d98e</Id>
+        <DisplayName>Change Request Created</DisplayName>
+        <LoadBalancer xsi:type="SingleTargetLoadBalancer">
+          <SingleTargetId>
+            <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+          </SingleTargetId>
+        </LoadBalancer>
+        <Imported>true</Imported>
+        <MatchingCriteria>
+          <GenericCriteria xsi:type="NumberCriteria">
+            <LinkChain>
+              <Link xsi:type="PropertyNameLink">
+                <PropertyName>ChangeRequestClass</PropertyName>
+              </Link>
+            </LinkChain>
+            <MatchingNumber>
+              <HardcodedValue>20005</HardcodedValue>
+            </MatchingNumber>
+            <Comparison>Equals</Comparison>
+          </GenericCriteria>
+          <GenericCriteria xsi:type="WildcardCriteria">
+            <LinkChain>
+              <Link xsi:type="PropertyNameLink">
+                <PropertyName>Process</PropertyName>
+              </Link>
+              <Link xsi:type="PropertyNameLink">
+                <PropertyName>AutomationPack</PropertyName>
+              </Link>
+              <Link xsi:type="PropertyNameLink">
+                <PropertyName>DisplayName</PropertyName>
+              </Link>
+            </LinkChain>
+            <MatchingWildcard>
+              <HardcodedValue>Intelligent Automation*</HardcodedValue>
+            </MatchingWildcard>
+          </GenericCriteria>
+        </MatchingCriteria>
+      </Event>
+      <Condition xsi:type="RootConditionDefinition">
+        <Id>7a044ebd-165e-429f-a1fa-9e10440c4c04</Id>
+        <Conditions />
+      </Condition>
+      <TriggerId>1ae91145-b016-48ee-a270-7275066c491d</TriggerId>
+    </TriggerDefinition>
+    <TriggerDefinition>
+      <Event xsi:type="AdHocEventDefinition">
+        <Id>826d2d90-0c5f-45f7-9d7c-c3bacbba8e79</Id>
+        <DisplayName>Started by User</DisplayName>
+        <Imported>true</Imported>
+        <Identities />
+      </Event>
+      <Condition xsi:type="RootConditionDefinition">
+        <Id>bbdc1e8f-6f95-4fe3-92b3-9fcc4b23e15a</Id>
+        <Conditions />
+      </Condition>
+      <TriggerId>7c93b25a-ee92-44ca-9470-4f956fde8e0a</TriggerId>
+    </TriggerDefinition>
+  </Triggers>
+  <VariableDefinitions />
+  <Notes />
+  <GeneralHelp xsi:type="CustomHelpAlias">
+    <Alias />
+  </GeneralHelp>
+  <GeneralInstanceHelp xsi:type="CustomHelpAlias">
+    <Alias />
+  </GeneralInstanceHelp>
+  <InputHelp xsi:type="CustomHelpAlias">
+    <Alias />
+  </InputHelp>
+  <InputInstanceHelp xsi:type="CustomHelpAlias">
+    <Alias />
+  </InputInstanceHelp>
+  <OutputHelp xsi:type="CustomHelpAlias">
+    <Alias />
+  </OutputHelp>
+  <ValidTargetTypeNames>
+    <string>Tidal.Automation.BuiltinAdapter.Common.ServiceTargetConfiguration, Tidal.Automation.BuiltinAdapter.Common</string>
+  </ValidTargetTypeNames>
+  <ValidTargetTypeExtensionIds>
+    <guid>2144f9f9-e556-424e-bb95-709d41dcc237</guid>
+  </ValidTargetTypeExtensionIds>
+  <ValidRuntimeUserTypeNames>
+    <string>Tidal.Automation.Ssh.Common.PublicKeyAdminUserConfiguration, Tidal.Automation.Ssh.Common</string>
+    <string>Tidal.Automation.Ssh.Common.IOSUserConfiguration, Tidal.Automation.Ssh.Common</string>
+    <string>Tidal.Automation.BuiltinAdapter.Common.GenericRuntimeUserConfiguration, Tidal.Automation.BuiltinAdapter.Common</string>
+    <string>Tidal.Automation.Sap.Common.Users.SAPUserConfiguration, Tidal.Automation.Sap.Common</string>
+    <string>Tidal.Automation.Snmp.Common.SnmpUserConfiguration, Tidal.Automation.Snmp.Common</string>
+    <string>Tidal.Automation.Windows.Common.WindowsUserConfiguration, Tidal.Automation.Windows.Common</string>
+  </ValidRuntimeUserTypeNames>
+  <GroupName>Cloud Service Orchestration</GroupName>
+</ProcessConfiguration>

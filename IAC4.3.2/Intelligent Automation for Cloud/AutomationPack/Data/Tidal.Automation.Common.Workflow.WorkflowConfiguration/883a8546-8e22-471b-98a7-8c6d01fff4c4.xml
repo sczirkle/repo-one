@@ -1,0 +1,235 @@
+<?xml version="1.0"?>
+<WorkflowConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>883a8546-8e22-471b-98a7-8c6d01fff4c4</Id>
+  <DisplayName>CloudSync vCenter VM PowerState (Scheduled)</DisplayName>
+  <CreatedTime>2016-02-15T20:46:01.535875Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:46:19.7451171Z</ModifiedTime>
+  <FirstActivity xsi:type="RootNode">
+    <Id>1670c6cd-0c58-42e0-8862-2c0c7c20972c</Id>
+    <DisplayName />
+    <Children>
+      <ActivityNode xsi:type="ConditionBranchNode">
+        <Id>a9489998-6eee-4a97-bb06-c51f99aaafa8</Id>
+        <DisplayName>If interval not 0</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>bd480c74-5f91-4429-a98b-f070a0f2ee5b</Id>
+            <DisplayName>Format Date</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>5f847e85-6d21-4ffe-92aa-340563e80f1a</Id>
+                <ActivityNodeId>bd480c74-5f91-4429-a98b-f070a0f2ee5b</ActivityNodeId>
+                <CompletedId>03696622-9cda-4bf5-9e31-fbca86de13d6</CompletedId>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="FormatDateTimeActivityConfiguration" xml:space="preserve">
+              <Id>bd480c74-5f91-4429-a98b-f070a0f2ee5b</Id>
+              <DisplayName>Format Date</DisplayName>
+              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                <SingleTargetId>
+                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                </SingleTargetId>
+              </TargetLoadBalancer>
+              <InheritTarget>false</InheritTarget>
+              <ContainingProcessId>a0c16e26-6310-4fbd-bae1-bfb214d0369a</ContainingProcessId>
+              <SourceDateTime>
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Start Time</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>StartTime</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectType>ProcessInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </SourceDateTime>
+              <FormatString>
+                <HardcodedValue>HH</HardcodedValue>
+              </FormatString>
+              <UseLocalDateTime>true</UseLocalDateTime>
+            </Configuration>
+          </ActivityNode>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>9e3109a8-bbc9-491a-b380-61999ccd911a</Id>
+            <DisplayName>Set Current Hour</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>0fe60c29-2677-4c86-bb9a-b5dee29c8c5f</Id>
+                <ActivityNodeId>9e3109a8-bbc9-491a-b380-61999ccd911a</ActivityNodeId>
+                <CompletedId>fc74b690-d843-4b53-8828-5562ad974958</CompletedId>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+              <Id>9e3109a8-bbc9-491a-b380-61999ccd911a</Id>
+              <DisplayName>Set Current Hour</DisplayName>
+              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                <SingleTargetId>
+                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                </SingleTargetId>
+              </TargetLoadBalancer>
+              <InheritTarget>false</InheritTarget>
+              <ContainingProcessId>a0c16e26-6310-4fbd-bae1-bfb214d0369a</ContainingProcessId>
+              <VariableToSet>
+                <DisplayPath>Process.Variables.Local.Current Hour</DisplayPath>
+                <LinkChain />
+                <ObjectId>a6232b34-398b-47e4-86ca-f1444e47ef9a</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableToSet>
+              <NewValue xsi:type="SubstitutableNumber">
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Format Date.Formatted Date</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>FormatResult</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>bd480c74-5f91-4429-a98b-f070a0f2ee5b</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </NewValue>
+            </Configuration>
+          </ActivityNode>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>aefb902d-31c6-4414-b5b8-688c234aa782</Id>
+            <DisplayName>Set Hours and Result</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>6cf06cea-e91f-4a93-9e88-9735e6118a2c</Id>
+                <ActivityNodeId>aefb902d-31c6-4414-b5b8-688c234aa782</ActivityNodeId>
+                <CompletedId>5238f4ad-09ed-4f22-9d0d-e8b60859ff84</CompletedId>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+              <Id>aefb902d-31c6-4414-b5b8-688c234aa782</Id>
+              <DisplayName>Set Hours and Result</DisplayName>
+              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                <SingleTargetId>
+                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                </SingleTargetId>
+              </TargetLoadBalancer>
+              <InheritTarget>false</InheritTarget>
+              <ContainingProcessId>a0c16e26-6310-4fbd-bae1-bfb214d0369a</ContainingProcessId>
+              <Assignments>
+                <PropertyReferenceValuePair>
+                  <VariableToSet>
+                    <DisplayPath>Process.Variables.Local.Result</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>b6faf3fd-d62c-4770-9064-a5efb5511699</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableToSet>
+                  <NewValue xsi:type="SubstitutableNumber">
+                    <FormattedCode>{0} % {1}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Variables.Local.Current Hour</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>a6232b34-398b-47e4-86ca-f1444e47ef9a</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableReference>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Global Variables.VM Powerstate Discovery Interval (Hours)</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>0595fbc5-1ef1-4214-a726-8faf18fb3966</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </NewValue>
+                </PropertyReferenceValuePair>
+              </Assignments>
+            </Configuration>
+          </ActivityNode>
+        </Children>
+        <Condition>
+          <Id>ddc121f4-1742-45e5-bc63-4bfa4a2effb5</Id>
+          <Conditions />
+        </Condition>
+      </ActivityNode>
+      <ActivityNode xsi:type="ConditionBranchNode">
+        <Id>44f616d8-e351-40f2-b0bd-eb02550ad845</Id>
+        <DisplayName>Run if time</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="StartProcessNode">
+            <Id>4cf8fb7b-fd72-4d26-9259-125f869a5def</Id>
+            <DisplayName>CloudSync vCenter VM PowerState</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>872dbd99-6a17-4503-9b2e-b3b543420458</Id>
+                <ProcessNodeId>4cf8fb7b-fd72-4d26-9259-125f869a5def</ProcessNodeId>
+                <CompletedId>10e209ce-47f2-423c-a4f5-6254bfbca81f</CompletedId>
+              </ActivityNode>
+            </Children>
+            <ProcessId>cfa81c6e-06b8-4dc1-8f7d-b407510ad61d</ProcessId>
+            <InputVariableTable>
+              <VariableAssignmentsAsArray>
+                <InputVariableAssignment>
+                  <InputVariableId>35b68eec-113d-49ca-aedd-13f9612b9ae2</InputVariableId>
+                  <VariableValue xsi:type="SubstitutableBoolean">
+                    <HardcodedValue>true</HardcodedValue>
+                  </VariableValue>
+                </InputVariableAssignment>
+                <InputVariableAssignment>
+                  <InputVariableId>54722966-4d03-4a01-b4f2-26725056b399</InputVariableId>
+                  <VariableValue xsi:type="SubstitutableNumber">
+                    <HardcodedValue>1</HardcodedValue>
+                  </VariableValue>
+                </InputVariableAssignment>
+              </VariableAssignmentsAsArray>
+            </InputVariableTable>
+            <Asynchronous>false</Asynchronous>
+            <InheritTarget>true</InheritTarget>
+            <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+            <InheritPriorityClass>true</InheritPriorityClass>
+            <RuntimeUserId>
+              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+            </RuntimeUserId>
+            <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+            <StartPointId>
+              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+            </StartPointId>
+            <StartPointName>
+              <FormattedCode />
+            </StartPointName>
+          </ActivityNode>
+        </Children>
+        <Condition>
+          <Id>ffd09948-f871-4a3b-a7d1-c343258648c5</Id>
+          <Conditions>
+            <ConditionDefinition xsi:type="VariableConditionDefinition">
+              <Id>8a737020-1c36-4583-a489-d55e9257f714</Id>
+              <Expression xsi:type="SubstitutableString">
+                <HardcodedValue />
+              </Expression>
+              <Comparison>NotEquals</Comparison>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Global Variables.Cloud Service Item Update Channel ID</DisplayPath>
+                <LinkChain />
+                <ObjectId>c070b5b6-0120-48f1-8b36-2319f9348a4a</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </ConditionDefinition>
+            <ConditionDefinition xsi:type="VariableConditionDefinition">
+              <Id>404d36bc-b119-4e9b-863f-927de7a119f3</Id>
+              <Expression xsi:type="SubstitutableNumber">
+                <HardcodedValue>0</HardcodedValue>
+              </Expression>
+              <Comparison>Equals</Comparison>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Local.Result</DisplayPath>
+                <LinkChain />
+                <ObjectId>b6faf3fd-d62c-4770-9064-a5efb5511699</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </ConditionDefinition>
+          </Conditions>
+        </Condition>
+      </ActivityNode>
+    </Children>
+  </FirstActivity>
+  <ProcessId>a0c16e26-6310-4fbd-bae1-bfb214d0369a</ProcessId>
+</WorkflowConfiguration>

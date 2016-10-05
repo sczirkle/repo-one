@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<WorkflowConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>8b959761-2a27-49c3-8d3d-fd20d634ce60</Id>
+  <DisplayName>Remove VLAN from UCS</DisplayName>
+  <CreatedTime>2016-02-15T20:42:24.6765Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:42:42.8857421Z</ModifiedTime>
+  <FirstActivity xsi:type="RootNode">
+    <Id>55b4f29a-04f1-43d9-b012-214c256434bd</Id>
+    <DisplayName />
+    <Children>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>8a4e6f1c-a68d-496b-a91c-5255fb755379</Id>
+        <DisplayName>Execute UCS Manager Command</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>efda160b-f112-4ff4-93ef-903648134ef7</Id>
+            <ActivityNodeId>8a4e6f1c-a68d-496b-a91c-5255fb755379</ActivityNodeId>
+            <CompletedId>6028151f-cf11-4f63-a7da-a3dd911e8efb</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="ExecuteUcsCommandActivityConfiguration" xml:space="preserve">
+          <Id>8a4e6f1c-a68d-496b-a91c-5255fb755379</Id>
+          <DisplayName>Execute UCS Manager Command</DisplayName>
+          <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+          <ContainingProcessId>08e24bff-cf43-4880-9aa7-beaeaddfddde</ContainingProcessId>
+          <CollectXmlOutput>true</CollectXmlOutput>
+          <CommandText>
+            <FormattedCode>&lt;configConfMo inHierarchical="false"&gt;
+   &lt;inConfig&gt;
+      &lt;fabricVlan dn="fabric/lan/net-{0}" status="deleted"/&gt;
+   &lt;/inConfig&gt;
+&lt;/configConfMo&gt;</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.VLAN Name</DisplayPath>
+                <LinkChain />
+                <ObjectId>369dab49-6a69-4b2a-adcc-753a341db9e4</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </CommandText>
+          <Columns />
+          <TransformXmlResponse>false</TransformXmlResponse>
+        </Configuration>
+      </ActivityNode>
+    </Children>
+  </FirstActivity>
+  <ProcessId>08e24bff-cf43-4880-9aa7-beaeaddfddde</ProcessId>
+</WorkflowConfiguration>

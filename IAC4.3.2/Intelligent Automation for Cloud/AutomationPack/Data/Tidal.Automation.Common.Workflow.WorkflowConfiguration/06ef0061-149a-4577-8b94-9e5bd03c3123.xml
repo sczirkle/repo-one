@@ -1,0 +1,587 @@
+<?xml version="1.0"?>
+<WorkflowConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>06ef0061-149a-4577-8b94-9e5bd03c3123</Id>
+  <DisplayName>Free Physical Interface on CSR</DisplayName>
+  <CreatedTime>2016-02-15T20:43:51.785875Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:44:09.9951171Z</ModifiedTime>
+  <FirstActivity xsi:type="RootNode">
+    <Id>46117599-7059-4849-af20-9d57f586fc4b</Id>
+    <DisplayName />
+    <Children>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>ab86ea12-8c67-4fa8-a9e9-923f4615fb27</Id>
+        <DisplayName>Query VM Network Adapters</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>3886c341-369e-42ad-bd73-a880dbedb457</Id>
+            <ActivityNodeId>ab86ea12-8c67-4fa8-a9e9-923f4615fb27</ActivityNodeId>
+            <CompletedId>c40e3a80-a3c1-4850-8210-94f2e5d25407</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="QueryVMNetworkAdaptersActivityConfiguration" xml:space="preserve">
+          <Id>ab86ea12-8c67-4fa8-a9e9-923f4615fb27</Id>
+          <DisplayName>Query VM Network Adapters</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+            <SingleTargetReference>
+              <FormattedCode>{0}</FormattedCode>
+              <References>
+                <VariableReference xsi:type="PropertyReference">
+                  <DisplayPath>Process.Target.Cloud.Service.General.PlatformElement.VCenter</DisplayPath>
+                  <LinkChain>
+                    <Link xsi:type="PropertyNameLink">
+                      <PropertyName>ResolvedTarget</PropertyName>
+                    </Link>
+                    <Link xsi:type="ObjectReferenceLink">
+                      <ObjectLink>
+                        <Id>42b6a134-067e-46f0-9f0c-cb0904901eba</Id>
+                        <ObjectType>PropertyExtension</ObjectType>
+                      </ObjectLink>
+                    </Link>
+                  </LinkChain>
+                  <ObjectType>ProcessInstance</ObjectType>
+                </VariableReference>
+              </References>
+            </SingleTargetReference>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>39a64410-c709-44d3-92cd-d231f4d417c0</ContainingProcessId>
+          <VTask>
+            <MainText>Query VM Network Adapters</MainText>
+          </VTask>
+          <TimeOutPeriod>
+            <DisplayUnits>Minutes</DisplayUnits>
+            <Period>
+              <HardcodedValue>20</HardcodedValue>
+            </Period>
+          </TimeOutPeriod>
+          <VirtualMachineName>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.CSR Virtual Machine Full Path</DisplayPath>
+                <LinkChain />
+                <ObjectId>9e901f9d-095a-4685-9c51-8664a403647b</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </VirtualMachineName>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>bfb7c21a-8f55-48cd-9594-d87b88185a91</Id>
+        <DisplayName>Split String</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>8a994629-22cb-4be5-a27b-8247d98af071</Id>
+            <ActivityNodeId>bfb7c21a-8f55-48cd-9594-d87b88185a91</ActivityNodeId>
+            <CompletedId>325500c7-5d73-499a-9267-1029558b24ce</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="SplitStringActivityConfiguration" xml:space="preserve">
+          <Id>bfb7c21a-8f55-48cd-9594-d87b88185a91</Id>
+          <DisplayName>Split String</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>39a64410-c709-44d3-92cd-d231f4d417c0</ContainingProcessId>
+          <InputString>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.Network Full Path</DisplayPath>
+                <LinkChain />
+                <ObjectId>60d77a95-071f-44a8-a915-9736fc4ee99f</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </InputString>
+          <IsCharDelimiter>true</IsCharDelimiter>
+          <CharDelimiters>
+            <HardcodedValue>/</HardcodedValue>
+          </CharDelimiters>
+          <ReturnEmptyString>false</ReturnEmptyString>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ForEachNode">
+        <Id>f71bc447-0c02-4454-8403-033188007814</Id>
+        <DisplayName>For Each Bit fo the Path</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>a14dcaae-c096-4e40-832f-da5c2dd0d612</Id>
+            <DisplayName>If not the last bit</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>e168550b-c434-43c4-b671-95ecbb709f02</Id>
+                <DisplayName>Update Quarantined Network Path</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>40f04149-9075-4745-a37e-6fa87967d5a3</Id>
+                    <ActivityNodeId>e168550b-c434-43c4-b671-95ecbb709f02</ActivityNodeId>
+                    <CompletedId>5ed80d3e-d1fc-4c39-8334-f56e0d5ca491</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                  <Id>e168550b-c434-43c4-b671-95ecbb709f02</Id>
+                  <DisplayName>Update Quarantined Network Path</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>39a64410-c709-44d3-92cd-d231f4d417c0</ContainingProcessId>
+                  <VariableToSet>
+                    <DisplayPath>Process.Variables.Local.Quarantined Network Path</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>25b4f9bb-348c-4930-a975-36b53be612f0</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableToSet>
+                  <NewValue xsi:type="SubstitutableString">
+                    <FormattedCode>{0}/{1}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Variables.Local.Quarantined Network Path</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>25b4f9bb-348c-4930-a975-36b53be612f0</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableReference>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.For Each Bit fo the Path.Item.Value</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>Value</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>f71bc447-0c02-4454-8403-033188007814</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </NewValue>
+                </Configuration>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>4d0bfc9a-a990-459b-8943-8e885357ab1b</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>20fbd21e-75e5-40b5-9d13-1ca0ceee74fb</Id>
+                  <Expression xsi:type="SubstitutableString">
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.Split String.Results Table.Last Row.Value</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResultTable</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>LastRow</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>Value</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>bfb7c21a-8f55-48cd-9594-d87b88185a91</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </Expression>
+                  <Comparison>NotEquals</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.For Each Bit fo the Path.Item.Value</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>Value</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>f71bc447-0c02-4454-8403-033188007814</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+        </Children>
+        <ForEachSource xsi:type="PropertyReference">
+          <DisplayPath>Workflow.Split String.Results Table.Rows</DisplayPath>
+          <LinkChain>
+            <Link xsi:type="PropertyNameLink">
+              <PropertyName>ResultTable</PropertyName>
+            </Link>
+            <Link xsi:type="PropertyNameLink">
+              <PropertyName>TIARows</PropertyName>
+            </Link>
+          </LinkChain>
+          <ObjectId>bfb7c21a-8f55-48cd-9594-d87b88185a91</ObjectId>
+          <ObjectType>ActivityInstance</ObjectType>
+        </ForEachSource>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>3fbc9fad-68b5-4d46-b97b-313c964e2268</Id>
+        <DisplayName>Trim String</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>1656cb40-9a9d-419c-b3b6-9744850ba6d3</Id>
+            <ActivityNodeId>3fbc9fad-68b5-4d46-b97b-313c964e2268</ActivityNodeId>
+            <CompletedId>4608fa77-1375-4d98-918c-d175e8e42938</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="TrimStringActivityConfiguration" xml:space="preserve">
+          <Id>3fbc9fad-68b5-4d46-b97b-313c964e2268</Id>
+          <DisplayName>Trim String</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>39a64410-c709-44d3-92cd-d231f4d417c0</ContainingProcessId>
+          <InputString>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Local.Quarantined Network Path</DisplayPath>
+                <LinkChain />
+                <ObjectId>25b4f9bb-348c-4930-a975-36b53be612f0</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </InputString>
+          <TrimCharacters>
+            <HardcodedValue>/</HardcodedValue>
+          </TrimCharacters>
+          <TrimOption>Both</TrimOption>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>f6edec49-761e-4530-aa49-ce972b87a402</Id>
+        <DisplayName>Set Quarantined Network Path</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>280dcc78-ea9b-4e63-9806-f051cd2e349f</Id>
+            <ActivityNodeId>f6edec49-761e-4530-aa49-ce972b87a402</ActivityNodeId>
+            <CompletedId>dcf47112-e37e-4e5e-9031-6dfcbb370a7c</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+          <Id>f6edec49-761e-4530-aa49-ce972b87a402</Id>
+          <DisplayName>Set Quarantined Network Path</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>39a64410-c709-44d3-92cd-d231f4d417c0</ContainingProcessId>
+          <VariableToSet>
+            <DisplayPath>Process.Variables.Local.Quarantined Network Path</DisplayPath>
+            <LinkChain />
+            <ObjectId>25b4f9bb-348c-4930-a975-36b53be612f0</ObjectId>
+            <ObjectType>GlobalVariable</ObjectType>
+          </VariableToSet>
+          <NewValue xsi:type="SubstitutableString">
+            <FormattedCode>{0}/Unused_Or_Quarantine_Veth</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Trim String.Trim Result</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>Result</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>3fbc9fad-68b5-4d46-b97b-313c964e2268</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </VariableReference>
+            </References>
+          </NewValue>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>13fd18c6-902e-459f-961f-19b686c3ca91</Id>
+        <DisplayName>Select Decommissioned Interface</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>3127fed1-b4fe-43eb-a5ca-72adba15f050</Id>
+            <ActivityNodeId>13fd18c6-902e-459f-961f-19b686c3ca91</ActivityNodeId>
+            <CompletedId>d9ca94b3-7003-4a81-8e30-9621e9808b5a</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="ExtractTableActivityConfiguration" xml:space="preserve">
+          <Id>13fd18c6-902e-459f-961f-19b686c3ca91</Id>
+          <DisplayName>Select Decommissioned Interface</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>39a64410-c709-44d3-92cd-d231f4d417c0</ContainingProcessId>
+          <Columns>
+            <BuiltinTableColumn>
+              <Name>Adapter</Name>
+              <DataType>System.String</DataType>
+            </BuiltinTableColumn>
+            <BuiltinTableColumn>
+              <Name>NetworkName</Name>
+              <DataType>System.String</DataType>
+            </BuiltinTableColumn>
+          </Columns>
+          <SourceTable xsi:type="PropertyReference">
+            <DisplayPath>Process.Target.Cloud.Service.Server.Virtual.NetworkAdapters</DisplayPath>
+            <LinkChain>
+              <Link xsi:type="PropertyNameLink">
+                <PropertyName>ResolvedTarget</PropertyName>
+              </Link>
+              <Link xsi:type="ObjectReferenceLink">
+                <ObjectLink>
+                  <Id>2ca08f93-fbb0-41f2-b6c9-88b9d607287b</Id>
+                  <ObjectType>PropertyExtension</ObjectType>
+                </ObjectLink>
+              </Link>
+            </LinkChain>
+            <ObjectType>ProcessInstance</ObjectType>
+          </SourceTable>
+          <WhereClause>
+            <FormattedCode>[NetworkName] like '%{0}%'</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Split String.Results Table.Last Row.Value</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>ResultTable</PropertyName>
+                  </Link>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>LastRow</PropertyName>
+                  </Link>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>Value</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>bfb7c21a-8f55-48cd-9594-d87b88185a91</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </VariableReference>
+            </References>
+          </WhereClause>
+          <SortColumn />
+          <SortOrder>Ascending</SortOrder>
+          <MaxRows>
+            <HardcodedValue>2147483647</HardcodedValue>
+          </MaxRows>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>9fd82454-d7e2-405a-aad9-7e9f2fd762f4</Id>
+        <DisplayName>Update VM Network Adapter</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>7804977d-4836-4d9b-97ab-37975aca2d15</Id>
+            <ActivityNodeId>9fd82454-d7e2-405a-aad9-7e9f2fd762f4</ActivityNodeId>
+            <CompletedId>e7e9218a-d924-4d66-a4d3-11a1bda2aa4c</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="UpdateVMNetworkAdapterActivityConfiguration" xml:space="preserve">
+          <Id>9fd82454-d7e2-405a-aad9-7e9f2fd762f4</Id>
+          <DisplayName>Update VM Network Adapter</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+            <SingleTargetReference>
+              <FormattedCode>{0}</FormattedCode>
+              <References>
+                <VariableReference xsi:type="PropertyReference">
+                  <DisplayPath>Process.Target.Cloud.Service.General.PlatformElement.VCenter</DisplayPath>
+                  <LinkChain>
+                    <Link xsi:type="PropertyNameLink">
+                      <PropertyName>ResolvedTarget</PropertyName>
+                    </Link>
+                    <Link xsi:type="ObjectReferenceLink">
+                      <ObjectLink>
+                        <Id>42b6a134-067e-46f0-9f0c-cb0904901eba</Id>
+                        <ObjectType>PropertyExtension</ObjectType>
+                      </ObjectLink>
+                    </Link>
+                  </LinkChain>
+                  <ObjectType>ProcessInstance</ObjectType>
+                </VariableReference>
+              </References>
+            </SingleTargetReference>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>39a64410-c709-44d3-92cd-d231f4d417c0</ContainingProcessId>
+          <VTask>
+            <MainText>Update VM Network Adapter</MainText>
+          </VTask>
+          <TimeOutPeriod>
+            <DisplayUnits>Minutes</DisplayUnits>
+            <Period>
+              <HardcodedValue>20</HardcodedValue>
+            </Period>
+          </TimeOutPeriod>
+          <VirtualMachineName>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.CSR Virtual Machine Full Path</DisplayPath>
+                <LinkChain />
+                <ObjectId>9e901f9d-095a-4685-9c51-8664a403647b</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </VirtualMachineName>
+          <NetworkAdapterName>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Select Decommissioned Interface.Result Table.First Row.Adapter</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>ResultTable</PropertyName>
+                  </Link>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>FirstRow</PropertyName>
+                  </Link>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>Adapter</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>13fd18c6-902e-459f-961f-19b686c3ca91</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </VariableReference>
+            </References>
+          </NetworkAdapterName>
+          <Connected>No</Connected>
+          <ConnectOnPowerOn>No</ConnectOnPowerOn>
+          <MACAddressType>DoNotChange</MACAddressType>
+          <Network>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Local.Quarantined Network Path</DisplayPath>
+                <LinkChain />
+                <ObjectId>25b4f9bb-348c-4930-a975-36b53be612f0</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </Network>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>d980d320-c4ce-492e-b1e9-6fb23eb91e53</Id>
+        <DisplayName>Get Interface Index</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>8497c1ae-2e7f-4037-9557-dcd4d791d318</Id>
+            <ActivityNodeId>d980d320-c4ce-492e-b1e9-6fb23eb91e53</ActivityNodeId>
+            <CompletedId>7454f55c-6e42-4e18-a85e-0ce92f67b3a2</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="RegExActivityConfiguration" xml:space="preserve">
+          <Id>d980d320-c4ce-492e-b1e9-6fb23eb91e53</Id>
+          <DisplayName>Get Interface Index</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>39a64410-c709-44d3-92cd-d231f4d417c0</ContainingProcessId>
+          <InputString>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Select Decommissioned Interface.Result Table.First Row.Adapter</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>ResultTable</PropertyName>
+                  </Link>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>FirstRow</PropertyName>
+                  </Link>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>Adapter</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>13fd18c6-902e-459f-961f-19b686c3ca91</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </VariableReference>
+            </References>
+          </InputString>
+          <MatchCase>false</MatchCase>
+          <RegularExpression>
+            <HardcodedValue>\d+</HardcodedValue>
+          </RegularExpression>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>fba8763d-65e8-47f2-92de-af3d391c2546</Id>
+        <DisplayName>Set Variable</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>49c294ce-71b0-4fe5-8091-3b1514e6f6bb</Id>
+            <ActivityNodeId>fba8763d-65e8-47f2-92de-af3d391c2546</ActivityNodeId>
+            <CompletedId>1eb8fb5f-6213-47f3-8cbf-01c506aab745</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+          <Id>fba8763d-65e8-47f2-92de-af3d391c2546</Id>
+          <DisplayName>Set Variable</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>39a64410-c709-44d3-92cd-d231f4d417c0</ContainingProcessId>
+          <VariableToSet>
+            <DisplayPath>Process.Variables.Output.Interface Index</DisplayPath>
+            <LinkChain />
+            <ObjectId>0c4e166c-e1c4-42d5-a5b1-55ea067eccd7</ObjectId>
+            <ObjectType>GlobalVariable</ObjectType>
+          </VariableToSet>
+          <NewValue xsi:type="SubstitutableNumber">
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Get Interface Index.First Match</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>FirstMatch</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>d980d320-c4ce-492e-b1e9-6fb23eb91e53</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </VariableReference>
+            </References>
+          </NewValue>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>cb043bb6-d615-42c4-ba9b-f2d746f75708</Id>
+        <DisplayName>Sleep while CSR is configuring</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>3cb71160-980d-470b-8e52-bf71adb44143</Id>
+            <ActivityNodeId>cb043bb6-d615-42c4-ba9b-f2d746f75708</ActivityNodeId>
+            <CompletedId>012c25dd-239f-469c-b32b-a25b6a7ea910</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="SleepActivityConfiguration" xml:space="preserve">
+          <Id>cb043bb6-d615-42c4-ba9b-f2d746f75708</Id>
+          <DisplayName>Sleep while CSR is configuring</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>39a64410-c709-44d3-92cd-d231f4d417c0</ContainingProcessId>
+          <Seconds>
+            <HardcodedValue>10</HardcodedValue>
+          </Seconds>
+        </Configuration>
+      </ActivityNode>
+    </Children>
+  </FirstActivity>
+  <ProcessId>39a64410-c709-44d3-92cd-d231f4d417c0</ProcessId>
+</WorkflowConfiguration>

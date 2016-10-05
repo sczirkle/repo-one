@@ -1,0 +1,224 @@
+<?xml version="1.0"?>
+<WorkflowConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>7ec8c940-3e11-4dad-8abd-dd26a9dae366</Id>
+  <DisplayName>Get XMP Credentials</DisplayName>
+  <CreatedTime>2016-02-15T20:45:50.723375Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:46:08.9482421Z</ModifiedTime>
+  <FirstActivity xsi:type="RootNode">
+    <Id>c6b8051b-0c58-4325-92fc-783f28582cc3</Id>
+    <DisplayName />
+    <Children>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>f23433a0-4d7e-442f-81ce-2939f0b73401</Id>
+        <DisplayName>Query XMP Credential Manager</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>442b23d3-dfe0-4170-bf6c-1f310f7047de</Id>
+            <ActivityNodeId>f23433a0-4d7e-442f-81ce-2939f0b73401</ActivityNodeId>
+            <CompletedId>d3e1b97d-6cea-4259-b5b4-d72f4092f638</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="WebHttpTargetAwareRequestActivityConfiguration" xml:space="preserve">
+          <Id>f23433a0-4d7e-442f-81ce-2939f0b73401</Id>
+          <DisplayName>Query XMP Credential Manager</DisplayName>
+          <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+          <ContainingProcessId>8d658025-2a08-4400-9853-331d191f0f7b</ContainingProcessId>
+          <UseCredentials>true</UseCredentials>
+          <RelativeUrl>
+            <FormattedCode>/credential/get-credential?ipAddress={0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.IP Address</DisplayPath>
+                <LinkChain />
+                <ObjectId>46d6303d-ae64-409e-bc50-7e47a1367788</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </RelativeUrl>
+          <ContentType>
+            <HardcodedValue>application/xml; charset=utf-8</HardcodedValue>
+          </ContentType>
+          <Method>
+            <HardcodedValue>GET</HardcodedValue>
+          </Method>
+          <UserAgent>
+            <HardcodedValue />
+          </UserAgent>
+          <Request>
+            <FormattedCode />
+          </Request>
+          <ProtocolVersion>Version11</ProtocolVersion>
+          <AllowAutoRedirect>true</AllowAutoRedirect>
+          <Timeout>
+            <DisplayUnits>Seconds</DisplayUnits>
+            <Period>
+              <HardcodedValue>300</HardcodedValue>
+            </Period>
+          </Timeout>
+          <Accept>
+            <HardcodedValue />
+          </Accept>
+          <AcceptCookies>false</AcceptCookies>
+          <Headers />
+          <OutputFormat>Xml</OutputFormat>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>988143c8-d9b3-45ba-8749-e1922e425b56</Id>
+        <DisplayName>Parse Credential</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>8f3064e6-0e51-46f3-a420-90ef2b7d5547</Id>
+            <ActivityNodeId>988143c8-d9b3-45ba-8749-e1922e425b56</ActivityNodeId>
+            <CompletedId>3caa367c-c4ac-41c5-abb2-f29f67f6b2b7</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="XPathQueryActivityConfiguration" xml:space="preserve">
+          <Id>988143c8-d9b3-45ba-8749-e1922e425b56</Id>
+          <DisplayName>Parse Credential</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>8d658025-2a08-4400-9853-331d191f0f7b</ContainingProcessId>
+          <SourceXml>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Query XMP Credential Manager.Response</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>Response</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>f23433a0-4d7e-442f-81ce-2939f0b73401</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </VariableReference>
+            </References>
+          </SourceXml>
+          <Namespaces />
+          <Queries>
+            <XPathQueryDefinition>
+              <DisplayName>User Name</DisplayName>
+              <Query>
+                <HardcodedValue>/credentialsList/sshCredential/user</HardcodedValue>
+              </Query>
+              <ReturnType>String</ReturnType>
+              <DefaultBehavior>Fail</DefaultBehavior>
+            </XPathQueryDefinition>
+            <XPathQueryDefinition>
+              <DisplayName>Password</DisplayName>
+              <Query>
+                <HardcodedValue>/credentialsList/sshCredential/password</HardcodedValue>
+              </Query>
+              <ReturnType>String</ReturnType>
+              <DefaultBehavior>Fail</DefaultBehavior>
+            </XPathQueryDefinition>
+          </Queries>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>1fc99b04-1cb5-430d-b33e-cc347c3cdd1e</Id>
+        <DisplayName>Set Credentials</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>28c4a6a0-962d-4cf3-9762-a2f376fd345a</Id>
+            <ActivityNodeId>1fc99b04-1cb5-430d-b33e-cc347c3cdd1e</ActivityNodeId>
+            <CompletedId>62acdbad-54e2-4bf6-b9b1-5dfb64adc450</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+          <Id>1fc99b04-1cb5-430d-b33e-cc347c3cdd1e</Id>
+          <DisplayName>Set Credentials</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>8d658025-2a08-4400-9853-331d191f0f7b</ContainingProcessId>
+          <Assignments>
+            <PropertyReferenceValuePair>
+              <VariableToSet>
+                <DisplayPath>Process.Variables.Output.User Name</DisplayPath>
+                <LinkChain />
+                <ObjectId>d7d574a4-c47f-46b8-91a7-bceb3fe93bd0</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableToSet>
+              <NewValue xsi:type="SubstitutableString">
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Parse Credential.Results.User Name</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>Results</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>User Name</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>988143c8-d9b3-45ba-8749-e1922e425b56</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </NewValue>
+            </PropertyReferenceValuePair>
+            <PropertyReferenceValuePair>
+              <VariableToSet>
+                <DisplayPath>Process.Variables.Output.Password</DisplayPath>
+                <LinkChain />
+                <ObjectId>079691c9-41d8-4aa0-8dfd-afed60d80acf</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableToSet>
+              <NewValue xsi:type="SubstitutableEncryptedString">
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Parse Credential.Results.Password</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>Results</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>Password</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>988143c8-d9b3-45ba-8749-e1922e425b56</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </NewValue>
+            </PropertyReferenceValuePair>
+            <PropertyReferenceValuePair>
+              <VariableToSet>
+                <DisplayPath>Process.Variables.Output.Resolved Url</DisplayPath>
+                <LinkChain />
+                <ObjectId>411679dd-6ef4-4145-b271-8355a34bc8b7</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableToSet>
+              <NewValue xsi:type="SubstitutableString">
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Query XMP Credential Manager.Response Url</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResponseUrl</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>f23433a0-4d7e-442f-81ce-2939f0b73401</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </NewValue>
+            </PropertyReferenceValuePair>
+          </Assignments>
+        </Configuration>
+      </ActivityNode>
+    </Children>
+  </FirstActivity>
+  <ProcessId>8d658025-2a08-4400-9853-331d191f0f7b</ProcessId>
+</WorkflowConfiguration>

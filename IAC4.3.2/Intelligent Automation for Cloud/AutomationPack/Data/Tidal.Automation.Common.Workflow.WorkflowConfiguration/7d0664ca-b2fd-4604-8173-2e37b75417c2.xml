@@ -1,0 +1,1522 @@
+<?xml version="1.0"?>
+<WorkflowConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>7d0664ca-b2fd-4604-8173-2e37b75417c2</Id>
+  <DisplayName>Create SubInterface (IOS-XE)</DisplayName>
+  <CreatedTime>2016-02-15T20:42:40.567125Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:42:58.7763671Z</ModifiedTime>
+  <FirstActivity xsi:type="RootNode">
+    <Id>13f46f27-afec-45ce-8f9e-473fbaace34f</Id>
+    <DisplayName />
+    <Children>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>5e57cec8-7131-4b57-8d09-25599b61b74a</Id>
+        <DisplayName>Open Terminal Session</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>8cf4dae8-b3cf-4107-a36f-7f8d6e26687c</Id>
+            <ActivityNodeId>5e57cec8-7131-4b57-8d09-25599b61b74a</ActivityNodeId>
+            <CompletedId>f70b16b7-2556-4ff6-99b3-16447fe252bf</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="SSHOpenSessionActivityConfiguration" xml:space="preserve">
+          <Id>5e57cec8-7131-4b57-8d09-25599b61b74a</Id>
+          <DisplayName>Open Terminal Session</DisplayName>
+          <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+          <ContainingProcessId>0a50b3c1-9fe6-41d6-97e1-e31104a5868e</ContainingProcessId>
+          <TimeOutPeriod>
+            <DisplayUnits>Minutes</DisplayUnits>
+            <Period>
+              <HardcodedValue>2</HardcodedValue>
+            </Period>
+          </TimeOutPeriod>
+          <AHFDelay>
+            <DisplayUnits>Seconds</DisplayUnits>
+            <Period>
+              <HardcodedValue>12</HardcodedValue>
+            </Period>
+          </AHFDelay>
+          <ExpectList>
+            <ExpectElementConfiguration>
+              <Name>Error</Name>
+              <RegularExpression>
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResolvedTarget</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>GetErrorExpect</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>5e57cec8-7131-4b57-8d09-25599b61b74a</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </RegularExpression>
+              <OperationType>Failed_Incompleted</OperationType>
+              <OperationParameter xsi:type="SubstitutableString">
+                <HardcodedValue />
+              </OperationParameter>
+              <MatchCase>false</MatchCase>
+            </ExpectElementConfiguration>
+            <ExpectElementConfiguration>
+              <Name>Prompt</Name>
+              <RegularExpression>
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResolvedTarget</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>GetPromptExpect</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>5e57cec8-7131-4b57-8d09-25599b61b74a</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </RegularExpression>
+              <OperationType>Succeeded</OperationType>
+              <OperationParameter xsi:type="SubstitutableString">
+                <HardcodedValue />
+              </OperationParameter>
+              <MatchCase>false</MatchCase>
+            </ExpectElementConfiguration>
+            <ExpectElementConfiguration>
+              <Name>Admin Prompt</Name>
+              <RegularExpression>
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResolvedTarget</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>GetAdminPromptExpect</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>5e57cec8-7131-4b57-8d09-25599b61b74a</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </RegularExpression>
+              <OperationType>Succeeded</OperationType>
+              <OperationParameter xsi:type="SubstitutableString">
+                <HardcodedValue />
+              </OperationParameter>
+              <MatchCase>false</MatchCase>
+            </ExpectElementConfiguration>
+          </ExpectList>
+          <CommandTimeoutPeriod>
+            <DisplayUnits>Minutes</DisplayUnits>
+            <Period>
+              <HardcodedValue>1</HardcodedValue>
+            </Period>
+          </CommandTimeoutPeriod>
+          <PreserveOutput>true</PreserveOutput>
+          <WaitingTimeoutPeriod>
+            <DisplayUnits>Minutes</DisplayUnits>
+            <Period>
+              <HardcodedValue>60</HardcodedValue>
+            </Period>
+          </WaitingTimeoutPeriod>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="SwitchNode">
+        <Id>254d411f-1f4a-4d47-bd29-cfcfcecf7b3c</Id>
+        <DisplayName>Subinterface ID specified?</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>3309ccee-e3df-476b-82da-8cda50ddb7d7</Id>
+            <DisplayName>Yes</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>2f6d4833-39f2-40ec-a36e-b5596f80245f</Id>
+                <DisplayName>Create SubInterface</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>6a8f56f2-7338-4751-8ba1-ca90acf50220</Id>
+                    <ActivityNodeId>2f6d4833-39f2-40ec-a36e-b5596f80245f</ActivityNodeId>
+                    <CompletedId>6751ec94-1d2f-4cb7-8472-e471b3488f4c</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SSHSendActivityConfiguration" xml:space="preserve">
+                  <Id>2f6d4833-39f2-40ec-a36e-b5596f80245f</Id>
+                  <DisplayName>Create SubInterface</DisplayName>
+                  <TargetLoadBalancer xsi:type="ActivityTargetLoadBalancer">
+                    <ActivityId>5e57cec8-7131-4b57-8d09-25599b61b74a</ActivityId>
+                    <ChildProcessNodeId>00000000-0000-0000-0000-000000000000</ChildProcessNodeId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>0a50b3c1-9fe6-41d6-97e1-e31104a5868e</ContainingProcessId>
+                  <TimeOutPeriod>
+                    <DisplayUnits>Minutes</DisplayUnits>
+                    <Period>
+                      <HardcodedValue>3</HardcodedValue>
+                    </Period>
+                  </TimeOutPeriod>
+                  <AHFDelay>
+                    <DisplayUnits>Seconds</DisplayUnits>
+                    <Period>
+                      <HardcodedValue>12</HardcodedValue>
+                    </Period>
+                  </AHFDelay>
+                  <ExpectList>
+                    <ExpectElementConfiguration>
+                      <Name>Error</Name>
+                      <RegularExpression>
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResolvedTarget</PropertyName>
+                              </Link>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>GetErrorExpect</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>2f6d4833-39f2-40ec-a36e-b5596f80245f</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </RegularExpression>
+                      <OperationType>Failed_Incompleted</OperationType>
+                      <OperationParameter xsi:type="SubstitutableString">
+                        <HardcodedValue />
+                      </OperationParameter>
+                      <MatchCase>false</MatchCase>
+                    </ExpectElementConfiguration>
+                    <ExpectElementConfiguration>
+                      <Name>Prompt</Name>
+                      <RegularExpression>
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResolvedTarget</PropertyName>
+                              </Link>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>GetPromptExpect</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>2f6d4833-39f2-40ec-a36e-b5596f80245f</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </RegularExpression>
+                      <OperationType>Succeeded</OperationType>
+                      <OperationParameter xsi:type="SubstitutableString">
+                        <HardcodedValue />
+                      </OperationParameter>
+                      <MatchCase>false</MatchCase>
+                    </ExpectElementConfiguration>
+                    <ExpectElementConfiguration>
+                      <Name>Admin Prompt</Name>
+                      <RegularExpression>
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResolvedTarget</PropertyName>
+                              </Link>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>GetAdminPromptExpect</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>2f6d4833-39f2-40ec-a36e-b5596f80245f</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </RegularExpression>
+                      <OperationType>Succeeded</OperationType>
+                      <OperationParameter xsi:type="SubstitutableString">
+                        <HardcodedValue />
+                      </OperationParameter>
+                      <MatchCase>false</MatchCase>
+                    </ExpectElementConfiguration>
+                  </ExpectList>
+                  <CommandTimeoutPeriod>
+                    <DisplayUnits>Minutes</DisplayUnits>
+                    <Period>
+                      <HardcodedValue>2</HardcodedValue>
+                    </Period>
+                  </CommandTimeoutPeriod>
+                  <PreserveOutput>true</PreserveOutput>
+                  <Input>
+                    <FormattedCode>configure terminal
+interface {0}.{1}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Variables.Input.Physical Interface Name</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>b01ae025-be0b-4e4f-a64e-08ddb0d01bba</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableReference>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Variables.Input.Subinterface ID (if 0 then VLAN ID is used)</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>3845b83c-08e9-4389-babb-72d5a001b0f7</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </Input>
+                  <IsInputEncrypted>false</IsInputEncrypted>
+                  <SpecialEndCharacter>Empty</SpecialEndCharacter>
+                  <EndsWithSpecialCharacter>false</EndsWithSpecialCharacter>
+                  <SendMultiLineInputAsOne>false</SendMultiLineInputAsOne>
+                </Configuration>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>ce34dc5b-d6c5-4b27-a669-9fd362a3d3a7</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>da9cc49f-f5f3-4321-a6f6-e2ee92aea12f</Id>
+                  <Expression xsi:type="SubstitutableNumber">
+                    <HardcodedValue>0</HardcodedValue>
+                  </Expression>
+                  <Comparison>GreaterThan</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Input.Subinterface ID (if 0 then VLAN ID is used)</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>3845b83c-08e9-4389-babb-72d5a001b0f7</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>40f629b4-5dea-4b98-9fb3-44039d0d749a</Id>
+            <DisplayName>No</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>f01d295b-eda9-47f8-8906-028ddbdab894</Id>
+                <DisplayName>Create SubInterface</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>32b6d27f-7fa1-4da6-bc22-d3c8a3c0fe2a</Id>
+                    <ActivityNodeId>f01d295b-eda9-47f8-8906-028ddbdab894</ActivityNodeId>
+                    <CompletedId>a9a0cab2-8ec0-41df-b571-eabbd42751cd</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SSHSendActivityConfiguration" xml:space="preserve">
+                  <Id>f01d295b-eda9-47f8-8906-028ddbdab894</Id>
+                  <DisplayName>Create SubInterface</DisplayName>
+                  <TargetLoadBalancer xsi:type="ActivityTargetLoadBalancer">
+                    <ActivityId>5e57cec8-7131-4b57-8d09-25599b61b74a</ActivityId>
+                    <ChildProcessNodeId>00000000-0000-0000-0000-000000000000</ChildProcessNodeId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>0a50b3c1-9fe6-41d6-97e1-e31104a5868e</ContainingProcessId>
+                  <TimeOutPeriod>
+                    <DisplayUnits>Minutes</DisplayUnits>
+                    <Period>
+                      <HardcodedValue>3</HardcodedValue>
+                    </Period>
+                  </TimeOutPeriod>
+                  <AHFDelay>
+                    <DisplayUnits>Seconds</DisplayUnits>
+                    <Period>
+                      <HardcodedValue>12</HardcodedValue>
+                    </Period>
+                  </AHFDelay>
+                  <ExpectList>
+                    <ExpectElementConfiguration>
+                      <Name>Error</Name>
+                      <RegularExpression>
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResolvedTarget</PropertyName>
+                              </Link>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>GetErrorExpect</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>f01d295b-eda9-47f8-8906-028ddbdab894</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </RegularExpression>
+                      <OperationType>Failed_Incompleted</OperationType>
+                      <OperationParameter xsi:type="SubstitutableString">
+                        <HardcodedValue />
+                      </OperationParameter>
+                      <MatchCase>false</MatchCase>
+                    </ExpectElementConfiguration>
+                    <ExpectElementConfiguration>
+                      <Name>Prompt</Name>
+                      <RegularExpression>
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResolvedTarget</PropertyName>
+                              </Link>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>GetPromptExpect</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>f01d295b-eda9-47f8-8906-028ddbdab894</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </RegularExpression>
+                      <OperationType>Succeeded</OperationType>
+                      <OperationParameter xsi:type="SubstitutableString">
+                        <HardcodedValue />
+                      </OperationParameter>
+                      <MatchCase>false</MatchCase>
+                    </ExpectElementConfiguration>
+                    <ExpectElementConfiguration>
+                      <Name>Admin Prompt</Name>
+                      <RegularExpression>
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResolvedTarget</PropertyName>
+                              </Link>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>GetAdminPromptExpect</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>f01d295b-eda9-47f8-8906-028ddbdab894</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </RegularExpression>
+                      <OperationType>Succeeded</OperationType>
+                      <OperationParameter xsi:type="SubstitutableString">
+                        <HardcodedValue />
+                      </OperationParameter>
+                      <MatchCase>false</MatchCase>
+                    </ExpectElementConfiguration>
+                  </ExpectList>
+                  <CommandTimeoutPeriod>
+                    <DisplayUnits>Minutes</DisplayUnits>
+                    <Period>
+                      <HardcodedValue>2</HardcodedValue>
+                    </Period>
+                  </CommandTimeoutPeriod>
+                  <PreserveOutput>true</PreserveOutput>
+                  <Input>
+                    <FormattedCode>configure terminal
+interface {0}.{1}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Variables.Input.Physical Interface Name</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>b01ae025-be0b-4e4f-a64e-08ddb0d01bba</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableReference>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Variables.Input.VLAN ID</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>f2dba65c-9582-4bfb-aa91-914c855bb00b</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </Input>
+                  <IsInputEncrypted>false</IsInputEncrypted>
+                  <SpecialEndCharacter>Empty</SpecialEndCharacter>
+                  <EndsWithSpecialCharacter>false</EndsWithSpecialCharacter>
+                  <SendMultiLineInputAsOne>false</SendMultiLineInputAsOne>
+                </Configuration>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>f9922729-c99c-4b41-929f-7cd794176494</Id>
+              <Conditions />
+            </Condition>
+          </ActivityNode>
+        </Children>
+      </ActivityNode>
+      <ActivityNode xsi:type="ConditionBranchNode">
+        <Id>01cf8078-fa93-4a87-8974-3034d1d7c93e</Id>
+        <DisplayName>Using VRF?</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>9353a7fa-d8c6-4047-94a8-4812dd79a87c</Id>
+            <DisplayName>Set VRF</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>7dca5e61-bde6-4863-ac34-e2d3e1d75336</Id>
+                <ActivityNodeId>9353a7fa-d8c6-4047-94a8-4812dd79a87c</ActivityNodeId>
+                <CompletedId>14a8ad87-c88a-4c99-a5dc-5de5a349ad82</CompletedId>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="SSHSendActivityConfiguration" xml:space="preserve">
+              <Id>9353a7fa-d8c6-4047-94a8-4812dd79a87c</Id>
+              <DisplayName>Set VRF</DisplayName>
+              <TargetLoadBalancer xsi:type="ActivityTargetLoadBalancer">
+                <ActivityId>5e57cec8-7131-4b57-8d09-25599b61b74a</ActivityId>
+                <ChildProcessNodeId>00000000-0000-0000-0000-000000000000</ChildProcessNodeId>
+              </TargetLoadBalancer>
+              <InheritTarget>false</InheritTarget>
+              <ContainingProcessId>0a50b3c1-9fe6-41d6-97e1-e31104a5868e</ContainingProcessId>
+              <TimeOutPeriod>
+                <DisplayUnits>Minutes</DisplayUnits>
+                <Period>
+                  <HardcodedValue>3</HardcodedValue>
+                </Period>
+              </TimeOutPeriod>
+              <AHFDelay>
+                <DisplayUnits>Seconds</DisplayUnits>
+                <Period>
+                  <HardcodedValue>12</HardcodedValue>
+                </Period>
+              </AHFDelay>
+              <ExpectList>
+                <ExpectElementConfiguration>
+                  <Name>Error</Name>
+                  <RegularExpression>
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>GetErrorExpect</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>9353a7fa-d8c6-4047-94a8-4812dd79a87c</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </RegularExpression>
+                  <OperationType>Failed_Incompleted</OperationType>
+                  <OperationParameter xsi:type="SubstitutableString">
+                    <HardcodedValue />
+                  </OperationParameter>
+                  <MatchCase>false</MatchCase>
+                </ExpectElementConfiguration>
+                <ExpectElementConfiguration>
+                  <Name>Prompt</Name>
+                  <RegularExpression>
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>GetPromptExpect</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>9353a7fa-d8c6-4047-94a8-4812dd79a87c</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </RegularExpression>
+                  <OperationType>Succeeded</OperationType>
+                  <OperationParameter xsi:type="SubstitutableString">
+                    <HardcodedValue />
+                  </OperationParameter>
+                  <MatchCase>false</MatchCase>
+                </ExpectElementConfiguration>
+                <ExpectElementConfiguration>
+                  <Name>Admin Prompt</Name>
+                  <RegularExpression>
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>GetAdminPromptExpect</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>9353a7fa-d8c6-4047-94a8-4812dd79a87c</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </RegularExpression>
+                  <OperationType>Succeeded</OperationType>
+                  <OperationParameter xsi:type="SubstitutableString">
+                    <HardcodedValue />
+                  </OperationParameter>
+                  <MatchCase>false</MatchCase>
+                </ExpectElementConfiguration>
+              </ExpectList>
+              <CommandTimeoutPeriod>
+                <DisplayUnits>Minutes</DisplayUnits>
+                <Period>
+                  <HardcodedValue>2</HardcodedValue>
+                </Period>
+              </CommandTimeoutPeriod>
+              <PreserveOutput>true</PreserveOutput>
+              <Input>
+                <FormattedCode>vrf forwarding {0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Input.VRF Name</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>898d17fe-73d6-424f-af3d-26b2c3c2a041</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                </References>
+              </Input>
+              <IsInputEncrypted>false</IsInputEncrypted>
+              <SpecialEndCharacter>Empty</SpecialEndCharacter>
+              <EndsWithSpecialCharacter>false</EndsWithSpecialCharacter>
+              <SendMultiLineInputAsOne>false</SendMultiLineInputAsOne>
+            </Configuration>
+          </ActivityNode>
+        </Children>
+        <Condition>
+          <Id>71b98a8b-1fb9-4151-832f-0dc65ac0fd73</Id>
+          <Conditions>
+            <ConditionDefinition xsi:type="VariableConditionDefinition">
+              <Id>699b3bc5-f979-4307-8176-b8bdcbf2b787</Id>
+              <Expression xsi:type="SubstitutableString">
+                <HardcodedValue />
+              </Expression>
+              <Comparison>NotEquals</Comparison>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.VRF Name</DisplayPath>
+                <LinkChain />
+                <ObjectId>898d17fe-73d6-424f-af3d-26b2c3c2a041</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </ConditionDefinition>
+          </Conditions>
+        </Condition>
+      </ActivityNode>
+      <ActivityNode xsi:type="ConditionBranchNode">
+        <Id>25ad0529-1ea8-409a-8a3e-ff002a8863b6</Id>
+        <DisplayName>Description?</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>9104f353-31cb-4ae7-8f91-e01666c8ba9b</Id>
+            <DisplayName>Set Description</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>21dbd0c4-b12c-4b2d-b08f-c40055b05d1a</Id>
+                <ActivityNodeId>9104f353-31cb-4ae7-8f91-e01666c8ba9b</ActivityNodeId>
+                <CompletedId>47746b67-e044-4a4a-a237-fc9924021ea7</CompletedId>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="SSHSendActivityConfiguration" xml:space="preserve">
+              <Id>9104f353-31cb-4ae7-8f91-e01666c8ba9b</Id>
+              <DisplayName>Set Description</DisplayName>
+              <TargetLoadBalancer xsi:type="ActivityTargetLoadBalancer">
+                <ActivityId>5e57cec8-7131-4b57-8d09-25599b61b74a</ActivityId>
+                <ChildProcessNodeId>00000000-0000-0000-0000-000000000000</ChildProcessNodeId>
+              </TargetLoadBalancer>
+              <InheritTarget>false</InheritTarget>
+              <ContainingProcessId>0a50b3c1-9fe6-41d6-97e1-e31104a5868e</ContainingProcessId>
+              <TimeOutPeriod>
+                <DisplayUnits>Minutes</DisplayUnits>
+                <Period>
+                  <HardcodedValue>3</HardcodedValue>
+                </Period>
+              </TimeOutPeriod>
+              <AHFDelay>
+                <DisplayUnits>Seconds</DisplayUnits>
+                <Period>
+                  <HardcodedValue>12</HardcodedValue>
+                </Period>
+              </AHFDelay>
+              <ExpectList>
+                <ExpectElementConfiguration>
+                  <Name>Error</Name>
+                  <RegularExpression>
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>GetErrorExpect</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>9104f353-31cb-4ae7-8f91-e01666c8ba9b</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </RegularExpression>
+                  <OperationType>Failed_Incompleted</OperationType>
+                  <OperationParameter xsi:type="SubstitutableString">
+                    <HardcodedValue />
+                  </OperationParameter>
+                  <MatchCase>false</MatchCase>
+                </ExpectElementConfiguration>
+                <ExpectElementConfiguration>
+                  <Name>Prompt</Name>
+                  <RegularExpression>
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>GetPromptExpect</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>9104f353-31cb-4ae7-8f91-e01666c8ba9b</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </RegularExpression>
+                  <OperationType>Succeeded</OperationType>
+                  <OperationParameter xsi:type="SubstitutableString">
+                    <HardcodedValue />
+                  </OperationParameter>
+                  <MatchCase>false</MatchCase>
+                </ExpectElementConfiguration>
+                <ExpectElementConfiguration>
+                  <Name>Admin Prompt</Name>
+                  <RegularExpression>
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>GetAdminPromptExpect</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>9104f353-31cb-4ae7-8f91-e01666c8ba9b</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </RegularExpression>
+                  <OperationType>Succeeded</OperationType>
+                  <OperationParameter xsi:type="SubstitutableString">
+                    <HardcodedValue />
+                  </OperationParameter>
+                  <MatchCase>false</MatchCase>
+                </ExpectElementConfiguration>
+              </ExpectList>
+              <CommandTimeoutPeriod>
+                <DisplayUnits>Minutes</DisplayUnits>
+                <Period>
+                  <HardcodedValue>2</HardcodedValue>
+                </Period>
+              </CommandTimeoutPeriod>
+              <PreserveOutput>true</PreserveOutput>
+              <Input>
+                <FormattedCode>description {0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Input.Description</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>7dba1e38-719e-473c-9f87-742ad4b5c127</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                </References>
+              </Input>
+              <IsInputEncrypted>false</IsInputEncrypted>
+              <SpecialEndCharacter>Empty</SpecialEndCharacter>
+              <EndsWithSpecialCharacter>false</EndsWithSpecialCharacter>
+              <SendMultiLineInputAsOne>false</SendMultiLineInputAsOne>
+            </Configuration>
+          </ActivityNode>
+        </Children>
+        <Condition>
+          <Id>c4766f2a-806c-40d0-bfc4-98273e40d829</Id>
+          <Conditions>
+            <ConditionDefinition xsi:type="VariableConditionDefinition">
+              <Id>5390ad31-a953-47c4-a021-82df548b2629</Id>
+              <Expression xsi:type="SubstitutableString">
+                <HardcodedValue />
+              </Expression>
+              <Comparison>NotEquals</Comparison>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.Description</DisplayPath>
+                <LinkChain />
+                <ObjectId>7dba1e38-719e-473c-9f87-742ad4b5c127</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </ConditionDefinition>
+          </Conditions>
+        </Condition>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>312c051d-f7b9-4a1a-b252-e57cd9c2c3ef</Id>
+        <DisplayName>Set Mandatory Attributes</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>79760497-f405-4b45-8ba9-9187edf65cae</Id>
+            <ActivityNodeId>312c051d-f7b9-4a1a-b252-e57cd9c2c3ef</ActivityNodeId>
+            <CompletedId>0ab4dda7-f7b9-43a0-bb4b-b43b8d744bfc</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="SSHSendActivityConfiguration" xml:space="preserve">
+          <Id>312c051d-f7b9-4a1a-b252-e57cd9c2c3ef</Id>
+          <DisplayName>Set Mandatory Attributes</DisplayName>
+          <TargetLoadBalancer xsi:type="ActivityTargetLoadBalancer">
+            <ActivityId>5e57cec8-7131-4b57-8d09-25599b61b74a</ActivityId>
+            <ChildProcessNodeId>00000000-0000-0000-0000-000000000000</ChildProcessNodeId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>0a50b3c1-9fe6-41d6-97e1-e31104a5868e</ContainingProcessId>
+          <TimeOutPeriod>
+            <DisplayUnits>Minutes</DisplayUnits>
+            <Period>
+              <HardcodedValue>3</HardcodedValue>
+            </Period>
+          </TimeOutPeriod>
+          <AHFDelay>
+            <DisplayUnits>Seconds</DisplayUnits>
+            <Period>
+              <HardcodedValue>12</HardcodedValue>
+            </Period>
+          </AHFDelay>
+          <ExpectList>
+            <ExpectElementConfiguration>
+              <Name>Error</Name>
+              <RegularExpression>
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResolvedTarget</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>GetErrorExpect</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>312c051d-f7b9-4a1a-b252-e57cd9c2c3ef</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </RegularExpression>
+              <OperationType>Failed_Incompleted</OperationType>
+              <OperationParameter xsi:type="SubstitutableString">
+                <HardcodedValue />
+              </OperationParameter>
+              <MatchCase>false</MatchCase>
+            </ExpectElementConfiguration>
+            <ExpectElementConfiguration>
+              <Name>Prompt</Name>
+              <RegularExpression>
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResolvedTarget</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>GetPromptExpect</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>312c051d-f7b9-4a1a-b252-e57cd9c2c3ef</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </RegularExpression>
+              <OperationType>Succeeded</OperationType>
+              <OperationParameter xsi:type="SubstitutableString">
+                <HardcodedValue />
+              </OperationParameter>
+              <MatchCase>false</MatchCase>
+            </ExpectElementConfiguration>
+            <ExpectElementConfiguration>
+              <Name>Admin Prompt</Name>
+              <RegularExpression>
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResolvedTarget</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>GetAdminPromptExpect</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>312c051d-f7b9-4a1a-b252-e57cd9c2c3ef</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </RegularExpression>
+              <OperationType>Succeeded</OperationType>
+              <OperationParameter xsi:type="SubstitutableString">
+                <HardcodedValue />
+              </OperationParameter>
+              <MatchCase>false</MatchCase>
+            </ExpectElementConfiguration>
+          </ExpectList>
+          <CommandTimeoutPeriod>
+            <DisplayUnits>Minutes</DisplayUnits>
+            <Period>
+              <HardcodedValue>2</HardcodedValue>
+            </Period>
+          </CommandTimeoutPeriod>
+          <PreserveOutput>true</PreserveOutput>
+          <Input>
+            <FormattedCode>encapsu dot1q {0}
+ip address {1} {2}
+no shutdown</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.VLAN ID</DisplayPath>
+                <LinkChain />
+                <ObjectId>f2dba65c-9582-4bfb-aa91-914c855bb00b</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.IP Address</DisplayPath>
+                <LinkChain />
+                <ObjectId>096391c8-432e-430a-b9e1-c663e4f8919e</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.Subnet Mask</DisplayPath>
+                <LinkChain />
+                <ObjectId>eaf9d1d1-b2b4-4a96-8412-266b0cf08eb5</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </Input>
+          <IsInputEncrypted>false</IsInputEncrypted>
+          <SpecialEndCharacter>Empty</SpecialEndCharacter>
+          <EndsWithSpecialCharacter>false</EndsWithSpecialCharacter>
+          <SendMultiLineInputAsOne>false</SendMultiLineInputAsOne>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ConditionBranchNode">
+        <Id>29b086f6-1dfe-4ba8-9c23-13d5e4c6f554</Id>
+        <DisplayName>OSPF Area?</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>7a982813-0d63-4d3c-b87f-842c155c0666</Id>
+            <DisplayName>Set OSPF Area</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>960cce93-f26e-4f07-944b-5851a2c58d82</Id>
+                <ActivityNodeId>7a982813-0d63-4d3c-b87f-842c155c0666</ActivityNodeId>
+                <CompletedId>1c325075-63fe-47d1-bd2c-2c20202a1e46</CompletedId>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="SSHSendActivityConfiguration" xml:space="preserve">
+              <Id>7a982813-0d63-4d3c-b87f-842c155c0666</Id>
+              <DisplayName>Set OSPF Area</DisplayName>
+              <TargetLoadBalancer xsi:type="ActivityTargetLoadBalancer">
+                <ActivityId>5e57cec8-7131-4b57-8d09-25599b61b74a</ActivityId>
+                <ChildProcessNodeId>00000000-0000-0000-0000-000000000000</ChildProcessNodeId>
+              </TargetLoadBalancer>
+              <InheritTarget>false</InheritTarget>
+              <ContainingProcessId>0a50b3c1-9fe6-41d6-97e1-e31104a5868e</ContainingProcessId>
+              <TimeOutPeriod>
+                <DisplayUnits>Minutes</DisplayUnits>
+                <Period>
+                  <HardcodedValue>3</HardcodedValue>
+                </Period>
+              </TimeOutPeriod>
+              <AHFDelay>
+                <DisplayUnits>Seconds</DisplayUnits>
+                <Period>
+                  <HardcodedValue>12</HardcodedValue>
+                </Period>
+              </AHFDelay>
+              <ExpectList>
+                <ExpectElementConfiguration>
+                  <Name>Error</Name>
+                  <RegularExpression>
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>GetErrorExpect</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>7a982813-0d63-4d3c-b87f-842c155c0666</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </RegularExpression>
+                  <OperationType>Failed_Incompleted</OperationType>
+                  <OperationParameter xsi:type="SubstitutableString">
+                    <HardcodedValue />
+                  </OperationParameter>
+                  <MatchCase>false</MatchCase>
+                </ExpectElementConfiguration>
+                <ExpectElementConfiguration>
+                  <Name>Prompt</Name>
+                  <RegularExpression>
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>GetPromptExpect</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>7a982813-0d63-4d3c-b87f-842c155c0666</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </RegularExpression>
+                  <OperationType>Succeeded</OperationType>
+                  <OperationParameter xsi:type="SubstitutableString">
+                    <HardcodedValue />
+                  </OperationParameter>
+                  <MatchCase>false</MatchCase>
+                </ExpectElementConfiguration>
+                <ExpectElementConfiguration>
+                  <Name>Admin Prompt</Name>
+                  <RegularExpression>
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>GetAdminPromptExpect</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>7a982813-0d63-4d3c-b87f-842c155c0666</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </RegularExpression>
+                  <OperationType>Succeeded</OperationType>
+                  <OperationParameter xsi:type="SubstitutableString">
+                    <HardcodedValue />
+                  </OperationParameter>
+                  <MatchCase>false</MatchCase>
+                </ExpectElementConfiguration>
+              </ExpectList>
+              <CommandTimeoutPeriod>
+                <DisplayUnits>Minutes</DisplayUnits>
+                <Period>
+                  <HardcodedValue>2</HardcodedValue>
+                </Period>
+              </CommandTimeoutPeriod>
+              <PreserveOutput>true</PreserveOutput>
+              <Input>
+                <FormattedCode>ip ospf {0} area {1}
+ip ospf network point-to-point</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Input.VLAN ID</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>f2dba65c-9582-4bfb-aa91-914c855bb00b</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Input.OSPF Area ID</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>0b65c9cd-fa7a-4138-b137-82561c17150a</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                </References>
+              </Input>
+              <IsInputEncrypted>false</IsInputEncrypted>
+              <SpecialEndCharacter>Empty</SpecialEndCharacter>
+              <EndsWithSpecialCharacter>false</EndsWithSpecialCharacter>
+              <SendMultiLineInputAsOne>false</SendMultiLineInputAsOne>
+            </Configuration>
+          </ActivityNode>
+        </Children>
+        <Condition>
+          <Id>c4766f2a-806c-40d0-bfc4-98273e40d829</Id>
+          <Conditions>
+            <ConditionDefinition xsi:type="VariableConditionDefinition">
+              <Id>5390ad31-a953-47c4-a021-82df548b2629</Id>
+              <Expression xsi:type="SubstitutableString">
+                <HardcodedValue />
+              </Expression>
+              <Comparison>NotEquals</Comparison>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.OSPF Area ID</DisplayPath>
+                <LinkChain />
+                <ObjectId>0b65c9cd-fa7a-4138-b137-82561c17150a</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </ConditionDefinition>
+          </Conditions>
+        </Condition>
+      </ActivityNode>
+      <ActivityNode xsi:type="ConditionBranchNode">
+        <Id>0f140119-65cc-428c-bdb0-8818ad455287</Id>
+        <DisplayName>Security Zone?</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>715f8bf8-eae9-4c7a-9dc4-bbdfa81a6654</Id>
+            <DisplayName>Set Security Zone</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>28678934-95fb-414f-b6c7-bacd943c07e7</Id>
+                <ActivityNodeId>715f8bf8-eae9-4c7a-9dc4-bbdfa81a6654</ActivityNodeId>
+                <CompletedId>f6c294d5-dc2a-47ab-9bed-489be496f159</CompletedId>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="SSHSendActivityConfiguration" xml:space="preserve">
+              <Id>715f8bf8-eae9-4c7a-9dc4-bbdfa81a6654</Id>
+              <DisplayName>Set Security Zone</DisplayName>
+              <TargetLoadBalancer xsi:type="ActivityTargetLoadBalancer">
+                <ActivityId>5e57cec8-7131-4b57-8d09-25599b61b74a</ActivityId>
+                <ChildProcessNodeId>00000000-0000-0000-0000-000000000000</ChildProcessNodeId>
+              </TargetLoadBalancer>
+              <InheritTarget>false</InheritTarget>
+              <ContainingProcessId>0a50b3c1-9fe6-41d6-97e1-e31104a5868e</ContainingProcessId>
+              <TimeOutPeriod>
+                <DisplayUnits>Minutes</DisplayUnits>
+                <Period>
+                  <HardcodedValue>3</HardcodedValue>
+                </Period>
+              </TimeOutPeriod>
+              <AHFDelay>
+                <DisplayUnits>Seconds</DisplayUnits>
+                <Period>
+                  <HardcodedValue>12</HardcodedValue>
+                </Period>
+              </AHFDelay>
+              <ExpectList>
+                <ExpectElementConfiguration>
+                  <Name>Error</Name>
+                  <RegularExpression>
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>GetErrorExpect</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>715f8bf8-eae9-4c7a-9dc4-bbdfa81a6654</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </RegularExpression>
+                  <OperationType>Failed_Incompleted</OperationType>
+                  <OperationParameter xsi:type="SubstitutableString">
+                    <HardcodedValue />
+                  </OperationParameter>
+                  <MatchCase>false</MatchCase>
+                </ExpectElementConfiguration>
+                <ExpectElementConfiguration>
+                  <Name>Prompt</Name>
+                  <RegularExpression>
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>GetPromptExpect</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>715f8bf8-eae9-4c7a-9dc4-bbdfa81a6654</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </RegularExpression>
+                  <OperationType>Succeeded</OperationType>
+                  <OperationParameter xsi:type="SubstitutableString">
+                    <HardcodedValue />
+                  </OperationParameter>
+                  <MatchCase>false</MatchCase>
+                </ExpectElementConfiguration>
+                <ExpectElementConfiguration>
+                  <Name>Admin Prompt</Name>
+                  <RegularExpression>
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>GetAdminPromptExpect</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>715f8bf8-eae9-4c7a-9dc4-bbdfa81a6654</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </RegularExpression>
+                  <OperationType>Succeeded</OperationType>
+                  <OperationParameter xsi:type="SubstitutableString">
+                    <HardcodedValue />
+                  </OperationParameter>
+                  <MatchCase>false</MatchCase>
+                </ExpectElementConfiguration>
+              </ExpectList>
+              <CommandTimeoutPeriod>
+                <DisplayUnits>Minutes</DisplayUnits>
+                <Period>
+                  <HardcodedValue>2</HardcodedValue>
+                </Period>
+              </CommandTimeoutPeriod>
+              <PreserveOutput>true</PreserveOutput>
+              <Input>
+                <FormattedCode>zone-member security {0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Input.Security Zone Name</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>c7321b24-bf21-480b-8832-954f3553bde2</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                </References>
+              </Input>
+              <IsInputEncrypted>false</IsInputEncrypted>
+              <SpecialEndCharacter>Empty</SpecialEndCharacter>
+              <EndsWithSpecialCharacter>false</EndsWithSpecialCharacter>
+              <SendMultiLineInputAsOne>false</SendMultiLineInputAsOne>
+            </Configuration>
+          </ActivityNode>
+        </Children>
+        <Condition>
+          <Id>c4766f2a-806c-40d0-bfc4-98273e40d829</Id>
+          <Conditions>
+            <ConditionDefinition xsi:type="VariableConditionDefinition">
+              <Id>5390ad31-a953-47c4-a021-82df548b2629</Id>
+              <Expression xsi:type="SubstitutableString">
+                <HardcodedValue />
+              </Expression>
+              <Comparison>NotEquals</Comparison>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.Security Zone Name</DisplayPath>
+                <LinkChain />
+                <ObjectId>c7321b24-bf21-480b-8832-954f3553bde2</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </ConditionDefinition>
+          </Conditions>
+        </Condition>
+      </ActivityNode>
+      <ActivityNode xsi:type="ConditionBranchNode">
+        <Id>87c84809-ae37-4185-898e-02304a8eb529</Id>
+        <DisplayName>Write Memory?</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>ac9c4d04-13ad-43e5-b8aa-61dd8cb8589c</Id>
+            <DisplayName>Write Memory</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>d0965348-622d-4930-be7d-cf8b804e82b0</Id>
+                <ActivityNodeId>ac9c4d04-13ad-43e5-b8aa-61dd8cb8589c</ActivityNodeId>
+                <CompletedId>80aefff3-eca6-4499-bde8-8fb6e748c5d1</CompletedId>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="SSHSendActivityConfiguration" xml:space="preserve">
+              <Id>ac9c4d04-13ad-43e5-b8aa-61dd8cb8589c</Id>
+              <DisplayName>Write Memory</DisplayName>
+              <TargetLoadBalancer xsi:type="ActivityTargetLoadBalancer">
+                <ActivityId>5e57cec8-7131-4b57-8d09-25599b61b74a</ActivityId>
+                <ChildProcessNodeId>00000000-0000-0000-0000-000000000000</ChildProcessNodeId>
+              </TargetLoadBalancer>
+              <InheritTarget>false</InheritTarget>
+              <ContainingProcessId>0a50b3c1-9fe6-41d6-97e1-e31104a5868e</ContainingProcessId>
+              <TimeOutPeriod>
+                <DisplayUnits>Minutes</DisplayUnits>
+                <Period>
+                  <HardcodedValue>3</HardcodedValue>
+                </Period>
+              </TimeOutPeriod>
+              <AHFDelay>
+                <DisplayUnits>Seconds</DisplayUnits>
+                <Period>
+                  <HardcodedValue>12</HardcodedValue>
+                </Period>
+              </AHFDelay>
+              <ExpectList>
+                <ExpectElementConfiguration>
+                  <Name>Error</Name>
+                  <RegularExpression>
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>GetErrorExpect</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>ac9c4d04-13ad-43e5-b8aa-61dd8cb8589c</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </RegularExpression>
+                  <OperationType>Failed_Incompleted</OperationType>
+                  <OperationParameter xsi:type="SubstitutableString">
+                    <HardcodedValue />
+                  </OperationParameter>
+                  <MatchCase>false</MatchCase>
+                </ExpectElementConfiguration>
+                <ExpectElementConfiguration>
+                  <Name>Prompt</Name>
+                  <RegularExpression>
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>GetPromptExpect</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>ac9c4d04-13ad-43e5-b8aa-61dd8cb8589c</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </RegularExpression>
+                  <OperationType>Succeeded</OperationType>
+                  <OperationParameter xsi:type="SubstitutableString">
+                    <HardcodedValue />
+                  </OperationParameter>
+                  <MatchCase>false</MatchCase>
+                </ExpectElementConfiguration>
+                <ExpectElementConfiguration>
+                  <Name>Admin Prompt</Name>
+                  <RegularExpression>
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>GetAdminPromptExpect</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>ac9c4d04-13ad-43e5-b8aa-61dd8cb8589c</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </RegularExpression>
+                  <OperationType>Succeeded</OperationType>
+                  <OperationParameter xsi:type="SubstitutableString">
+                    <HardcodedValue />
+                  </OperationParameter>
+                  <MatchCase>false</MatchCase>
+                </ExpectElementConfiguration>
+              </ExpectList>
+              <CommandTimeoutPeriod>
+                <DisplayUnits>Minutes</DisplayUnits>
+                <Period>
+                  <HardcodedValue>2</HardcodedValue>
+                </Period>
+              </CommandTimeoutPeriod>
+              <PreserveOutput>true</PreserveOutput>
+              <Input>
+                <FormattedCode>end
+write memory</FormattedCode>
+              </Input>
+              <IsInputEncrypted>false</IsInputEncrypted>
+              <SpecialEndCharacter>Empty</SpecialEndCharacter>
+              <EndsWithSpecialCharacter>false</EndsWithSpecialCharacter>
+              <SendMultiLineInputAsOne>false</SendMultiLineInputAsOne>
+            </Configuration>
+          </ActivityNode>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>dff9eb80-6ad2-43fa-ac8d-a433c30badd2</Id>
+            <DisplayName>Sleep</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>f9c35372-45f3-4df6-a9fc-7dcf1bad12ca</Id>
+                <ActivityNodeId>dff9eb80-6ad2-43fa-ac8d-a433c30badd2</ActivityNodeId>
+                <CompletedId>6ab3b6f4-80e0-47be-937b-713a5c801ec0</CompletedId>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="SleepActivityConfiguration" xml:space="preserve">
+              <Id>dff9eb80-6ad2-43fa-ac8d-a433c30badd2</Id>
+              <DisplayName>Sleep</DisplayName>
+              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                <SingleTargetId>
+                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                </SingleTargetId>
+              </TargetLoadBalancer>
+              <InheritTarget>false</InheritTarget>
+              <ContainingProcessId>0a50b3c1-9fe6-41d6-97e1-e31104a5868e</ContainingProcessId>
+              <Seconds>
+                <HardcodedValue>10</HardcodedValue>
+              </Seconds>
+            </Configuration>
+          </ActivityNode>
+        </Children>
+        <Condition>
+          <Id>fb5bb8e5-1d87-4023-89a4-43cf3e823068</Id>
+          <Conditions>
+            <ConditionDefinition xsi:type="VariableConditionDefinition">
+              <Id>a50c2134-dff7-4d27-94fc-a592afce91b3</Id>
+              <Expression xsi:type="SubstitutableBoolean">
+                <HardcodedValue>true</HardcodedValue>
+              </Expression>
+              <Comparison>Equals</Comparison>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.Write Memory?</DisplayPath>
+                <LinkChain />
+                <ObjectId>c11db884-4814-4372-b4ca-09ea720bfcea</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </ConditionDefinition>
+          </Conditions>
+        </Condition>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>5f1d5e8c-7f15-4e76-8d7d-d1ec5d44be76</Id>
+        <DisplayName>Close Terminal Session</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>9bb7db89-ac5c-40c9-9be5-58451bfb0eb9</Id>
+            <ActivityNodeId>5f1d5e8c-7f15-4e76-8d7d-d1ec5d44be76</ActivityNodeId>
+            <CompletedId>2efbdbc3-e406-4648-afff-b2878b9c7529</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="SSHCloseSessionActivityConfiguration" xml:space="preserve">
+          <Id>5f1d5e8c-7f15-4e76-8d7d-d1ec5d44be76</Id>
+          <DisplayName>Close Terminal Session</DisplayName>
+          <TargetLoadBalancer xsi:type="ActivityTargetLoadBalancer">
+            <ActivityId>5e57cec8-7131-4b57-8d09-25599b61b74a</ActivityId>
+            <ChildProcessNodeId>00000000-0000-0000-0000-000000000000</ChildProcessNodeId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>0a50b3c1-9fe6-41d6-97e1-e31104a5868e</ContainingProcessId>
+          <TimeOutPeriod>
+            <DisplayUnits>Minutes</DisplayUnits>
+            <Period>
+              <HardcodedValue>2</HardcodedValue>
+            </Period>
+          </TimeOutPeriod>
+          <AHFDelay>
+            <DisplayUnits>Seconds</DisplayUnits>
+            <Period>
+              <HardcodedValue>12</HardcodedValue>
+            </Period>
+          </AHFDelay>
+          <ExpectList>
+            <ExpectElementConfiguration>
+              <Name>Error</Name>
+              <RegularExpression>
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResolvedTarget</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>GetErrorExpect</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>5f1d5e8c-7f15-4e76-8d7d-d1ec5d44be76</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </RegularExpression>
+              <OperationType>Failed_Incompleted</OperationType>
+              <OperationParameter xsi:type="SubstitutableString">
+                <HardcodedValue />
+              </OperationParameter>
+              <MatchCase>false</MatchCase>
+            </ExpectElementConfiguration>
+            <ExpectElementConfiguration>
+              <Name>Prompt</Name>
+              <RegularExpression>
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResolvedTarget</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>GetPromptExpect</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>5f1d5e8c-7f15-4e76-8d7d-d1ec5d44be76</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </RegularExpression>
+              <OperationType>Succeeded</OperationType>
+              <OperationParameter xsi:type="SubstitutableString">
+                <HardcodedValue />
+              </OperationParameter>
+              <MatchCase>false</MatchCase>
+            </ExpectElementConfiguration>
+            <ExpectElementConfiguration>
+              <Name>Admin Prompt</Name>
+              <RegularExpression>
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResolvedTarget</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>GetAdminPromptExpect</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>5f1d5e8c-7f15-4e76-8d7d-d1ec5d44be76</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </RegularExpression>
+              <OperationType>Succeeded</OperationType>
+              <OperationParameter xsi:type="SubstitutableString">
+                <HardcodedValue />
+              </OperationParameter>
+              <MatchCase>false</MatchCase>
+            </ExpectElementConfiguration>
+          </ExpectList>
+          <CommandTimeoutPeriod>
+            <DisplayUnits>Minutes</DisplayUnits>
+            <Period>
+              <HardcodedValue>1</HardcodedValue>
+            </Period>
+          </CommandTimeoutPeriod>
+          <PreserveOutput>true</PreserveOutput>
+          <Input>
+            <HardcodedValue />
+          </Input>
+        </Configuration>
+      </ActivityNode>
+    </Children>
+  </FirstActivity>
+  <ProcessId>0a50b3c1-9fe6-41d6-97e1-e31104a5868e</ProcessId>
+</WorkflowConfiguration>

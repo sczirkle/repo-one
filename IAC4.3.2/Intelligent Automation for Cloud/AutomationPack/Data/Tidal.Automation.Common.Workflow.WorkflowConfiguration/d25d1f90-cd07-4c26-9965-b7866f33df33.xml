@@ -1,0 +1,546 @@
+<?xml version="1.0"?>
+<WorkflowConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>d25d1f90-cd07-4c26-9965-b7866f33df33</Id>
+  <DisplayName>Reserve VLAN in Portal</DisplayName>
+  <CreatedTime>2016-02-15T20:42:06.317125Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:42:24.5263671Z</ModifiedTime>
+  <FirstActivity xsi:type="RootNode">
+    <Id>54c4add7-37f3-47fb-95c1-03af02123ce3</Id>
+    <DisplayName />
+    <Children>
+      <ActivityNode xsi:type="LockNode">
+        <Id>649e863f-61e8-4f80-a4a8-35b9697e4ba4</Id>
+        <DisplayName>Queue Block</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>b88d15a9-f070-4dc9-85af-b2c2d0cd2542</Id>
+            <DisplayName>Find Unassigned VLAN</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>f9ce2788-710f-46de-b157-71a3f1db1c47</Id>
+                <ActivityNodeId>b88d15a9-f070-4dc9-85af-b2c2d0cd2542</ActivityNodeId>
+                <CompletedId>0bb9b9b6-0100-41d4-bcee-9d3cec7b3278</CompletedId>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="FindServiceItemsActivityConfiguration" xml:space="preserve">
+              <Id>b88d15a9-f070-4dc9-85af-b2c2d0cd2542</Id>
+              <DisplayName>Find Unassigned VLAN</DisplayName>
+              <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+              <ContainingProcessId>98cdf86b-5ebe-4530-a174-4af362dc0ca7</ContainingProcessId>
+              <RetryTimePeriod>
+                <DisplayUnits>Minutes</DisplayUnits>
+                <Period>
+                  <FormattedCode>{0}</FormattedCode>
+                  <References>
+                    <VariableReference xsi:type="PropertyReference">
+                      <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Time Period (minutes)</DisplayPath>
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>DefaultRetryMinutes</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                      <ObjectType>Adapter</ObjectType>
+                    </VariableReference>
+                  </References>
+                </Period>
+              </RetryTimePeriod>
+              <RetryFrequency>
+                <DisplayUnits>Seconds</DisplayUnits>
+                <Period>
+                  <FormattedCode>{0}</FormattedCode>
+                  <References>
+                    <VariableReference xsi:type="PropertyReference">
+                      <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Frequency (seconds)</DisplayPath>
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>DefaultRetryFrequency</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                      <ObjectType>Adapter</ObjectType>
+                    </VariableReference>
+                  </References>
+                </Period>
+              </RetryFrequency>
+              <Timeout>
+                <DisplayUnits>Seconds</DisplayUnits>
+                <Period>
+                  <HardcodedValue>100</HardcodedValue>
+                </Period>
+              </Timeout>
+              <ItemType>
+                <HardcodedValue>VLANPool</HardcodedValue>
+              </ItemType>
+              <ItemName>
+                <FormattedCode />
+              </ItemName>
+              <BrowseServiceItemName>VLANPool</BrowseServiceItemName>
+              <Properties>
+                <ServiceItemProperty>
+                  <Name>
+                    <HardcodedValue>VLANID</HardcodedValue>
+                  </Name>
+                  <VariableType>Number</VariableType>
+                </ServiceItemProperty>
+                <ServiceItemProperty>
+                  <Name>
+                    <HardcodedValue>Name</HardcodedValue>
+                  </Name>
+                </ServiceItemProperty>
+              </Properties>
+              <SearchCriteria>
+                <ServiceItemSearchCriteria>
+                  <Name>
+                    <HardcodedValue>State</HardcodedValue>
+                  </Name>
+                  <Value xsi:type="SubstitutableString">
+                    <HardcodedValue>Unassigned</HardcodedValue>
+                  </Value>
+                  <Comparison>Equal</Comparison>
+                </ServiceItemSearchCriteria>
+                <ServiceItemSearchCriteria>
+                  <Name>
+                    <HardcodedValue>NetworkPOD</HardcodedValue>
+                  </Name>
+                  <Value xsi:type="SubstitutableString">
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Variables.Input.POD Name</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>e6c34d17-e7ed-44e5-8a44-e3f98206646c</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </Value>
+                  <Comparison>Equal</Comparison>
+                </ServiceItemSearchCriteria>
+              </SearchCriteria>
+              <FindType>FindSpecifiedRows</FindType>
+              <Count>1</Count>
+              <ReturnSubscriberInfo>true</ReturnSubscriberInfo>
+              <Subscriber>
+                <HardcodedValue />
+              </Subscriber>
+              <SubscriberOuName>
+                <HardcodedValue />
+              </SubscriberOuName>
+            </Configuration>
+          </ActivityNode>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>16346c49-e7a6-412a-a3a6-746e2d38b1af</Id>
+            <DisplayName>If no free VLAN found</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="CompletedNode">
+                <Id>183a5e83-846e-4369-a761-7d7c2536edc8</Id>
+                <CompletedType>FailedNotCompleted</CompletedType>
+                <ResultMessage>
+                  <HardcodedValue>No free vlans were found in the pool</HardcodedValue>
+                </ResultMessage>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>82064a20-fb8d-4a62-82fe-05b872918708</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>d6799209-1089-4ed6-9e4b-aac9a92b6059</Id>
+                  <Expression xsi:type="SubstitutableNumber">
+                    <HardcodedValue>0</HardcodedValue>
+                  </Expression>
+                  <Comparison>Equals</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Find Unassigned VLAN.Service Items.Row Count</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResultsTable</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>RowCount</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>b88d15a9-f070-4dc9-85af-b2c2d0cd2542</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>ceee240b-09d0-4876-9aaa-be83d77bc39b</Id>
+            <DisplayName>Update VLAN Service Item</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ConditionBranchNode">
+                <Id>2614a0e2-97c3-43ef-a9d5-277c38b8b9fe</Id>
+                <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                <DisplayName>If Execution Fails</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="ExecuteActivityNode">
+                    <Id>4550142e-af03-46b9-a9df-10bce2569f91</Id>
+                    <DisplayName>Unable to update service item (1011)</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                        <Id>1d698975-2a5b-4aa7-abe6-82a94b49d9fa</Id>
+                        <ActivityNodeId>4550142e-af03-46b9-a9df-10bce2569f91</ActivityNodeId>
+                        <CompletedId>9cf36645-8bdb-40d8-a23a-1eb1002c8d66</CompletedId>
+                      </ActivityNode>
+                    </Children>
+                    <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+                      <Id>4550142e-af03-46b9-a9df-10bce2569f91</Id>
+                      <DisplayName>Unable to update service item (1011)</DisplayName>
+                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                        <SingleTargetId>
+                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                        </SingleTargetId>
+                      </TargetLoadBalancer>
+                      <InheritTarget>false</InheritTarget>
+                      <ContainingProcessId>98cdf86b-5ebe-4530-a174-4af362dc0ca7</ContainingProcessId>
+                      <Assignments>
+                        <PropertyReferenceValuePair>
+                          <VariableToSet>
+                            <DisplayPath>Process.Target.Properties.Cloud.Service.General.ErrorCode</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResolvedTarget</PropertyName>
+                              </Link>
+                              <Link xsi:type="ObjectReferenceLink">
+                                <ObjectLink>
+                                  <Id>7ad8347e-4936-4962-ab6d-3ec987d2737a</Id>
+                                  <ObjectType>PropertyExtension</ObjectType>
+                                </ObjectLink>
+                              </Link>
+                            </LinkChain>
+                            <ObjectType>ProcessInstance</ObjectType>
+                          </VariableToSet>
+                          <NewValue xsi:type="SubstitutableNumber">
+                            <HardcodedValue>1011</HardcodedValue>
+                          </NewValue>
+                        </PropertyReferenceValuePair>
+                        <PropertyReferenceValuePair>
+                          <VariableToSet>
+                            <DisplayPath>Process.Target.Properties.Cloud.Service.General.ErrorDescription</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResolvedTarget</PropertyName>
+                              </Link>
+                              <Link xsi:type="ObjectReferenceLink">
+                                <ObjectLink>
+                                  <Id>05385a56-169a-4946-9e3e-8de36ceaa838</Id>
+                                  <ObjectType>PropertyExtension</ObjectType>
+                                </ObjectLink>
+                              </Link>
+                            </LinkChain>
+                            <ObjectType>ProcessInstance</ObjectType>
+                          </VariableToSet>
+                          <NewValue xsi:type="SubstitutableString">
+                            <FormattedCode>Unable to update service item:
+{0}
+</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Variables.Local.Name</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>2196085e-7cda-405c-bbf1-4c8d68294613</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </NewValue>
+                        </PropertyReferenceValuePair>
+                      </Assignments>
+                    </Configuration>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="CompletedNode">
+                    <Id>da337b95-2df4-4304-a449-1bb1e79351ee</Id>
+                    <Notes>Fail the entire process</Notes>
+                    <CompletedType>FailedNotCompleted</CompletedType>
+                    <ResultMessage>
+                      <FormattedCode>{0}</FormattedCode>
+                      <References>
+                        <VariableReference xsi:type="PropertyReference">
+                          <LinkChain>
+                            <Link xsi:type="PropertyNameLink">
+                              <PropertyName>ErrorInformation</PropertyName>
+                            </Link>
+                          </LinkChain>
+                          <ObjectId>ceee240b-09d0-4876-9aaa-be83d77bc39b</ObjectId>
+                          <ObjectType>ActivityInstance</ObjectType>
+                        </VariableReference>
+                      </References>
+                    </ResultMessage>
+                  </ActivityNode>
+                </Children>
+                <Condition>
+                  <Id>fc88e840-ec79-4da5-882d-e9a23a228375</Id>
+                  <Conditions>
+                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                      <Id>f03b87a2-0a4e-4f6d-9a7d-9140911c7fe9</Id>
+                      <Expression xsi:type="SubstitutableBoolean">
+                        <HardcodedValue>true</HardcodedValue>
+                      </Expression>
+                      <Comparison>Equals</Comparison>
+                      <VariableReference xsi:type="PropertyReference">
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>InstanceFailed</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>ceee240b-09d0-4876-9aaa-be83d77bc39b</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </ConditionDefinition>
+                  </Conditions>
+                </Condition>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="UpdateServiceItemActivityConfiguration" xml:space="preserve">
+              <Id>ceee240b-09d0-4876-9aaa-be83d77bc39b</Id>
+              <DisplayName>Update VLAN Service Item</DisplayName>
+              <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+              <ContainingProcessId>98cdf86b-5ebe-4530-a174-4af362dc0ca7</ContainingProcessId>
+              <RetryTimePeriod>
+                <DisplayUnits>Minutes</DisplayUnits>
+                <Period>
+                  <FormattedCode>{0}</FormattedCode>
+                  <References>
+                    <VariableReference xsi:type="PropertyReference">
+                      <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Time Period (minutes)</DisplayPath>
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>DefaultRetryMinutes</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                      <ObjectType>Adapter</ObjectType>
+                    </VariableReference>
+                  </References>
+                </Period>
+              </RetryTimePeriod>
+              <RetryFrequency>
+                <DisplayUnits>Seconds</DisplayUnits>
+                <Period>
+                  <FormattedCode>{0}</FormattedCode>
+                  <References>
+                    <VariableReference xsi:type="PropertyReference">
+                      <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Frequency (seconds)</DisplayPath>
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>DefaultRetryFrequency</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                      <ObjectType>Adapter</ObjectType>
+                    </VariableReference>
+                  </References>
+                </Period>
+              </RetryFrequency>
+              <Timeout>
+                <DisplayUnits>Seconds</DisplayUnits>
+                <Period>
+                  <HardcodedValue>100</HardcodedValue>
+                </Period>
+              </Timeout>
+              <ItemType>
+                <HardcodedValue>VLANPool</HardcodedValue>
+              </ItemType>
+              <ItemName>
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Find Unassigned VLAN.Service Items.First Row.Name</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResultsTable</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>FirstRow</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>Name</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>b88d15a9-f070-4dc9-85af-b2c2d0cd2542</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </ItemName>
+              <BrowseServiceItemName>VLAN</BrowseServiceItemName>
+              <ItemAttributes>
+                <ServiceItemPropertyInformation>
+                  <Name>
+                    <HardcodedValue>State</HardcodedValue>
+                  </Name>
+                  <Value xsi:type="SubstitutableString">
+                    <HardcodedValue>Assigned</HardcodedValue>
+                  </Value>
+                </ServiceItemPropertyInformation>
+                <ServiceItemPropertyInformation>
+                  <Name>
+                    <HardcodedValue>VLANInstance</HardcodedValue>
+                  </Name>
+                  <Value xsi:type="SubstitutableString">
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Variables.Input.VLAN Instance SI Name</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>ce72f664-f790-4d3a-a4db-85509b8709aa</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </Value>
+                </ServiceItemPropertyInformation>
+                <ServiceItemPropertyInformation>
+                  <Name>
+                    <HardcodedValue>VDCName</HardcodedValue>
+                  </Name>
+                  <Value xsi:type="SubstitutableString">
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Variables.Input.VDC SI Name</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>4003b96e-570c-4383-a138-363672413fb2</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </Value>
+                </ServiceItemPropertyInformation>
+                <ServiceItemPropertyInformation>
+                  <Name>
+                    <HardcodedValue>TenantName</HardcodedValue>
+                  </Name>
+                  <Value xsi:type="SubstitutableString">
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Variables.Input.Tenant Name</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>dc1262f6-a688-4b49-b851-adcd30f5a2de</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </Value>
+                </ServiceItemPropertyInformation>
+              </ItemAttributes>
+              <Subscriber>
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Find Unassigned VLAN.Service Items.First Row.Subscription_loginID</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResultsTable</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>FirstRow</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>Subscription_loginID</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>b88d15a9-f070-4dc9-85af-b2c2d0cd2542</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </Subscriber>
+              <SubscriberOuName>
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Find Unassigned VLAN.Service Items.First Row.Subscription_ouname</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResultsTable</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>FirstRow</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>Subscription_ouname</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>b88d15a9-f070-4dc9-85af-b2c2d0cd2542</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </SubscriberOuName>
+              <SubscriberRequisitionEntryId>
+                <FormattedCode />
+              </SubscriberRequisitionEntryId>
+              <ChannelId>
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Global Variables.Cloud Service Item Update Channel ID</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>c070b5b6-0120-48f1-8b36-2319f9348a4a</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                </References>
+              </ChannelId>
+            </Configuration>
+          </ActivityNode>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>4ca6e923-f9b7-4803-a469-3de5e760a21b</Id>
+            <DisplayName>Set VLAN ID</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>298e6b00-047d-4637-8453-c50eaaec4468</Id>
+                <ActivityNodeId>4ca6e923-f9b7-4803-a469-3de5e760a21b</ActivityNodeId>
+                <CompletedId>0e984de7-2101-4892-b6d6-167e8cae56a4</CompletedId>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+              <Id>4ca6e923-f9b7-4803-a469-3de5e760a21b</Id>
+              <DisplayName>Set VLAN ID</DisplayName>
+              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                <SingleTargetId>
+                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                </SingleTargetId>
+              </TargetLoadBalancer>
+              <InheritTarget>false</InheritTarget>
+              <ContainingProcessId>98cdf86b-5ebe-4530-a174-4af362dc0ca7</ContainingProcessId>
+              <VariableToSet>
+                <DisplayPath>Process.Variables.Output.VLAN ID</DisplayPath>
+                <LinkChain />
+                <ObjectId>4605c70a-008b-467e-9a82-eeb5538e5a9e</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableToSet>
+              <NewValue xsi:type="SubstitutableNumber">
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Find Unassigned VLAN.Service Items.First Row.VLANID</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResultsTable</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>FirstRow</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>VLANID</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>b88d15a9-f070-4dc9-85af-b2c2d0cd2542</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </NewValue>
+            </Configuration>
+          </ActivityNode>
+        </Children>
+        <LockSource xsi:type="SubstitutableObjectReference">
+          <FormattedCode />
+          <HardcodedValue>
+            <Id>2f9fc293-2edf-41ce-86f8-453c3b0e6f16</Id>
+            <ObjectType>SynchronizedResource</ObjectType>
+          </HardcodedValue>
+        </LockSource>
+        <Priority>High</Priority>
+        <TimeoutOccurred>false</TimeoutOccurred>
+      </ActivityNode>
+    </Children>
+  </FirstActivity>
+  <ProcessId>98cdf86b-5ebe-4530-a174-4af362dc0ca7</ProcessId>
+</WorkflowConfiguration>

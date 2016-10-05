@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<WorkflowConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>7e4ca5a9-a545-4f44-aa6c-3596e9b2e4bc</Id>
+  <DisplayName>Read Nested Table XML</DisplayName>
+  <CreatedTime>2016-02-15T20:45:37.848375Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:45:56.0576171Z</ModifiedTime>
+  <FirstActivity xsi:type="RootNode">
+    <Id>ce127a6c-6936-4fd3-961b-cdba6b9e5b23</Id>
+    <DisplayName />
+    <Children>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>4017e237-4d9e-4192-b559-792163859afc</Id>
+        <DisplayName>Apply XSL Transform</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>b3ab080e-4f34-490a-80d7-2d1967fd4ea9</Id>
+            <ActivityNodeId>4017e237-4d9e-4192-b559-792163859afc</ActivityNodeId>
+            <CompletedId>88668fba-3b5b-49d6-a85e-c76be31b9bdf</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="XslTransformActivityConfiguration" xml:space="preserve">
+          <Id>4017e237-4d9e-4192-b559-792163859afc</Id>
+          <DisplayName>Apply XSL Transform</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>77eb3f1f-e2b2-4531-a8c7-02345fc94a9b</ContainingProcessId>
+          <SourceText>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.Input XML</DisplayPath>
+                <LinkChain />
+                <ObjectId>7e0fae25-bff7-42b9-a72d-34de82321993</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </SourceText>
+          <TransformPath>
+            <HardcodedValue />
+          </TransformPath>
+          <XSLDocument>
+            <FormattedCode>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+ &lt;xsl:template match="/"&gt;
+  &lt;xsl:element name="table"&gt;
+   &lt;xsl:for-each select="{0}"&gt;
+    &lt;xsl:element name="row"&gt;
+     &lt;xsl:for-each select="./*"&gt;
+      &lt;xsl:element name="{{local-name(.)}}"&gt;
+       &lt;xsl:choose&gt;
+        &lt;xsl:when test="count(./*) &amp;gt; 0"&gt;
+         &lt;xsl:text disable-output-escaping="yes"&gt;&amp;lt;![CDATA[&lt;/xsl:text&gt;
+         &lt;xsl:copy-of select="."/&gt;
+         &lt;xsl:text disable-output-escaping="yes"&gt;]]&amp;gt;&lt;/xsl:text&gt;
+        &lt;/xsl:when&gt;
+        &lt;xsl:otherwise&gt;
+         &lt;xsl:value-of select="." /&gt;
+        &lt;/xsl:otherwise&gt;
+       &lt;/xsl:choose&gt;
+      &lt;/xsl:element&gt;
+     &lt;/xsl:for-each&gt;
+    &lt;/xsl:element&gt;
+   &lt;/xsl:for-each&gt;
+  &lt;/xsl:element&gt;
+ &lt;/xsl:template&gt;
+&lt;/xsl:stylesheet&gt;</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.XPath Expression</DisplayPath>
+                <LinkChain />
+                <ObjectId>16f4b4ef-8c3b-44eb-a8e4-682b0bb3faa5</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </XSLDocument>
+          <OutputFormat>Text</OutputFormat>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>4713b74c-6c62-4397-9c9c-3c6a2f1815dc</Id>
+        <DisplayName>Set Variable</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>f4681f2c-b894-4ced-bcf4-2d539d33d88f</Id>
+            <ActivityNodeId>4713b74c-6c62-4397-9c9c-3c6a2f1815dc</ActivityNodeId>
+            <CompletedId>fa79d536-1cc7-4e5d-ac55-73689d1ff8ec</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+          <Id>4713b74c-6c62-4397-9c9c-3c6a2f1815dc</Id>
+          <DisplayName>Set Variable</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>77eb3f1f-e2b2-4531-a8c7-02345fc94a9b</ContainingProcessId>
+          <VariableToSet>
+            <DisplayPath>Process.Variables.Output.Table XML</DisplayPath>
+            <LinkChain />
+            <ObjectId>723d920d-d8b3-428b-b6c1-558d18a53388</ObjectId>
+            <ObjectType>GlobalVariable</ObjectType>
+          </VariableToSet>
+          <NewValue xsi:type="SubstitutableString">
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Apply XSL Transform.Output</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>Output</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>4017e237-4d9e-4192-b559-792163859afc</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </VariableReference>
+            </References>
+          </NewValue>
+        </Configuration>
+      </ActivityNode>
+    </Children>
+  </FirstActivity>
+  <ProcessId>77eb3f1f-e2b2-4531-a8c7-02345fc94a9b</ProcessId>
+</WorkflowConfiguration>

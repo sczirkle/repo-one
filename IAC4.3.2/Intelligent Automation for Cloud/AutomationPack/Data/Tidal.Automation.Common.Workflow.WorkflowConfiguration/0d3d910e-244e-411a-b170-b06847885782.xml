@@ -1,0 +1,804 @@
+<?xml version="1.0"?>
+<WorkflowConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>0d3d910e-244e-411a-b170-b06847885782</Id>
+  <DisplayName>Get Rate Table</DisplayName>
+  <CreatedTime>2016-02-15T20:42:24.192125Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:42:42.4013671Z</ModifiedTime>
+  <FirstActivity xsi:type="RootNode">
+    <Id>f320d533-707e-4d2d-88e3-5148e1657442</Id>
+    <DisplayName />
+    <Children>
+      <ActivityNode xsi:type="StartProcessNode">
+        <Id>17d2d1aa-41c2-4a8a-8a2f-0cd14038a7d3</Id>
+        <DisplayName>Query Account Object</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>db5b6da2-46df-4a2d-9f6d-5a6711107cb2</Id>
+            <ProcessNodeId>17d2d1aa-41c2-4a8a-8a2f-0cd14038a7d3</ProcessNodeId>
+            <CompletedId>ed9bb93e-f5f5-4b39-8edb-078181cd3cfe</CompletedId>
+          </ActivityNode>
+        </Children>
+        <ProcessId>abc47723-7db0-4496-8c79-2bcbef74b11e</ProcessId>
+        <InputVariableTable>
+          <VariableAssignmentsAsArray>
+            <InputVariableAssignment>
+              <InputVariableId>b228d1ad-1725-409f-a613-65b69e5ca9c3</InputVariableId>
+              <VariableValue xsi:type="SubstitutableString">
+                <FormattedCode>nsapi/directory/accounts/name/{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Input.Account Name</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>f15f0d55-8ba6-45ec-bd3f-e2db2f8f201b</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                </References>
+              </VariableValue>
+            </InputVariableAssignment>
+          </VariableAssignmentsAsArray>
+        </InputVariableTable>
+        <Asynchronous>false</Asynchronous>
+        <InheritTarget>false</InheritTarget>
+        <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+          <SingleTargetReference>
+            <FormattedCode />
+            <HardcodedValue>
+              <Id>ba183b27-04b2-4f17-aa1d-709221bd68f5</Id>
+              <ObjectType>Target</ObjectType>
+            </HardcodedValue>
+          </SingleTargetReference>
+        </TargetLoadBalancer>
+        <InheritPriorityClass>true</InheritPriorityClass>
+        <RuntimeUserId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </RuntimeUserId>
+        <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+        <StartPointId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </StartPointId>
+        <StartPointName>
+          <FormattedCode />
+        </StartPointName>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>5ab08a32-e795-4c43-88de-583d1cf0525e</Id>
+        <DisplayName>Query Billing Rate Group</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>9750096c-3483-4383-83f4-67804a0c6293</Id>
+            <ActivityNodeId>5ab08a32-e795-4c43-88de-583d1cf0525e</ActivityNodeId>
+            <CompletedId>58d51b6c-3f2d-454e-8abd-e8d3320cbfab</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="XPathQueryActivityConfiguration" xml:space="preserve">
+          <Id>5ab08a32-e795-4c43-88de-583d1cf0525e</Id>
+          <DisplayName>Query Billing Rate Group</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>0759701e-0b46-4efd-8518-3c8e54e96152</ContainingProcessId>
+          <SourceXml>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Query Account Object.Response</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="ProcessOutputVariableLink">
+                    <LaunchingActivityId>17d2d1aa-41c2-4a8a-8a2f-0cd14038a7d3</LaunchingActivityId>
+                    <OutputVariableId>2d71795f-4483-4cd1-9467-745f090567e2</OutputVariableId>
+                  </Link>
+                </LinkChain>
+                <ObjectId>17d2d1aa-41c2-4a8a-8a2f-0cd14038a7d3</ObjectId>
+                <ObjectType>WorkflowNode</ObjectType>
+              </VariableReference>
+            </References>
+          </SourceXml>
+          <Namespaces />
+          <Queries>
+            <XPathQueryDefinition>
+              <DisplayName>billingRateGroup</DisplayName>
+              <Query>
+                <HardcodedValue>//account/billingRateGroup</HardcodedValue>
+              </Query>
+              <ReturnType>String</ReturnType>
+              <DefaultBehavior>Fail</DefaultBehavior>
+            </XPathQueryDefinition>
+          </Queries>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ConditionBranchNode">
+        <Id>54cf1fb4-6207-487c-a7b6-a2aef4602521</Id>
+        <DisplayName>Billing Rate Group Empty?</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="CompletedNode">
+            <Id>03fcddac-aa00-4fc2-b0de-e3acbcc79d6a</Id>
+            <CompletedType>Failed</CompletedType>
+            <ResultMessage>
+              <FormattedCode>The billing rate group for the account '{0}' is missing.</FormattedCode>
+              <References>
+                <VariableReference xsi:type="PropertyReference">
+                  <DisplayPath>Process.Variables.Input.Account Name</DisplayPath>
+                  <LinkChain />
+                  <ObjectId>f15f0d55-8ba6-45ec-bd3f-e2db2f8f201b</ObjectId>
+                  <ObjectType>GlobalVariable</ObjectType>
+                </VariableReference>
+              </References>
+            </ResultMessage>
+          </ActivityNode>
+        </Children>
+        <Condition>
+          <Id>6f00e8c5-546b-4da2-98c9-3a0d2f6da33d</Id>
+          <Conditions>
+            <ConditionDefinition xsi:type="VariableConditionDefinition">
+              <Id>3af14a2c-5e7d-4802-ae10-b2228ffc5148</Id>
+              <Expression xsi:type="SubstitutableString">
+                <HardcodedValue />
+              </Expression>
+              <Comparison>Equals</Comparison>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Query Billing Rate Group.Results.billingRateGroup</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>Results</PropertyName>
+                  </Link>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>billingRateGroup</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>5ab08a32-e795-4c43-88de-583d1cf0525e</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </VariableReference>
+            </ConditionDefinition>
+          </Conditions>
+        </Condition>
+      </ActivityNode>
+      <ActivityNode xsi:type="StartProcessNode">
+        <Id>f8c010b3-d9d9-4d60-829b-bb2db0f4f8f7</Id>
+        <DisplayName>Query Rategroup Name</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>7ab96e3d-b43e-41f0-8790-5ced230f6ff6</Id>
+            <ProcessNodeId>f8c010b3-d9d9-4d60-829b-bb2db0f4f8f7</ProcessNodeId>
+            <CompletedId>ece224a7-f97b-4c2f-b2d1-9faa0cd0a576</CompletedId>
+          </ActivityNode>
+        </Children>
+        <ProcessId>abc47723-7db0-4496-8c79-2bcbef74b11e</ProcessId>
+        <InputVariableTable>
+          <VariableAssignmentsAsArray>
+            <InputVariableAssignment>
+              <InputVariableId>b228d1ad-1725-409f-a613-65b69e5ca9c3</InputVariableId>
+              <VariableValue xsi:type="SubstitutableString">
+                <FormattedCode>nsapi/definition/billing/ratetables/rategroupname/{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Query Billing Rate Group.Results.billingRateGroup</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>Results</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>billingRateGroup</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>5ab08a32-e795-4c43-88de-583d1cf0525e</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </VariableValue>
+            </InputVariableAssignment>
+          </VariableAssignmentsAsArray>
+        </InputVariableTable>
+        <Asynchronous>false</Asynchronous>
+        <InheritTarget>false</InheritTarget>
+        <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+          <SingleTargetReference>
+            <FormattedCode />
+            <HardcodedValue>
+              <Id>ba183b27-04b2-4f17-aa1d-709221bd68f5</Id>
+              <ObjectType>Target</ObjectType>
+            </HardcodedValue>
+          </SingleTargetReference>
+        </TargetLoadBalancer>
+        <InheritPriorityClass>true</InheritPriorityClass>
+        <RuntimeUserId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </RuntimeUserId>
+        <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+        <StartPointId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </StartPointId>
+        <StartPointName>
+          <FormattedCode />
+        </StartPointName>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>469d577d-21bf-49c8-8071-2593904da6f6</Id>
+        <DisplayName>XSL Transform</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>e054f603-ba1c-44a1-a468-a0a63dc28a4a</Id>
+            <ActivityNodeId>469d577d-21bf-49c8-8071-2593904da6f6</ActivityNodeId>
+            <CompletedId>61ae1711-1f3a-4551-a1ee-2c03fbf125d8</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="XslTransformActivityConfiguration" xml:space="preserve">
+          <Id>469d577d-21bf-49c8-8071-2593904da6f6</Id>
+          <DisplayName>XSL Transform</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>0759701e-0b46-4efd-8518-3c8e54e96152</ContainingProcessId>
+          <SourceText>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Query Rategroup Name.Response</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="ProcessOutputVariableLink">
+                    <LaunchingActivityId>f8c010b3-d9d9-4d60-829b-bb2db0f4f8f7</LaunchingActivityId>
+                    <OutputVariableId>2d71795f-4483-4cd1-9467-745f090567e2</OutputVariableId>
+                  </Link>
+                </LinkChain>
+                <ObjectId>f8c010b3-d9d9-4d60-829b-bb2db0f4f8f7</ObjectId>
+                <ObjectType>WorkflowNode</ObjectType>
+              </VariableReference>
+            </References>
+          </SourceText>
+          <TransformPath>
+            <HardcodedValue />
+          </TransformPath>
+          <XSLDocument>
+            <HardcodedValue>&lt;?xml version="1.0"?&gt;
+&lt;xsl:stylesheet version="1.0"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+  &lt;xsl:template match="/"&gt;
+    &lt;results&gt;
+      &lt;xsl:for-each select="//rateTable"&gt;
+        &lt;row&gt;
+          &lt;logicName&gt;
+            &lt;xsl:value-of select="@logicName"/&gt;
+          &lt;/logicName&gt;
+          &lt;Name&gt;
+            &lt;xsl:value-of select="@name"/&gt;
+          &lt;/Name&gt;
+        &lt;/row&gt;
+      &lt;/xsl:for-each&gt;
+    &lt;/results&gt;
+  &lt;/xsl:template&gt;
+&lt;/xsl:stylesheet&gt;</HardcodedValue>
+          </XSLDocument>
+          <OutputFormat>Xml</OutputFormat>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>185599e0-7b04-4796-8d93-c2a0de8b5946</Id>
+        <DisplayName>Read Table from XML</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>b52c26c4-3a0a-465b-9740-dbb8b6f0c9be</Id>
+            <ActivityNodeId>185599e0-7b04-4796-8d93-c2a0de8b5946</ActivityNodeId>
+            <CompletedId>bde5dfc9-6076-4f61-9871-36a85e5ab6d0</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="ReadTableFromXmlActivityConfiguration" xml:space="preserve">
+          <Id>185599e0-7b04-4796-8d93-c2a0de8b5946</Id>
+          <DisplayName>Read Table from XML</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>0759701e-0b46-4efd-8518-3c8e54e96152</ContainingProcessId>
+          <Columns>
+            <BuiltinTableColumn>
+              <Name>logicName</Name>
+              <DataType>System.String</DataType>
+            </BuiltinTableColumn>
+            <BuiltinTableColumn>
+              <Name>Name</Name>
+              <DataType>System.String</DataType>
+            </BuiltinTableColumn>
+          </Columns>
+          <XmlRowElementName>
+            <HardcodedValue>row</HardcodedValue>
+          </XmlRowElementName>
+          <XmlString>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.XSL Transform.Output</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>Output</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>469d577d-21bf-49c8-8071-2593904da6f6</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </VariableReference>
+            </References>
+          </XmlString>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ForEachNode">
+        <Id>f797b104-d1a9-48da-9e83-a7dc6a306fd5</Id>
+        <DisplayName>For Each group</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="StartProcessNode">
+            <Id>2d7e2da1-698a-49b6-8d3a-59358a2890cc</Id>
+            <DisplayName>Query Operation Name</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>9f576dff-d6ff-4dfc-8bc2-42f2a9daaf72</Id>
+                <ProcessNodeId>2d7e2da1-698a-49b6-8d3a-59358a2890cc</ProcessNodeId>
+                <CompletedId>8e47b4c8-bb1f-4600-a5f2-3b1ffb5f567b</CompletedId>
+              </ActivityNode>
+            </Children>
+            <ProcessId>abc47723-7db0-4496-8c79-2bcbef74b11e</ProcessId>
+            <InputVariableTable>
+              <VariableAssignmentsAsArray>
+                <InputVariableAssignment>
+                  <InputVariableId>b228d1ad-1725-409f-a613-65b69e5ca9c3</InputVariableId>
+                  <VariableValue xsi:type="SubstitutableString">
+                    <FormattedCode>nsapi/definition/billing/ratetables/schema/name/{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.For Each group.Item.Name</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>Name</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>f797b104-d1a9-48da-9e83-a7dc6a306fd5</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </VariableValue>
+                </InputVariableAssignment>
+              </VariableAssignmentsAsArray>
+            </InputVariableTable>
+            <Asynchronous>false</Asynchronous>
+            <InheritTarget>false</InheritTarget>
+            <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+              <SingleTargetReference>
+                <FormattedCode />
+                <HardcodedValue>
+                  <Id>ba183b27-04b2-4f17-aa1d-709221bd68f5</Id>
+                  <ObjectType>Target</ObjectType>
+                </HardcodedValue>
+              </SingleTargetReference>
+            </TargetLoadBalancer>
+            <InheritPriorityClass>true</InheritPriorityClass>
+            <RuntimeUserId>
+              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+            </RuntimeUserId>
+            <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+            <StartPointId>
+              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+            </StartPointId>
+            <StartPointName>
+              <FormattedCode />
+            </StartPointName>
+          </ActivityNode>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>c8c3886e-77ad-41b8-b634-b04922af1324</Id>
+            <DisplayName>XSL Transform - Rate Type</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>0f8b1c6f-d96f-4bf5-8717-7b419d0ac3f4</Id>
+                <ActivityNodeId>c8c3886e-77ad-41b8-b634-b04922af1324</ActivityNodeId>
+                <CompletedId>b451df6a-e501-4aae-b262-7e26f671ae30</CompletedId>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="XslTransformActivityConfiguration" xml:space="preserve">
+              <Id>c8c3886e-77ad-41b8-b634-b04922af1324</Id>
+              <DisplayName>XSL Transform - Rate Type</DisplayName>
+              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                <SingleTargetId>
+                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                </SingleTargetId>
+              </TargetLoadBalancer>
+              <InheritTarget>false</InheritTarget>
+              <ContainingProcessId>0759701e-0b46-4efd-8518-3c8e54e96152</ContainingProcessId>
+              <SourceText>
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Query Operation Name.Response</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="ProcessOutputVariableLink">
+                        <LaunchingActivityId>2d7e2da1-698a-49b6-8d3a-59358a2890cc</LaunchingActivityId>
+                        <OutputVariableId>2d71795f-4483-4cd1-9467-745f090567e2</OutputVariableId>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>2d7e2da1-698a-49b6-8d3a-59358a2890cc</ObjectId>
+                    <ObjectType>WorkflowNode</ObjectType>
+                  </VariableReference>
+                </References>
+              </SourceText>
+              <TransformPath>
+                <HardcodedValue />
+              </TransformPath>
+              <XSLDocument>
+                <HardcodedValue>&lt;?xml version="1.0"?&gt;
+&lt;xsl:stylesheet version="1.0"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+  &lt;xsl:template match="/"&gt;
+      &lt;xsl:for-each select="//operation"&gt;
+            &lt;xsl:value-of select="@name"/&gt;
+      &lt;/xsl:for-each&gt;
+  &lt;/xsl:template&gt;
+&lt;/xsl:stylesheet&gt;</HardcodedValue>
+              </XSLDocument>
+              <OutputFormat>Text</OutputFormat>
+            </Configuration>
+          </ActivityNode>
+          <ActivityNode xsi:type="StartProcessNode">
+            <Id>2ccce22b-6475-451f-80a6-edd14608665c</Id>
+            <DisplayName>Query Rate</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>26300c93-e524-4907-9451-8c04ea3b2cd6</Id>
+                <ProcessNodeId>2ccce22b-6475-451f-80a6-edd14608665c</ProcessNodeId>
+                <CompletedId>84e91993-0d0a-4382-abf1-f05df8f08852</CompletedId>
+              </ActivityNode>
+            </Children>
+            <ProcessId>abc47723-7db0-4496-8c79-2bcbef74b11e</ProcessId>
+            <InputVariableTable>
+              <VariableAssignmentsAsArray>
+                <InputVariableAssignment>
+                  <InputVariableId>b228d1ad-1725-409f-a613-65b69e5ca9c3</InputVariableId>
+                  <VariableValue xsi:type="SubstitutableString">
+                    <FormattedCode>nsapi/definition/billing/ratetables/data/tablename/{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.For Each group.Item.Name</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>Name</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>f797b104-d1a9-48da-9e83-a7dc6a306fd5</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </VariableValue>
+                </InputVariableAssignment>
+              </VariableAssignmentsAsArray>
+            </InputVariableTable>
+            <Asynchronous>false</Asynchronous>
+            <InheritTarget>false</InheritTarget>
+            <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+              <SingleTargetReference>
+                <FormattedCode />
+                <HardcodedValue>
+                  <Id>ba183b27-04b2-4f17-aa1d-709221bd68f5</Id>
+                  <ObjectType>Target</ObjectType>
+                </HardcodedValue>
+              </SingleTargetReference>
+            </TargetLoadBalancer>
+            <InheritPriorityClass>true</InheritPriorityClass>
+            <RuntimeUserId>
+              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+            </RuntimeUserId>
+            <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+            <StartPointId>
+              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+            </StartPointId>
+            <StartPointName>
+              <FormattedCode />
+            </StartPointName>
+          </ActivityNode>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>f344ce79-62a8-458b-86a8-27701e3d8ca4</Id>
+            <DisplayName>XSL Transform - Template</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>57ad03d5-475c-4dc9-9e4b-cf7c15abaa46</Id>
+                <ActivityNodeId>f344ce79-62a8-458b-86a8-27701e3d8ca4</ActivityNodeId>
+                <CompletedId>cc548078-a7bb-442a-9459-e35453d6850a</CompletedId>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="XslTransformActivityConfiguration" xml:space="preserve">
+              <Id>f344ce79-62a8-458b-86a8-27701e3d8ca4</Id>
+              <DisplayName>XSL Transform - Template</DisplayName>
+              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                <SingleTargetId>
+                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                </SingleTargetId>
+              </TargetLoadBalancer>
+              <InheritTarget>false</InheritTarget>
+              <ContainingProcessId>0759701e-0b46-4efd-8518-3c8e54e96152</ContainingProcessId>
+              <SourceText>
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Query Rate.Response</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="ProcessOutputVariableLink">
+                        <LaunchingActivityId>2ccce22b-6475-451f-80a6-edd14608665c</LaunchingActivityId>
+                        <OutputVariableId>2d71795f-4483-4cd1-9467-745f090567e2</OutputVariableId>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>2ccce22b-6475-451f-80a6-edd14608665c</ObjectId>
+                    <ObjectType>WorkflowNode</ObjectType>
+                  </VariableReference>
+                </References>
+              </SourceText>
+              <TransformPath>
+                <HardcodedValue />
+              </TransformPath>
+              <XSLDocument>
+                <HardcodedValue>&lt;?xml version="1.0"?&gt;
+&lt;xsl:stylesheet version="1.0"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+  &lt;xsl:template match="/"&gt;
+
+    &lt;results&gt;
+      &lt;xsl:for-each select="//rateTableRecord"&gt;
+        &lt;row&gt;
+          &lt;rateCode&gt;
+            &lt;xsl:value-of select="@rateCode"/&gt;
+          &lt;/rateCode&gt;
+          &lt;rate&gt;
+            &lt;xsl:value-of select="@rate"/&gt;
+          &lt;/rate&gt;
+          &lt;ServerSize&gt;
+            &lt;!--
+            &lt;xsl:value-of select="current()"/&gt;
+            --&gt;
+            &lt;xsl:value-of select="attributes/attribute/@value"/&gt;
+          &lt;/ServerSize&gt;
+        &lt;/row&gt;
+      &lt;/xsl:for-each&gt;
+    &lt;/results&gt;
+  &lt;/xsl:template&gt;
+&lt;/xsl:stylesheet&gt;
+</HardcodedValue>
+              </XSLDocument>
+              <OutputFormat>Xml</OutputFormat>
+            </Configuration>
+          </ActivityNode>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>f61f9206-8bc0-4047-8ffc-8632ae928600</Id>
+            <DisplayName>Read Table from XML- rate</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>e4605404-e18a-461d-91ce-90d6ba2c9bd7</Id>
+                <ActivityNodeId>f61f9206-8bc0-4047-8ffc-8632ae928600</ActivityNodeId>
+                <CompletedId>0babf414-f02a-4e8b-a5ed-5206f494e4bd</CompletedId>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="ReadTableFromXmlActivityConfiguration" xml:space="preserve">
+              <Id>f61f9206-8bc0-4047-8ffc-8632ae928600</Id>
+              <DisplayName>Read Table from XML- rate</DisplayName>
+              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                <SingleTargetId>
+                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                </SingleTargetId>
+              </TargetLoadBalancer>
+              <InheritTarget>false</InheritTarget>
+              <ContainingProcessId>0759701e-0b46-4efd-8518-3c8e54e96152</ContainingProcessId>
+              <Columns>
+                <BuiltinTableColumn>
+                  <Name>rateCode</Name>
+                  <DataType>System.String</DataType>
+                </BuiltinTableColumn>
+                <BuiltinTableColumn>
+                  <Name>rate</Name>
+                  <DataType>System.String</DataType>
+                </BuiltinTableColumn>
+                <BuiltinTableColumn>
+                  <Name>ServerSize</Name>
+                  <DataType>System.String</DataType>
+                </BuiltinTableColumn>
+              </Columns>
+              <XmlRowElementName>
+                <HardcodedValue>row</HardcodedValue>
+              </XmlRowElementName>
+              <XmlString>
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.XSL Transform - Template.Output</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>Output</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>f344ce79-62a8-458b-86a8-27701e3d8ca4</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </References>
+              </XmlString>
+            </Configuration>
+          </ActivityNode>
+          <ActivityNode xsi:type="ForEachNode">
+            <Id>80c1c93d-9c9b-48c8-819a-6c0463085c89</Id>
+            <DisplayName>For Each RateCode</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>0c60843f-ae09-4194-b5ed-dc14830381eb</Id>
+                <DisplayName>Add Row to Table</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>3c614ea3-8f0f-4f3f-a55c-c1d6cfac9003</Id>
+                    <ActivityNodeId>0c60843f-ae09-4194-b5ed-dc14830381eb</ActivityNodeId>
+                    <CompletedId>f2dae225-686c-40ee-88e9-237d35220eb3</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="AddTableRowActivityConfiguration" xml:space="preserve">
+                  <Id>0c60843f-ae09-4194-b5ed-dc14830381eb</Id>
+                  <DisplayName>Add Row to Table</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>0759701e-0b46-4efd-8518-3c8e54e96152</ContainingProcessId>
+                  <TableVariable>
+                    <DisplayPath>Process.Variables.Output.Rate Table</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>5d049465-acec-4471-a5ae-9e568df02e4e</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </TableVariable>
+                  <Values>
+                    <BuiltinDataCellValue>
+                      <ColumnName>Rate</ColumnName>
+                      <Value xsi:type="SubstitutableNumber">
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.For Each RateCode.Item.rate</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>rate</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>80c1c93d-9c9b-48c8-819a-6c0463085c89</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </Value>
+                    </BuiltinDataCellValue>
+                    <BuiltinDataCellValue>
+                      <ColumnName>Rate Code</ColumnName>
+                      <Value xsi:type="SubstitutableString">
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.For Each RateCode.Item.rateCode</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>rateCode</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>80c1c93d-9c9b-48c8-819a-6c0463085c89</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </Value>
+                    </BuiltinDataCellValue>
+                    <BuiltinDataCellValue>
+                      <ColumnName>Size</ColumnName>
+                      <Value xsi:type="SubstitutableString">
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.For Each RateCode.Item.ServerSize</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ServerSize</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>80c1c93d-9c9b-48c8-819a-6c0463085c89</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </Value>
+                    </BuiltinDataCellValue>
+                    <BuiltinDataCellValue>
+                      <ColumnName>Type</ColumnName>
+                      <Value xsi:type="SubstitutableString">
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.XSL Transform - Rate Type.Output</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>Output</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>c8c3886e-77ad-41b8-b634-b04922af1324</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </Value>
+                    </BuiltinDataCellValue>
+                  </Values>
+                </Configuration>
+              </ActivityNode>
+            </Children>
+            <ForEachSource xsi:type="PropertyReference">
+              <DisplayPath>Workflow.Read Table from XML- rate.Result Table.Rows</DisplayPath>
+              <LinkChain>
+                <Link xsi:type="PropertyNameLink">
+                  <PropertyName>ResultTable</PropertyName>
+                </Link>
+                <Link xsi:type="PropertyNameLink">
+                  <PropertyName>TIARows</PropertyName>
+                </Link>
+              </LinkChain>
+              <ObjectId>f61f9206-8bc0-4047-8ffc-8632ae928600</ObjectId>
+              <ObjectType>ActivityInstance</ObjectType>
+            </ForEachSource>
+          </ActivityNode>
+        </Children>
+        <ForEachSource xsi:type="PropertyReference">
+          <DisplayPath>Workflow.Read Table from XML.Result Table.Rows</DisplayPath>
+          <LinkChain>
+            <Link xsi:type="PropertyNameLink">
+              <PropertyName>ResultTable</PropertyName>
+            </Link>
+            <Link xsi:type="PropertyNameLink">
+              <PropertyName>TIARows</PropertyName>
+            </Link>
+          </LinkChain>
+          <ObjectId>185599e0-7b04-4796-8d93-c2a0de8b5946</ObjectId>
+          <ObjectType>ActivityInstance</ObjectType>
+        </ForEachSource>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>3ab1354e-6854-4775-b7ab-f7a1eaaf3a42</Id>
+        <DisplayName>Set Variable</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>ac259f3b-0c43-4201-be24-b1bb52a9f5b9</Id>
+            <ActivityNodeId>3ab1354e-6854-4775-b7ab-f7a1eaaf3a42</ActivityNodeId>
+            <CompletedId>868ffda0-c1fa-4436-ab74-37e0d1b52a10</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+          <Id>3ab1354e-6854-4775-b7ab-f7a1eaaf3a42</Id>
+          <DisplayName>Set Variable</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>0759701e-0b46-4efd-8518-3c8e54e96152</ContainingProcessId>
+          <VariableToSet>
+            <DisplayPath>Process.Variables.Local.Rate Table XML</DisplayPath>
+            <LinkChain />
+            <ObjectId>c83bde15-fda1-4328-b5b6-7ebefaef8d2a</ObjectId>
+            <ObjectType>GlobalVariable</ObjectType>
+          </VariableToSet>
+          <NewValue xsi:type="SubstitutableString">
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Output.Rate Table.Table Data XML</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>TableDataXml</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>5d049465-acec-4471-a5ae-9e568df02e4e</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </NewValue>
+        </Configuration>
+      </ActivityNode>
+    </Children>
+  </FirstActivity>
+  <ProcessId>0759701e-0b46-4efd-8518-3c8e54e96152</ProcessId>
+</WorkflowConfiguration>

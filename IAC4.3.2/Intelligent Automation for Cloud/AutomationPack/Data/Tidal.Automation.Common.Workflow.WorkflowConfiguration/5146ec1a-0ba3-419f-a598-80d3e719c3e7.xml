@@ -1,0 +1,2552 @@
+<?xml version="1.0"?>
+<WorkflowConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>5146ec1a-0ba3-419f-a598-80d3e719c3e7</Id>
+  <DisplayName>Create Stack Container</DisplayName>
+  <CreatedTime>2016-02-15T20:45:01.004625Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:45:19.2138671Z</ModifiedTime>
+  <FirstActivity xsi:type="RootNode">
+    <Id>a0eb14fc-d70e-49a8-aeb9-4ed5d6bee526</Id>
+    <DisplayName />
+    <Children>
+      <ActivityNode xsi:type="SwitchNode">
+        <Id>f004fce0-5af6-405d-b08d-ca6a65f16ee4</Id>
+        <DisplayName />
+        <Children>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>46e65c43-24cd-47d0-b3d4-23747aad7ea0</Id>
+            <DisplayName>vCenter</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>d7db874a-1a93-45e6-b2ab-08aa20e64d2c</Id>
+                <DisplayName>Find vCenter Target</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="ConditionBranchNode">
+                    <Id>c56313f2-9200-47f5-aa2f-9d2fb900a949</Id>
+                    <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                    <DisplayName>If Execution Fails</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ExecuteActivityNode">
+                        <Id>30eb3a97-cec2-4c99-809b-38adc0f1e94f</Id>
+                        <DisplayName>Set Remediation Settings </DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                            <Id>b011112c-939f-4fe9-ab2b-8eb002f41272</Id>
+                            <ActivityNodeId>30eb3a97-cec2-4c99-809b-38adc0f1e94f</ActivityNodeId>
+                            <CompletedId>612e3c93-683d-48b3-85a2-39967b20a5a5</CompletedId>
+                          </ActivityNode>
+                        </Children>
+                        <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+                          <Id>30eb3a97-cec2-4c99-809b-38adc0f1e94f</Id>
+                          <DisplayName>Set Remediation Settings </DisplayName>
+                          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                            <SingleTargetId>
+                              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                            </SingleTargetId>
+                          </TargetLoadBalancer>
+                          <InheritTarget>false</InheritTarget>
+                          <ContainingProcessId>d298e1b3-db8e-41d3-8906-9281cad4d063</ContainingProcessId>
+                          <Assignments>
+                            <PropertyReferenceValuePair>
+                              <VariableToSet>
+                                <DisplayPath>Process.Target.Properties.Cloud.Service.General.ErrorCode</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>ResolvedTarget</PropertyName>
+                                  </Link>
+                                  <Link xsi:type="ObjectReferenceLink">
+                                    <ObjectLink>
+                                      <Id>7ad8347e-4936-4962-ab6d-3ec987d2737a</Id>
+                                      <ObjectType>PropertyExtension</ObjectType>
+                                    </ObjectLink>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectType>ProcessInstance</ObjectType>
+                              </VariableToSet>
+                              <NewValue xsi:type="SubstitutableNumber">
+                                <HardcodedValue>5001</HardcodedValue>
+                              </NewValue>
+                            </PropertyReferenceValuePair>
+                            <PropertyReferenceValuePair>
+                              <VariableToSet>
+                                <DisplayPath>Process.Target.Properties.Cloud.Service.General.ErrorRemediation.Actions</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>ResolvedTarget</PropertyName>
+                                  </Link>
+                                  <Link xsi:type="ObjectReferenceLink">
+                                    <ObjectLink>
+                                      <Id>d3e16466-5e76-4adf-9738-9d3faf351bce</Id>
+                                      <ObjectType>PropertyExtension</ObjectType>
+                                    </ObjectLink>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectType>ProcessInstance</ObjectType>
+                              </VariableToSet>
+                              <NewValue xsi:type="SubstitutableString">
+                                <HardcodedValue>Cancel</HardcodedValue>
+                              </NewValue>
+                            </PropertyReferenceValuePair>
+                          </Assignments>
+                        </Configuration>
+                      </ActivityNode>
+                      <ActivityNode xsi:type="CompletedNode">
+                        <Id>03c806ad-d968-4a61-85b3-935755a3514a</Id>
+                        <Notes>Fail the entire process</Notes>
+                        <CompletedType>FailedNotCompleted</CompletedType>
+                        <ResultMessage>
+                          <FormattedCode>{0}</FormattedCode>
+                          <References>
+                            <VariableReference xsi:type="PropertyReference">
+                              <DisplayPath>Workflow.Find vCenter Target.Error Information</DisplayPath>
+                              <LinkChain>
+                                <Link xsi:type="PropertyNameLink">
+                                  <PropertyName>ErrorInformation</PropertyName>
+                                </Link>
+                              </LinkChain>
+                              <ObjectId>d7db874a-1a93-45e6-b2ab-08aa20e64d2c</ObjectId>
+                              <ObjectType>ActivityInstance</ObjectType>
+                            </VariableReference>
+                          </References>
+                        </ResultMessage>
+                      </ActivityNode>
+                    </Children>
+                    <Condition>
+                      <Id>6f0127da-5a50-4f36-86e2-86a17782606c</Id>
+                      <Conditions>
+                        <ConditionDefinition xsi:type="VariableConditionDefinition">
+                          <Id>36ac7aaf-aa8b-494f-8c7e-5f0dbb1d3466</Id>
+                          <Expression xsi:type="SubstitutableBoolean">
+                            <HardcodedValue>true</HardcodedValue>
+                          </Expression>
+                          <Comparison>Equals</Comparison>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.Find vCenter Target.Instance Failed</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>InstanceFailed</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>d7db874a-1a93-45e6-b2ab-08aa20e64d2c</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </ConditionDefinition>
+                      </Conditions>
+                    </Condition>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="BuiltinFindTargetsActivityConfiguration" xml:space="preserve">
+                  <Id>d7db874a-1a93-45e6-b2ab-08aa20e64d2c</Id>
+                  <DisplayName>Find vCenter Target</DisplayName>
+                  <Description>The Center target is the platform on which this process runs. This is passed to it through one of the input parameters. This activity validates that target and if that target if found to bre invalid, causes the process to abort.</Description>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <KnowledgeBaseId>cef23f56-d979-4583-b291-8b9b2d3d3606</KnowledgeBaseId>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>d298e1b3-db8e-41d3-8906-9281cad4d063</ContainingProcessId>
+                  <TargetTypeName>Tidal.Automation.VMware.Common.VCTargetConfiguration, Tidal.Automation.VMware.Common</TargetTypeName>
+                  <TargetTypeExtensionId>a7fc2f5a-1e30-7968-b60a-1860da88e13d</TargetTypeExtensionId>
+                  <TargetGroupId>1a480c45-36f4-4f1a-875f-857b866c5cba</TargetGroupId>
+                  <MatchingCriteria>
+                    <GenericCriteria xsi:type="GuidCriteria">
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>Id</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <MatchingGuid>
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Target.Cloud.Configuration.PlatformElement.TargetID</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResolvedTarget</PropertyName>
+                              </Link>
+                              <Link xsi:type="ObjectReferenceLink">
+                                <ObjectLink>
+                                  <Id>84a08e2c-751d-4a0d-9d36-2bd94f98fbee</Id>
+                                  <ObjectType>PropertyExtension</ObjectType>
+                                </ObjectLink>
+                              </Link>
+                            </LinkChain>
+                            <ObjectType>ProcessInstance</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </MatchingGuid>
+                      <Comparison>Equals</Comparison>
+                    </GenericCriteria>
+                  </MatchingCriteria>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="ConditionBranchNode">
+                <Id>cfea1c05-9382-4d4f-8654-e81faddf87ba</Id>
+                <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                <DisplayName>If No Target</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="ExecuteActivityNode">
+                    <Id>768977f1-9f9e-43b8-ae39-a886dbafc5fb</Id>
+                    <DisplayName>Set Remediation Settings </DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                        <Id>efe8611c-7157-46f0-9972-3e495b823c9f</Id>
+                        <ActivityNodeId>768977f1-9f9e-43b8-ae39-a886dbafc5fb</ActivityNodeId>
+                        <CompletedId>102072c4-734b-436c-a39f-4fd3fca9bb14</CompletedId>
+                      </ActivityNode>
+                    </Children>
+                    <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+                      <Id>768977f1-9f9e-43b8-ae39-a886dbafc5fb</Id>
+                      <DisplayName>Set Remediation Settings </DisplayName>
+                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                        <SingleTargetId>
+                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                        </SingleTargetId>
+                      </TargetLoadBalancer>
+                      <InheritTarget>false</InheritTarget>
+                      <ContainingProcessId>d298e1b3-db8e-41d3-8906-9281cad4d063</ContainingProcessId>
+                      <Assignments>
+                        <PropertyReferenceValuePair>
+                          <VariableToSet>
+                            <DisplayPath>Process.Target.Properties.Cloud.Service.General.ErrorCode</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResolvedTarget</PropertyName>
+                              </Link>
+                              <Link xsi:type="ObjectReferenceLink">
+                                <ObjectLink>
+                                  <Id>7ad8347e-4936-4962-ab6d-3ec987d2737a</Id>
+                                  <ObjectType>PropertyExtension</ObjectType>
+                                </ObjectLink>
+                              </Link>
+                            </LinkChain>
+                            <ObjectType>ProcessInstance</ObjectType>
+                          </VariableToSet>
+                          <NewValue xsi:type="SubstitutableNumber">
+                            <HardcodedValue>5001</HardcodedValue>
+                          </NewValue>
+                        </PropertyReferenceValuePair>
+                        <PropertyReferenceValuePair>
+                          <VariableToSet>
+                            <DisplayPath>Process.Target.Properties.Cloud.Service.General.ErrorRemediation.Actions</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResolvedTarget</PropertyName>
+                              </Link>
+                              <Link xsi:type="ObjectReferenceLink">
+                                <ObjectLink>
+                                  <Id>d3e16466-5e76-4adf-9738-9d3faf351bce</Id>
+                                  <ObjectType>PropertyExtension</ObjectType>
+                                </ObjectLink>
+                              </Link>
+                            </LinkChain>
+                            <ObjectType>ProcessInstance</ObjectType>
+                          </VariableToSet>
+                          <NewValue xsi:type="SubstitutableString">
+                            <HardcodedValue>Cancel,Restart</HardcodedValue>
+                          </NewValue>
+                        </PropertyReferenceValuePair>
+                      </Assignments>
+                    </Configuration>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="CompletedNode">
+                    <Id>15a3ad9d-d111-4bd2-98f6-99f0f599b5bc</Id>
+                    <CompletedType>FailedNotCompleted</CompletedType>
+                    <ResultMessage>
+                      <HardcodedValue>No vCenter target found.</HardcodedValue>
+                    </ResultMessage>
+                  </ActivityNode>
+                </Children>
+                <Condition>
+                  <Id>e474631a-2443-4e90-8762-0cd3836c18a5</Id>
+                  <Conditions>
+                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                      <Id>b4dad73b-4305-44fe-bfc3-2d4b33c315f8</Id>
+                      <Expression xsi:type="SubstitutableNumber">
+                        <HardcodedValue>0</HardcodedValue>
+                      </Expression>
+                      <Comparison>Equals</Comparison>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.Find vCenter Target.Found Targets.Count</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>GetAllFoundTargets</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ItemCount</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>d7db874a-1a93-45e6-b2ab-08aa20e64d2c</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </ConditionDefinition>
+                  </Conditions>
+                </Condition>
+              </ActivityNode>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>8d85a8c4-ae7b-455e-b35e-a8bcd91428a0</Id>
+                <DisplayName>Set Platform Information</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>f2afe91a-0ee5-4e50-a3ef-5da70a0aaa0c</Id>
+                    <ActivityNodeId>8d85a8c4-ae7b-455e-b35e-a8bcd91428a0</ActivityNodeId>
+                    <CompletedId>6f7073de-c567-45ec-b3cc-e63c7979bee0</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+                  <Id>8d85a8c4-ae7b-455e-b35e-a8bcd91428a0</Id>
+                  <DisplayName>Set Platform Information</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>d298e1b3-db8e-41d3-8906-9281cad4d063</ContainingProcessId>
+                  <Assignments>
+                    <PropertyReferenceValuePair>
+                      <VariableToSet>
+                        <DisplayPath>Process.Target.Cloud.Configuration.PlatformElement.Type</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="ObjectReferenceLink">
+                            <ObjectLink>
+                              <Id>32a47b79-2138-4987-a88f-e69ae7abe8ec</Id>
+                              <ObjectType>PropertyExtension</ObjectType>
+                            </ObjectLink>
+                          </Link>
+                        </LinkChain>
+                        <ObjectType>ProcessInstance</ObjectType>
+                      </VariableToSet>
+                      <NewValue xsi:type="SubstitutableString">
+                        <HardcodedValue>VMware vCenter Server</HardcodedValue>
+                      </NewValue>
+                    </PropertyReferenceValuePair>
+                    <PropertyReferenceValuePair>
+                      <VariableToSet>
+                        <DisplayPath>Process.Target.Cloud.Service.General.PlatformElement.VCenter</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>ResolvedTarget</PropertyName>
+                          </Link>
+                          <Link xsi:type="ObjectReferenceLink">
+                            <ObjectLink>
+                              <Id>42b6a134-067e-46f0-9f0c-cb0904901eba</Id>
+                              <ObjectType>PropertyExtension</ObjectType>
+                            </ObjectLink>
+                          </Link>
+                        </LinkChain>
+                        <ObjectType>ProcessInstance</ObjectType>
+                      </VariableToSet>
+                      <NewValue xsi:type="SubstitutableObjectReference">
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.Find vCenter Target.Found Targets.First</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>GetAllFoundTargets</PropertyName>
+                              </Link>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>FirstItem</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>d7db874a-1a93-45e6-b2ab-08aa20e64d2c</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </NewValue>
+                    </PropertyReferenceValuePair>
+                  </Assignments>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>b0d96b5d-cbd8-437e-a52a-915ae1e14116</Id>
+                <DisplayName>Initialize Folder Path</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>6ff75f8b-c867-45f7-83e5-31b3d578c7a9</Id>
+                    <ActivityNodeId>b0d96b5d-cbd8-437e-a52a-915ae1e14116</ActivityNodeId>
+                    <CompletedId>6932b336-729a-48d4-b988-6f43cee8971f</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                  <Id>b0d96b5d-cbd8-437e-a52a-915ae1e14116</Id>
+                  <DisplayName>Initialize Folder Path</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>d298e1b3-db8e-41d3-8906-9281cad4d063</ContainingProcessId>
+                  <VariableToSet>
+                    <DisplayPath>Process.Variables.Output.New Folder Path</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>a6a7adb7-d232-4dcd-884e-a72b0741b6a4</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableToSet>
+                  <NewValue xsi:type="SubstitutableString">
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Variables.Input.Parent Folder</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>7b8ee6d4-71c2-4eb9-9135-ef3db2903fa9</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </NewValue>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="ConditionBranchNode">
+                <Id>f9d03fcf-84c1-41ac-8826-2762c70ec366</Id>
+                <DisplayName>Tenant Folder</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="ExecuteActivityNode">
+                    <Id>9b5187a3-3520-48d3-858d-16d361b677cd</Id>
+                    <DisplayName>Create Tenant Folder</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ConditionBranchNode">
+                        <Id>58b2b2a5-9785-43c0-8d94-bf60796f27d7</Id>
+                        <DisplayName>If Exists</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="ExecuteActivityNode">
+                            <Id>d962d861-7cea-4c91-91fb-bf8d21a16d80</Id>
+                            <DisplayName>Set Existing Folder Path</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                <Id>9f744594-8cef-4bbf-95be-ee3bd68df852</Id>
+                                <ActivityNodeId>d962d861-7cea-4c91-91fb-bf8d21a16d80</ActivityNodeId>
+                                <CompletedId>5516e0ac-1a21-4094-bd48-e4127092b7f0</CompletedId>
+                              </ActivityNode>
+                            </Children>
+                            <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                              <Id>d962d861-7cea-4c91-91fb-bf8d21a16d80</Id>
+                              <DisplayName>Set Existing Folder Path</DisplayName>
+                              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                <SingleTargetId>
+                                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                </SingleTargetId>
+                              </TargetLoadBalancer>
+                              <InheritTarget>false</InheritTarget>
+                              <ContainingProcessId>d298e1b3-db8e-41d3-8906-9281cad4d063</ContainingProcessId>
+                              <VariableToSet>
+                                <DisplayPath>Process.Variables.Output.New Folder Path</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>a6a7adb7-d232-4dcd-884e-a72b0741b6a4</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableToSet>
+                              <NewValue xsi:type="SubstitutableString">
+                                <FormattedCode>{0}/{1}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Process.Variables.Output.New Folder Path</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>a6a7adb7-d232-4dcd-884e-a72b0741b6a4</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableReference>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Process.Variables.Input.Tenant</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>4a0e1411-5141-4ebd-95ab-f8c1ee77852d</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </NewValue>
+                            </Configuration>
+                          </ActivityNode>
+                        </Children>
+                        <Condition>
+                          <Id>09c5f45c-5afe-4aeb-a521-2896f9ff9571</Id>
+                          <Conditions>
+                            <ConditionDefinition xsi:type="VariableConditionDefinition">
+                              <Id>24ffe8fe-35c9-40dc-94f4-4fbe2538f5f0</Id>
+                              <Expression xsi:type="SubstitutableBoolean">
+                                <HardcodedValue>true</HardcodedValue>
+                              </Expression>
+                              <Comparison>Equals</Comparison>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Variables.Input.Reuse Existing Folder</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>e22e4991-1421-49cb-98c5-30faaa3051ab</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableReference>
+                            </ConditionDefinition>
+                            <ConditionDefinition xsi:type="VariableConditionDefinition">
+                              <Id>f4a5591f-c75d-4f9f-ba9d-c02961773467</Id>
+                              <Expression xsi:type="SubstitutableWildcard">
+                                <HardcodedValue>*already exists*</HardcodedValue>
+                              </Expression>
+                              <Comparison>Wildcard</Comparison>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.Create Organization Folder.Error Information</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>ErrorInformation</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>9b5187a3-3520-48d3-858d-16d361b677cd</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </ConditionDefinition>
+                          </Conditions>
+                        </Condition>
+                      </ActivityNode>
+                      <ActivityNode xsi:type="ConditionBranchNode">
+                        <Id>f203a322-744b-4218-b890-e2316d8e2123</Id>
+                        <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                        <DisplayName>If Execution Fails</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="ExecuteActivityNode">
+                            <Id>b0a88a03-046e-4ad8-b70b-23290d8915f1</Id>
+                            <DisplayName>Set Remediation Settings</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                <Id>dd1468f7-dfd5-4982-9160-d2e91ddd7538</Id>
+                                <ActivityNodeId>b0a88a03-046e-4ad8-b70b-23290d8915f1</ActivityNodeId>
+                                <CompletedId>fb6bb0b5-a61f-4ee1-b465-97330f8eeef4</CompletedId>
+                              </ActivityNode>
+                            </Children>
+                            <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+                              <Id>b0a88a03-046e-4ad8-b70b-23290d8915f1</Id>
+                              <DisplayName>Set Remediation Settings</DisplayName>
+                              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                <SingleTargetId>
+                                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                </SingleTargetId>
+                              </TargetLoadBalancer>
+                              <InheritTarget>false</InheritTarget>
+                              <ContainingProcessId>d298e1b3-db8e-41d3-8906-9281cad4d063</ContainingProcessId>
+                              <Assignments>
+                                <PropertyReferenceValuePair>
+                                  <VariableToSet>
+                                    <DisplayPath>Process.Target.Cloud.Service.General.ErrorCode</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ResolvedTarget</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="ObjectReferenceLink">
+                                        <ObjectLink>
+                                          <Id>7ad8347e-4936-4962-ab6d-3ec987d2737a</Id>
+                                          <ObjectType>PropertyExtension</ObjectType>
+                                        </ObjectLink>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectType>ProcessInstance</ObjectType>
+                                  </VariableToSet>
+                                  <NewValue xsi:type="SubstitutableNumber">
+                                    <HardcodedValue>5001</HardcodedValue>
+                                  </NewValue>
+                                </PropertyReferenceValuePair>
+                                <PropertyReferenceValuePair>
+                                  <VariableToSet>
+                                    <DisplayPath>Process.Target.Cloud.Service.General.ErrorRemediation.Actions</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ResolvedTarget</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="ObjectReferenceLink">
+                                        <ObjectLink>
+                                          <Id>d3e16466-5e76-4adf-9738-9d3faf351bce</Id>
+                                          <ObjectType>PropertyExtension</ObjectType>
+                                        </ObjectLink>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectType>ProcessInstance</ObjectType>
+                                  </VariableToSet>
+                                  <NewValue xsi:type="SubstitutableString">
+                                    <HardcodedValue>Cancel,Restart</HardcodedValue>
+                                  </NewValue>
+                                </PropertyReferenceValuePair>
+                              </Assignments>
+                            </Configuration>
+                          </ActivityNode>
+                          <ActivityNode xsi:type="CompletedNode">
+                            <Id>1ba89237-8d61-4304-9d9b-3e68a555f364</Id>
+                            <Notes>Fail the entire process</Notes>
+                            <CompletedType>FailedNotCompleted</CompletedType>
+                            <ResultMessage>
+                              <FormattedCode>{0}</FormattedCode>
+                              <References>
+                                <VariableReference xsi:type="PropertyReference">
+                                  <DisplayPath>Workflow.Create Folder.Error Information</DisplayPath>
+                                  <LinkChain>
+                                    <Link xsi:type="PropertyNameLink">
+                                      <PropertyName>ErrorInformation</PropertyName>
+                                    </Link>
+                                  </LinkChain>
+                                  <ObjectId>629f4b2a-3e2c-41ab-97b0-07bb76c5c92c</ObjectId>
+                                  <ObjectType>ActivityInstance</ObjectType>
+                                </VariableReference>
+                              </References>
+                            </ResultMessage>
+                          </ActivityNode>
+                        </Children>
+                        <Condition>
+                          <Id>d8c0162b-126d-4487-acbc-a0897cf1c72f</Id>
+                          <Conditions>
+                            <ConditionDefinition xsi:type="VariableConditionDefinition">
+                              <Id>e297ac8b-6d22-40c6-aa9f-d8893151e13e</Id>
+                              <Expression xsi:type="SubstitutableBoolean">
+                                <HardcodedValue>true</HardcodedValue>
+                              </Expression>
+                              <Comparison>Equals</Comparison>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.Create Organization Folder.Instance Failed</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>InstanceFailed</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>9b5187a3-3520-48d3-858d-16d361b677cd</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </ConditionDefinition>
+                          </Conditions>
+                        </Condition>
+                      </ActivityNode>
+                      <ActivityNode xsi:type="ConditionBranchNode">
+                        <Id>9ccd68b8-c7ae-4f78-8c33-2ff961239997</Id>
+                        <DisplayName>Otherwise</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="ExecuteActivityNode">
+                            <Id>d2f978d6-59ca-4ecb-999a-6f303fcc5f31</Id>
+                            <DisplayName>Set New Folder Path</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                <Id>b9aa7337-eb3a-4e58-9f39-8718021c732b</Id>
+                                <ActivityNodeId>d2f978d6-59ca-4ecb-999a-6f303fcc5f31</ActivityNodeId>
+                                <CompletedId>0d4989f0-0210-48c7-9682-f7b3687b8539</CompletedId>
+                              </ActivityNode>
+                            </Children>
+                            <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                              <Id>d2f978d6-59ca-4ecb-999a-6f303fcc5f31</Id>
+                              <DisplayName>Set New Folder Path</DisplayName>
+                              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                <SingleTargetId>
+                                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                </SingleTargetId>
+                              </TargetLoadBalancer>
+                              <InheritTarget>false</InheritTarget>
+                              <ContainingProcessId>d298e1b3-db8e-41d3-8906-9281cad4d063</ContainingProcessId>
+                              <VariableToSet>
+                                <DisplayPath>Process.Variables.Output.New Folder Path</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>a6a7adb7-d232-4dcd-884e-a72b0741b6a4</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableToSet>
+                              <NewValue xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Create Tenant Folder.New Folder Path</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>NewFolderPath</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>9b5187a3-3520-48d3-858d-16d361b677cd</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </NewValue>
+                            </Configuration>
+                          </ActivityNode>
+                        </Children>
+                        <Condition>
+                          <Id>e6eff1f0-5509-41a7-993d-754f9fbff039</Id>
+                          <Conditions />
+                        </Condition>
+                      </ActivityNode>
+                    </Children>
+                    <Configuration xsi:type="VMwareCreateFolderActivityConfiguration" xml:space="preserve">
+                      <Id>9b5187a3-3520-48d3-858d-16d361b677cd</Id>
+                      <DisplayName>Create Tenant Folder</DisplayName>
+                      <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                        <SingleTargetReference>
+                          <FormattedCode>{0}</FormattedCode>
+                          <References>
+                            <VariableReference xsi:type="PropertyReference">
+                              <DisplayPath>Process.Target.Cloud.Service.General.PlatformElement.VCenter</DisplayPath>
+                              <LinkChain>
+                                <Link xsi:type="PropertyNameLink">
+                                  <PropertyName>ResolvedTarget</PropertyName>
+                                </Link>
+                                <Link xsi:type="ObjectReferenceLink">
+                                  <ObjectLink>
+                                    <Id>42b6a134-067e-46f0-9f0c-cb0904901eba</Id>
+                                    <ObjectType>PropertyExtension</ObjectType>
+                                  </ObjectLink>
+                                </Link>
+                              </LinkChain>
+                              <ObjectType>ProcessInstance</ObjectType>
+                            </VariableReference>
+                          </References>
+                        </SingleTargetReference>
+                      </TargetLoadBalancer>
+                      <InheritTarget>false</InheritTarget>
+                      <ContainingProcessId>d298e1b3-db8e-41d3-8906-9281cad4d063</ContainingProcessId>
+                      <VTask>
+                        <MainText>Create Folder</MainText>
+                      </VTask>
+                      <TimeOutPeriod>
+                        <DisplayUnits>Minutes</DisplayUnits>
+                        <Period>
+                          <HardcodedValue>5</HardcodedValue>
+                        </Period>
+                      </TimeOutPeriod>
+                      <ParentFolder>
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Output.New Folder Path</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>a6a7adb7-d232-4dcd-884e-a72b0741b6a4</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </ParentFolder>
+                      <FolderName>
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Input.Tenant</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>4a0e1411-5141-4ebd-95ab-f8c1ee77852d</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </FolderName>
+                      <FolderType>VirtualMachinesAndTemplates</FolderType>
+                    </Configuration>
+                  </ActivityNode>
+                </Children>
+                <Condition>
+                  <Id>fdf51f5d-b4d7-4669-bc6b-33c25f2b5ad8</Id>
+                  <Conditions>
+                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                      <Id>f09a26a0-058d-4bf7-92e6-80ee76663352</Id>
+                      <Expression xsi:type="SubstitutableString">
+                        <HardcodedValue />
+                      </Expression>
+                      <Comparison>NotEquals</Comparison>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Variables.Input.Organization</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>25bdbab3-b48c-4804-b3b7-c7bfc0b06586</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableReference>
+                    </ConditionDefinition>
+                  </Conditions>
+                </Condition>
+              </ActivityNode>
+              <ActivityNode xsi:type="ConditionBranchNode">
+                <Id>b6feb521-6e17-44af-a4d3-df2b21825024</Id>
+                <DisplayName>Organization Folder</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="ExecuteActivityNode">
+                    <Id>0d65c49e-9f0a-487e-ae8c-dfea6a53e0d1</Id>
+                    <DisplayName>Create Organization Folder</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ConditionBranchNode">
+                        <Id>d46d9c98-b70c-487b-a2c5-44462354a137</Id>
+                        <DisplayName>If Exists</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="ExecuteActivityNode">
+                            <Id>d3cd390a-46be-4e2c-a9f4-f7db86e646ee</Id>
+                            <DisplayName>Set Existing Folder Path (2)</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                <Id>134d9458-1560-4d13-934d-5ceedbeffc95</Id>
+                                <ActivityNodeId>d3cd390a-46be-4e2c-a9f4-f7db86e646ee</ActivityNodeId>
+                                <CompletedId>1fef26b9-c7a5-4de4-a421-d8ed0923669a</CompletedId>
+                              </ActivityNode>
+                            </Children>
+                            <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                              <Id>d3cd390a-46be-4e2c-a9f4-f7db86e646ee</Id>
+                              <DisplayName>Set Existing Folder Path (2)</DisplayName>
+                              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                <SingleTargetId>
+                                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                </SingleTargetId>
+                              </TargetLoadBalancer>
+                              <InheritTarget>false</InheritTarget>
+                              <ContainingProcessId>d298e1b3-db8e-41d3-8906-9281cad4d063</ContainingProcessId>
+                              <VariableToSet>
+                                <DisplayPath>Process.Variables.Output.New Folder Path</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>a6a7adb7-d232-4dcd-884e-a72b0741b6a4</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableToSet>
+                              <NewValue xsi:type="SubstitutableString">
+                                <FormattedCode>{0}/{1}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Process.Variables.Output.New Folder Path</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>a6a7adb7-d232-4dcd-884e-a72b0741b6a4</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableReference>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Process.Variables.Input.Organization</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>25bdbab3-b48c-4804-b3b7-c7bfc0b06586</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </NewValue>
+                            </Configuration>
+                          </ActivityNode>
+                        </Children>
+                        <Condition>
+                          <Id>09c5f45c-5afe-4aeb-a521-2896f9ff9571</Id>
+                          <Conditions>
+                            <ConditionDefinition xsi:type="VariableConditionDefinition">
+                              <Id>24ffe8fe-35c9-40dc-94f4-4fbe2538f5f0</Id>
+                              <Expression xsi:type="SubstitutableBoolean">
+                                <HardcodedValue>true</HardcodedValue>
+                              </Expression>
+                              <Comparison>Equals</Comparison>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Variables.Input.Reuse Existing Folder</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>e22e4991-1421-49cb-98c5-30faaa3051ab</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableReference>
+                            </ConditionDefinition>
+                            <ConditionDefinition xsi:type="VariableConditionDefinition">
+                              <Id>f4a5591f-c75d-4f9f-ba9d-c02961773467</Id>
+                              <Expression xsi:type="SubstitutableWildcard">
+                                <HardcodedValue>*already exists*</HardcodedValue>
+                              </Expression>
+                              <Comparison>Wildcard</Comparison>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.Create Organization Folder.Error Information</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>ErrorInformation</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>0d65c49e-9f0a-487e-ae8c-dfea6a53e0d1</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </ConditionDefinition>
+                          </Conditions>
+                        </Condition>
+                      </ActivityNode>
+                      <ActivityNode xsi:type="ConditionBranchNode">
+                        <Id>bd6e2a30-0ad5-4ebf-ad4c-c45e059c7ba2</Id>
+                        <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                        <DisplayName>If Execution Fails</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="ExecuteActivityNode">
+                            <Id>27439d4d-95d3-4791-b814-80304d7cfcd9</Id>
+                            <DisplayName>Set Remediation Settings  (3)</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                <Id>3ceacc42-e27c-45c6-be39-53208c72f10a</Id>
+                                <ActivityNodeId>27439d4d-95d3-4791-b814-80304d7cfcd9</ActivityNodeId>
+                                <CompletedId>de45756b-d665-42dc-a87b-7a6c9720d228</CompletedId>
+                              </ActivityNode>
+                            </Children>
+                            <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+                              <Id>27439d4d-95d3-4791-b814-80304d7cfcd9</Id>
+                              <DisplayName>Set Remediation Settings  (3)</DisplayName>
+                              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                <SingleTargetId>
+                                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                </SingleTargetId>
+                              </TargetLoadBalancer>
+                              <InheritTarget>false</InheritTarget>
+                              <ContainingProcessId>d298e1b3-db8e-41d3-8906-9281cad4d063</ContainingProcessId>
+                              <Assignments>
+                                <PropertyReferenceValuePair>
+                                  <VariableToSet>
+                                    <DisplayPath>Process.Target.Cloud.Service.General.ErrorCode</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ResolvedTarget</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="ObjectReferenceLink">
+                                        <ObjectLink>
+                                          <Id>7ad8347e-4936-4962-ab6d-3ec987d2737a</Id>
+                                          <ObjectType>PropertyExtension</ObjectType>
+                                        </ObjectLink>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectType>ProcessInstance</ObjectType>
+                                  </VariableToSet>
+                                  <NewValue xsi:type="SubstitutableNumber">
+                                    <HardcodedValue>5001</HardcodedValue>
+                                  </NewValue>
+                                </PropertyReferenceValuePair>
+                                <PropertyReferenceValuePair>
+                                  <VariableToSet>
+                                    <DisplayPath>Process.Target.Cloud.Service.General.ErrorRemediation.Actions</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ResolvedTarget</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="ObjectReferenceLink">
+                                        <ObjectLink>
+                                          <Id>d3e16466-5e76-4adf-9738-9d3faf351bce</Id>
+                                          <ObjectType>PropertyExtension</ObjectType>
+                                        </ObjectLink>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectType>ProcessInstance</ObjectType>
+                                  </VariableToSet>
+                                  <NewValue xsi:type="SubstitutableString">
+                                    <HardcodedValue>Cancel,Restart</HardcodedValue>
+                                  </NewValue>
+                                </PropertyReferenceValuePair>
+                              </Assignments>
+                            </Configuration>
+                          </ActivityNode>
+                          <ActivityNode xsi:type="CompletedNode">
+                            <Id>e810461e-3bf1-40fe-83f7-6624033def9f</Id>
+                            <Notes>Fail the entire process</Notes>
+                            <CompletedType>FailedNotCompleted</CompletedType>
+                            <ResultMessage>
+                              <FormattedCode>{0}</FormattedCode>
+                              <References>
+                                <VariableReference xsi:type="PropertyReference">
+                                  <DisplayPath>Workflow.Create Folder.Error Information</DisplayPath>
+                                  <LinkChain>
+                                    <Link xsi:type="PropertyNameLink">
+                                      <PropertyName>ErrorInformation</PropertyName>
+                                    </Link>
+                                  </LinkChain>
+                                  <ObjectId>629f4b2a-3e2c-41ab-97b0-07bb76c5c92c</ObjectId>
+                                  <ObjectType>ActivityInstance</ObjectType>
+                                </VariableReference>
+                              </References>
+                            </ResultMessage>
+                          </ActivityNode>
+                        </Children>
+                        <Condition>
+                          <Id>d8c0162b-126d-4487-acbc-a0897cf1c72f</Id>
+                          <Conditions>
+                            <ConditionDefinition xsi:type="VariableConditionDefinition">
+                              <Id>e297ac8b-6d22-40c6-aa9f-d8893151e13e</Id>
+                              <Expression xsi:type="SubstitutableBoolean">
+                                <HardcodedValue>true</HardcodedValue>
+                              </Expression>
+                              <Comparison>Equals</Comparison>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.Create Organization Folder.Instance Failed</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>InstanceFailed</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>0d65c49e-9f0a-487e-ae8c-dfea6a53e0d1</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </ConditionDefinition>
+                          </Conditions>
+                        </Condition>
+                      </ActivityNode>
+                      <ActivityNode xsi:type="ConditionBranchNode">
+                        <Id>8c5ce8cc-ed1e-48bf-8ef0-7e307759542c</Id>
+                        <DisplayName>Otherwise</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="ExecuteActivityNode">
+                            <Id>2fcd3028-bf1a-4fd1-a907-40c51eb7d299</Id>
+                            <DisplayName>Set New Folder Path (2)</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                <Id>8b780d7f-0a2c-4f20-b5e6-331a06080447</Id>
+                                <ActivityNodeId>2fcd3028-bf1a-4fd1-a907-40c51eb7d299</ActivityNodeId>
+                                <CompletedId>b80fb273-b8e3-4b92-abad-a302b959bea8</CompletedId>
+                              </ActivityNode>
+                            </Children>
+                            <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                              <Id>2fcd3028-bf1a-4fd1-a907-40c51eb7d299</Id>
+                              <DisplayName>Set New Folder Path (2)</DisplayName>
+                              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                <SingleTargetId>
+                                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                </SingleTargetId>
+                              </TargetLoadBalancer>
+                              <InheritTarget>false</InheritTarget>
+                              <ContainingProcessId>d298e1b3-db8e-41d3-8906-9281cad4d063</ContainingProcessId>
+                              <VariableToSet>
+                                <DisplayPath>Process.Variables.Output.New Folder Path</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>a6a7adb7-d232-4dcd-884e-a72b0741b6a4</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableToSet>
+                              <NewValue xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Create Organization Folder.New Folder Path</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>NewFolderPath</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>0d65c49e-9f0a-487e-ae8c-dfea6a53e0d1</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </NewValue>
+                            </Configuration>
+                          </ActivityNode>
+                        </Children>
+                        <Condition>
+                          <Id>e6eff1f0-5509-41a7-993d-754f9fbff039</Id>
+                          <Conditions />
+                        </Condition>
+                      </ActivityNode>
+                    </Children>
+                    <Configuration xsi:type="VMwareCreateFolderActivityConfiguration" xml:space="preserve">
+                      <Id>0d65c49e-9f0a-487e-ae8c-dfea6a53e0d1</Id>
+                      <DisplayName>Create Organization Folder</DisplayName>
+                      <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                        <SingleTargetReference>
+                          <FormattedCode>{0}</FormattedCode>
+                          <References>
+                            <VariableReference xsi:type="PropertyReference">
+                              <DisplayPath>Process.Target.Cloud.Service.General.PlatformElement.VCenter</DisplayPath>
+                              <LinkChain>
+                                <Link xsi:type="PropertyNameLink">
+                                  <PropertyName>ResolvedTarget</PropertyName>
+                                </Link>
+                                <Link xsi:type="ObjectReferenceLink">
+                                  <ObjectLink>
+                                    <Id>42b6a134-067e-46f0-9f0c-cb0904901eba</Id>
+                                    <ObjectType>PropertyExtension</ObjectType>
+                                  </ObjectLink>
+                                </Link>
+                              </LinkChain>
+                              <ObjectType>ProcessInstance</ObjectType>
+                            </VariableReference>
+                          </References>
+                        </SingleTargetReference>
+                      </TargetLoadBalancer>
+                      <InheritTarget>false</InheritTarget>
+                      <ContainingProcessId>d298e1b3-db8e-41d3-8906-9281cad4d063</ContainingProcessId>
+                      <VTask>
+                        <MainText>Create Folder</MainText>
+                      </VTask>
+                      <TimeOutPeriod>
+                        <DisplayUnits>Minutes</DisplayUnits>
+                        <Period>
+                          <HardcodedValue>5</HardcodedValue>
+                        </Period>
+                      </TimeOutPeriod>
+                      <ParentFolder>
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Output.New Folder Path</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>a6a7adb7-d232-4dcd-884e-a72b0741b6a4</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </ParentFolder>
+                      <FolderName>
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Input.Organization</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>25bdbab3-b48c-4804-b3b7-c7bfc0b06586</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </FolderName>
+                      <FolderType>VirtualMachinesAndTemplates</FolderType>
+                    </Configuration>
+                  </ActivityNode>
+                </Children>
+                <Condition>
+                  <Id>fdf51f5d-b4d7-4669-bc6b-33c25f2b5ad8</Id>
+                  <Conditions>
+                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                      <Id>f09a26a0-058d-4bf7-92e6-80ee76663352</Id>
+                      <Expression xsi:type="SubstitutableString">
+                        <HardcodedValue />
+                      </Expression>
+                      <Comparison>NotEquals</Comparison>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Variables.Input.Organization</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>25bdbab3-b48c-4804-b3b7-c7bfc0b06586</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableReference>
+                    </ConditionDefinition>
+                  </Conditions>
+                </Condition>
+              </ActivityNode>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>629f4b2a-3e2c-41ab-97b0-07bb76c5c92c</Id>
+                <DisplayName>Create Folder</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="ConditionBranchNode">
+                    <Id>751e1d99-a852-4822-abab-6ea7e5d69ec9</Id>
+                    <DisplayName>If Exists</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ExecuteActivityNode">
+                        <Id>bcd116f6-8db1-4709-b62c-0c864788a7ba</Id>
+                        <DisplayName>Set Existing Folder Path</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                            <Id>8be27fa2-ddc7-4cbb-b826-836c15782ca7</Id>
+                            <ActivityNodeId>bcd116f6-8db1-4709-b62c-0c864788a7ba</ActivityNodeId>
+                            <CompletedId>c2634522-00f4-4a77-87e4-3fd0f1fc0343</CompletedId>
+                          </ActivityNode>
+                        </Children>
+                        <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                          <Id>bcd116f6-8db1-4709-b62c-0c864788a7ba</Id>
+                          <DisplayName>Set Existing Folder Path</DisplayName>
+                          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                            <SingleTargetId>
+                              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                            </SingleTargetId>
+                          </TargetLoadBalancer>
+                          <InheritTarget>false</InheritTarget>
+                          <ContainingProcessId>d298e1b3-db8e-41d3-8906-9281cad4d063</ContainingProcessId>
+                          <VariableToSet>
+                            <DisplayPath>Process.Variables.Output.New Folder Path</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>a6a7adb7-d232-4dcd-884e-a72b0741b6a4</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableToSet>
+                          <NewValue xsi:type="SubstitutableString">
+                            <FormattedCode>{0}/{1}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Variables.Output.New Folder Path</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>a6a7adb7-d232-4dcd-884e-a72b0741b6a4</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableReference>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Variables.Input.Stack Folder Name</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>44ab549f-d4b8-4841-825b-f37016cfa771</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </NewValue>
+                        </Configuration>
+                      </ActivityNode>
+                    </Children>
+                    <Condition>
+                      <Id>09c5f45c-5afe-4aeb-a521-2896f9ff9571</Id>
+                      <Conditions>
+                        <ConditionDefinition xsi:type="VariableConditionDefinition">
+                          <Id>24ffe8fe-35c9-40dc-94f4-4fbe2538f5f0</Id>
+                          <Expression xsi:type="SubstitutableBoolean">
+                            <HardcodedValue>true</HardcodedValue>
+                          </Expression>
+                          <Comparison>Equals</Comparison>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Input.Reuse Existing Folder</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>e22e4991-1421-49cb-98c5-30faaa3051ab</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                        </ConditionDefinition>
+                        <ConditionDefinition xsi:type="VariableConditionDefinition">
+                          <Id>f4a5591f-c75d-4f9f-ba9d-c02961773467</Id>
+                          <Expression xsi:type="SubstitutableWildcard">
+                            <HardcodedValue>*already exists*</HardcodedValue>
+                          </Expression>
+                          <Comparison>Wildcard</Comparison>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.Create Folder.Error Information</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ErrorInformation</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>629f4b2a-3e2c-41ab-97b0-07bb76c5c92c</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </ConditionDefinition>
+                      </Conditions>
+                    </Condition>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="ConditionBranchNode">
+                    <Id>37897041-bf41-441e-91fe-dd757d9b495c</Id>
+                    <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                    <DisplayName>If Execution Fails</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ExecuteActivityNode">
+                        <Id>7f6d07dc-e2a6-4838-9185-ad479b4e7bf6</Id>
+                        <DisplayName>Set Remediation Settings </DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                            <Id>131ae49b-bc89-4953-ba27-2472bdc27a02</Id>
+                            <ActivityNodeId>7f6d07dc-e2a6-4838-9185-ad479b4e7bf6</ActivityNodeId>
+                            <CompletedId>b5d49fce-d0d4-4b4a-87d8-59cbc3d9981e</CompletedId>
+                          </ActivityNode>
+                        </Children>
+                        <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+                          <Id>7f6d07dc-e2a6-4838-9185-ad479b4e7bf6</Id>
+                          <DisplayName>Set Remediation Settings </DisplayName>
+                          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                            <SingleTargetId>
+                              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                            </SingleTargetId>
+                          </TargetLoadBalancer>
+                          <InheritTarget>false</InheritTarget>
+                          <ContainingProcessId>d298e1b3-db8e-41d3-8906-9281cad4d063</ContainingProcessId>
+                          <Assignments>
+                            <PropertyReferenceValuePair>
+                              <VariableToSet>
+                                <DisplayPath>Process.Target.Cloud.Service.General.ErrorCode</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>ResolvedTarget</PropertyName>
+                                  </Link>
+                                  <Link xsi:type="ObjectReferenceLink">
+                                    <ObjectLink>
+                                      <Id>7ad8347e-4936-4962-ab6d-3ec987d2737a</Id>
+                                      <ObjectType>PropertyExtension</ObjectType>
+                                    </ObjectLink>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectType>ProcessInstance</ObjectType>
+                              </VariableToSet>
+                              <NewValue xsi:type="SubstitutableNumber">
+                                <HardcodedValue>5001</HardcodedValue>
+                              </NewValue>
+                            </PropertyReferenceValuePair>
+                            <PropertyReferenceValuePair>
+                              <VariableToSet>
+                                <DisplayPath>Process.Target.Cloud.Service.General.ErrorRemediation.Actions</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>ResolvedTarget</PropertyName>
+                                  </Link>
+                                  <Link xsi:type="ObjectReferenceLink">
+                                    <ObjectLink>
+                                      <Id>d3e16466-5e76-4adf-9738-9d3faf351bce</Id>
+                                      <ObjectType>PropertyExtension</ObjectType>
+                                    </ObjectLink>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectType>ProcessInstance</ObjectType>
+                              </VariableToSet>
+                              <NewValue xsi:type="SubstitutableString">
+                                <HardcodedValue>Cancel,Restart</HardcodedValue>
+                              </NewValue>
+                            </PropertyReferenceValuePair>
+                          </Assignments>
+                        </Configuration>
+                      </ActivityNode>
+                      <ActivityNode xsi:type="CompletedNode">
+                        <Id>4598393f-bf56-4800-acb3-482dfcff1ea0</Id>
+                        <Notes>Fail the entire process</Notes>
+                        <CompletedType>FailedNotCompleted</CompletedType>
+                        <ResultMessage>
+                          <FormattedCode>{0}</FormattedCode>
+                          <References>
+                            <VariableReference xsi:type="PropertyReference">
+                              <DisplayPath>Workflow.Create Folder.Error Information</DisplayPath>
+                              <LinkChain>
+                                <Link xsi:type="PropertyNameLink">
+                                  <PropertyName>ErrorInformation</PropertyName>
+                                </Link>
+                              </LinkChain>
+                              <ObjectId>629f4b2a-3e2c-41ab-97b0-07bb76c5c92c</ObjectId>
+                              <ObjectType>ActivityInstance</ObjectType>
+                            </VariableReference>
+                          </References>
+                        </ResultMessage>
+                      </ActivityNode>
+                    </Children>
+                    <Condition>
+                      <Id>d8c0162b-126d-4487-acbc-a0897cf1c72f</Id>
+                      <Conditions>
+                        <ConditionDefinition xsi:type="VariableConditionDefinition">
+                          <Id>e297ac8b-6d22-40c6-aa9f-d8893151e13e</Id>
+                          <Expression xsi:type="SubstitutableBoolean">
+                            <HardcodedValue>true</HardcodedValue>
+                          </Expression>
+                          <Comparison>Equals</Comparison>
+                          <VariableReference xsi:type="PropertyReference">
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>InstanceFailed</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>629f4b2a-3e2c-41ab-97b0-07bb76c5c92c</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </ConditionDefinition>
+                      </Conditions>
+                    </Condition>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="ConditionBranchNode">
+                    <Id>6266c863-b9db-41e0-9672-1c252789e937</Id>
+                    <DisplayName>Otherwise</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ExecuteActivityNode">
+                        <Id>30702c33-9765-4df8-8723-96e70dfa1063</Id>
+                        <DisplayName>Set New Folder Path</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                            <Id>0cff3488-75e7-4f73-a949-ce8b0726fcbc</Id>
+                            <ActivityNodeId>30702c33-9765-4df8-8723-96e70dfa1063</ActivityNodeId>
+                            <CompletedId>a60fb5cb-3765-45af-9097-227392fd1d48</CompletedId>
+                          </ActivityNode>
+                        </Children>
+                        <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                          <Id>30702c33-9765-4df8-8723-96e70dfa1063</Id>
+                          <DisplayName>Set New Folder Path</DisplayName>
+                          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                            <SingleTargetId>
+                              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                            </SingleTargetId>
+                          </TargetLoadBalancer>
+                          <InheritTarget>false</InheritTarget>
+                          <ContainingProcessId>d298e1b3-db8e-41d3-8906-9281cad4d063</ContainingProcessId>
+                          <VariableToSet>
+                            <DisplayPath>Process.Variables.Output.New Folder Path</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>a6a7adb7-d232-4dcd-884e-a72b0741b6a4</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableToSet>
+                          <NewValue xsi:type="SubstitutableString">
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.Create Folder.New Folder Path</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>NewFolderPath</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>629f4b2a-3e2c-41ab-97b0-07bb76c5c92c</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </NewValue>
+                        </Configuration>
+                      </ActivityNode>
+                    </Children>
+                    <Condition>
+                      <Id>e6eff1f0-5509-41a7-993d-754f9fbff039</Id>
+                      <Conditions />
+                    </Condition>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="VMwareCreateFolderActivityConfiguration" xml:space="preserve">
+                  <Id>629f4b2a-3e2c-41ab-97b0-07bb76c5c92c</Id>
+                  <DisplayName>Create Folder</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                    <SingleTargetReference>
+                      <FormattedCode>{0}</FormattedCode>
+                      <References>
+                        <VariableReference xsi:type="PropertyReference">
+                          <DisplayPath>Process.Target.Cloud.Service.General.PlatformElement.VCenter</DisplayPath>
+                          <LinkChain>
+                            <Link xsi:type="PropertyNameLink">
+                              <PropertyName>ResolvedTarget</PropertyName>
+                            </Link>
+                            <Link xsi:type="ObjectReferenceLink">
+                              <ObjectLink>
+                                <Id>42b6a134-067e-46f0-9f0c-cb0904901eba</Id>
+                                <ObjectType>PropertyExtension</ObjectType>
+                              </ObjectLink>
+                            </Link>
+                          </LinkChain>
+                          <ObjectType>ProcessInstance</ObjectType>
+                        </VariableReference>
+                      </References>
+                    </SingleTargetReference>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>d298e1b3-db8e-41d3-8906-9281cad4d063</ContainingProcessId>
+                  <VTask>
+                    <MainText>Create Folder</MainText>
+                  </VTask>
+                  <TimeOutPeriod>
+                    <DisplayUnits>Minutes</DisplayUnits>
+                    <Period>
+                      <HardcodedValue>5</HardcodedValue>
+                    </Period>
+                  </TimeOutPeriod>
+                  <ParentFolder>
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Variables.Output.New Folder Path</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>a6a7adb7-d232-4dcd-884e-a72b0741b6a4</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </ParentFolder>
+                  <FolderName>
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Variables.Input.Stack Folder Name</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>44ab549f-d4b8-4841-825b-f37016cfa771</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </FolderName>
+                  <FolderType>VirtualMachinesAndTemplates</FolderType>
+                </Configuration>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>f88d189e-7fc8-4a65-8d7a-2b8262fe8327</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>a68d2c1a-0b02-41ad-81d1-499fe59e9b9e</Id>
+                  <Expression xsi:type="SubstitutableString">
+                    <HardcodedValue>VMware vCenter Server</HardcodedValue>
+                  </Expression>
+                  <Comparison>Equals</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Target.Properties.Cloud.Configuration.PlatformElement.Type</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ResolvedTarget</PropertyName>
+                      </Link>
+                      <Link xsi:type="ObjectReferenceLink">
+                        <ObjectLink>
+                          <Id>32a47b79-2138-4987-a88f-e69ae7abe8ec</Id>
+                          <ObjectType>PropertyExtension</ObjectType>
+                        </ObjectLink>
+                      </Link>
+                    </LinkChain>
+                    <ObjectType>ProcessInstance</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>fa7f8430-f7e8-4fa3-8155-ae110cba66ff</Id>
+            <DisplayName>Other</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="SwitchNode">
+                <Id>1445fe9d-bc19-4868-b23c-8dc41fc83571</Id>
+                <DisplayName />
+                <Children>
+                  <ActivityNode xsi:type="ConditionBranchNode">
+                    <Id>26081a1b-079f-4000-b32c-d791b65f0660</Id>
+                    <DisplayName>OpenStack</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ConditionBranchNode">
+                        <Id>80438405-1062-47ad-93e7-2ec89cd3666e</Id>
+                        <DisplayName>Disabled - Never Satisfied</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="ExecuteActivityNode">
+                            <Id>5affd0ad-c1ba-4880-8751-626adefb1aae</Id>
+                            <DisplayName>Find OpenStack Target</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="ConditionBranchNode">
+                                <Id>4a5c979b-ea22-49ab-9317-c07b08ab948d</Id>
+                                <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                                <DisplayName>If Execution Fails</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="ExecuteActivityNode">
+                                    <Id>8b01e986-2bf1-4f3a-8ea9-bc42d15416c1</Id>
+                                    <DisplayName>Set Remediation Settings  (2)</DisplayName>
+                                    <Children>
+                                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                        <Id>656b383a-0e0f-4ec7-a0e7-79d2ae7979be</Id>
+                                        <ActivityNodeId>8b01e986-2bf1-4f3a-8ea9-bc42d15416c1</ActivityNodeId>
+                                        <CompletedId>c206355f-7e19-4545-ba4b-e8af71aa0c85</CompletedId>
+                                      </ActivityNode>
+                                    </Children>
+                                    <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+                                      <Id>8b01e986-2bf1-4f3a-8ea9-bc42d15416c1</Id>
+                                      <DisplayName>Set Remediation Settings  (2)</DisplayName>
+                                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                        <SingleTargetId>
+                                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                        </SingleTargetId>
+                                      </TargetLoadBalancer>
+                                      <InheritTarget>false</InheritTarget>
+                                      <ContainingProcessId>d298e1b3-db8e-41d3-8906-9281cad4d063</ContainingProcessId>
+                                      <Assignments>
+                                        <PropertyReferenceValuePair>
+                                          <VariableToSet>
+                                            <DisplayPath>Process.Target.Properties.Cloud.Service.General.ErrorCode</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>ResolvedTarget</PropertyName>
+                                              </Link>
+                                              <Link xsi:type="ObjectReferenceLink">
+                                                <ObjectLink>
+                                                  <Id>7ad8347e-4936-4962-ab6d-3ec987d2737a</Id>
+                                                  <ObjectType>PropertyExtension</ObjectType>
+                                                </ObjectLink>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectType>ProcessInstance</ObjectType>
+                                          </VariableToSet>
+                                          <NewValue xsi:type="SubstitutableNumber">
+                                            <HardcodedValue>5001</HardcodedValue>
+                                          </NewValue>
+                                        </PropertyReferenceValuePair>
+                                        <PropertyReferenceValuePair>
+                                          <VariableToSet>
+                                            <DisplayPath>Process.Target.Properties.Cloud.Service.General.ErrorRemediation.Actions</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>ResolvedTarget</PropertyName>
+                                              </Link>
+                                              <Link xsi:type="ObjectReferenceLink">
+                                                <ObjectLink>
+                                                  <Id>d3e16466-5e76-4adf-9738-9d3faf351bce</Id>
+                                                  <ObjectType>PropertyExtension</ObjectType>
+                                                </ObjectLink>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectType>ProcessInstance</ObjectType>
+                                          </VariableToSet>
+                                          <NewValue xsi:type="SubstitutableString">
+                                            <HardcodedValue>Cancel</HardcodedValue>
+                                          </NewValue>
+                                        </PropertyReferenceValuePair>
+                                      </Assignments>
+                                    </Configuration>
+                                  </ActivityNode>
+                                  <ActivityNode xsi:type="CompletedNode">
+                                    <Id>80ccb52c-66f9-4617-80a4-be4010ea371a</Id>
+                                    <Notes>Fail the entire process</Notes>
+                                    <CompletedType>FailedNotCompleted</CompletedType>
+                                    <ResultMessage>
+                                      <FormattedCode>{0}</FormattedCode>
+                                      <References>
+                                        <VariableReference xsi:type="PropertyReference">
+                                          <DisplayPath>Workflow.Find vCenter Target.Error Information</DisplayPath>
+                                          <LinkChain>
+                                            <Link xsi:type="PropertyNameLink">
+                                              <PropertyName>ErrorInformation</PropertyName>
+                                            </Link>
+                                          </LinkChain>
+                                          <ObjectId>5affd0ad-c1ba-4880-8751-626adefb1aae</ObjectId>
+                                          <ObjectType>ActivityInstance</ObjectType>
+                                        </VariableReference>
+                                      </References>
+                                    </ResultMessage>
+                                  </ActivityNode>
+                                </Children>
+                                <Condition>
+                                  <Id>6f0127da-5a50-4f36-86e2-86a17782606c</Id>
+                                  <Conditions>
+                                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                                      <Id>36ac7aaf-aa8b-494f-8c7e-5f0dbb1d3466</Id>
+                                      <Expression xsi:type="SubstitutableBoolean">
+                                        <HardcodedValue>true</HardcodedValue>
+                                      </Expression>
+                                      <Comparison>Equals</Comparison>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.Find vCenter Target.Instance Failed</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>InstanceFailed</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>5affd0ad-c1ba-4880-8751-626adefb1aae</ObjectId>
+                                        <ObjectType>ActivityInstance</ObjectType>
+                                      </VariableReference>
+                                    </ConditionDefinition>
+                                  </Conditions>
+                                </Condition>
+                              </ActivityNode>
+                            </Children>
+                            <Configuration xsi:type="BuiltinFindTargetsActivityConfiguration" xml:space="preserve">
+                              <Id>5affd0ad-c1ba-4880-8751-626adefb1aae</Id>
+                              <DisplayName>Find OpenStack Target</DisplayName>
+                              <Description>The OpenSTack target is the platform on which this process runs. This is passed to it through one of the input parameters. This activity validates that target and if that target if found to bre invalid, causes the process to abort.</Description>
+                              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                <SingleTargetId>
+                                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                </SingleTargetId>
+                              </TargetLoadBalancer>
+                              <KnowledgeBaseId>cef23f56-d979-4583-b291-8b9b2d3d3606</KnowledgeBaseId>
+                              <InheritTarget>false</InheritTarget>
+                              <ContainingProcessId>d298e1b3-db8e-41d3-8906-9281cad4d063</ContainingProcessId>
+                              <TargetTypeName>Tidal.Automation.WebService.Common.WebTargetConfiguration, Tidal.Automation.WebService.Common</TargetTypeName>
+                              <TargetTypeExtensionId>86e5a024-9ad5-462c-819b-c0e479e34d17</TargetTypeExtensionId>
+                              <TargetGroupId>030cc8f4-f329-4a05-b630-ea401df17264</TargetGroupId>
+                              <MatchingCriteria>
+                                <GenericCriteria xsi:type="GuidCriteria">
+                                  <LinkChain>
+                                    <Link xsi:type="PropertyNameLink">
+                                      <PropertyName>Id</PropertyName>
+                                    </Link>
+                                  </LinkChain>
+                                  <MatchingGuid>
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Target.Cloud.Configuration.PlatformElement.TargetID</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>ResolvedTarget</PropertyName>
+                                          </Link>
+                                          <Link xsi:type="ObjectReferenceLink">
+                                            <ObjectLink>
+                                              <Id>84a08e2c-751d-4a0d-9d36-2bd94f98fbee</Id>
+                                              <ObjectType>PropertyExtension</ObjectType>
+                                            </ObjectLink>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectType>ProcessInstance</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </MatchingGuid>
+                                  <Comparison>Equals</Comparison>
+                                </GenericCriteria>
+                              </MatchingCriteria>
+                            </Configuration>
+                          </ActivityNode>
+                          <ActivityNode xsi:type="ConditionBranchNode">
+                            <Id>2180c957-5288-4142-8d8a-3bb8a9b3a66e</Id>
+                            <DisplayName>If No Target</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="ExecuteActivityNode">
+                                <Id>87c8f1d2-426f-4156-8e11-2cca560eac61</Id>
+                                <DisplayName>Set Remediation Settings  </DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                    <Id>3e7f00ca-acf9-43e1-8400-24fea7ee5738</Id>
+                                    <ActivityNodeId>87c8f1d2-426f-4156-8e11-2cca560eac61</ActivityNodeId>
+                                    <CompletedId>7f1dc966-9f99-4930-9d53-dbe7a65e8e7e</CompletedId>
+                                  </ActivityNode>
+                                </Children>
+                                <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+                                  <Id>87c8f1d2-426f-4156-8e11-2cca560eac61</Id>
+                                  <DisplayName>Set Remediation Settings  </DisplayName>
+                                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                    <SingleTargetId>
+                                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                    </SingleTargetId>
+                                  </TargetLoadBalancer>
+                                  <InheritTarget>false</InheritTarget>
+                                  <ContainingProcessId>d298e1b3-db8e-41d3-8906-9281cad4d063</ContainingProcessId>
+                                  <Assignments>
+                                    <PropertyReferenceValuePair>
+                                      <VariableToSet>
+                                        <DisplayPath>Process.Target.Properties.Cloud.Service.General.ErrorCode</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>ResolvedTarget</PropertyName>
+                                          </Link>
+                                          <Link xsi:type="ObjectReferenceLink">
+                                            <ObjectLink>
+                                              <Id>7ad8347e-4936-4962-ab6d-3ec987d2737a</Id>
+                                              <ObjectType>PropertyExtension</ObjectType>
+                                            </ObjectLink>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectType>ProcessInstance</ObjectType>
+                                      </VariableToSet>
+                                      <NewValue xsi:type="SubstitutableNumber">
+                                        <HardcodedValue>5001</HardcodedValue>
+                                      </NewValue>
+                                    </PropertyReferenceValuePair>
+                                    <PropertyReferenceValuePair>
+                                      <VariableToSet>
+                                        <DisplayPath>Process.Target.Properties.Cloud.Service.General.ErrorRemediation.Actions</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>ResolvedTarget</PropertyName>
+                                          </Link>
+                                          <Link xsi:type="ObjectReferenceLink">
+                                            <ObjectLink>
+                                              <Id>d3e16466-5e76-4adf-9738-9d3faf351bce</Id>
+                                              <ObjectType>PropertyExtension</ObjectType>
+                                            </ObjectLink>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectType>ProcessInstance</ObjectType>
+                                      </VariableToSet>
+                                      <NewValue xsi:type="SubstitutableString">
+                                        <HardcodedValue>Cancel,Restart</HardcodedValue>
+                                      </NewValue>
+                                    </PropertyReferenceValuePair>
+                                  </Assignments>
+                                </Configuration>
+                              </ActivityNode>
+                              <ActivityNode xsi:type="CompletedNode">
+                                <Id>576ec952-fa72-47c4-9e6a-5144c989fff1</Id>
+                                <CompletedType>FailedNotCompleted</CompletedType>
+                                <ResultMessage>
+                                  <HardcodedValue>No OpenStack target found.</HardcodedValue>
+                                </ResultMessage>
+                              </ActivityNode>
+                            </Children>
+                            <Condition>
+                              <Id>c127ccea-7152-4f79-9052-b6d0950db0c4</Id>
+                              <Conditions>
+                                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                                  <Id>9fe47a77-fce4-4a3a-b366-60299797c906</Id>
+                                  <Expression xsi:type="SubstitutableNumber">
+                                    <HardcodedValue>0</HardcodedValue>
+                                  </Expression>
+                                  <Comparison>Equals</Comparison>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Find OpenStack Target.Found Targets.Count</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>GetAllFoundTargets</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ItemCount</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>5affd0ad-c1ba-4880-8751-626adefb1aae</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </ConditionDefinition>
+                              </Conditions>
+                            </Condition>
+                          </ActivityNode>
+                          <ActivityNode xsi:type="StartProcessNode">
+                            <Id>7a8f36e0-acf1-4b20-9d3d-2a83d5a88ebe</Id>
+                            <DisplayName>Connect to OpenStack</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                <Id>326d5c29-500f-4603-a4c7-d2295ba6d69b</Id>
+                                <ProcessNodeId>7a8f36e0-acf1-4b20-9d3d-2a83d5a88ebe</ProcessNodeId>
+                                <CompletedId>5cd4249f-9d22-4c8b-9749-88d49077a269</CompletedId>
+                              </ActivityNode>
+                            </Children>
+                            <ProcessId>65ade3d1-85c2-4014-a98c-9395bcfe0776</ProcessId>
+                            <InputVariableTable>
+                              <VariableAssignmentsAsArray>
+                                <InputVariableAssignment>
+                                  <InputVariableId>c36952ee-2eea-48bc-b331-f8b1b8211574</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.Find OpenStack Target.Found Targets.First.Cloud.Service.OpenStack.Keystone.Tenant</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>GetAllFoundTargets</PropertyName>
+                                          </Link>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>FirstItem</PropertyName>
+                                          </Link>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>GetReferencedObject</PropertyName>
+                                          </Link>
+                                          <Link xsi:type="ObjectReferenceLink">
+                                            <ObjectLink>
+                                              <Id>7cef8d52-cb31-4bed-9609-4001375d518b</Id>
+                                              <ObjectType>PropertyExtension</ObjectType>
+                                            </ObjectLink>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>5affd0ad-c1ba-4880-8751-626adefb1aae</ObjectId>
+                                        <ObjectType>ActivityInstance</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                              </VariableAssignmentsAsArray>
+                            </InputVariableTable>
+                            <Asynchronous>false</Asynchronous>
+                            <InheritTarget>false</InheritTarget>
+                            <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                              <SingleTargetReference>
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Find OpenStack Target.Found Targets.First</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>GetAllFoundTargets</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>FirstItem</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>5affd0ad-c1ba-4880-8751-626adefb1aae</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </SingleTargetReference>
+                            </TargetLoadBalancer>
+                            <InheritPriorityClass>true</InheritPriorityClass>
+                            <RuntimeUserId>
+                              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                            </RuntimeUserId>
+                            <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                            <StartPointId>
+                              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                            </StartPointId>
+                            <StartPointName>
+                              <FormattedCode />
+                            </StartPointName>
+                          </ActivityNode>
+                          <ActivityNode xsi:type="StartProcessNode">
+                            <Id>01d50124-bc1e-4812-8925-c892c93524f8</Id>
+                            <DisplayName>Create Tenant (OS)</DisplayName>
+                            <Children />
+                            <ProcessId>1973f3b4-4e76-407f-992f-a919872479d4</ProcessId>
+                            <InputVariableTable>
+                              <VariableAssignmentsAsArray>
+                                <InputVariableAssignment>
+                                  <InputVariableId>f5f378b9-08ca-41ec-bcc5-781f9457d6e1</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.Connect to OpenStack.Token ID</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="ProcessOutputVariableLink">
+                                            <LaunchingActivityId>7a8f36e0-acf1-4b20-9d3d-2a83d5a88ebe</LaunchingActivityId>
+                                            <OutputVariableId>bde07195-b1d1-44c1-bbc9-739e75dcc444</OutputVariableId>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>7a8f36e0-acf1-4b20-9d3d-2a83d5a88ebe</ObjectId>
+                                        <ObjectType>WorkflowNode</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                                <InputVariableAssignment>
+                                  <InputVariableId>8f7dfaaf-f5bc-413c-9c0c-9aa75eb480c9</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.Connect to OpenStack.Identity Admin Url</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="ProcessOutputVariableLink">
+                                            <LaunchingActivityId>7a8f36e0-acf1-4b20-9d3d-2a83d5a88ebe</LaunchingActivityId>
+                                            <OutputVariableId>9c3b5e4c-e6a7-4eea-ba2c-b22ca7941f87</OutputVariableId>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>7a8f36e0-acf1-4b20-9d3d-2a83d5a88ebe</ObjectId>
+                                        <ObjectType>WorkflowNode</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                                <InputVariableAssignment>
+                                  <InputVariableId>f73e66e6-b815-4dd2-8cc8-b7743c96736a</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableBoolean">
+                                    <HardcodedValue>true</HardcodedValue>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                                <InputVariableAssignment>
+                                  <InputVariableId>1566d763-a58d-4fe1-8b4d-8126ee139634</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableString">
+                                    <FormattedCode>Stack Container (Requisition {0})</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Target.Cloud.Service.General.ServiceRequestXML.RequisitionID</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>ResolvedTarget</PropertyName>
+                                          </Link>
+                                          <Link xsi:type="ObjectReferenceLink">
+                                            <ObjectLink>
+                                              <Id>55d37b19-035c-4ee7-afb9-cbb8a40c4a6f</Id>
+                                              <ObjectType>PropertyExtension</ObjectType>
+                                            </ObjectLink>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectType>ProcessInstance</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                                <InputVariableAssignment>
+                                  <InputVariableId>1062145b-cae6-4258-b34d-352d00c6812c</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Input.Stack Folder Name</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>44ab549f-d4b8-4841-825b-f37016cfa771</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                              </VariableAssignmentsAsArray>
+                            </InputVariableTable>
+                            <Asynchronous>false</Asynchronous>
+                            <InheritTarget>false</InheritTarget>
+                            <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                              <SingleTargetReference>
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Find OpenStack Target.Found Targets.First</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>GetAllFoundTargets</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>FirstItem</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>5affd0ad-c1ba-4880-8751-626adefb1aae</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </SingleTargetReference>
+                            </TargetLoadBalancer>
+                            <InheritPriorityClass>true</InheritPriorityClass>
+                            <RuntimeUserId>
+                              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                            </RuntimeUserId>
+                            <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                            <StartPointId>
+                              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                            </StartPointId>
+                            <StartPointName>
+                              <FormattedCode />
+                            </StartPointName>
+                          </ActivityNode>
+                          <ActivityNode xsi:type="SwitchNode">
+                            <Id>dc49d213-8464-4b76-80c2-a0df2d23a4dc</Id>
+                            <DisplayName />
+                            <Children>
+                              <ActivityNode xsi:type="ConditionBranchNode">
+                                <Id>31615b56-ae58-43ef-991c-f93ebdf5224f</Id>
+                                <DisplayName>If Exists</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="StartProcessNode">
+                                    <Id>c5daa576-0e88-4f54-94e9-2e413fb41168</Id>
+                                    <DisplayName>Describe tenants (OS)</DisplayName>
+                                    <Children>
+                                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                        <Id>e7086ab4-97ee-4649-8835-7a31443c711c</Id>
+                                        <ProcessNodeId>c5daa576-0e88-4f54-94e9-2e413fb41168</ProcessNodeId>
+                                        <CompletedId>057067a4-2ab5-4a76-a721-f131b9b88535</CompletedId>
+                                      </ActivityNode>
+                                    </Children>
+                                    <ProcessId>0e9346be-72c5-485e-b18d-fcd8fe5f40e5</ProcessId>
+                                    <InputVariableTable>
+                                      <VariableAssignmentsAsArray>
+                                        <InputVariableAssignment>
+                                          <InputVariableId>2ae4a571-16ac-4621-bd92-0f26edb98f46</InputVariableId>
+                                          <VariableValue xsi:type="SubstitutableString">
+                                            <FormattedCode>{0}</FormattedCode>
+                                            <References>
+                                              <VariableReference xsi:type="PropertyReference">
+                                                <DisplayPath>Workflow.Connect to OpenStack.Token ID</DisplayPath>
+                                                <LinkChain>
+                                                  <Link xsi:type="ProcessOutputVariableLink">
+                                                    <LaunchingActivityId>7a8f36e0-acf1-4b20-9d3d-2a83d5a88ebe</LaunchingActivityId>
+                                                    <OutputVariableId>bde07195-b1d1-44c1-bbc9-739e75dcc444</OutputVariableId>
+                                                  </Link>
+                                                </LinkChain>
+                                                <ObjectId>7a8f36e0-acf1-4b20-9d3d-2a83d5a88ebe</ObjectId>
+                                                <ObjectType>WorkflowNode</ObjectType>
+                                              </VariableReference>
+                                            </References>
+                                          </VariableValue>
+                                        </InputVariableAssignment>
+                                        <InputVariableAssignment>
+                                          <InputVariableId>31c28e6b-1aaf-4c0d-916c-235bab70e38a</InputVariableId>
+                                          <VariableValue xsi:type="SubstitutableString">
+                                            <FormattedCode>{0}</FormattedCode>
+                                            <References>
+                                              <VariableReference xsi:type="PropertyReference">
+                                                <DisplayPath>Workflow.Connect to OpenStack.Identity Url</DisplayPath>
+                                                <LinkChain>
+                                                  <Link xsi:type="ProcessOutputVariableLink">
+                                                    <LaunchingActivityId>7a8f36e0-acf1-4b20-9d3d-2a83d5a88ebe</LaunchingActivityId>
+                                                    <OutputVariableId>9c3b5e4c-e6a7-4eea-ba2c-b22ca7941f87</OutputVariableId>
+                                                  </Link>
+                                                </LinkChain>
+                                                <ObjectId>7a8f36e0-acf1-4b20-9d3d-2a83d5a88ebe</ObjectId>
+                                                <ObjectType>WorkflowNode</ObjectType>
+                                              </VariableReference>
+                                            </References>
+                                          </VariableValue>
+                                        </InputVariableAssignment>
+                                        <InputVariableAssignment>
+                                          <InputVariableId>815aa298-b6b8-4928-8f4b-c627f53f6346</InputVariableId>
+                                          <VariableValue xsi:type="SubstitutableString">
+                                            <FormattedCode>{0}</FormattedCode>
+                                            <References>
+                                              <VariableReference xsi:type="PropertyReference">
+                                                <DisplayPath>Process.Variables.Input.Stack Folder Name</DisplayPath>
+                                                <LinkChain />
+                                                <ObjectId>44ab549f-d4b8-4841-825b-f37016cfa771</ObjectId>
+                                                <ObjectType>GlobalVariable</ObjectType>
+                                              </VariableReference>
+                                            </References>
+                                          </VariableValue>
+                                        </InputVariableAssignment>
+                                      </VariableAssignmentsAsArray>
+                                    </InputVariableTable>
+                                    <Asynchronous>false</Asynchronous>
+                                    <InheritTarget>false</InheritTarget>
+                                    <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                                      <SingleTargetReference>
+                                        <FormattedCode>{0}</FormattedCode>
+                                        <References>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.Find OpenStack Target.Found Targets.First</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>GetAllFoundTargets</PropertyName>
+                                              </Link>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>FirstItem</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>5affd0ad-c1ba-4880-8751-626adefb1aae</ObjectId>
+                                            <ObjectType>ActivityInstance</ObjectType>
+                                          </VariableReference>
+                                        </References>
+                                      </SingleTargetReference>
+                                    </TargetLoadBalancer>
+                                    <InheritPriorityClass>true</InheritPriorityClass>
+                                    <RuntimeUserId>
+                                      <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                                    </RuntimeUserId>
+                                    <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                                    <StartPointId>
+                                      <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                                    </StartPointId>
+                                    <StartPointName>
+                                      <FormattedCode />
+                                    </StartPointName>
+                                  </ActivityNode>
+                                  <ActivityNode xsi:type="ExecuteActivityNode">
+                                    <Id>86d21974-73da-4f90-b686-5562d53f95d2</Id>
+                                    <DisplayName>Select from Table</DisplayName>
+                                    <Children>
+                                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                        <Id>8c064e9e-04de-40f0-8a05-b0d7576fa7c7</Id>
+                                        <ActivityNodeId>86d21974-73da-4f90-b686-5562d53f95d2</ActivityNodeId>
+                                        <CompletedId>b3aa399b-bfff-4db2-85b8-40aaa8b74273</CompletedId>
+                                      </ActivityNode>
+                                    </Children>
+                                    <Configuration xsi:type="ExtractTableActivityConfiguration" xml:space="preserve">
+                                      <Id>86d21974-73da-4f90-b686-5562d53f95d2</Id>
+                                      <DisplayName>Select from Table</DisplayName>
+                                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                        <SingleTargetId>
+                                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                        </SingleTargetId>
+                                      </TargetLoadBalancer>
+                                      <InheritTarget>false</InheritTarget>
+                                      <ContainingProcessId>d298e1b3-db8e-41d3-8906-9281cad4d063</ContainingProcessId>
+                                      <Columns>
+                                        <BuiltinTableColumn>
+                                          <Name>ID</Name>
+                                          <DataType>System.String</DataType>
+                                        </BuiltinTableColumn>
+                                      </Columns>
+                                      <SourceTable xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.Describe tenants (OS).Projects</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="ProcessOutputVariableLink">
+                                            <LaunchingActivityId>c5daa576-0e88-4f54-94e9-2e413fb41168</LaunchingActivityId>
+                                            <OutputVariableId>444c03aa-d9a2-4fa2-88fe-9464418707b7</OutputVariableId>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>c5daa576-0e88-4f54-94e9-2e413fb41168</ObjectId>
+                                        <ObjectType>WorkflowNode</ObjectType>
+                                      </SourceTable>
+                                      <WhereClause>
+                                        <FormattedCode>[name] = '{0}'</FormattedCode>
+                                        <References>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Process.Variables.Input.Stack Folder Name</DisplayPath>
+                                            <LinkChain />
+                                            <ObjectId>44ab549f-d4b8-4841-825b-f37016cfa771</ObjectId>
+                                            <ObjectType>GlobalVariable</ObjectType>
+                                          </VariableReference>
+                                        </References>
+                                      </WhereClause>
+                                      <SortColumn />
+                                      <SortOrder>Ascending</SortOrder>
+                                      <MaxRows>
+                                        <HardcodedValue>2147483647</HardcodedValue>
+                                      </MaxRows>
+                                    </Configuration>
+                                  </ActivityNode>
+                                  <ActivityNode xsi:type="ExecuteActivityNode">
+                                    <Id>67716224-03fa-416b-bfe6-bff64e76f126</Id>
+                                    <DisplayName>Set Existing Tenant ID</DisplayName>
+                                    <Children>
+                                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                        <Id>90b38601-1d1d-4633-bca9-1b94c9819726</Id>
+                                        <ActivityNodeId>67716224-03fa-416b-bfe6-bff64e76f126</ActivityNodeId>
+                                        <CompletedId>b488db3f-91fa-4787-97c9-a48f876a686a</CompletedId>
+                                      </ActivityNode>
+                                    </Children>
+                                    <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                                      <Id>67716224-03fa-416b-bfe6-bff64e76f126</Id>
+                                      <DisplayName>Set Existing Tenant ID</DisplayName>
+                                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                        <SingleTargetId>
+                                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                        </SingleTargetId>
+                                      </TargetLoadBalancer>
+                                      <InheritTarget>false</InheritTarget>
+                                      <ContainingProcessId>d298e1b3-db8e-41d3-8906-9281cad4d063</ContainingProcessId>
+                                      <VariableToSet>
+                                        <DisplayPath>Process.Variables.Output.New Folder Path</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>a6a7adb7-d232-4dcd-884e-a72b0741b6a4</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableToSet>
+                                      <NewValue xsi:type="SubstitutableString">
+                                        <FormattedCode>{0}</FormattedCode>
+                                        <References>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.Select from Table.Result Table.First Row.ID</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>ResultTable</PropertyName>
+                                              </Link>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>FirstRow</PropertyName>
+                                              </Link>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>ID</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>86d21974-73da-4f90-b686-5562d53f95d2</ObjectId>
+                                            <ObjectType>ActivityInstance</ObjectType>
+                                          </VariableReference>
+                                        </References>
+                                      </NewValue>
+                                    </Configuration>
+                                  </ActivityNode>
+                                </Children>
+                                <Condition>
+                                  <Id>09c5f45c-5afe-4aeb-a521-2896f9ff9571</Id>
+                                  <Conditions>
+                                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                                      <Id>24ffe8fe-35c9-40dc-94f4-4fbe2538f5f0</Id>
+                                      <Expression xsi:type="SubstitutableBoolean">
+                                        <HardcodedValue>true</HardcodedValue>
+                                      </Expression>
+                                      <Comparison>Equals</Comparison>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Input.Reuse Existing Folder</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>e22e4991-1421-49cb-98c5-30faaa3051ab</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                    </ConditionDefinition>
+                                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                                      <Id>f4a5591f-c75d-4f9f-ba9d-c02961773467</Id>
+                                      <Expression xsi:type="SubstitutableWildcard">
+                                        <HardcodedValue>*Duplicate Entry*</HardcodedValue>
+                                      </Expression>
+                                      <Comparison>Wildcard</Comparison>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.Create Tenant (OS).Error Information</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>ErrorInformation</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>01d50124-bc1e-4812-8925-c892c93524f8</ObjectId>
+                                        <ObjectType>ProcessInstance</ObjectType>
+                                      </VariableReference>
+                                    </ConditionDefinition>
+                                  </Conditions>
+                                </Condition>
+                              </ActivityNode>
+                              <ActivityNode xsi:type="ConditionBranchNode">
+                                <Id>61fd3500-823b-47b9-b03d-22873f7ab3ec</Id>
+                                <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                                <DisplayName>If Execution Fails</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="ExecuteActivityNode">
+                                    <Id>a6f9f2c1-58fc-4f00-b6cb-8e1c1f4a37e0</Id>
+                                    <DisplayName>Set Remediation Settings</DisplayName>
+                                    <Children>
+                                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                        <Id>99b02487-bc84-490d-a41a-4c2030465866</Id>
+                                        <ActivityNodeId>a6f9f2c1-58fc-4f00-b6cb-8e1c1f4a37e0</ActivityNodeId>
+                                        <CompletedId>3e0ecadb-3665-44ff-9df0-8d2fff923eb9</CompletedId>
+                                      </ActivityNode>
+                                    </Children>
+                                    <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+                                      <Id>a6f9f2c1-58fc-4f00-b6cb-8e1c1f4a37e0</Id>
+                                      <DisplayName>Set Remediation Settings</DisplayName>
+                                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                        <SingleTargetId>
+                                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                        </SingleTargetId>
+                                      </TargetLoadBalancer>
+                                      <InheritTarget>false</InheritTarget>
+                                      <ContainingProcessId>d298e1b3-db8e-41d3-8906-9281cad4d063</ContainingProcessId>
+                                      <Assignments>
+                                        <PropertyReferenceValuePair>
+                                          <VariableToSet>
+                                            <DisplayPath>Process.Target.Cloud.Service.General.ErrorCode</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>ResolvedTarget</PropertyName>
+                                              </Link>
+                                              <Link xsi:type="ObjectReferenceLink">
+                                                <ObjectLink>
+                                                  <Id>7ad8347e-4936-4962-ab6d-3ec987d2737a</Id>
+                                                  <ObjectType>PropertyExtension</ObjectType>
+                                                </ObjectLink>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectType>ProcessInstance</ObjectType>
+                                          </VariableToSet>
+                                          <NewValue xsi:type="SubstitutableNumber">
+                                            <HardcodedValue>5001</HardcodedValue>
+                                          </NewValue>
+                                        </PropertyReferenceValuePair>
+                                        <PropertyReferenceValuePair>
+                                          <VariableToSet>
+                                            <DisplayPath>Process.Target.Cloud.Service.General.ErrorRemediation.Actions</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>ResolvedTarget</PropertyName>
+                                              </Link>
+                                              <Link xsi:type="ObjectReferenceLink">
+                                                <ObjectLink>
+                                                  <Id>d3e16466-5e76-4adf-9738-9d3faf351bce</Id>
+                                                  <ObjectType>PropertyExtension</ObjectType>
+                                                </ObjectLink>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectType>ProcessInstance</ObjectType>
+                                          </VariableToSet>
+                                          <NewValue xsi:type="SubstitutableString">
+                                            <HardcodedValue>Cancel,Restart</HardcodedValue>
+                                          </NewValue>
+                                        </PropertyReferenceValuePair>
+                                      </Assignments>
+                                    </Configuration>
+                                  </ActivityNode>
+                                  <ActivityNode xsi:type="CompletedNode">
+                                    <Id>75873324-e266-4e60-8251-a1d4358bbe29</Id>
+                                    <Notes>Fail the entire process</Notes>
+                                    <CompletedType>FailedNotCompleted</CompletedType>
+                                    <ResultMessage>
+                                      <FormattedCode>{0}</FormattedCode>
+                                      <References>
+                                        <VariableReference xsi:type="PropertyReference">
+                                          <DisplayPath>Workflow.Create Tenant (OS).Error Information</DisplayPath>
+                                          <LinkChain>
+                                            <Link xsi:type="PropertyNameLink">
+                                              <PropertyName>ErrorInformation</PropertyName>
+                                            </Link>
+                                          </LinkChain>
+                                          <ObjectId>01d50124-bc1e-4812-8925-c892c93524f8</ObjectId>
+                                          <ObjectType>ProcessInstance</ObjectType>
+                                        </VariableReference>
+                                      </References>
+                                    </ResultMessage>
+                                  </ActivityNode>
+                                </Children>
+                                <Condition>
+                                  <Id>d8c0162b-126d-4487-acbc-a0897cf1c72f</Id>
+                                  <Conditions>
+                                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                                      <Id>e297ac8b-6d22-40c6-aa9f-d8893151e13e</Id>
+                                      <Expression xsi:type="SubstitutableBoolean">
+                                        <HardcodedValue>true</HardcodedValue>
+                                      </Expression>
+                                      <Comparison>Equals</Comparison>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.Create Tenant (OS).Instance Failed</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>InstanceFailed</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>01d50124-bc1e-4812-8925-c892c93524f8</ObjectId>
+                                        <ObjectType>ProcessInstance</ObjectType>
+                                      </VariableReference>
+                                    </ConditionDefinition>
+                                  </Conditions>
+                                </Condition>
+                              </ActivityNode>
+                              <ActivityNode xsi:type="ConditionBranchNode">
+                                <Id>617e9574-8227-4f05-81e5-7f69cdb4b420</Id>
+                                <DisplayName>Otherwise</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="ExecuteActivityNode">
+                                    <Id>8bf49980-e448-4665-b071-c09134ddd757</Id>
+                                    <DisplayName>Set Tenant ID</DisplayName>
+                                    <Children>
+                                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                        <Id>30e87016-ce2f-400d-bb5e-803a19ca3475</Id>
+                                        <ActivityNodeId>8bf49980-e448-4665-b071-c09134ddd757</ActivityNodeId>
+                                        <CompletedId>112df3cf-d1c8-4925-aef8-274c0eecbcfc</CompletedId>
+                                      </ActivityNode>
+                                    </Children>
+                                    <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                                      <Id>8bf49980-e448-4665-b071-c09134ddd757</Id>
+                                      <DisplayName>Set Tenant ID</DisplayName>
+                                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                        <SingleTargetId>
+                                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                        </SingleTargetId>
+                                      </TargetLoadBalancer>
+                                      <InheritTarget>false</InheritTarget>
+                                      <ContainingProcessId>d298e1b3-db8e-41d3-8906-9281cad4d063</ContainingProcessId>
+                                      <VariableToSet>
+                                        <DisplayPath>Process.Variables.Output.New Folder Path</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>a6a7adb7-d232-4dcd-884e-a72b0741b6a4</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableToSet>
+                                      <NewValue xsi:type="SubstitutableString">
+                                        <FormattedCode>{0}</FormattedCode>
+                                        <References>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.Create Tenant (OS).Project ID</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="ProcessOutputVariableLink">
+                                                <LaunchingActivityId>01d50124-bc1e-4812-8925-c892c93524f8</LaunchingActivityId>
+                                                <OutputVariableId>d58be479-c6f8-48b6-93b9-186d4a3d74f3</OutputVariableId>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>01d50124-bc1e-4812-8925-c892c93524f8</ObjectId>
+                                            <ObjectType>WorkflowNode</ObjectType>
+                                          </VariableReference>
+                                        </References>
+                                      </NewValue>
+                                    </Configuration>
+                                  </ActivityNode>
+                                </Children>
+                                <Condition>
+                                  <Id>e6eff1f0-5509-41a7-993d-754f9fbff039</Id>
+                                  <Conditions />
+                                </Condition>
+                              </ActivityNode>
+                            </Children>
+                          </ActivityNode>
+                          <ActivityNode xsi:type="StartProcessNode">
+                            <Id>857c128a-7933-40f4-82d5-a6045e8ab4d7</Id>
+                            <DisplayName>Copy Security Groups (OS)</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="ConditionBranchNode">
+                                <Id>fb644829-e4a6-4867-9d7c-8376c2630647</Id>
+                                <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                                <DisplayName>If Execution Fails</DisplayName>
+                                <Children />
+                                <Condition>
+                                  <Id>b4da211f-77fc-4952-94a7-a8723e556060</Id>
+                                  <Conditions>
+                                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                                      <Id>7b4cf197-ab3f-4a17-9e2c-55d41c9efc67</Id>
+                                      <Expression xsi:type="SubstitutableBoolean">
+                                        <HardcodedValue>true</HardcodedValue>
+                                      </Expression>
+                                      <Comparison>Equals</Comparison>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>InstanceFailed</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>857c128a-7933-40f4-82d5-a6045e8ab4d7</ObjectId>
+                                        <ObjectType>ProcessInstance</ObjectType>
+                                      </VariableReference>
+                                    </ConditionDefinition>
+                                  </Conditions>
+                                </Condition>
+                              </ActivityNode>
+                            </Children>
+                            <ProcessId>9c81820a-caec-4512-ae24-a23defab45c5</ProcessId>
+                            <InputVariableTable>
+                              <VariableAssignmentsAsArray>
+                                <InputVariableAssignment>
+                                  <InputVariableId>db0a5ae8-d5f6-4b21-a433-dc5d964c3b93</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Input.Stack Folder Name</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>44ab549f-d4b8-4841-825b-f37016cfa771</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                                <InputVariableAssignment>
+                                  <InputVariableId>bc4556e4-e275-4494-8ae6-b16be9b46209</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Input.Parent Folder</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>7b8ee6d4-71c2-4eb9-9135-ef3db2903fa9</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                              </VariableAssignmentsAsArray>
+                            </InputVariableTable>
+                            <Asynchronous>false</Asynchronous>
+                            <InheritTarget>false</InheritTarget>
+                            <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                              <SingleTargetReference>
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Find OpenStack Target.Found Targets.First</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>GetAllFoundTargets</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>FirstItem</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>5affd0ad-c1ba-4880-8751-626adefb1aae</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </SingleTargetReference>
+                            </TargetLoadBalancer>
+                            <InheritPriorityClass>true</InheritPriorityClass>
+                            <RuntimeUserId>
+                              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                            </RuntimeUserId>
+                            <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                            <StartPointId>
+                              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                            </StartPointId>
+                            <StartPointName>
+                              <FormattedCode />
+                            </StartPointName>
+                          </ActivityNode>
+                        </Children>
+                        <Condition>
+                          <Id>d7dec12e-2d10-4368-ba11-2f90479f8bb2</Id>
+                          <Operator>Or</Operator>
+                          <Conditions />
+                        </Condition>
+                      </ActivityNode>
+                    </Children>
+                    <Condition>
+                      <Id>538b2ba8-7dd8-4630-8888-1437d6824b33</Id>
+                      <Conditions>
+                        <ConditionDefinition xsi:type="VariableConditionDefinition">
+                          <Id>36ffebda-aff4-48f4-9b33-779a347da000</Id>
+                          <Expression xsi:type="SubstitutableString">
+                            <HardcodedValue>OpenStack Cloud Manager</HardcodedValue>
+                          </Expression>
+                          <Comparison>Equals</Comparison>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Target.Cloud.Configuration.PlatformElement.Type</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResolvedTarget</PropertyName>
+                              </Link>
+                              <Link xsi:type="ObjectReferenceLink">
+                                <ObjectLink>
+                                  <Id>32a47b79-2138-4987-a88f-e69ae7abe8ec</Id>
+                                  <ObjectType>PropertyExtension</ObjectType>
+                                </ObjectLink>
+                              </Link>
+                            </LinkChain>
+                            <ObjectType>ProcessInstance</ObjectType>
+                          </VariableReference>
+                        </ConditionDefinition>
+                      </Conditions>
+                    </Condition>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="ConditionBranchNode">
+                    <Id>c1b08a09-7c21-43ad-a1c6-546a582f3e16</Id>
+                    <DisplayName>vCloud Director</DisplayName>
+                    <Children />
+                    <Condition>
+                      <Id>3ff8f622-0aad-46de-a672-09e3cdbb78c6</Id>
+                      <Conditions>
+                        <ConditionDefinition xsi:type="VariableConditionDefinition">
+                          <Id>727e93de-878c-4520-a308-78d2191ebb71</Id>
+                          <Expression xsi:type="SubstitutableString">
+                            <HardcodedValue>VMware vCloud Director</HardcodedValue>
+                          </Expression>
+                          <Comparison>Equals</Comparison>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Target.Properties.Cloud.Configuration.PlatformElement.Type</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResolvedTarget</PropertyName>
+                              </Link>
+                              <Link xsi:type="ObjectReferenceLink">
+                                <ObjectLink>
+                                  <Id>32a47b79-2138-4987-a88f-e69ae7abe8ec</Id>
+                                  <ObjectType>PropertyExtension</ObjectType>
+                                </ObjectLink>
+                              </Link>
+                            </LinkChain>
+                            <ObjectType>ProcessInstance</ObjectType>
+                          </VariableReference>
+                        </ConditionDefinition>
+                      </Conditions>
+                    </Condition>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="ConditionBranchNode">
+                    <Id>1796d527-cf35-4ce1-8fc1-48bea73b0f3e</Id>
+                    <DisplayName>EC2</DisplayName>
+                    <Children />
+                    <Condition>
+                      <Id>3ff8f622-0aad-46de-a672-09e3cdbb78c6</Id>
+                      <Conditions>
+                        <ConditionDefinition xsi:type="VariableConditionDefinition">
+                          <Id>d1831724-7c1a-421d-80cf-d83ea9183e86</Id>
+                          <Expression xsi:type="SubstitutableString">
+                            <HardcodedValue>Amazon EC2</HardcodedValue>
+                          </Expression>
+                          <Comparison>Equals</Comparison>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Target.Properties.Cloud.Configuration.PlatformElement.Type</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResolvedTarget</PropertyName>
+                              </Link>
+                              <Link xsi:type="ObjectReferenceLink">
+                                <ObjectLink>
+                                  <Id>32a47b79-2138-4987-a88f-e69ae7abe8ec</Id>
+                                  <ObjectType>PropertyExtension</ObjectType>
+                                </ObjectLink>
+                              </Link>
+                            </LinkChain>
+                            <ObjectType>ProcessInstance</ObjectType>
+                          </VariableReference>
+                        </ConditionDefinition>
+                      </Conditions>
+                    </Condition>
+                  </ActivityNode>
+                </Children>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>fa5fe840-918c-4ba7-ac0a-cea840aaeab6</Id>
+              <Conditions />
+            </Condition>
+          </ActivityNode>
+        </Children>
+      </ActivityNode>
+    </Children>
+  </FirstActivity>
+  <ProcessId>d298e1b3-db8e-41d3-8906-9281cad4d063</ProcessId>
+</WorkflowConfiguration>

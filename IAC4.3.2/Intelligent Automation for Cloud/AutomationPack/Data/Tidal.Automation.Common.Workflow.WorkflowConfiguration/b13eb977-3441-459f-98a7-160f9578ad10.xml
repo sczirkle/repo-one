@@ -1,0 +1,2939 @@
+<?xml version="1.0"?>
+<WorkflowConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>b13eb977-3441-459f-98a7-160f9578ad10</Id>
+  <DisplayName>CloudSync Discover Infrastructure -&gt; Nexus 1000V Components</DisplayName>
+  <CreatedTime>2016-02-15T20:43:03.098375Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:43:21.3076171Z</ModifiedTime>
+  <FirstActivity xsi:type="RootNode">
+    <Id>690a6f4c-deb0-4212-974e-1690f4a8eeca</Id>
+    <DisplayName />
+    <Children>
+      <ActivityNode xsi:type="StartProcessNode">
+        <Id>86ecc29f-13b3-4d46-bf5d-8f58727944fc</Id>
+        <DisplayName>Get Port Profiles</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>a7f5a704-80c2-401a-8dc2-1b04c0c42647</Id>
+            <ProcessNodeId>86ecc29f-13b3-4d46-bf5d-8f58727944fc</ProcessNodeId>
+            <CompletedId>73622d2a-fa6b-40c7-a5fb-c5713ef634d1</CompletedId>
+          </ActivityNode>
+        </Children>
+        <ProcessId>44e5d254-f20e-468e-9bc9-966e92e6cc4f</ProcessId>
+        <InputVariableTable>
+          <VariableAssignmentsAsArray />
+        </InputVariableTable>
+        <Asynchronous>false</Asynchronous>
+        <InheritTarget>true</InheritTarget>
+        <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+        <InheritPriorityClass>true</InheritPriorityClass>
+        <RuntimeUserId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </RuntimeUserId>
+        <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+        <StartPointId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </StartPointId>
+        <StartPointName>
+          <FormattedCode />
+        </StartPointName>
+      </ActivityNode>
+      <ActivityNode xsi:type="ParallelNode">
+        <Id>7f33ddaa-26d5-4af0-b59a-f7db0652384a</Id>
+        <DisplayName>Parallel Block</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="SequenceNode">
+            <Id>a35c71c6-fe0f-4429-85dc-6382d0175af6</Id>
+            <DisplayName>Sequential Block</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ForEachNode">
+                <Id>9aebfbba-3f55-48b4-a48e-dbf4ce7981ea</Id>
+                <DisplayName>For Each Port Profile</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="ExecuteActivityNode">
+                    <Id>1cee96e0-22df-4c88-a783-fe4f00846676</Id>
+                    <DisplayName>Replace Switchport Access</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                        <Id>580c5828-3d55-47ac-af4e-14cca7279829</Id>
+                        <ActivityNodeId>1cee96e0-22df-4c88-a783-fe4f00846676</ActivityNodeId>
+                        <CompletedId>5c7e2026-17cb-42bb-adff-081679471112</CompletedId>
+                      </ActivityNode>
+                    </Children>
+                    <Configuration xsi:type="ReplaceStringActivityConfiguration" xml:space="preserve">
+                      <Id>1cee96e0-22df-4c88-a783-fe4f00846676</Id>
+                      <DisplayName>Replace Switchport Access</DisplayName>
+                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                        <SingleTargetId>
+                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                        </SingleTargetId>
+                      </TargetLoadBalancer>
+                      <InheritTarget>false</InheritTarget>
+                      <ContainingProcessId>1795116c-97f0-4dfc-939b-634f3ded46af</ContainingProcessId>
+                      <InputString>
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.For Each Port Profile.Item.switchport</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>switchport</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>9aebfbba-3f55-48b4-a48e-dbf4ce7981ea</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </InputString>
+                      <ReplaceList>
+                        <SubstitutableRepaceItem>
+                          <ReplacedString>
+                            <HardcodedValue>switchport access </HardcodedValue>
+                          </ReplacedString>
+                          <ReplacementString>
+                            <HardcodedValue />
+                          </ReplacementString>
+                        </SubstitutableRepaceItem>
+                      </ReplaceList>
+                    </Configuration>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="SwitchNode">
+                    <Id>95d292cf-5764-42bc-ae8e-90991db86b36</Id>
+                    <DisplayName>Condition Block</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ConditionBranchNode">
+                        <Id>68c0ce60-4062-4f3e-8c5d-610d9976fb0d</Id>
+                        <DisplayName>If using VXLAN</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="ExecuteActivityNode">
+                            <Id>166f7a49-15de-4365-a08a-a37d5c48a6e6</Id>
+                            <DisplayName>Replace bridge-domain</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                <Id>763f51c9-45f5-4fb6-b665-77d366b5cd4c</Id>
+                                <ActivityNodeId>166f7a49-15de-4365-a08a-a37d5c48a6e6</ActivityNodeId>
+                                <CompletedId>445c61dc-76ae-45e8-9f12-b42825404836</CompletedId>
+                              </ActivityNode>
+                            </Children>
+                            <Configuration xsi:type="ReplaceStringActivityConfiguration" xml:space="preserve">
+                              <Id>166f7a49-15de-4365-a08a-a37d5c48a6e6</Id>
+                              <DisplayName>Replace bridge-domain</DisplayName>
+                              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                <SingleTargetId>
+                                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                </SingleTargetId>
+                              </TargetLoadBalancer>
+                              <InheritTarget>false</InheritTarget>
+                              <ContainingProcessId>1795116c-97f0-4dfc-939b-634f3ded46af</ContainingProcessId>
+                              <InputString>
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Replace Switchport Access.Replaced Result</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>Result</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>1cee96e0-22df-4c88-a783-fe4f00846676</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </InputString>
+                              <ReplaceList>
+                                <SubstitutableRepaceItem>
+                                  <ReplacedString>
+                                    <HardcodedValue>bridge-domain </HardcodedValue>
+                                  </ReplacedString>
+                                  <ReplacementString>
+                                    <HardcodedValue />
+                                  </ReplacementString>
+                                </SubstitutableRepaceItem>
+                              </ReplaceList>
+                            </Configuration>
+                          </ActivityNode>
+                          <ActivityNode xsi:type="ExecuteActivityNode">
+                            <Id>bb0b8c6f-a41d-4df6-9481-db438a8dc215</Id>
+                            <DisplayName>Add Row to PP Table</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                <Id>580ee9db-1af6-491f-b7d4-b0686bf16d6f</Id>
+                                <ActivityNodeId>bb0b8c6f-a41d-4df6-9481-db438a8dc215</ActivityNodeId>
+                                <CompletedId>98b9e2d1-97f2-4fa5-b961-75bf4cd0acab</CompletedId>
+                              </ActivityNode>
+                            </Children>
+                            <Configuration xsi:type="AddTableRowActivityConfiguration" xml:space="preserve">
+                              <Id>bb0b8c6f-a41d-4df6-9481-db438a8dc215</Id>
+                              <DisplayName>Add Row to PP Table</DisplayName>
+                              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                <SingleTargetId>
+                                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                </SingleTargetId>
+                              </TargetLoadBalancer>
+                              <InheritTarget>false</InheritTarget>
+                              <ContainingProcessId>1795116c-97f0-4dfc-939b-634f3ded46af</ContainingProcessId>
+                              <TableVariable>
+                                <DisplayPath>Process.Variables.Local.PortProfiles</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>68f5a8e2-1eda-46dd-948e-29ff4ab31058</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </TableVariable>
+                              <Values>
+                                <BuiltinDataCellValue>
+                                  <ColumnName>MaxPorts</ColumnName>
+                                  <Value xsi:type="SubstitutableNumber">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.For Each Port Profile.Item.max_ports</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>max_ports</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>9aebfbba-3f55-48b4-a48e-dbf4ce7981ea</ObjectId>
+                                        <ObjectType>ActivityInstance</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </Value>
+                                </BuiltinDataCellValue>
+                                <BuiltinDataCellValue>
+                                  <ColumnName>PlatformElementID</ColumnName>
+                                  <Value xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Target.Target Id</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>ResolvedTarget</PropertyName>
+                                          </Link>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>Id</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectType>ProcessInstance</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </Value>
+                                </BuiltinDataCellValue>
+                                <BuiltinDataCellValue>
+                                  <ColumnName>PortgroupName</ColumnName>
+                                  <Value xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.For Each Port Profile.Item.portgrp</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>portgrp</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>9aebfbba-3f55-48b4-a48e-dbf4ce7981ea</ObjectId>
+                                        <ObjectType>ActivityInstance</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </Value>
+                                </BuiltinDataCellValue>
+                                <BuiltinDataCellValue>
+                                  <ColumnName>PortProfileName</ColumnName>
+                                  <Value xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.For Each Port Profile.Item.profile_name</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>profile_name</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>9aebfbba-3f55-48b4-a48e-dbf4ce7981ea</ObjectId>
+                                        <ObjectType>ActivityInstance</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </Value>
+                                </BuiltinDataCellValue>
+                                <BuiltinDataCellValue>
+                                  <ColumnName>PortProfileType</ColumnName>
+                                  <Value xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.For Each Port Profile.Item.type</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>type</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>9aebfbba-3f55-48b4-a48e-dbf4ce7981ea</ObjectId>
+                                        <ObjectType>ActivityInstance</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </Value>
+                                </BuiltinDataCellValue>
+                                <BuiltinDataCellValue>
+                                  <ColumnName>SwitchMode</ColumnName>
+                                  <Value xsi:type="SubstitutableString">
+                                    <HardcodedValue>access</HardcodedValue>
+                                  </Value>
+                                </BuiltinDataCellValue>
+                                <BuiltinDataCellValue>
+                                  <ColumnName>UniqueID</ColumnName>
+                                  <Value xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}:{1}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Target.Target Id</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>ResolvedTarget</PropertyName>
+                                          </Link>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>Id</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectType>ProcessInstance</ObjectType>
+                                      </VariableReference>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.For Each Port Profile.Item.profile_name</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>profile_name</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>9aebfbba-3f55-48b4-a48e-dbf4ce7981ea</ObjectId>
+                                        <ObjectType>ActivityInstance</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </Value>
+                                </BuiltinDataCellValue>
+                                <BuiltinDataCellValue>
+                                  <ColumnName>VLANID</ColumnName>
+                                  <Value xsi:type="SubstitutableNumber">
+                                    <HardcodedValue>0</HardcodedValue>
+                                  </Value>
+                                </BuiltinDataCellValue>
+                              </Values>
+                            </Configuration>
+                          </ActivityNode>
+                        </Children>
+                        <Condition>
+                          <Id>b178edd4-f206-4b12-a3d3-57d0aa62d90a</Id>
+                          <Conditions>
+                            <ConditionDefinition xsi:type="VariableConditionDefinition">
+                              <Id>c24b2304-f351-4e49-91dc-1cb89592bfae</Id>
+                              <Expression xsi:type="SubstitutableWildcard">
+                                <HardcodedValue>bridge-domain*</HardcodedValue>
+                              </Expression>
+                              <Comparison>Wildcard</Comparison>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.Replace Switchport Access.Replaced Result</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>Result</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>1cee96e0-22df-4c88-a783-fe4f00846676</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </ConditionDefinition>
+                          </Conditions>
+                        </Condition>
+                      </ActivityNode>
+                      <ActivityNode xsi:type="ConditionBranchNode">
+                        <Id>f9fe3af9-9361-46ac-8c93-86d32e45f113</Id>
+                        <DisplayName>If using VLAN</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="ExecuteActivityNode">
+                            <Id>29cb187d-76f3-4fee-b6e0-66678cf9ba85</Id>
+                            <DisplayName>Replace vlan</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                <Id>cbb70bbb-1164-4974-bebc-8fab08a7164a</Id>
+                                <ActivityNodeId>29cb187d-76f3-4fee-b6e0-66678cf9ba85</ActivityNodeId>
+                                <CompletedId>76f7e1df-adb0-4cdd-a25f-877be554935b</CompletedId>
+                              </ActivityNode>
+                            </Children>
+                            <Configuration xsi:type="ReplaceStringActivityConfiguration" xml:space="preserve">
+                              <Id>29cb187d-76f3-4fee-b6e0-66678cf9ba85</Id>
+                              <DisplayName>Replace vlan</DisplayName>
+                              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                <SingleTargetId>
+                                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                </SingleTargetId>
+                              </TargetLoadBalancer>
+                              <InheritTarget>false</InheritTarget>
+                              <ContainingProcessId>1795116c-97f0-4dfc-939b-634f3ded46af</ContainingProcessId>
+                              <InputString>
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Replace Switchport Access.Replaced Result</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>Result</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>1cee96e0-22df-4c88-a783-fe4f00846676</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </InputString>
+                              <ReplaceList>
+                                <SubstitutableRepaceItem>
+                                  <ReplacedString>
+                                    <HardcodedValue>vlan </HardcodedValue>
+                                  </ReplacedString>
+                                  <ReplacementString>
+                                    <HardcodedValue />
+                                  </ReplacementString>
+                                </SubstitutableRepaceItem>
+                              </ReplaceList>
+                            </Configuration>
+                          </ActivityNode>
+                          <ActivityNode xsi:type="ExecuteActivityNode">
+                            <Id>46c10ab3-3a59-4959-bbaa-89a18869155b</Id>
+                            <DisplayName>Add Row to PP Table</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                <Id>5926f99e-edd1-4590-80c0-968e69862dfd</Id>
+                                <ActivityNodeId>46c10ab3-3a59-4959-bbaa-89a18869155b</ActivityNodeId>
+                                <CompletedId>82581aa0-27a1-41af-8679-d444a42a5905</CompletedId>
+                              </ActivityNode>
+                            </Children>
+                            <Configuration xsi:type="AddTableRowActivityConfiguration" xml:space="preserve">
+                              <Id>46c10ab3-3a59-4959-bbaa-89a18869155b</Id>
+                              <DisplayName>Add Row to PP Table</DisplayName>
+                              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                <SingleTargetId>
+                                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                </SingleTargetId>
+                              </TargetLoadBalancer>
+                              <InheritTarget>false</InheritTarget>
+                              <ContainingProcessId>1795116c-97f0-4dfc-939b-634f3ded46af</ContainingProcessId>
+                              <TableVariable>
+                                <DisplayPath>Process.Variables.Local.PortProfiles</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>68f5a8e2-1eda-46dd-948e-29ff4ab31058</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </TableVariable>
+                              <Values>
+                                <BuiltinDataCellValue>
+                                  <ColumnName>MaxPorts</ColumnName>
+                                  <Value xsi:type="SubstitutableNumber">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.For Each Port Profile.Item.max_ports</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>max_ports</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>9aebfbba-3f55-48b4-a48e-dbf4ce7981ea</ObjectId>
+                                        <ObjectType>ActivityInstance</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </Value>
+                                </BuiltinDataCellValue>
+                                <BuiltinDataCellValue>
+                                  <ColumnName>PlatformElementID</ColumnName>
+                                  <Value xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Target.Target Id</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>ResolvedTarget</PropertyName>
+                                          </Link>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>Id</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectType>ProcessInstance</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </Value>
+                                </BuiltinDataCellValue>
+                                <BuiltinDataCellValue>
+                                  <ColumnName>PortgroupName</ColumnName>
+                                  <Value xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.For Each Port Profile.Item.portgrp</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>portgrp</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>9aebfbba-3f55-48b4-a48e-dbf4ce7981ea</ObjectId>
+                                        <ObjectType>ActivityInstance</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </Value>
+                                </BuiltinDataCellValue>
+                                <BuiltinDataCellValue>
+                                  <ColumnName>PortProfileName</ColumnName>
+                                  <Value xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.For Each Port Profile.Item.profile_name</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>profile_name</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>9aebfbba-3f55-48b4-a48e-dbf4ce7981ea</ObjectId>
+                                        <ObjectType>ActivityInstance</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </Value>
+                                </BuiltinDataCellValue>
+                                <BuiltinDataCellValue>
+                                  <ColumnName>PortProfileType</ColumnName>
+                                  <Value xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.For Each Port Profile.Item.type</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>type</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>9aebfbba-3f55-48b4-a48e-dbf4ce7981ea</ObjectId>
+                                        <ObjectType>ActivityInstance</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </Value>
+                                </BuiltinDataCellValue>
+                                <BuiltinDataCellValue>
+                                  <ColumnName>SwitchMode</ColumnName>
+                                  <Value xsi:type="SubstitutableString">
+                                    <HardcodedValue>access</HardcodedValue>
+                                  </Value>
+                                </BuiltinDataCellValue>
+                                <BuiltinDataCellValue>
+                                  <ColumnName>UniqueID</ColumnName>
+                                  <Value xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}:{1}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Target.Target Id</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>ResolvedTarget</PropertyName>
+                                          </Link>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>Id</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectType>ProcessInstance</ObjectType>
+                                      </VariableReference>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.For Each Port Profile.Item.profile_name</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>profile_name</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>9aebfbba-3f55-48b4-a48e-dbf4ce7981ea</ObjectId>
+                                        <ObjectType>ActivityInstance</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </Value>
+                                </BuiltinDataCellValue>
+                                <BuiltinDataCellValue>
+                                  <ColumnName>VLANID</ColumnName>
+                                  <Value xsi:type="SubstitutableNumber">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.Replace vlan.Replaced Result</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>Result</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>29cb187d-76f3-4fee-b6e0-66678cf9ba85</ObjectId>
+                                        <ObjectType>ActivityInstance</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </Value>
+                                </BuiltinDataCellValue>
+                              </Values>
+                            </Configuration>
+                          </ActivityNode>
+                        </Children>
+                        <Condition>
+                          <Id>d9624e07-f722-4b0d-a489-b6015eec0c67</Id>
+                          <Conditions>
+                            <ConditionDefinition xsi:type="VariableConditionDefinition">
+                              <Id>fdb668c4-45ad-4418-b22a-c394e1b91d82</Id>
+                              <Expression xsi:type="SubstitutableWildcard">
+                                <HardcodedValue>vlan *</HardcodedValue>
+                              </Expression>
+                              <Comparison>Wildcard</Comparison>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.Replace Switchport Access.Replaced Result</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>Result</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>1cee96e0-22df-4c88-a783-fe4f00846676</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </ConditionDefinition>
+                          </Conditions>
+                        </Condition>
+                      </ActivityNode>
+                    </Children>
+                  </ActivityNode>
+                </Children>
+                <ForEachSource xsi:type="PropertyReference">
+                  <DisplayPath>Workflow.Get Port Profiles.Port Profiles.Rows</DisplayPath>
+                  <LinkChain>
+                    <Link xsi:type="ProcessOutputVariableLink">
+                      <LaunchingActivityId>86ecc29f-13b3-4d46-bf5d-8f58727944fc</LaunchingActivityId>
+                      <OutputVariableId>6c7179f2-7c61-4090-a547-d0f2897ac247</OutputVariableId>
+                    </Link>
+                    <Link xsi:type="PropertyNameLink">
+                      <PropertyName>TIARows</PropertyName>
+                    </Link>
+                  </LinkChain>
+                  <ObjectId>86ecc29f-13b3-4d46-bf5d-8f58727944fc</ObjectId>
+                  <ObjectType>WorkflowNode</ObjectType>
+                </ForEachSource>
+              </ActivityNode>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>eddcf2be-c55b-4ab3-96da-5aacafe72634</Id>
+                <DisplayName>Format PP Root Elements</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>ea0efcdb-8e5e-45c9-a6f2-d841e4a7cab1</Id>
+                    <ActivityNodeId>eddcf2be-c55b-4ab3-96da-5aacafe72634</ActivityNodeId>
+                    <CompletedId>528280af-6588-4b84-8046-96d3b5de7b58</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="ReplaceStringActivityConfiguration" xml:space="preserve">
+                  <Id>eddcf2be-c55b-4ab3-96da-5aacafe72634</Id>
+                  <DisplayName>Format PP Root Elements</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>1795116c-97f0-4dfc-939b-634f3ded46af</ContainingProcessId>
+                  <InputString>
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Variables.Local.PortProfiles.Table Data XML</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>TableDataXml</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>68f5a8e2-1eda-46dd-948e-29ff4ab31058</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </InputString>
+                  <ReplaceList>
+                    <SubstitutableRepaceItem>
+                      <ReplacedString>
+                        <HardcodedValue>Row&gt;</HardcodedValue>
+                      </ReplacedString>
+                      <ReplacementString>
+                        <HardcodedValue>row&gt;</HardcodedValue>
+                      </ReplacementString>
+                    </SubstitutableRepaceItem>
+                    <SubstitutableRepaceItem>
+                      <ReplacedString>
+                        <HardcodedValue>DocumentElement&gt;</HardcodedValue>
+                      </ReplacedString>
+                      <ReplacementString>
+                        <HardcodedValue>results&gt;</HardcodedValue>
+                      </ReplacementString>
+                    </SubstitutableRepaceItem>
+                    <SubstitutableRepaceItem>
+                      <ReplacedString>
+                        <HardcodedValue>DocumentElement /&gt;</HardcodedValue>
+                      </ReplacedString>
+                      <ReplacementString>
+                        <HardcodedValue>results /&gt;</HardcodedValue>
+                      </ReplacementString>
+                    </SubstitutableRepaceItem>
+                  </ReplaceList>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>1daee462-bd93-496c-ae5d-3a8819530b7f</Id>
+                <DisplayName>Set PP Data XML</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>7a66886d-172f-4dac-99f7-7c0cb0047d87</Id>
+                    <ActivityNodeId>1daee462-bd93-496c-ae5d-3a8819530b7f</ActivityNodeId>
+                    <CompletedId>5437e957-793f-40a5-9448-0304da79f5aa</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                  <Id>1daee462-bd93-496c-ae5d-3a8819530b7f</Id>
+                  <DisplayName>Set PP Data XML</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>1795116c-97f0-4dfc-939b-634f3ded46af</ContainingProcessId>
+                  <VariableToSet>
+                    <DisplayPath>Process.Variables.Output.PortProfiles Data XML</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>91a3715b-b8e1-4c75-b4c0-0fb0c5f9f088</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableToSet>
+                  <NewValue xsi:type="SubstitutableString">
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.Format PP Root Elements.Replaced Result</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>Result</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>eddcf2be-c55b-4ab3-96da-5aacafe72634</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </NewValue>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="StartProcessNode">
+                <Id>1a30b2dd-4061-49af-9c3a-7d040352cde6</Id>
+                <DisplayName>Update Service Item by Discovery Table XML - PP</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>9d7ff591-ab71-4e42-a275-98e8cdbe0f20</Id>
+                    <ProcessNodeId>1a30b2dd-4061-49af-9c3a-7d040352cde6</ProcessNodeId>
+                    <CompletedId>167be947-f0b2-48f5-a588-7050263a4732</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <ProcessId>c52eb259-cd26-48e9-935a-4745b7fd1d8a</ProcessId>
+                <InputVariableTable>
+                  <VariableAssignmentsAsArray>
+                    <InputVariableAssignment>
+                      <InputVariableId>d81fa286-b3be-4d3a-ab70-9eb21ed667af</InputVariableId>
+                      <VariableValue xsi:type="SubstitutableBoolean">
+                        <HardcodedValue>false</HardcodedValue>
+                      </VariableValue>
+                    </InputVariableAssignment>
+                    <InputVariableAssignment>
+                      <InputVariableId>f13a2610-769d-4fe1-a7f4-ff1c342fab1b</InputVariableId>
+                      <VariableValue xsi:type="SubstitutableString">
+                        <HardcodedValue />
+                      </VariableValue>
+                    </InputVariableAssignment>
+                    <InputVariableAssignment>
+                      <InputVariableId>bccd18cf-51a4-4333-be71-44151b6638d4</InputVariableId>
+                      <VariableValue xsi:type="SubstitutableString">
+                        <HardcodedValue />
+                      </VariableValue>
+                    </InputVariableAssignment>
+                    <InputVariableAssignment>
+                      <InputVariableId>06b6e6f8-6bac-4098-bf02-bf4fafc371e7</InputVariableId>
+                      <VariableValue xsi:type="SubstitutableString">
+                        <HardcodedValue />
+                      </VariableValue>
+                    </InputVariableAssignment>
+                    <InputVariableAssignment>
+                      <InputVariableId>7655509d-3465-451d-921b-83bd3b611cab</InputVariableId>
+                      <VariableValue xsi:type="SubstitutableString">
+                        <HardcodedValue />
+                      </VariableValue>
+                    </InputVariableAssignment>
+                    <InputVariableAssignment>
+                      <InputVariableId>18e8725d-e57d-4ba3-a5ea-5ef62fe6d5c7</InputVariableId>
+                      <VariableValue xsi:type="SubstitutableString">
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Target.Target Id</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResolvedTarget</PropertyName>
+                              </Link>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>Id</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectType>ProcessInstance</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </VariableValue>
+                    </InputVariableAssignment>
+                    <InputVariableAssignment>
+                      <InputVariableId>e75ff706-8f8f-4579-afb4-f904a5771853</InputVariableId>
+                      <VariableValue xsi:type="SubstitutableString">
+                        <HardcodedValue>PlatformElementID</HardcodedValue>
+                      </VariableValue>
+                    </InputVariableAssignment>
+                    <InputVariableAssignment>
+                      <InputVariableId>af9d0c3d-3681-4268-a191-86763cd8d44e</InputVariableId>
+                      <VariableValue xsi:type="SubstitutableBoolean">
+                        <HardcodedValue>true</HardcodedValue>
+                      </VariableValue>
+                    </InputVariableAssignment>
+                    <InputVariableAssignment>
+                      <InputVariableId>f95a1ec5-7848-490f-af58-a8eac6bd47cb</InputVariableId>
+                      <VariableValue xsi:type="SubstitutableBoolean">
+                        <HardcodedValue>false</HardcodedValue>
+                      </VariableValue>
+                    </InputVariableAssignment>
+                    <InputVariableAssignment>
+                      <InputVariableId>9b98fd25-dca2-4384-8e79-8aa0251b1dd8</InputVariableId>
+                      <VariableValue xsi:type="SubstitutableString">
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Output.PortProfiles Data XML</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>91a3715b-b8e1-4c75-b4c0-0fb0c5f9f088</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </VariableValue>
+                    </InputVariableAssignment>
+                    <InputVariableAssignment>
+                      <InputVariableId>194e6469-ba18-4214-968c-bf937ccee274</InputVariableId>
+                      <VariableValue xsi:type="SubstitutableString">
+                        <HardcodedValue>Nexus1000VPortProfile</HardcodedValue>
+                      </VariableValue>
+                    </InputVariableAssignment>
+                  </VariableAssignmentsAsArray>
+                </InputVariableTable>
+                <Asynchronous>false</Asynchronous>
+                <InheritTarget>false</InheritTarget>
+                <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                  <SingleTargetReference>
+                    <FormattedCode />
+                    <HardcodedValue>
+                      <Id>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</Id>
+                      <ObjectType>Target</ObjectType>
+                    </HardcodedValue>
+                  </SingleTargetReference>
+                </TargetLoadBalancer>
+                <InheritPriorityClass>true</InheritPriorityClass>
+                <RuntimeUserId>
+                  <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                </RuntimeUserId>
+                <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                <StartPointId>
+                  <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                </StartPointId>
+                <StartPointName>
+                  <FormattedCode />
+                </StartPointName>
+              </ActivityNode>
+            </Children>
+          </ActivityNode>
+          <ActivityNode xsi:type="SequenceNode">
+            <Id>eae263f0-20b0-4fd2-9773-50dd268fb690</Id>
+            <DisplayName>Sequential Block</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="StartProcessNode">
+                <Id>996a7617-f25e-4f87-a8b7-2675ec868255</Id>
+                <DisplayName>Get VEM Detailed Information</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>726535cf-2c46-4ed6-9011-6bbb465399d6</Id>
+                    <ProcessNodeId>996a7617-f25e-4f87-a8b7-2675ec868255</ProcessNodeId>
+                    <CompletedId>7f43772b-e1fa-49a7-abc2-eefedadd8573</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <ProcessId>cfc7ae19-6585-4bfb-bdf9-f84bfdc8022e</ProcessId>
+                <InputVariableTable>
+                  <VariableAssignmentsAsArray />
+                </InputVariableTable>
+                <Asynchronous>false</Asynchronous>
+                <InheritTarget>true</InheritTarget>
+                <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+                <InheritPriorityClass>true</InheritPriorityClass>
+                <RuntimeUserId>
+                  <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                </RuntimeUserId>
+                <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                <StartPointId>
+                  <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                </StartPointId>
+                <StartPointName>
+                  <FormattedCode />
+                </StartPointName>
+              </ActivityNode>
+              <ActivityNode xsi:type="ForEachNode">
+                <Id>ad6aac2c-dd92-4998-be1a-e1dfec4312cb</Id>
+                <DisplayName>For Each VEM</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="ExecuteActivityNode">
+                    <Id>82ef7f8a-1638-408d-83f4-4a9b83f6a151</Id>
+                    <DisplayName>Add Row to VEMs Table</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                        <Id>bda68f98-0004-4b06-8851-6f1d97f8e4f9</Id>
+                        <ActivityNodeId>82ef7f8a-1638-408d-83f4-4a9b83f6a151</ActivityNodeId>
+                        <CompletedId>280e434c-5468-4322-9ad7-8bce93bf18e6</CompletedId>
+                      </ActivityNode>
+                    </Children>
+                    <Configuration xsi:type="AddTableRowActivityConfiguration" xml:space="preserve">
+                      <Id>82ef7f8a-1638-408d-83f4-4a9b83f6a151</Id>
+                      <DisplayName>Add Row to VEMs Table</DisplayName>
+                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                        <SingleTargetId>
+                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                        </SingleTargetId>
+                      </TargetLoadBalancer>
+                      <InheritTarget>false</InheritTarget>
+                      <ContainingProcessId>1795116c-97f0-4dfc-939b-634f3ded46af</ContainingProcessId>
+                      <TableVariable>
+                        <DisplayPath>Process.Variables.Local.VEMs</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>21b2a1de-d521-4709-a747-9e6f1b90f7ae</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </TableVariable>
+                      <Values>
+                        <BuiltinDataCellValue>
+                          <ColumnName>UniqueID</ColumnName>
+                          <Value xsi:type="SubstitutableString">
+                            <FormattedCode>{0}:{1}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Target.Target Id</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>ResolvedTarget</PropertyName>
+                                  </Link>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>Id</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectType>ProcessInstance</ObjectType>
+                              </VariableReference>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.For Each VEM.Item.UUID</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>UUID</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>ad6aac2c-dd92-4998-be1a-e1dfec4312cb</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </Value>
+                        </BuiltinDataCellValue>
+                        <BuiltinDataCellValue>
+                          <ColumnName>VEMUuid</ColumnName>
+                          <Value xsi:type="SubstitutableString">
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.For Each VEM.Item.UUID</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>UUID</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>ad6aac2c-dd92-4998-be1a-e1dfec4312cb</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </Value>
+                        </BuiltinDataCellValue>
+                        <BuiltinDataCellValue>
+                          <ColumnName>VSMPlatformElementID</ColumnName>
+                          <Value xsi:type="SubstitutableString">
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Target.Target Id</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>ResolvedTarget</PropertyName>
+                                  </Link>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>Id</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectType>ProcessInstance</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </Value>
+                        </BuiltinDataCellValue>
+                      </Values>
+                    </Configuration>
+                  </ActivityNode>
+                </Children>
+                <ForEachSource xsi:type="PropertyReference">
+                  <DisplayPath>Workflow.Get VEM Detailed Information.Virtual Ethernet Modules.Rows</DisplayPath>
+                  <LinkChain>
+                    <Link xsi:type="ProcessOutputVariableLink">
+                      <LaunchingActivityId>996a7617-f25e-4f87-a8b7-2675ec868255</LaunchingActivityId>
+                      <OutputVariableId>708aaca0-0848-4a69-b601-bc845f9a7433</OutputVariableId>
+                    </Link>
+                    <Link xsi:type="PropertyNameLink">
+                      <PropertyName>TIARows</PropertyName>
+                    </Link>
+                  </LinkChain>
+                  <ObjectId>996a7617-f25e-4f87-a8b7-2675ec868255</ObjectId>
+                  <ObjectType>WorkflowNode</ObjectType>
+                </ForEachSource>
+              </ActivityNode>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>45961a3c-f6a5-441a-b993-b85dab9c4efc</Id>
+                <DisplayName>Format VEM Root Elements</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>67854d4a-13df-4784-8dde-e2fd14f5d193</Id>
+                    <ActivityNodeId>45961a3c-f6a5-441a-b993-b85dab9c4efc</ActivityNodeId>
+                    <CompletedId>b6b00e49-230c-4e64-aca3-6718b478b4f9</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="ReplaceStringActivityConfiguration" xml:space="preserve">
+                  <Id>45961a3c-f6a5-441a-b993-b85dab9c4efc</Id>
+                  <DisplayName>Format VEM Root Elements</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>1795116c-97f0-4dfc-939b-634f3ded46af</ContainingProcessId>
+                  <InputString>
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Variables.Local.VEMs.Table Data XML</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>TableDataXml</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>21b2a1de-d521-4709-a747-9e6f1b90f7ae</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </InputString>
+                  <ReplaceList>
+                    <SubstitutableRepaceItem>
+                      <ReplacedString>
+                        <HardcodedValue>Row&gt;</HardcodedValue>
+                      </ReplacedString>
+                      <ReplacementString>
+                        <HardcodedValue>row&gt;</HardcodedValue>
+                      </ReplacementString>
+                    </SubstitutableRepaceItem>
+                    <SubstitutableRepaceItem>
+                      <ReplacedString>
+                        <HardcodedValue>DocumentElement&gt;</HardcodedValue>
+                      </ReplacedString>
+                      <ReplacementString>
+                        <HardcodedValue>results&gt;</HardcodedValue>
+                      </ReplacementString>
+                    </SubstitutableRepaceItem>
+                    <SubstitutableRepaceItem>
+                      <ReplacedString>
+                        <HardcodedValue>DocumentElement /&gt;</HardcodedValue>
+                      </ReplacedString>
+                      <ReplacementString>
+                        <HardcodedValue>results /&gt;</HardcodedValue>
+                      </ReplacementString>
+                    </SubstitutableRepaceItem>
+                  </ReplaceList>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>ffc906aa-af0e-4cd2-9b54-d6e675e00f5f</Id>
+                <DisplayName>Set VEMs Data XML</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>c870bc79-7f58-485b-8bec-b572f0a2b9b0</Id>
+                    <ActivityNodeId>ffc906aa-af0e-4cd2-9b54-d6e675e00f5f</ActivityNodeId>
+                    <CompletedId>4d8ebb61-7806-4c63-878a-7484d16ac8df</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                  <Id>ffc906aa-af0e-4cd2-9b54-d6e675e00f5f</Id>
+                  <DisplayName>Set VEMs Data XML</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>1795116c-97f0-4dfc-939b-634f3ded46af</ContainingProcessId>
+                  <VariableToSet>
+                    <DisplayPath>Process.Variables.Local.VEMs Working XML</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>51017d92-358b-424b-85c3-ca8eb8bf53c5</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableToSet>
+                  <NewValue xsi:type="SubstitutableString">
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.Format VEM Root Elements.Replaced Result</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>Result</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>45961a3c-f6a5-441a-b993-b85dab9c4efc</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </NewValue>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="StartProcessNode">
+                <Id>ed581b75-3761-414c-9403-f9fef743886f</Id>
+                <DisplayName>Update Service Item by Discovery Table XML - VEM</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>4d1f55f1-769b-4ed9-a98d-d20c1ecc3238</Id>
+                    <ProcessNodeId>ed581b75-3761-414c-9403-f9fef743886f</ProcessNodeId>
+                    <CompletedId>cf30854f-2415-4f3f-a4f2-947af3f77d94</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <ProcessId>c52eb259-cd26-48e9-935a-4745b7fd1d8a</ProcessId>
+                <InputVariableTable>
+                  <VariableAssignmentsAsArray>
+                    <InputVariableAssignment>
+                      <InputVariableId>d81fa286-b3be-4d3a-ab70-9eb21ed667af</InputVariableId>
+                      <VariableValue xsi:type="SubstitutableBoolean">
+                        <HardcodedValue>false</HardcodedValue>
+                      </VariableValue>
+                    </InputVariableAssignment>
+                    <InputVariableAssignment>
+                      <InputVariableId>f13a2610-769d-4fe1-a7f4-ff1c342fab1b</InputVariableId>
+                      <VariableValue xsi:type="SubstitutableString">
+                        <HardcodedValue />
+                      </VariableValue>
+                    </InputVariableAssignment>
+                    <InputVariableAssignment>
+                      <InputVariableId>bccd18cf-51a4-4333-be71-44151b6638d4</InputVariableId>
+                      <VariableValue xsi:type="SubstitutableString">
+                        <HardcodedValue />
+                      </VariableValue>
+                    </InputVariableAssignment>
+                    <InputVariableAssignment>
+                      <InputVariableId>06b6e6f8-6bac-4098-bf02-bf4fafc371e7</InputVariableId>
+                      <VariableValue xsi:type="SubstitutableString">
+                        <HardcodedValue />
+                      </VariableValue>
+                    </InputVariableAssignment>
+                    <InputVariableAssignment>
+                      <InputVariableId>7655509d-3465-451d-921b-83bd3b611cab</InputVariableId>
+                      <VariableValue xsi:type="SubstitutableString">
+                        <HardcodedValue />
+                      </VariableValue>
+                    </InputVariableAssignment>
+                    <InputVariableAssignment>
+                      <InputVariableId>18e8725d-e57d-4ba3-a5ea-5ef62fe6d5c7</InputVariableId>
+                      <VariableValue xsi:type="SubstitutableString">
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Target.Target Id</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResolvedTarget</PropertyName>
+                              </Link>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>Id</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectType>ProcessInstance</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </VariableValue>
+                    </InputVariableAssignment>
+                    <InputVariableAssignment>
+                      <InputVariableId>e75ff706-8f8f-4579-afb4-f904a5771853</InputVariableId>
+                      <VariableValue xsi:type="SubstitutableString">
+                        <HardcodedValue>VSMPlatformElementID</HardcodedValue>
+                      </VariableValue>
+                    </InputVariableAssignment>
+                    <InputVariableAssignment>
+                      <InputVariableId>af9d0c3d-3681-4268-a191-86763cd8d44e</InputVariableId>
+                      <VariableValue xsi:type="SubstitutableBoolean">
+                        <HardcodedValue>true</HardcodedValue>
+                      </VariableValue>
+                    </InputVariableAssignment>
+                    <InputVariableAssignment>
+                      <InputVariableId>f95a1ec5-7848-490f-af58-a8eac6bd47cb</InputVariableId>
+                      <VariableValue xsi:type="SubstitutableBoolean">
+                        <HardcodedValue>false</HardcodedValue>
+                      </VariableValue>
+                    </InputVariableAssignment>
+                    <InputVariableAssignment>
+                      <InputVariableId>9b98fd25-dca2-4384-8e79-8aa0251b1dd8</InputVariableId>
+                      <VariableValue xsi:type="SubstitutableString">
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Output.VEMs Data XML</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>51017d92-358b-424b-85c3-ca8eb8bf53c5</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </VariableValue>
+                    </InputVariableAssignment>
+                    <InputVariableAssignment>
+                      <InputVariableId>194e6469-ba18-4214-968c-bf937ccee274</InputVariableId>
+                      <VariableValue xsi:type="SubstitutableString">
+                        <HardcodedValue>Nexus1000vVEM</HardcodedValue>
+                      </VariableValue>
+                    </InputVariableAssignment>
+                  </VariableAssignmentsAsArray>
+                </InputVariableTable>
+                <Asynchronous>false</Asynchronous>
+                <InheritTarget>false</InheritTarget>
+                <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                  <SingleTargetReference>
+                    <FormattedCode />
+                    <HardcodedValue>
+                      <Id>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</Id>
+                      <ObjectType>Target</ObjectType>
+                    </HardcodedValue>
+                  </SingleTargetReference>
+                </TargetLoadBalancer>
+                <InheritPriorityClass>true</InheritPriorityClass>
+                <RuntimeUserId>
+                  <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                </RuntimeUserId>
+                <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                <StartPointId>
+                  <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                </StartPointId>
+                <StartPointName>
+                  <FormattedCode />
+                </StartPointName>
+              </ActivityNode>
+            </Children>
+          </ActivityNode>
+        </Children>
+      </ActivityNode>
+      <ActivityNode xsi:type="ParallelNode">
+        <Id>f3915940-4b1b-42b2-b195-deb3012f5528</Id>
+        <DisplayName>Handle SI Tables</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="SequenceNode">
+            <Id>d7238ce8-ee98-49f8-818c-f9a22c7a1339</Id>
+            <DisplayName>Create PP SIs </DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ConditionBranchNode">
+                <Id>044398db-ce58-489e-bd58-028f528b7a6d</Id>
+                <DisplayName>If SIs to Create </DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="ExecuteActivityNode">
+                    <Id>fa125536-87a4-44c2-9068-b8563e48d43b</Id>
+                    <DisplayName>Read PP Table from XML - Create</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                        <Id>d5b08bf9-3d56-4914-ad6b-536d1c4c1136</Id>
+                        <ActivityNodeId>fa125536-87a4-44c2-9068-b8563e48d43b</ActivityNodeId>
+                        <CompletedId>65043c68-86aa-4e1c-a7c2-c04dec7faf31</CompletedId>
+                      </ActivityNode>
+                    </Children>
+                    <Configuration xsi:type="ReadTableFromXmlActivityConfiguration" xml:space="preserve">
+                      <Id>fa125536-87a4-44c2-9068-b8563e48d43b</Id>
+                      <DisplayName>Read PP Table from XML - Create</DisplayName>
+                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                        <SingleTargetId>
+                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                        </SingleTargetId>
+                      </TargetLoadBalancer>
+                      <InheritTarget>false</InheritTarget>
+                      <ContainingProcessId>1795116c-97f0-4dfc-939b-634f3ded46af</ContainingProcessId>
+                      <Columns>
+                        <BuiltinTableColumn>
+                          <Name>PortProfileName</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>PortProfileType</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>PortgroupName</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>MaxPorts</Name>
+                          <DataType>System.Int32</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>VLANID</Name>
+                          <DataType>System.Int32</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>SwitchMode</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>PlatformElementID</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>UniqueID</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                      </Columns>
+                      <XmlRowElementName>
+                        <HardcodedValue>row</HardcodedValue>
+                      </XmlRowElementName>
+                      <XmlString>
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.Update Service Item by Discovery Table XML - PP.Create Record Set (Table XML)</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="ProcessOutputVariableLink">
+                                <LaunchingActivityId>1a30b2dd-4061-49af-9c3a-7d040352cde6</LaunchingActivityId>
+                                <OutputVariableId>4a286f6d-5629-4ac4-a4f0-a6dbd3c9332a</OutputVariableId>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>1a30b2dd-4061-49af-9c3a-7d040352cde6</ObjectId>
+                            <ObjectType>WorkflowNode</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </XmlString>
+                    </Configuration>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="ForEachNode">
+                    <Id>9a0f3b4c-34aa-412f-b2a2-a42964279462</Id>
+                    <DisplayName>For Each New PortProfile</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ExecuteActivityNode">
+                        <Id>ceb98efc-eafb-4fe1-96c3-425cb83dd950</Id>
+                        <DisplayName>Add Row to Table</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                            <Id>94174d5e-a476-4a74-9e29-f2af0ac6d87e</Id>
+                            <ActivityNodeId>ceb98efc-eafb-4fe1-96c3-425cb83dd950</ActivityNodeId>
+                            <CompletedId>780e267e-8bd1-422f-b49f-96ef377de2c6</CompletedId>
+                          </ActivityNode>
+                        </Children>
+                        <Configuration xsi:type="AddTableRowActivityConfiguration" xml:space="preserve">
+                          <Id>ceb98efc-eafb-4fe1-96c3-425cb83dd950</Id>
+                          <DisplayName>Add Row to Table</DisplayName>
+                          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                            <SingleTargetId>
+                              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                            </SingleTargetId>
+                          </TargetLoadBalancer>
+                          <InheritTarget>false</InheritTarget>
+                          <ContainingProcessId>1795116c-97f0-4dfc-939b-634f3ded46af</ContainingProcessId>
+                          <TableVariable>
+                            <DisplayPath>Process.Variables.Local.Create PortProfiles</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>eb91a2fa-46b0-4b7d-8700-ed6a1883ee3d</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </TableVariable>
+                          <Values>
+                            <BuiltinDataCellValue>
+                              <ColumnName>MaxPorts</ColumnName>
+                              <Value xsi:type="SubstitutableNumber">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.For Each New PortProfile.Item.MaxPorts</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>MaxPorts</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>9a0f3b4c-34aa-412f-b2a2-a42964279462</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>Name</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}{1}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Process.Process Instance Id</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>Id</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectType>ProcessInstance</ObjectType>
+                                  </VariableReference>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Process.Variables.Local.PPGUIDCount</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>f2157f59-5368-4b73-a239-94920e19ec32</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>PlatformElementID</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.For Each New PortProfile.Item.PlatformElementID</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>PlatformElementID</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>9a0f3b4c-34aa-412f-b2a2-a42964279462</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>PortgroupName</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.For Each New PortProfile.Item.PortgroupName</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>PortgroupName</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>9a0f3b4c-34aa-412f-b2a2-a42964279462</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>PortProfileName</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.For Each New PortProfile.Item.PortProfileName</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>PortProfileName</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>9a0f3b4c-34aa-412f-b2a2-a42964279462</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>PortProfileType</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.For Each New PortProfile.Item.PortProfileType</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>PortProfileType</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>9a0f3b4c-34aa-412f-b2a2-a42964279462</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>SwitchMode</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.For Each New PortProfile.Item.SwitchMode</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>SwitchMode</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>9a0f3b4c-34aa-412f-b2a2-a42964279462</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>UniqueID</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.For Each New PortProfile.Item.UniqueID</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>UniqueID</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>9a0f3b4c-34aa-412f-b2a2-a42964279462</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>VLANID</ColumnName>
+                              <Value xsi:type="SubstitutableNumber">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.For Each New PortProfile.Item.VLANID</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>VLANID</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>9a0f3b4c-34aa-412f-b2a2-a42964279462</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                          </Values>
+                        </Configuration>
+                      </ActivityNode>
+                      <ActivityNode xsi:type="ExecuteActivityNode">
+                        <Id>bd1f9982-9904-4dd9-a88c-c063691b3310</Id>
+                        <DisplayName>Increment PPGUIDCount</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                            <Id>17e8b72f-5be8-4b86-915f-a1d471fd889a</Id>
+                            <ActivityNodeId>bd1f9982-9904-4dd9-a88c-c063691b3310</ActivityNodeId>
+                            <CompletedId>a96a31bc-d091-4441-901d-6914d4294861</CompletedId>
+                          </ActivityNode>
+                        </Children>
+                        <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                          <Id>bd1f9982-9904-4dd9-a88c-c063691b3310</Id>
+                          <DisplayName>Increment PPGUIDCount</DisplayName>
+                          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                            <SingleTargetId>
+                              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                            </SingleTargetId>
+                          </TargetLoadBalancer>
+                          <InheritTarget>false</InheritTarget>
+                          <ContainingProcessId>1795116c-97f0-4dfc-939b-634f3ded46af</ContainingProcessId>
+                          <VariableToSet>
+                            <DisplayPath>Process.Variables.Local.PPGUIDCount</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>f2157f59-5368-4b73-a239-94920e19ec32</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableToSet>
+                          <NewValue xsi:type="SubstitutableNumber">
+                            <FormattedCode>{0} + 1</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Variables.Local.PPGUIDCount</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>f2157f59-5368-4b73-a239-94920e19ec32</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </NewValue>
+                        </Configuration>
+                      </ActivityNode>
+                    </Children>
+                    <ForEachSource xsi:type="PropertyReference">
+                      <DisplayPath>Workflow.Read PP Table from XML - Create.Result Table.Rows</DisplayPath>
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>ResultTable</PropertyName>
+                        </Link>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>TIARows</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectId>fa125536-87a4-44c2-9068-b8563e48d43b</ObjectId>
+                      <ObjectType>ActivityInstance</ObjectType>
+                    </ForEachSource>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="ConditionBranchNode">
+                    <Id>790b50f6-dfee-430a-8553-719c94275cb7</Id>
+                    <DisplayName>Condition Branch</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ExecuteActivityNode">
+                        <Id>f02865b2-5fc6-47dc-a947-3764470bb217</Id>
+                        <DisplayName>Create PP Service Items</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="ConditionBranchNode">
+                            <Id>5cfb2066-c151-4865-8d93-29885677e2f9</Id>
+                            <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                            <DisplayName>If Execution Fails</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="ExecuteActivityNode">
+                                <Id>7fb89d57-8a30-4bea-ad03-375b7d24d40c</Id>
+                                <DisplayName>Failed to Create Service Items (1013)</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                    <Id>cf4520bd-9264-4b6f-8067-5900234173df</Id>
+                                    <ActivityNodeId>7fb89d57-8a30-4bea-ad03-375b7d24d40c</ActivityNodeId>
+                                    <CompletedId>530be15b-f769-4f3f-a402-00bfce33c288</CompletedId>
+                                  </ActivityNode>
+                                </Children>
+                                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                                  <Id>7fb89d57-8a30-4bea-ad03-375b7d24d40c</Id>
+                                  <DisplayName>Failed to Create Service Items (1013)</DisplayName>
+                                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                    <SingleTargetId>
+                                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                    </SingleTargetId>
+                                  </TargetLoadBalancer>
+                                  <InheritTarget>false</InheritTarget>
+                                  <ContainingProcessId>1795116c-97f0-4dfc-939b-634f3ded46af</ContainingProcessId>
+                                  <VariableToSet>
+                                    <DisplayPath>Process.Variables.Output.Error Code</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>fa3bf118-7d29-431a-86b0-3a4b44b4babc</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableToSet>
+                                  <NewValue xsi:type="SubstitutableNumber">
+                                    <HardcodedValue>1013</HardcodedValue>
+                                  </NewValue>
+                                </Configuration>
+                              </ActivityNode>
+                              <ActivityNode xsi:type="CompletedNode">
+                                <Id>8fdf5907-ed06-4673-9d4c-5e266c8dd364</Id>
+                                <Notes>Fail the entire process</Notes>
+                                <CompletedType>FailedNotCompleted</CompletedType>
+                                <ResultMessage>
+                                  <FormattedCode>Failed to Create Service Items:
+{0}</FormattedCode>
+                                  <References>
+                                    <VariableReference xsi:type="PropertyReference">
+                                      <DisplayPath>Workflow.Create PP Service Items.Error Information</DisplayPath>
+                                      <LinkChain>
+                                        <Link xsi:type="PropertyNameLink">
+                                          <PropertyName>ErrorInformation</PropertyName>
+                                        </Link>
+                                      </LinkChain>
+                                      <ObjectId>f02865b2-5fc6-47dc-a947-3764470bb217</ObjectId>
+                                      <ObjectType>ActivityInstance</ObjectType>
+                                    </VariableReference>
+                                  </References>
+                                </ResultMessage>
+                              </ActivityNode>
+                            </Children>
+                            <Condition>
+                              <Id>3b3ae837-abaa-4940-9b3b-a440aee6ec18</Id>
+                              <Conditions>
+                                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                                  <Id>0ce287dd-e697-4bcb-b2e9-b192e3ef176d</Id>
+                                  <Expression xsi:type="SubstitutableBoolean">
+                                    <HardcodedValue>true</HardcodedValue>
+                                  </Expression>
+                                  <Comparison>Equals</Comparison>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Create Service Items.Instance Failed</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>InstanceFailed</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>f02865b2-5fc6-47dc-a947-3764470bb217</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </ConditionDefinition>
+                              </Conditions>
+                            </Condition>
+                          </ActivityNode>
+                        </Children>
+                        <Configuration xsi:type="CreateServiceItemsFromTableActivityConfiguration" xml:space="preserve">
+                          <Id>f02865b2-5fc6-47dc-a947-3764470bb217</Id>
+                          <DisplayName>Create PP Service Items</DisplayName>
+                          <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                            <SingleTargetReference>
+                              <FormattedCode />
+                              <HardcodedValue>
+                                <Id>b3216113-bb0f-4cb3-b7c2-93b9074ef87b</Id>
+                                <ObjectType>Target</ObjectType>
+                              </HardcodedValue>
+                            </SingleTargetReference>
+                          </TargetLoadBalancer>
+                          <InheritTarget>false</InheritTarget>
+                          <ContainingProcessId>1795116c-97f0-4dfc-939b-634f3ded46af</ContainingProcessId>
+                          <RetryTimePeriod>
+                            <DisplayUnits>Minutes</DisplayUnits>
+                            <Period>
+                              <FormattedCode>{0}</FormattedCode>
+                              <References>
+                                <VariableReference xsi:type="PropertyReference">
+                                  <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Time Period (minutes)</DisplayPath>
+                                  <LinkChain>
+                                    <Link xsi:type="PropertyNameLink">
+                                      <PropertyName>DefaultRetryMinutes</PropertyName>
+                                    </Link>
+                                  </LinkChain>
+                                  <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                                  <ObjectType>Adapter</ObjectType>
+                                </VariableReference>
+                              </References>
+                            </Period>
+                          </RetryTimePeriod>
+                          <RetryFrequency>
+                            <DisplayUnits>Seconds</DisplayUnits>
+                            <Period>
+                              <FormattedCode>{0}</FormattedCode>
+                              <References>
+                                <VariableReference xsi:type="PropertyReference">
+                                  <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Frequency (seconds)</DisplayPath>
+                                  <LinkChain>
+                                    <Link xsi:type="PropertyNameLink">
+                                      <PropertyName>DefaultRetryFrequency</PropertyName>
+                                    </Link>
+                                  </LinkChain>
+                                  <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                                  <ObjectType>Adapter</ObjectType>
+                                </VariableReference>
+                              </References>
+                            </Period>
+                          </RetryFrequency>
+                          <Timeout>
+                            <DisplayUnits>Seconds</DisplayUnits>
+                            <Period>
+                              <HardcodedValue>100</HardcodedValue>
+                            </Period>
+                          </Timeout>
+                          <ChannelId>
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Variables.Input.Cloud Portal Channel ID</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>870624d6-2c5b-4eea-9944-99c1e67252e1</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </ChannelId>
+                          <ItemType>
+                            <HardcodedValue>Nexus1000VPortProfile</HardcodedValue>
+                          </ItemType>
+                          <Table>
+                            <DisplayPath>Process.Variables.Local.Create PortProfiles</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>eb91a2fa-46b0-4b7d-8700-ed6a1883ee3d</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </Table>
+                          <Subscriber>
+                            <HardcodedValue />
+                          </Subscriber>
+                          <SubscriberOuName>
+                            <HardcodedValue />
+                          </SubscriberOuName>
+                          <SubscriberRequisitionId>
+                            <FormattedCode />
+                          </SubscriberRequisitionId>
+                          <SubscriberRequisitionEntryId>
+                            <FormattedCode />
+                          </SubscriberRequisitionEntryId>
+                        </Configuration>
+                      </ActivityNode>
+                    </Children>
+                    <Condition>
+                      <Id>1aeb2ca8-02a6-414d-8d0c-bd59e69ad468</Id>
+                      <Conditions>
+                        <ConditionDefinition xsi:type="VariableConditionDefinition">
+                          <Id>76681fba-aebb-4b57-a807-7c556c4c1538</Id>
+                          <Expression xsi:type="SubstitutableNumber">
+                            <HardcodedValue>0</HardcodedValue>
+                          </Expression>
+                          <Comparison>GreaterThan</Comparison>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Local.Create PortProfiles.Row Count</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>RowCount</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>eb91a2fa-46b0-4b7d-8700-ed6a1883ee3d</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                        </ConditionDefinition>
+                      </Conditions>
+                    </Condition>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="StartProcessNode">
+                    <Id>fb2a7574-48dc-4f69-a9b1-04be16e70537</Id>
+                    <DisplayName>Create &gt;&gt; Post-Discovery</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                        <Id>77820312-52ab-460c-b6eb-916423877a8f</Id>
+                        <ProcessNodeId>fb2a7574-48dc-4f69-a9b1-04be16e70537</ProcessNodeId>
+                        <CompletedId>8fa99f40-7fd6-49fb-9226-0f94f25b1cdb</CompletedId>
+                      </ActivityNode>
+                    </Children>
+                    <ProcessId>bcc5059f-cc96-4265-8fed-fa53e2e82374</ProcessId>
+                    <InputVariableTable>
+                      <VariableAssignmentsAsArray />
+                    </InputVariableTable>
+                    <Asynchronous>false</Asynchronous>
+                    <InheritTarget>true</InheritTarget>
+                    <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+                    <InheritPriorityClass>true</InheritPriorityClass>
+                    <RuntimeUserId>
+                      <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                    </RuntimeUserId>
+                    <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                    <StartPointId>
+                      <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                    </StartPointId>
+                    <StartPointName>
+                      <FormattedCode />
+                    </StartPointName>
+                  </ActivityNode>
+                </Children>
+                <Condition>
+                  <Id>579a4ada-617c-4df0-be57-b9dba74c64a8</Id>
+                  <Conditions>
+                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                      <Id>9920a859-a4ed-459c-a22c-99b2a025b56c</Id>
+                      <Expression xsi:type="SubstitutableString">
+                        <HardcodedValue />
+                      </Expression>
+                      <Comparison>NotEquals</Comparison>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.Update Service Item by Discovery Table XML - PP.Create Record Set (Table XML)</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="ProcessOutputVariableLink">
+                            <LaunchingActivityId>1a30b2dd-4061-49af-9c3a-7d040352cde6</LaunchingActivityId>
+                            <OutputVariableId>4a286f6d-5629-4ac4-a4f0-a6dbd3c9332a</OutputVariableId>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>1a30b2dd-4061-49af-9c3a-7d040352cde6</ObjectId>
+                        <ObjectType>WorkflowNode</ObjectType>
+                      </VariableReference>
+                    </ConditionDefinition>
+                  </Conditions>
+                </Condition>
+              </ActivityNode>
+            </Children>
+          </ActivityNode>
+          <ActivityNode xsi:type="SequenceNode">
+            <Id>1fea4bc2-be6f-484d-bd2c-ca92b18a9ace</Id>
+            <DisplayName>Update PP SIs</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ConditionBranchNode">
+                <Id>2b3fbfd3-37df-44f4-bd02-8ebe36121fba</Id>
+                <DisplayName>If SIs to Update </DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="ExecuteActivityNode">
+                    <Id>26590c49-b591-406a-b35e-4fce469fce88</Id>
+                    <DisplayName>Read PP Table from XML - Update</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                        <Id>7a3b5f55-546f-4009-a45d-351d852c589e</Id>
+                        <ActivityNodeId>26590c49-b591-406a-b35e-4fce469fce88</ActivityNodeId>
+                        <CompletedId>35802a21-978b-45b3-9b3b-553ac9ed6ab7</CompletedId>
+                      </ActivityNode>
+                    </Children>
+                    <Configuration xsi:type="ReadTableFromXmlActivityConfiguration" xml:space="preserve">
+                      <Id>26590c49-b591-406a-b35e-4fce469fce88</Id>
+                      <DisplayName>Read PP Table from XML - Update</DisplayName>
+                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                        <SingleTargetId>
+                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                        </SingleTargetId>
+                      </TargetLoadBalancer>
+                      <InheritTarget>false</InheritTarget>
+                      <ContainingProcessId>1795116c-97f0-4dfc-939b-634f3ded46af</ContainingProcessId>
+                      <Columns>
+                        <BuiltinTableColumn>
+                          <Name>Name</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>PortProfileName</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>PortProfileType</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>PortgroupName</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>MaxPorts</Name>
+                          <DataType>System.Int32</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>VLANID</Name>
+                          <DataType>System.Int32</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>SwitchMode</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>PlatformElementID</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>UniqueID</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                      </Columns>
+                      <XmlRowElementName>
+                        <HardcodedValue>row</HardcodedValue>
+                      </XmlRowElementName>
+                      <XmlString>
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.Update Service Item by Discovery Table XML - PP.Update Record Set (Table XML)</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="ProcessOutputVariableLink">
+                                <LaunchingActivityId>1a30b2dd-4061-49af-9c3a-7d040352cde6</LaunchingActivityId>
+                                <OutputVariableId>38cd1186-aba2-4a56-ae91-52cd53bb67ff</OutputVariableId>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>1a30b2dd-4061-49af-9c3a-7d040352cde6</ObjectId>
+                            <ObjectType>WorkflowNode</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </XmlString>
+                    </Configuration>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="ConditionBranchNode">
+                    <Id>b3d98745-01e0-430f-b250-c8d3057b415a</Id>
+                    <DisplayName>If Records</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ExecuteActivityNode">
+                        <Id>6ab7e0e2-e09f-4e9a-8a9d-97779fb9c6ef</Id>
+                        <DisplayName>Update Service Items</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="ConditionBranchNode">
+                            <Id>36dd8dfb-177a-4c6b-888f-4ec0005e6bad</Id>
+                            <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                            <DisplayName>If Execution Fails</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="ExecuteActivityNode">
+                                <Id>e3a1101c-4cf2-479a-a749-610c902e51d7</Id>
+                                <DisplayName>Failed to Update Service Items (1014)</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                    <Id>610b1f02-cae8-4574-ba91-a29ac1e0791f</Id>
+                                    <ActivityNodeId>e3a1101c-4cf2-479a-a749-610c902e51d7</ActivityNodeId>
+                                    <CompletedId>4ca0bc5b-bc43-42dc-b5e0-966308218e82</CompletedId>
+                                  </ActivityNode>
+                                </Children>
+                                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                                  <Id>e3a1101c-4cf2-479a-a749-610c902e51d7</Id>
+                                  <DisplayName>Failed to Update Service Items (1014)</DisplayName>
+                                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                    <SingleTargetId>
+                                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                    </SingleTargetId>
+                                  </TargetLoadBalancer>
+                                  <InheritTarget>false</InheritTarget>
+                                  <ContainingProcessId>1795116c-97f0-4dfc-939b-634f3ded46af</ContainingProcessId>
+                                  <VariableToSet>
+                                    <DisplayPath>Process.Variables.Output.Error Code</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>fa3bf118-7d29-431a-86b0-3a4b44b4babc</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableToSet>
+                                  <NewValue xsi:type="SubstitutableNumber">
+                                    <HardcodedValue>1014</HardcodedValue>
+                                  </NewValue>
+                                </Configuration>
+                              </ActivityNode>
+                              <ActivityNode xsi:type="CompletedNode">
+                                <Id>189ed55c-2ea3-4bff-88a2-ec3de737e21e</Id>
+                                <Notes>Fail the entire process</Notes>
+                                <CompletedType>FailedNotCompleted</CompletedType>
+                                <ResultMessage>
+                                  <FormattedCode>Failed to Update Service Items:
+{0}</FormattedCode>
+                                  <References>
+                                    <VariableReference xsi:type="PropertyReference">
+                                      <DisplayPath>Workflow.Update Service Items.Error Information</DisplayPath>
+                                      <LinkChain>
+                                        <Link xsi:type="PropertyNameLink">
+                                          <PropertyName>ErrorInformation</PropertyName>
+                                        </Link>
+                                      </LinkChain>
+                                      <ObjectId>6ab7e0e2-e09f-4e9a-8a9d-97779fb9c6ef</ObjectId>
+                                      <ObjectType>ActivityInstance</ObjectType>
+                                    </VariableReference>
+                                  </References>
+                                </ResultMessage>
+                              </ActivityNode>
+                            </Children>
+                            <Condition>
+                              <Id>093faac9-17e4-446e-b4ea-c75aea2b2a26</Id>
+                              <Conditions>
+                                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                                  <Id>47c8c2a4-cd73-4f49-950b-a2360b087d19</Id>
+                                  <Expression xsi:type="SubstitutableBoolean">
+                                    <HardcodedValue>true</HardcodedValue>
+                                  </Expression>
+                                  <Comparison>Equals</Comparison>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Update Service Items.Instance Failed</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>InstanceFailed</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>6ab7e0e2-e09f-4e9a-8a9d-97779fb9c6ef</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </ConditionDefinition>
+                              </Conditions>
+                            </Condition>
+                          </ActivityNode>
+                        </Children>
+                        <Configuration xsi:type="UpdateServiceItemsFromTableActivityConfiguration" xml:space="preserve">
+                          <Id>6ab7e0e2-e09f-4e9a-8a9d-97779fb9c6ef</Id>
+                          <DisplayName>Update Service Items</DisplayName>
+                          <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                            <SingleTargetReference>
+                              <FormattedCode />
+                              <HardcodedValue>
+                                <Id>b3216113-bb0f-4cb3-b7c2-93b9074ef87b</Id>
+                                <ObjectType>Target</ObjectType>
+                              </HardcodedValue>
+                            </SingleTargetReference>
+                          </TargetLoadBalancer>
+                          <InheritTarget>false</InheritTarget>
+                          <ContainingProcessId>1795116c-97f0-4dfc-939b-634f3ded46af</ContainingProcessId>
+                          <RetryTimePeriod>
+                            <DisplayUnits>Minutes</DisplayUnits>
+                            <Period>
+                              <FormattedCode>{0}</FormattedCode>
+                              <References>
+                                <VariableReference xsi:type="PropertyReference">
+                                  <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Time Period (minutes)</DisplayPath>
+                                  <LinkChain>
+                                    <Link xsi:type="PropertyNameLink">
+                                      <PropertyName>DefaultRetryMinutes</PropertyName>
+                                    </Link>
+                                  </LinkChain>
+                                  <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                                  <ObjectType>Adapter</ObjectType>
+                                </VariableReference>
+                              </References>
+                            </Period>
+                          </RetryTimePeriod>
+                          <RetryFrequency>
+                            <DisplayUnits>Seconds</DisplayUnits>
+                            <Period>
+                              <FormattedCode>{0}</FormattedCode>
+                              <References>
+                                <VariableReference xsi:type="PropertyReference">
+                                  <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Frequency (seconds)</DisplayPath>
+                                  <LinkChain>
+                                    <Link xsi:type="PropertyNameLink">
+                                      <PropertyName>DefaultRetryFrequency</PropertyName>
+                                    </Link>
+                                  </LinkChain>
+                                  <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                                  <ObjectType>Adapter</ObjectType>
+                                </VariableReference>
+                              </References>
+                            </Period>
+                          </RetryFrequency>
+                          <Timeout>
+                            <DisplayUnits>Seconds</DisplayUnits>
+                            <Period>
+                              <HardcodedValue>100</HardcodedValue>
+                            </Period>
+                          </Timeout>
+                          <ChannelId>
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Variables.Input.Cloud Portal Channel ID</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>870624d6-2c5b-4eea-9944-99c1e67252e1</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </ChannelId>
+                          <ItemType>
+                            <HardcodedValue>Nexus1000VPortProfile</HardcodedValue>
+                          </ItemType>
+                          <Table>
+                            <DisplayPath>Workflow.Read PP Table from XML - Update.Result Table</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResultTable</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>26590c49-b591-406a-b35e-4fce469fce88</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </Table>
+                          <Subscriber>
+                            <HardcodedValue />
+                          </Subscriber>
+                          <SubscriberOuName>
+                            <HardcodedValue />
+                          </SubscriberOuName>
+                          <SubscriberRequisitionId>
+                            <FormattedCode />
+                          </SubscriberRequisitionId>
+                          <SubscriberRequisitionEntryId>
+                            <FormattedCode />
+                          </SubscriberRequisitionEntryId>
+                        </Configuration>
+                      </ActivityNode>
+                    </Children>
+                    <Condition>
+                      <Id>2836ae66-7436-4d92-94a5-40de3998e334</Id>
+                      <Conditions>
+                        <ConditionDefinition xsi:type="VariableConditionDefinition">
+                          <Id>5ce50048-db90-4330-84c1-6e77426d3fde</Id>
+                          <Expression xsi:type="SubstitutableNumber">
+                            <HardcodedValue>0</HardcodedValue>
+                          </Expression>
+                          <Comparison>GreaterThan</Comparison>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.Read PP Table from XML - Update.Result Table.Row Count</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResultTable</PropertyName>
+                              </Link>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>RowCount</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>26590c49-b591-406a-b35e-4fce469fce88</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </ConditionDefinition>
+                      </Conditions>
+                    </Condition>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="StartProcessNode">
+                    <Id>2e41c426-b25d-45bc-b26a-cc6594b52cd0</Id>
+                    <DisplayName>Update &gt;&gt; Post-Discovery</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                        <Id>23b0d65e-ae43-434e-9bab-870ee8981a8f</Id>
+                        <ProcessNodeId>2e41c426-b25d-45bc-b26a-cc6594b52cd0</ProcessNodeId>
+                        <CompletedId>7f611419-20bb-4b7c-bd49-8f84f9aa6e20</CompletedId>
+                      </ActivityNode>
+                    </Children>
+                    <ProcessId>bcc5059f-cc96-4265-8fed-fa53e2e82374</ProcessId>
+                    <InputVariableTable>
+                      <VariableAssignmentsAsArray />
+                    </InputVariableTable>
+                    <Asynchronous>false</Asynchronous>
+                    <InheritTarget>true</InheritTarget>
+                    <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+                    <InheritPriorityClass>true</InheritPriorityClass>
+                    <RuntimeUserId>
+                      <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                    </RuntimeUserId>
+                    <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                    <StartPointId>
+                      <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                    </StartPointId>
+                    <StartPointName>
+                      <FormattedCode />
+                    </StartPointName>
+                  </ActivityNode>
+                </Children>
+                <Condition>
+                  <Id>28e747c2-0bf4-4c63-ad00-dd41428f99f3</Id>
+                  <Conditions>
+                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                      <Id>cbd4a64e-d24b-4a07-b79a-e3994b245d9d</Id>
+                      <Expression xsi:type="SubstitutableString">
+                        <HardcodedValue />
+                      </Expression>
+                      <Comparison>NotEquals</Comparison>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.Update Service Item by Discovery Table XML - PP.Update Record Set (Table XML)</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="ProcessOutputVariableLink">
+                            <LaunchingActivityId>1a30b2dd-4061-49af-9c3a-7d040352cde6</LaunchingActivityId>
+                            <OutputVariableId>38cd1186-aba2-4a56-ae91-52cd53bb67ff</OutputVariableId>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>1a30b2dd-4061-49af-9c3a-7d040352cde6</ObjectId>
+                        <ObjectType>WorkflowNode</ObjectType>
+                      </VariableReference>
+                    </ConditionDefinition>
+                  </Conditions>
+                </Condition>
+              </ActivityNode>
+            </Children>
+          </ActivityNode>
+          <ActivityNode xsi:type="SequenceNode">
+            <Id>7fc9b4d4-0196-40b6-8bd1-325ea3555dab</Id>
+            <DisplayName>Create VEM SIs</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ConditionBranchNode">
+                <Id>05bcf558-a912-4d30-b727-51fa59ad4a11</Id>
+                <DisplayName>If SIs to Create</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="ExecuteActivityNode">
+                    <Id>a20df71f-26c1-4033-93a2-6779f5785a32</Id>
+                    <DisplayName>Read VEM Table from XML - Create</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                        <Id>93c0b876-0eb9-478d-bb7b-579d435dc393</Id>
+                        <ActivityNodeId>a20df71f-26c1-4033-93a2-6779f5785a32</ActivityNodeId>
+                        <CompletedId>3dba3bb5-725c-4a77-a7a8-462d2baf0b03</CompletedId>
+                      </ActivityNode>
+                    </Children>
+                    <Configuration xsi:type="ReadTableFromXmlActivityConfiguration" xml:space="preserve">
+                      <Id>a20df71f-26c1-4033-93a2-6779f5785a32</Id>
+                      <DisplayName>Read VEM Table from XML - Create</DisplayName>
+                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                        <SingleTargetId>
+                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                        </SingleTargetId>
+                      </TargetLoadBalancer>
+                      <InheritTarget>false</InheritTarget>
+                      <ContainingProcessId>1795116c-97f0-4dfc-939b-634f3ded46af</ContainingProcessId>
+                      <Columns>
+                        <BuiltinTableColumn>
+                          <Name>VSMPlatformElementID</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>VEMUuid</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>UniqueID</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                      </Columns>
+                      <XmlRowElementName>
+                        <HardcodedValue>row</HardcodedValue>
+                      </XmlRowElementName>
+                      <XmlString>
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.Update Service Item by Discovery Table XML - VEM.Create Record Set (Table XML)</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="ProcessOutputVariableLink">
+                                <LaunchingActivityId>ed581b75-3761-414c-9403-f9fef743886f</LaunchingActivityId>
+                                <OutputVariableId>4a286f6d-5629-4ac4-a4f0-a6dbd3c9332a</OutputVariableId>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>ed581b75-3761-414c-9403-f9fef743886f</ObjectId>
+                            <ObjectType>WorkflowNode</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </XmlString>
+                    </Configuration>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="ForEachNode">
+                    <Id>8f97e92d-5c7e-4c3a-8f33-2f75bb5096da</Id>
+                    <DisplayName>For Each New VEM</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ExecuteActivityNode">
+                        <Id>e495bd43-2481-4fea-bc60-4b6bb5886699</Id>
+                        <DisplayName>Add Row to Create VEM Table</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                            <Id>dcfce3c0-27ef-4384-9d69-9b3aab89ba88</Id>
+                            <ActivityNodeId>e495bd43-2481-4fea-bc60-4b6bb5886699</ActivityNodeId>
+                            <CompletedId>10d11078-529d-4f24-ad04-c1d5361c5e2e</CompletedId>
+                          </ActivityNode>
+                        </Children>
+                        <Configuration xsi:type="AddTableRowActivityConfiguration" xml:space="preserve">
+                          <Id>e495bd43-2481-4fea-bc60-4b6bb5886699</Id>
+                          <DisplayName>Add Row to Create VEM Table</DisplayName>
+                          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                            <SingleTargetId>
+                              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                            </SingleTargetId>
+                          </TargetLoadBalancer>
+                          <InheritTarget>false</InheritTarget>
+                          <ContainingProcessId>1795116c-97f0-4dfc-939b-634f3ded46af</ContainingProcessId>
+                          <TableVariable>
+                            <DisplayPath>Process.Variables.Local.Create VEMs</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>68535349-e304-45d4-af2d-9b93a3bd34eb</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </TableVariable>
+                          <Values>
+                            <BuiltinDataCellValue>
+                              <ColumnName>Name</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}{1}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Process.Process Instance Id</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>Id</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectType>ProcessInstance</ObjectType>
+                                  </VariableReference>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Process.Variables.Local.VEMGUIDCount</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>50259c23-190d-4a64-b508-929981c5cc6b</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>UniqueID</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.For Each New VEM.Item.UniqueID</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>UniqueID</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>8f97e92d-5c7e-4c3a-8f33-2f75bb5096da</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>VEMUuid</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.For Each New VEM.Item.VEMUuid</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>VEMUuid</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>8f97e92d-5c7e-4c3a-8f33-2f75bb5096da</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>VSMPlatformElementID</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.For Each New VEM.Item.VSMPlatformElementID</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>VSMPlatformElementID</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>8f97e92d-5c7e-4c3a-8f33-2f75bb5096da</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                          </Values>
+                        </Configuration>
+                      </ActivityNode>
+                      <ActivityNode xsi:type="ExecuteActivityNode">
+                        <Id>ad841ccb-e288-47f3-970c-cda0c9297b73</Id>
+                        <DisplayName>Increment VEMGUIDCount</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                            <Id>87d2b031-ffbd-4c21-8771-e5c2ff5f0dfa</Id>
+                            <ActivityNodeId>ad841ccb-e288-47f3-970c-cda0c9297b73</ActivityNodeId>
+                            <CompletedId>06225001-02bb-4e8f-af25-97b6d20cb1b8</CompletedId>
+                          </ActivityNode>
+                        </Children>
+                        <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                          <Id>ad841ccb-e288-47f3-970c-cda0c9297b73</Id>
+                          <DisplayName>Increment VEMGUIDCount</DisplayName>
+                          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                            <SingleTargetId>
+                              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                            </SingleTargetId>
+                          </TargetLoadBalancer>
+                          <InheritTarget>false</InheritTarget>
+                          <ContainingProcessId>1795116c-97f0-4dfc-939b-634f3ded46af</ContainingProcessId>
+                          <VariableToSet>
+                            <DisplayPath>Process.Variables.Local.VEMGUIDCount</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>50259c23-190d-4a64-b508-929981c5cc6b</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableToSet>
+                          <NewValue xsi:type="SubstitutableNumber">
+                            <FormattedCode>{0} + 1</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Variables.Local.VEMGUIDCount</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>50259c23-190d-4a64-b508-929981c5cc6b</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </NewValue>
+                        </Configuration>
+                      </ActivityNode>
+                    </Children>
+                    <ForEachSource xsi:type="PropertyReference">
+                      <DisplayPath>Workflow.Read VEM Table from XML - Create.Result Table.Rows</DisplayPath>
+                      <LinkChain>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>ResultTable</PropertyName>
+                        </Link>
+                        <Link xsi:type="PropertyNameLink">
+                          <PropertyName>TIARows</PropertyName>
+                        </Link>
+                      </LinkChain>
+                      <ObjectId>a20df71f-26c1-4033-93a2-6779f5785a32</ObjectId>
+                      <ObjectType>ActivityInstance</ObjectType>
+                    </ForEachSource>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="ConditionBranchNode">
+                    <Id>0f2b9aee-75aa-45dd-bf58-f4eb582ade9e</Id>
+                    <DisplayName>Condition Branch</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ExecuteActivityNode">
+                        <Id>37a98004-d78a-4ea4-8708-c0eb36c479b2</Id>
+                        <DisplayName>Create VEM Service Items</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="ConditionBranchNode">
+                            <Id>0197a2f0-1e95-4646-bb86-85075476d1e2</Id>
+                            <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                            <DisplayName>If Execution Fails</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="ExecuteActivityNode">
+                                <Id>4142ab50-4f60-4657-9664-a5f2075cf179</Id>
+                                <DisplayName>Failed to Create Service Items (1013) (2)</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                    <Id>6b278567-7177-4f3a-9fb2-fe4431cc87df</Id>
+                                    <ActivityNodeId>4142ab50-4f60-4657-9664-a5f2075cf179</ActivityNodeId>
+                                    <CompletedId>5d6bcfd8-9880-43b7-ae37-3b52907155ed</CompletedId>
+                                  </ActivityNode>
+                                </Children>
+                                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                                  <Id>4142ab50-4f60-4657-9664-a5f2075cf179</Id>
+                                  <DisplayName>Failed to Create Service Items (1013) (2)</DisplayName>
+                                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                    <SingleTargetId>
+                                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                    </SingleTargetId>
+                                  </TargetLoadBalancer>
+                                  <InheritTarget>false</InheritTarget>
+                                  <ContainingProcessId>1795116c-97f0-4dfc-939b-634f3ded46af</ContainingProcessId>
+                                  <VariableToSet>
+                                    <DisplayPath>Process.Variables.Output.Error Code</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>fa3bf118-7d29-431a-86b0-3a4b44b4babc</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableToSet>
+                                  <NewValue xsi:type="SubstitutableNumber">
+                                    <HardcodedValue>1013</HardcodedValue>
+                                  </NewValue>
+                                </Configuration>
+                              </ActivityNode>
+                              <ActivityNode xsi:type="CompletedNode">
+                                <Id>4d1f8682-5e2f-42bc-a356-9be66a81610d</Id>
+                                <Notes>Fail the entire process</Notes>
+                                <CompletedType>FailedNotCompleted</CompletedType>
+                                <ResultMessage>
+                                  <FormattedCode>Failed to Create Service Items:
+{0}</FormattedCode>
+                                  <References>
+                                    <VariableReference xsi:type="PropertyReference">
+                                      <DisplayPath>Workflow.Create VEM Service Items.Error Information</DisplayPath>
+                                      <LinkChain>
+                                        <Link xsi:type="PropertyNameLink">
+                                          <PropertyName>ErrorInformation</PropertyName>
+                                        </Link>
+                                      </LinkChain>
+                                      <ObjectId>37a98004-d78a-4ea4-8708-c0eb36c479b2</ObjectId>
+                                      <ObjectType>ActivityInstance</ObjectType>
+                                    </VariableReference>
+                                  </References>
+                                </ResultMessage>
+                              </ActivityNode>
+                            </Children>
+                            <Condition>
+                              <Id>3b3ae837-abaa-4940-9b3b-a440aee6ec18</Id>
+                              <Conditions>
+                                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                                  <Id>0ce287dd-e697-4bcb-b2e9-b192e3ef176d</Id>
+                                  <Expression xsi:type="SubstitutableBoolean">
+                                    <HardcodedValue>true</HardcodedValue>
+                                  </Expression>
+                                  <Comparison>Equals</Comparison>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Create Service Items.Instance Failed</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>InstanceFailed</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>37a98004-d78a-4ea4-8708-c0eb36c479b2</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </ConditionDefinition>
+                              </Conditions>
+                            </Condition>
+                          </ActivityNode>
+                        </Children>
+                        <Configuration xsi:type="CreateServiceItemsFromTableActivityConfiguration" xml:space="preserve">
+                          <Id>37a98004-d78a-4ea4-8708-c0eb36c479b2</Id>
+                          <DisplayName>Create VEM Service Items</DisplayName>
+                          <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                            <SingleTargetReference>
+                              <FormattedCode />
+                              <HardcodedValue>
+                                <Id>b3216113-bb0f-4cb3-b7c2-93b9074ef87b</Id>
+                                <ObjectType>Target</ObjectType>
+                              </HardcodedValue>
+                            </SingleTargetReference>
+                          </TargetLoadBalancer>
+                          <InheritTarget>false</InheritTarget>
+                          <ContainingProcessId>1795116c-97f0-4dfc-939b-634f3ded46af</ContainingProcessId>
+                          <RetryTimePeriod>
+                            <DisplayUnits>Minutes</DisplayUnits>
+                            <Period>
+                              <FormattedCode>{0}</FormattedCode>
+                              <References>
+                                <VariableReference xsi:type="PropertyReference">
+                                  <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Time Period (minutes)</DisplayPath>
+                                  <LinkChain>
+                                    <Link xsi:type="PropertyNameLink">
+                                      <PropertyName>DefaultRetryMinutes</PropertyName>
+                                    </Link>
+                                  </LinkChain>
+                                  <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                                  <ObjectType>Adapter</ObjectType>
+                                </VariableReference>
+                              </References>
+                            </Period>
+                          </RetryTimePeriod>
+                          <RetryFrequency>
+                            <DisplayUnits>Seconds</DisplayUnits>
+                            <Period>
+                              <FormattedCode>{0}</FormattedCode>
+                              <References>
+                                <VariableReference xsi:type="PropertyReference">
+                                  <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Frequency (seconds)</DisplayPath>
+                                  <LinkChain>
+                                    <Link xsi:type="PropertyNameLink">
+                                      <PropertyName>DefaultRetryFrequency</PropertyName>
+                                    </Link>
+                                  </LinkChain>
+                                  <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                                  <ObjectType>Adapter</ObjectType>
+                                </VariableReference>
+                              </References>
+                            </Period>
+                          </RetryFrequency>
+                          <Timeout>
+                            <DisplayUnits>Seconds</DisplayUnits>
+                            <Period>
+                              <HardcodedValue>100</HardcodedValue>
+                            </Period>
+                          </Timeout>
+                          <ChannelId>
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Variables.Input.Cloud Portal Channel ID</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>870624d6-2c5b-4eea-9944-99c1e67252e1</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </ChannelId>
+                          <ItemType>
+                            <HardcodedValue>Nexus1000vVEM</HardcodedValue>
+                          </ItemType>
+                          <Table>
+                            <DisplayPath>Process.Variables.Local.Create VEMs</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>68535349-e304-45d4-af2d-9b93a3bd34eb</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </Table>
+                          <Subscriber>
+                            <HardcodedValue />
+                          </Subscriber>
+                          <SubscriberOuName>
+                            <HardcodedValue />
+                          </SubscriberOuName>
+                          <SubscriberRequisitionId>
+                            <FormattedCode />
+                          </SubscriberRequisitionId>
+                          <SubscriberRequisitionEntryId>
+                            <FormattedCode />
+                          </SubscriberRequisitionEntryId>
+                        </Configuration>
+                      </ActivityNode>
+                    </Children>
+                    <Condition>
+                      <Id>55ad62d7-619a-49df-93d0-c3508c05dac4</Id>
+                      <Conditions>
+                        <ConditionDefinition xsi:type="VariableConditionDefinition">
+                          <Id>7562ff9a-dd3e-43c5-a8a6-25752426b5b8</Id>
+                          <Expression xsi:type="SubstitutableNumber">
+                            <HardcodedValue>0</HardcodedValue>
+                          </Expression>
+                          <Comparison>GreaterThan</Comparison>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Local.Create VEMs.Row Count</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>RowCount</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>68535349-e304-45d4-af2d-9b93a3bd34eb</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                        </ConditionDefinition>
+                      </Conditions>
+                    </Condition>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="StartProcessNode">
+                    <Id>79237fb7-ff62-41b9-b187-959ef5662339</Id>
+                    <DisplayName>Create &gt;&gt; Post-Discovery</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                        <Id>86bc9cc1-e372-416e-979a-f87770fdf5f8</Id>
+                        <ProcessNodeId>79237fb7-ff62-41b9-b187-959ef5662339</ProcessNodeId>
+                        <CompletedId>6be20668-6c7f-4023-8e0d-0a523953f2a6</CompletedId>
+                      </ActivityNode>
+                    </Children>
+                    <ProcessId>3cfa9fb0-278b-4f9f-8401-21ac4df9b693</ProcessId>
+                    <InputVariableTable>
+                      <VariableAssignmentsAsArray />
+                    </InputVariableTable>
+                    <Asynchronous>false</Asynchronous>
+                    <InheritTarget>true</InheritTarget>
+                    <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+                    <InheritPriorityClass>true</InheritPriorityClass>
+                    <RuntimeUserId>
+                      <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                    </RuntimeUserId>
+                    <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                    <StartPointId>
+                      <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                    </StartPointId>
+                    <StartPointName>
+                      <FormattedCode />
+                    </StartPointName>
+                  </ActivityNode>
+                </Children>
+                <Condition>
+                  <Id>4ea94e18-9c1d-4d2a-bdb4-160997523eec</Id>
+                  <Conditions>
+                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                      <Id>4ee4c823-e695-4ae9-9544-78521101fde4</Id>
+                      <Expression xsi:type="SubstitutableString">
+                        <HardcodedValue />
+                      </Expression>
+                      <Comparison>NotEquals</Comparison>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.Update Service Item by Discovery Table XML - VEM.Create Record Set (Table XML)</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="ProcessOutputVariableLink">
+                            <LaunchingActivityId>ed581b75-3761-414c-9403-f9fef743886f</LaunchingActivityId>
+                            <OutputVariableId>4a286f6d-5629-4ac4-a4f0-a6dbd3c9332a</OutputVariableId>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>ed581b75-3761-414c-9403-f9fef743886f</ObjectId>
+                        <ObjectType>WorkflowNode</ObjectType>
+                      </VariableReference>
+                    </ConditionDefinition>
+                  </Conditions>
+                </Condition>
+              </ActivityNode>
+            </Children>
+          </ActivityNode>
+          <ActivityNode xsi:type="SequenceNode">
+            <Id>32f1f795-91ee-4eed-bcdb-83b16aabdc1a</Id>
+            <DisplayName>Update VEM SIs</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ConditionBranchNode">
+                <Id>642862fc-f786-40a7-a02e-bfcd948264ce</Id>
+                <DisplayName>If SIs to Update </DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="ExecuteActivityNode">
+                    <Id>31869c9f-a46f-48e7-99d9-2d8f2156815f</Id>
+                    <DisplayName>Read VEM Table from XML - Update</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                        <Id>141d6824-303d-469e-9dfc-def838aa196c</Id>
+                        <ActivityNodeId>31869c9f-a46f-48e7-99d9-2d8f2156815f</ActivityNodeId>
+                        <CompletedId>fecc263b-41f4-42cd-a871-162f78284da3</CompletedId>
+                      </ActivityNode>
+                    </Children>
+                    <Configuration xsi:type="ReadTableFromXmlActivityConfiguration" xml:space="preserve">
+                      <Id>31869c9f-a46f-48e7-99d9-2d8f2156815f</Id>
+                      <DisplayName>Read VEM Table from XML - Update</DisplayName>
+                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                        <SingleTargetId>
+                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                        </SingleTargetId>
+                      </TargetLoadBalancer>
+                      <InheritTarget>false</InheritTarget>
+                      <ContainingProcessId>1795116c-97f0-4dfc-939b-634f3ded46af</ContainingProcessId>
+                      <Columns>
+                        <BuiltinTableColumn>
+                          <Name>Name</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>VSMPlatformElementID</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>VEMUuid</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>UniqueID</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                      </Columns>
+                      <XmlRowElementName>
+                        <HardcodedValue>row</HardcodedValue>
+                      </XmlRowElementName>
+                      <XmlString>
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.Update Service Item by Discovery Table XML - VEM.Update Record Set (Table XML)</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="ProcessOutputVariableLink">
+                                <LaunchingActivityId>ed581b75-3761-414c-9403-f9fef743886f</LaunchingActivityId>
+                                <OutputVariableId>38cd1186-aba2-4a56-ae91-52cd53bb67ff</OutputVariableId>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>ed581b75-3761-414c-9403-f9fef743886f</ObjectId>
+                            <ObjectType>WorkflowNode</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </XmlString>
+                    </Configuration>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="ConditionBranchNode">
+                    <Id>5091b7f6-ff1f-440c-ab52-3d6cddae7ae9</Id>
+                    <DisplayName>If Records</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ExecuteActivityNode">
+                        <Id>db70ac98-889a-4f33-8510-6d0d7bb9b2d2</Id>
+                        <DisplayName>Update VEM Service Items</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                            <Id>947ab87c-43fd-45ad-8569-ff259ff65191</Id>
+                            <ActivityNodeId>db70ac98-889a-4f33-8510-6d0d7bb9b2d2</ActivityNodeId>
+                            <CompletedId>72c26331-724a-4a6d-a5b0-ea9c8bd720e7</CompletedId>
+                          </ActivityNode>
+                        </Children>
+                        <Configuration xsi:type="UpdateServiceItemsFromTableActivityConfiguration" xml:space="preserve">
+                          <Id>db70ac98-889a-4f33-8510-6d0d7bb9b2d2</Id>
+                          <DisplayName>Update VEM Service Items</DisplayName>
+                          <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                            <SingleTargetReference>
+                              <FormattedCode />
+                              <HardcodedValue>
+                                <Id>b3216113-bb0f-4cb3-b7c2-93b9074ef87b</Id>
+                                <ObjectType>Target</ObjectType>
+                              </HardcodedValue>
+                            </SingleTargetReference>
+                          </TargetLoadBalancer>
+                          <InheritTarget>false</InheritTarget>
+                          <ContainingProcessId>1795116c-97f0-4dfc-939b-634f3ded46af</ContainingProcessId>
+                          <RetryTimePeriod>
+                            <DisplayUnits>Minutes</DisplayUnits>
+                            <Period>
+                              <FormattedCode>{0}</FormattedCode>
+                              <References>
+                                <VariableReference xsi:type="PropertyReference">
+                                  <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Time Period (minutes)</DisplayPath>
+                                  <LinkChain>
+                                    <Link xsi:type="PropertyNameLink">
+                                      <PropertyName>DefaultRetryMinutes</PropertyName>
+                                    </Link>
+                                  </LinkChain>
+                                  <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                                  <ObjectType>Adapter</ObjectType>
+                                </VariableReference>
+                              </References>
+                            </Period>
+                          </RetryTimePeriod>
+                          <RetryFrequency>
+                            <DisplayUnits>Seconds</DisplayUnits>
+                            <Period>
+                              <FormattedCode>{0}</FormattedCode>
+                              <References>
+                                <VariableReference xsi:type="PropertyReference">
+                                  <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Frequency (seconds)</DisplayPath>
+                                  <LinkChain>
+                                    <Link xsi:type="PropertyNameLink">
+                                      <PropertyName>DefaultRetryFrequency</PropertyName>
+                                    </Link>
+                                  </LinkChain>
+                                  <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                                  <ObjectType>Adapter</ObjectType>
+                                </VariableReference>
+                              </References>
+                            </Period>
+                          </RetryFrequency>
+                          <Timeout>
+                            <DisplayUnits>Seconds</DisplayUnits>
+                            <Period>
+                              <HardcodedValue>100</HardcodedValue>
+                            </Period>
+                          </Timeout>
+                          <ChannelId>
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Variables.Input.Cloud Portal Channel ID</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>870624d6-2c5b-4eea-9944-99c1e67252e1</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </ChannelId>
+                          <ItemType>
+                            <HardcodedValue>Nexus1000vVEM</HardcodedValue>
+                          </ItemType>
+                          <Table>
+                            <DisplayPath>Workflow.Read VEM Table from XML - Update.Result Table</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResultTable</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>31869c9f-a46f-48e7-99d9-2d8f2156815f</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </Table>
+                          <Subscriber>
+                            <HardcodedValue />
+                          </Subscriber>
+                          <SubscriberOuName>
+                            <HardcodedValue />
+                          </SubscriberOuName>
+                          <SubscriberRequisitionId>
+                            <FormattedCode />
+                          </SubscriberRequisitionId>
+                          <SubscriberRequisitionEntryId>
+                            <FormattedCode />
+                          </SubscriberRequisitionEntryId>
+                        </Configuration>
+                      </ActivityNode>
+                    </Children>
+                    <Condition>
+                      <Id>dea45b2a-82bb-43a0-b84d-57d471fa0e87</Id>
+                      <Conditions>
+                        <ConditionDefinition xsi:type="VariableConditionDefinition">
+                          <Id>880bb8b1-b804-4af0-b6bd-54d2fc56df8c</Id>
+                          <Expression xsi:type="SubstitutableNumber">
+                            <HardcodedValue>0</HardcodedValue>
+                          </Expression>
+                          <Comparison>GreaterThan</Comparison>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.Read VEM Table from XML - Update.Result Table.Row Count</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResultTable</PropertyName>
+                              </Link>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>RowCount</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>31869c9f-a46f-48e7-99d9-2d8f2156815f</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </ConditionDefinition>
+                      </Conditions>
+                    </Condition>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="StartProcessNode">
+                    <Id>d2b4ebf3-f5d5-4898-aa7a-edc212b663b6</Id>
+                    <DisplayName>Update &gt;&gt; Post-Discovery</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                        <Id>319e8955-9cc1-4862-8e79-5d4a3ad11635</Id>
+                        <ProcessNodeId>d2b4ebf3-f5d5-4898-aa7a-edc212b663b6</ProcessNodeId>
+                        <CompletedId>3e52d2e2-34b8-475a-9aea-6e4191359f55</CompletedId>
+                      </ActivityNode>
+                    </Children>
+                    <ProcessId>3cfa9fb0-278b-4f9f-8401-21ac4df9b693</ProcessId>
+                    <InputVariableTable>
+                      <VariableAssignmentsAsArray />
+                    </InputVariableTable>
+                    <Asynchronous>false</Asynchronous>
+                    <InheritTarget>true</InheritTarget>
+                    <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+                    <InheritPriorityClass>true</InheritPriorityClass>
+                    <RuntimeUserId>
+                      <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                    </RuntimeUserId>
+                    <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                    <StartPointId>
+                      <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                    </StartPointId>
+                    <StartPointName>
+                      <FormattedCode />
+                    </StartPointName>
+                  </ActivityNode>
+                </Children>
+                <Condition>
+                  <Id>28e747c2-0bf4-4c63-ad00-dd41428f99f3</Id>
+                  <Conditions>
+                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                      <Id>cbd4a64e-d24b-4a07-b79a-e3994b245d9d</Id>
+                      <Expression xsi:type="SubstitutableString">
+                        <HardcodedValue />
+                      </Expression>
+                      <Comparison>NotEquals</Comparison>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.Update Service Item by Discovery Table XML - VEM.Update Record Set (Table XML)</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="ProcessOutputVariableLink">
+                            <LaunchingActivityId>ed581b75-3761-414c-9403-f9fef743886f</LaunchingActivityId>
+                            <OutputVariableId>38cd1186-aba2-4a56-ae91-52cd53bb67ff</OutputVariableId>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>ed581b75-3761-414c-9403-f9fef743886f</ObjectId>
+                        <ObjectType>WorkflowNode</ObjectType>
+                      </VariableReference>
+                    </ConditionDefinition>
+                  </Conditions>
+                </Condition>
+              </ActivityNode>
+            </Children>
+          </ActivityNode>
+        </Children>
+      </ActivityNode>
+    </Children>
+  </FirstActivity>
+  <ProcessId>1795116c-97f0-4dfc-939b-634f3ded46af</ProcessId>
+</WorkflowConfiguration>

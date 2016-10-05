@@ -1,0 +1,1716 @@
+<?xml version="1.0"?>
+<WorkflowConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>adcccb26-18e2-484a-8b7a-df6bc305fd66</Id>
+  <DisplayName>CloudSync Discover Infrastructure -&gt; UCS Manager</DisplayName>
+  <CreatedTime>2016-02-15T20:43:19.0515Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:43:37.2607421Z</ModifiedTime>
+  <FirstActivity xsi:type="RootNode">
+    <Id>685facf3-0744-4663-9101-1b06127822bc</Id>
+    <DisplayName />
+    <Children>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>07ec9b18-577e-4e38-816d-f047339b3be3</Id>
+        <DisplayName>Log - Starting vCenter Discovery</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>8c8799a0-4c98-44cb-a630-062f5b3fc181</Id>
+            <ActivityNodeId>07ec9b18-577e-4e38-816d-f047339b3be3</ActivityNodeId>
+            <CompletedId>e7dbd949-5a14-4a51-b423-970305f758de</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+          <Id>07ec9b18-577e-4e38-816d-f047339b3be3</Id>
+          <DisplayName>Log - Starting vCenter Discovery</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>25f13104-6592-4847-b8f5-7f6d34fca074</ContainingProcessId>
+          <VariableToSet>
+            <DisplayPath>Process.Variables.Output.Status Log</DisplayPath>
+            <LinkChain />
+            <ObjectId>27466a45-7483-415b-8a0d-487b29b2f680</ObjectId>
+            <ObjectType>GlobalVariable</ObjectType>
+          </VariableToSet>
+          <NewValue xsi:type="SubstitutableString">
+            <HardcodedValue>=== Starting UCS Manager Discovery ===</HardcodedValue>
+          </NewValue>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="StartProcessNode">
+        <Id>d60a90a6-e7fc-4ae8-9def-fb18aa9f6d82</Id>
+        <DisplayName>Convert Platform Element IDs to List</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>20c944c3-3d0b-4848-8af1-f150bb964923</Id>
+            <ProcessNodeId>d60a90a6-e7fc-4ae8-9def-fb18aa9f6d82</ProcessNodeId>
+            <CompletedId>8ede1edb-880e-4bb7-a9be-7a79a0de5f34</CompletedId>
+          </ActivityNode>
+        </Children>
+        <ProcessId>bad2be97-8356-46e9-87ee-166abe20ea46</ProcessId>
+        <InputVariableTable>
+          <VariableAssignmentsAsArray>
+            <InputVariableAssignment>
+              <InputVariableId>188c824d-3f39-4d9e-8e33-d4ea71a82dd0</InputVariableId>
+              <VariableValue xsi:type="SubstitutableString">
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Input.PlatformElementID</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>5a32504e-4871-4d97-8423-302514e209e3</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                </References>
+              </VariableValue>
+            </InputVariableAssignment>
+          </VariableAssignmentsAsArray>
+        </InputVariableTable>
+        <Asynchronous>false</Asynchronous>
+        <InheritTarget>true</InheritTarget>
+        <TargetLoadBalancer xsi:type="ProcessTargetLoadBalancer" />
+        <InheritPriorityClass>true</InheritPriorityClass>
+        <RuntimeUserId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </RuntimeUserId>
+        <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+        <StartPointId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </StartPointId>
+        <StartPointName>
+          <FormattedCode />
+        </StartPointName>
+      </ActivityNode>
+      <ActivityNode xsi:type="ForEachNode">
+        <Id>807f5e54-024d-4b74-9847-82fc159cfc48</Id>
+        <DisplayName>For Each Platform Element ID</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>ce164c27-740d-4652-9388-44d2afaef60e</Id>
+            <DisplayName>Find UCS Manager Target</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ConditionBranchNode">
+                <Id>84840e84-8d57-45a1-ade7-4631c4dd1789</Id>
+                <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                <DisplayName>Ignore Error</DisplayName>
+                <Children />
+                <Condition>
+                  <Id>9fbb3bea-e566-49cd-9523-bd1401c49ddd</Id>
+                  <Conditions>
+                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                      <Id>795b6096-cd68-4f2e-be46-9b8dc08b5108</Id>
+                      <Expression xsi:type="SubstitutableBoolean">
+                        <HardcodedValue>true</HardcodedValue>
+                      </Expression>
+                      <Comparison>Equals</Comparison>
+                      <VariableReference xsi:type="PropertyReference">
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>InstanceFailed</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>ce164c27-740d-4652-9388-44d2afaef60e</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </ConditionDefinition>
+                  </Conditions>
+                </Condition>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="BuiltinFindTargetsActivityConfiguration" xml:space="preserve">
+              <Id>ce164c27-740d-4652-9388-44d2afaef60e</Id>
+              <DisplayName>Find UCS Manager Target</DisplayName>
+              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                <SingleTargetId>
+                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                </SingleTargetId>
+              </TargetLoadBalancer>
+              <InheritTarget>false</InheritTarget>
+              <ContainingProcessId>25f13104-6592-4847-b8f5-7f6d34fca074</ContainingProcessId>
+              <TargetTypeName>Tidal.Automation.Ucs.Common.UcsManagerTargetConfiguration, Tidal.Automation.Ucs.Common</TargetTypeName>
+              <TargetTypeExtensionId>7fbd1c2a-606e-5531-7dcd-91400d793fe1</TargetTypeExtensionId>
+              <TargetGroupId>b0960e16-15e4-4163-bd9b-e34f6b0ad01c</TargetGroupId>
+              <MatchingCriteria>
+                <GenericCriteria xsi:type="GuidCriteria">
+                  <LinkChain>
+                    <Link xsi:type="PropertyNameLink">
+                      <PropertyName>Id</PropertyName>
+                    </Link>
+                  </LinkChain>
+                  <MatchingGuid>
+                    <FormattedCode>{0}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.For Each Platform Element ID.Item.Item</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>Item</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>807f5e54-024d-4b74-9847-82fc159cfc48</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </MatchingGuid>
+                  <Comparison>Equals</Comparison>
+                </GenericCriteria>
+              </MatchingCriteria>
+            </Configuration>
+          </ActivityNode>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>36cf3548-fbd2-4e36-80c9-20ec894927ed</Id>
+            <DisplayName>If Target Not Found</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>4190e03b-2b40-4c2a-95a7-27ed295c885d</Id>
+                <DisplayName>Update Discovery Status Log</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>13be84c5-0602-4c0f-a7d2-f7b1c0c1431d</Id>
+                    <ActivityNodeId>4190e03b-2b40-4c2a-95a7-27ed295c885d</ActivityNodeId>
+                    <CompletedId>09e1f2be-ea95-4571-b7e3-31e9af10a803</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                  <Id>4190e03b-2b40-4c2a-95a7-27ed295c885d</Id>
+                  <DisplayName>Update Discovery Status Log</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>25f13104-6592-4847-b8f5-7f6d34fca074</ContainingProcessId>
+                  <VariableToSet>
+                    <DisplayPath>Process.Variables.Output.Status Log</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>27466a45-7483-415b-8a0d-487b29b2f680</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableToSet>
+                  <NewValue xsi:type="SubstitutableString">
+                    <FormattedCode>{0}
+  === Aborted Discovery for Platform Element with ID: {1}
+  === Reason: Target not found</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Variables.Output.Status Log</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>27466a45-7483-415b-8a0d-487b29b2f680</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableReference>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Variables.Input.PlatformElementID</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>5a32504e-4871-4d97-8423-302514e209e3</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </NewValue>
+                </Configuration>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>5dc546a4-b54a-440c-9d7f-a13a97542b0c</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>9902c794-bff2-48e5-b371-73bc753c8a3c</Id>
+                  <Expression xsi:type="SubstitutableNumber">
+                    <HardcodedValue>0</HardcodedValue>
+                  </Expression>
+                  <Comparison>Equals</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Find UCS Manager Target.Found Targets.Count</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>GetAllFoundTargets</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ItemCount</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>ce164c27-740d-4652-9388-44d2afaef60e</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>094f83f9-edc6-4ee8-a326-fdcb6598eae0</Id>
+            <DisplayName>If Target Found</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>ed4d0b31-ab25-4495-aa96-1df69a2c3b99</Id>
+                <DisplayName>Update Discovery Status Log</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>74c056d7-3b82-438c-ae9e-bf2bb15fd5f1</Id>
+                    <ActivityNodeId>ed4d0b31-ab25-4495-aa96-1df69a2c3b99</ActivityNodeId>
+                    <CompletedId>5cff8700-c517-417d-8e60-b0b42e78ae09</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                  <Id>ed4d0b31-ab25-4495-aa96-1df69a2c3b99</Id>
+                  <DisplayName>Update Discovery Status Log</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>25f13104-6592-4847-b8f5-7f6d34fca074</ContainingProcessId>
+                  <VariableToSet>
+                    <DisplayPath>Process.Variables.Output.Status Log</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>27466a45-7483-415b-8a0d-487b29b2f680</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableToSet>
+                  <NewValue xsi:type="SubstitutableString">
+                    <FormattedCode>{0}
+    === Starting Discovery for Platform Element: {1}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Variables.Output.Status Log</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>27466a45-7483-415b-8a0d-487b29b2f680</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableReference>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.Find UCS Manager Target.Found Targets.First.UCS Manager Host Name</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>GetAllFoundTargets</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>FirstItem</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>GetReferencedObject</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>UcsManagerHost</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>ce164c27-740d-4652-9388-44d2afaef60e</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </NewValue>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="ParallelNode">
+                <Id>3a778c57-51d2-4047-9c12-48a5e300eff8</Id>
+                <DisplayName>Find Cisco UCS Resources</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="SequenceNode">
+                    <Id>47778a48-0e7f-4924-b2a6-99c4ffbebc2c</Id>
+                    <DisplayName>UCS Servers (Blades/Racks)</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ConditionBranchNode">
+                        <Id>40d294b0-b727-4591-94d7-f42e00cbebfc</Id>
+                        <DisplayName>If discovering this resource</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="StartProcessNode">
+                            <Id>9dace89a-1028-4dd4-a663-c6919cfa8cb2</Id>
+                            <DisplayName>Discover Infrastructure -&gt; UCS Blades</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="ConditionBranchNode">
+                                <Id>aaca3c30-bb66-43b0-990b-f02e7b244148</Id>
+                                <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                                <DisplayName>If Execution Fails</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="ExecuteActivityNode">
+                                    <Id>9a720852-f5ae-44d2-8c4e-972d2e4460a6</Id>
+                                    <DisplayName>Update Discovery Status Log</DisplayName>
+                                    <Children>
+                                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                        <Id>8a880aaa-122f-40f3-aa2f-f6d48d1041f7</Id>
+                                        <ActivityNodeId>9a720852-f5ae-44d2-8c4e-972d2e4460a6</ActivityNodeId>
+                                        <CompletedId>0931a907-db42-4c76-aa94-c0d57d966545</CompletedId>
+                                      </ActivityNode>
+                                    </Children>
+                                    <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                                      <Id>9a720852-f5ae-44d2-8c4e-972d2e4460a6</Id>
+                                      <DisplayName>Update Discovery Status Log</DisplayName>
+                                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                        <SingleTargetId>
+                                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                        </SingleTargetId>
+                                      </TargetLoadBalancer>
+                                      <InheritTarget>false</InheritTarget>
+                                      <ContainingProcessId>25f13104-6592-4847-b8f5-7f6d34fca074</ContainingProcessId>
+                                      <VariableToSet>
+                                        <DisplayPath>Process.Variables.Output.Status Log</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>27466a45-7483-415b-8a0d-487b29b2f680</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableToSet>
+                                      <NewValue xsi:type="SubstitutableString">
+                                        <FormattedCode>{0}
+    {1} failed
+    Reason for failure: {2}</FormattedCode>
+                                        <References>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Process.Variables.Output.Status Log</DisplayPath>
+                                            <LinkChain />
+                                            <ObjectId>27466a45-7483-415b-8a0d-487b29b2f680</ObjectId>
+                                            <ObjectType>GlobalVariable</ObjectType>
+                                          </VariableReference>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.Discover Infrastructure -&gt; UCS Blades.Instance Name</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>DisplayName</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>9dace89a-1028-4dd4-a663-c6919cfa8cb2</ObjectId>
+                                            <ObjectType>ProcessInstance</ObjectType>
+                                          </VariableReference>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.Discover Infrastructure -&gt; UCS Blades.Error Information</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>ErrorInformation</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>9dace89a-1028-4dd4-a663-c6919cfa8cb2</ObjectId>
+                                            <ObjectType>ProcessInstance</ObjectType>
+                                          </VariableReference>
+                                        </References>
+                                      </NewValue>
+                                    </Configuration>
+                                  </ActivityNode>
+                                </Children>
+                                <Condition>
+                                  <Id>2209abf5-5303-4507-88fd-0bf6ed0bcf2b</Id>
+                                  <Conditions>
+                                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                                      <Id>0615a679-4930-4d47-9f2f-ef1e8465c4b5</Id>
+                                      <Expression xsi:type="SubstitutableBoolean">
+                                        <HardcodedValue>true</HardcodedValue>
+                                      </Expression>
+                                      <Comparison>Equals</Comparison>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>InstanceFailed</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>9dace89a-1028-4dd4-a663-c6919cfa8cb2</ObjectId>
+                                        <ObjectType>ProcessInstance</ObjectType>
+                                      </VariableReference>
+                                    </ConditionDefinition>
+                                  </Conditions>
+                                </Condition>
+                              </ActivityNode>
+                              <ActivityNode xsi:type="ConditionBranchNode">
+                                <Id>33f3bebc-4d46-40b3-b0cb-856dac208b3f</Id>
+                                <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                                <DisplayName>Record Success</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="ExecuteActivityNode">
+                                    <Id>2c8d89cd-a5b1-478d-bc89-9efb7a8b373c</Id>
+                                    <DisplayName>Update Discovery Status Log</DisplayName>
+                                    <Children>
+                                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                        <Id>c4901055-1a1b-420f-b2a8-3e5466e70697</Id>
+                                        <ActivityNodeId>2c8d89cd-a5b1-478d-bc89-9efb7a8b373c</ActivityNodeId>
+                                        <CompletedId>eadf0ab7-66c7-4d68-957a-d9f8bd9641b4</CompletedId>
+                                      </ActivityNode>
+                                    </Children>
+                                    <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                                      <Id>2c8d89cd-a5b1-478d-bc89-9efb7a8b373c</Id>
+                                      <DisplayName>Update Discovery Status Log</DisplayName>
+                                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                        <SingleTargetId>
+                                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                        </SingleTargetId>
+                                      </TargetLoadBalancer>
+                                      <InheritTarget>false</InheritTarget>
+                                      <ContainingProcessId>25f13104-6592-4847-b8f5-7f6d34fca074</ContainingProcessId>
+                                      <VariableToSet>
+                                        <DisplayPath>Process.Variables.Output.Status Log</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>27466a45-7483-415b-8a0d-487b29b2f680</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableToSet>
+                                      <NewValue xsi:type="SubstitutableString">
+                                        <FormattedCode>{0}
+    {1} succeeded!</FormattedCode>
+                                        <References>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Process.Variables.Output.Status Log</DisplayPath>
+                                            <LinkChain />
+                                            <ObjectId>27466a45-7483-415b-8a0d-487b29b2f680</ObjectId>
+                                            <ObjectType>GlobalVariable</ObjectType>
+                                          </VariableReference>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.Discover Infrastructure -&gt; UCS Blades.Instance Name</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>DisplayName</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>9dace89a-1028-4dd4-a663-c6919cfa8cb2</ObjectId>
+                                            <ObjectType>ProcessInstance</ObjectType>
+                                          </VariableReference>
+                                        </References>
+                                      </NewValue>
+                                    </Configuration>
+                                  </ActivityNode>
+                                </Children>
+                                <Condition>
+                                  <Id>ee792bf8-a50b-419e-b87b-1e564e87f2f0</Id>
+                                  <Conditions />
+                                </Condition>
+                              </ActivityNode>
+                            </Children>
+                            <ProcessId>4770c96b-eeda-4f82-bf69-656211a88b63</ProcessId>
+                            <InputVariableTable>
+                              <VariableAssignmentsAsArray>
+                                <InputVariableAssignment>
+                                  <InputVariableId>02061cbb-17c8-4e6e-a307-e42f14a6cc33</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Input.Channel ID</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>1ad3bca4-7d9e-4acd-9e7c-36354cf1f1c1</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                              </VariableAssignmentsAsArray>
+                            </InputVariableTable>
+                            <Asynchronous>false</Asynchronous>
+                            <InheritTarget>false</InheritTarget>
+                            <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                              <SingleTargetReference>
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Find UCS Manager Target.Found Targets.First</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>GetAllFoundTargets</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>FirstItem</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>ce164c27-740d-4652-9388-44d2afaef60e</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </SingleTargetReference>
+                            </TargetLoadBalancer>
+                            <InheritPriorityClass>true</InheritPriorityClass>
+                            <RuntimeUserId>
+                              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                            </RuntimeUserId>
+                            <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                            <StartPointId>
+                              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                            </StartPointId>
+                            <StartPointName>
+                              <FormattedCode />
+                            </StartPointName>
+                          </ActivityNode>
+                          <ActivityNode xsi:type="StartProcessNode">
+                            <Id>a415c5b3-bf89-41a4-8372-a19d19e0d9e1</Id>
+                            <DisplayName>Discover Infrastructure -&gt; UCS Rack Servers </DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="ConditionBranchNode">
+                                <Id>702305a3-3225-4697-8360-f22dcaf4fb51</Id>
+                                <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                                <DisplayName>If Execution Fails</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="ExecuteActivityNode">
+                                    <Id>df4b320b-6a50-49a5-9323-49008da82353</Id>
+                                    <DisplayName>Update Discovery Status Log</DisplayName>
+                                    <Children>
+                                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                        <Id>027bd83a-e0b3-41a9-8e39-afba3cfa1965</Id>
+                                        <ActivityNodeId>df4b320b-6a50-49a5-9323-49008da82353</ActivityNodeId>
+                                        <CompletedId>1693dcff-1da1-4e17-acc2-c9b2a1e767e7</CompletedId>
+                                      </ActivityNode>
+                                    </Children>
+                                    <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                                      <Id>df4b320b-6a50-49a5-9323-49008da82353</Id>
+                                      <DisplayName>Update Discovery Status Log</DisplayName>
+                                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                        <SingleTargetId>
+                                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                        </SingleTargetId>
+                                      </TargetLoadBalancer>
+                                      <InheritTarget>false</InheritTarget>
+                                      <ContainingProcessId>25f13104-6592-4847-b8f5-7f6d34fca074</ContainingProcessId>
+                                      <VariableToSet>
+                                        <DisplayPath>Process.Variables.Output.Status Log</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>27466a45-7483-415b-8a0d-487b29b2f680</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableToSet>
+                                      <NewValue xsi:type="SubstitutableString">
+                                        <FormattedCode>{0}
+    {1} failed
+    Reason for failure: {2}</FormattedCode>
+                                        <References>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Process.Variables.Output.Status Log</DisplayPath>
+                                            <LinkChain />
+                                            <ObjectId>27466a45-7483-415b-8a0d-487b29b2f680</ObjectId>
+                                            <ObjectType>GlobalVariable</ObjectType>
+                                          </VariableReference>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.Discover Infrastructure -&gt; UCS Rack Servers .Instance Name</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>DisplayName</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>a415c5b3-bf89-41a4-8372-a19d19e0d9e1</ObjectId>
+                                            <ObjectType>ProcessInstance</ObjectType>
+                                          </VariableReference>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.Discover Infrastructure -&gt; UCS Blades.Instance Name</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>DisplayName</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>9dace89a-1028-4dd4-a663-c6919cfa8cb2</ObjectId>
+                                            <ObjectType>ProcessInstance</ObjectType>
+                                          </VariableReference>
+                                        </References>
+                                      </NewValue>
+                                    </Configuration>
+                                  </ActivityNode>
+                                </Children>
+                                <Condition>
+                                  <Id>9826937f-74bb-4442-9b69-12593b2a6342</Id>
+                                  <Conditions>
+                                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                                      <Id>24ad14b4-09cd-41da-baed-b6b0bca29820</Id>
+                                      <Expression xsi:type="SubstitutableBoolean">
+                                        <HardcodedValue>true</HardcodedValue>
+                                      </Expression>
+                                      <Comparison>Equals</Comparison>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>InstanceFailed</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>a415c5b3-bf89-41a4-8372-a19d19e0d9e1</ObjectId>
+                                        <ObjectType>ProcessInstance</ObjectType>
+                                      </VariableReference>
+                                    </ConditionDefinition>
+                                  </Conditions>
+                                </Condition>
+                              </ActivityNode>
+                              <ActivityNode xsi:type="ConditionBranchNode">
+                                <Id>6356e499-3f07-41b5-b4e1-eed66528bcae</Id>
+                                <DisplayName>Record Success</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="ExecuteActivityNode">
+                                    <Id>46321983-4aba-4034-a43d-fddb82755dc7</Id>
+                                    <DisplayName>Update Discovery Status Log</DisplayName>
+                                    <Children>
+                                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                        <Id>a1b8334e-0135-4028-9621-2c9ef95c6e7d</Id>
+                                        <ActivityNodeId>46321983-4aba-4034-a43d-fddb82755dc7</ActivityNodeId>
+                                        <CompletedId>efabac64-53c1-4454-9f49-16a0efeafc39</CompletedId>
+                                      </ActivityNode>
+                                    </Children>
+                                    <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                                      <Id>46321983-4aba-4034-a43d-fddb82755dc7</Id>
+                                      <DisplayName>Update Discovery Status Log</DisplayName>
+                                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                        <SingleTargetId>
+                                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                        </SingleTargetId>
+                                      </TargetLoadBalancer>
+                                      <InheritTarget>false</InheritTarget>
+                                      <ContainingProcessId>25f13104-6592-4847-b8f5-7f6d34fca074</ContainingProcessId>
+                                      <VariableToSet>
+                                        <DisplayPath>Process.Variables.Output.Status Log</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>27466a45-7483-415b-8a0d-487b29b2f680</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableToSet>
+                                      <NewValue xsi:type="SubstitutableString">
+                                        <FormattedCode>{0}
+    {1} succeeded!</FormattedCode>
+                                        <References>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Process.Variables.Output.Status Log</DisplayPath>
+                                            <LinkChain />
+                                            <ObjectId>27466a45-7483-415b-8a0d-487b29b2f680</ObjectId>
+                                            <ObjectType>GlobalVariable</ObjectType>
+                                          </VariableReference>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.Discover Infrastructure -&gt; UCS Rack Servers .Instance Name</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>DisplayName</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>a415c5b3-bf89-41a4-8372-a19d19e0d9e1</ObjectId>
+                                            <ObjectType>ProcessInstance</ObjectType>
+                                          </VariableReference>
+                                        </References>
+                                      </NewValue>
+                                    </Configuration>
+                                  </ActivityNode>
+                                </Children>
+                                <Condition>
+                                  <Id>dcaa37c2-8128-4928-8268-d8c824c7f565</Id>
+                                  <Conditions />
+                                </Condition>
+                              </ActivityNode>
+                            </Children>
+                            <ProcessId>fe4bc9d6-a07c-4585-a716-d1db20b15d6c</ProcessId>
+                            <InputVariableTable>
+                              <VariableAssignmentsAsArray>
+                                <InputVariableAssignment>
+                                  <InputVariableId>e65ce12a-57a3-465a-a1ab-05d44838ddba</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableBoolean">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Input.Scheduled</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>75e4c205-3dcf-458c-b267-2f0ff914c126</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                                <InputVariableAssignment>
+                                  <InputVariableId>28251da8-6113-458b-aef0-9dcd9b888ca8</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Input.Channel ID</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>1ad3bca4-7d9e-4acd-9e7c-36354cf1f1c1</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                              </VariableAssignmentsAsArray>
+                            </InputVariableTable>
+                            <Asynchronous>true</Asynchronous>
+                            <InheritTarget>false</InheritTarget>
+                            <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                              <SingleTargetReference>
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Find UCS Manager Target.Found Targets.First</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>GetAllFoundTargets</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>FirstItem</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>ce164c27-740d-4652-9388-44d2afaef60e</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </SingleTargetReference>
+                            </TargetLoadBalancer>
+                            <InheritPriorityClass>true</InheritPriorityClass>
+                            <RuntimeUserId>
+                              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                            </RuntimeUserId>
+                            <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                            <StartPointId>
+                              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                            </StartPointId>
+                            <StartPointName>
+                              <FormattedCode />
+                            </StartPointName>
+                          </ActivityNode>
+                        </Children>
+                        <Condition>
+                          <Id>7b00047c-31e6-49ea-9c31-e3a11e412e4c</Id>
+                          <Operator>Or</Operator>
+                          <Conditions>
+                            <ConditionDefinition xsi:type="VariableConditionDefinition">
+                              <Id>f7986336-6ca6-41f5-82dd-3eba23241eb5</Id>
+                              <Expression xsi:type="SubstitutableWildcard">
+                                <HardcodedValue>*Servers*</HardcodedValue>
+                              </Expression>
+                              <Comparison>Wildcard</Comparison>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Variables.Input.DiscoveryAction</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>8b825ca9-92a4-4666-92f6-3997497a33c6</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableReference>
+                            </ConditionDefinition>
+                            <ConditionDefinition xsi:type="VariableConditionDefinition">
+                              <Id>33befc80-5211-4c5b-ae0f-3d67539a4368</Id>
+                              <Expression xsi:type="SubstitutableString">
+                                <HardcodedValue>UCSManager</HardcodedValue>
+                              </Expression>
+                              <Comparison>Equals</Comparison>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Variables.Input.DiscoveryAction</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>8b825ca9-92a4-4666-92f6-3997497a33c6</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableReference>
+                            </ConditionDefinition>
+                          </Conditions>
+                        </Condition>
+                      </ActivityNode>
+                    </Children>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="SequenceNode">
+                    <Id>f9dc14e4-f11a-4404-8576-b8d7d73d12f2</Id>
+                    <DisplayName>UCS VLANs</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ConditionBranchNode">
+                        <Id>5680c080-0754-4486-a868-d45033d5e94a</Id>
+                        <DisplayName>If discovering this resource</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="StartProcessNode">
+                            <Id>be852ec4-c75c-46e3-a660-621e4aa199e9</Id>
+                            <DisplayName>Discover Infrastructure -&gt; UCS VLANs</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="ConditionBranchNode">
+                                <Id>b9ef8291-6f96-438d-a619-f6df4b4f4a27</Id>
+                                <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                                <DisplayName>If Execution Fails</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="ExecuteActivityNode">
+                                    <Id>6c35f359-5e61-422a-8c5c-e321c12ec507</Id>
+                                    <DisplayName>Update Discovery Status Log</DisplayName>
+                                    <Children>
+                                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                        <Id>ca2ae3f5-07e5-4d7f-8895-9a100e2ccc71</Id>
+                                        <ActivityNodeId>6c35f359-5e61-422a-8c5c-e321c12ec507</ActivityNodeId>
+                                        <CompletedId>d6b63580-a6bb-4b7d-b152-af64efaa7767</CompletedId>
+                                      </ActivityNode>
+                                    </Children>
+                                    <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                                      <Id>6c35f359-5e61-422a-8c5c-e321c12ec507</Id>
+                                      <DisplayName>Update Discovery Status Log</DisplayName>
+                                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                        <SingleTargetId>
+                                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                        </SingleTargetId>
+                                      </TargetLoadBalancer>
+                                      <InheritTarget>false</InheritTarget>
+                                      <ContainingProcessId>25f13104-6592-4847-b8f5-7f6d34fca074</ContainingProcessId>
+                                      <VariableToSet>
+                                        <DisplayPath>Process.Variables.Output.Status Log</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>27466a45-7483-415b-8a0d-487b29b2f680</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableToSet>
+                                      <NewValue xsi:type="SubstitutableString">
+                                        <FormattedCode>{0}
+    {1} failed
+    Reason for failure: {2}</FormattedCode>
+                                        <References>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Process.Variables.Output.Status Log</DisplayPath>
+                                            <LinkChain />
+                                            <ObjectId>27466a45-7483-415b-8a0d-487b29b2f680</ObjectId>
+                                            <ObjectType>GlobalVariable</ObjectType>
+                                          </VariableReference>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.Discover Infrastructure -&gt; UCS VLANs.Instance Name</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>DisplayName</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>be852ec4-c75c-46e3-a660-621e4aa199e9</ObjectId>
+                                            <ObjectType>ProcessInstance</ObjectType>
+                                          </VariableReference>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.Discover Infrastructure -&gt; UCS VLANs.Error Information</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>ErrorInformation</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>be852ec4-c75c-46e3-a660-621e4aa199e9</ObjectId>
+                                            <ObjectType>ProcessInstance</ObjectType>
+                                          </VariableReference>
+                                        </References>
+                                      </NewValue>
+                                    </Configuration>
+                                  </ActivityNode>
+                                </Children>
+                                <Condition>
+                                  <Id>77cf5000-2800-4166-8a19-df89923206fd</Id>
+                                  <Conditions>
+                                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                                      <Id>ba6cdbc1-1b6c-4a3b-95c0-b40598ae172c</Id>
+                                      <Expression xsi:type="SubstitutableBoolean">
+                                        <HardcodedValue>true</HardcodedValue>
+                                      </Expression>
+                                      <Comparison>Equals</Comparison>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>InstanceFailed</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>be852ec4-c75c-46e3-a660-621e4aa199e9</ObjectId>
+                                        <ObjectType>ProcessInstance</ObjectType>
+                                      </VariableReference>
+                                    </ConditionDefinition>
+                                  </Conditions>
+                                </Condition>
+                              </ActivityNode>
+                              <ActivityNode xsi:type="ConditionBranchNode">
+                                <Id>55550174-0caa-4545-aa1e-59241473f020</Id>
+                                <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                                <DisplayName>Record Success</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="ExecuteActivityNode">
+                                    <Id>24776803-561a-41ca-ad34-0b99534356f3</Id>
+                                    <DisplayName>Update Discovery Status Log</DisplayName>
+                                    <Children>
+                                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                        <Id>4a7eee18-9fc9-43d2-be15-76206ff0633a</Id>
+                                        <ActivityNodeId>24776803-561a-41ca-ad34-0b99534356f3</ActivityNodeId>
+                                        <CompletedId>c827ea77-1c27-4daa-9045-29855d45619e</CompletedId>
+                                      </ActivityNode>
+                                    </Children>
+                                    <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                                      <Id>24776803-561a-41ca-ad34-0b99534356f3</Id>
+                                      <DisplayName>Update Discovery Status Log</DisplayName>
+                                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                        <SingleTargetId>
+                                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                        </SingleTargetId>
+                                      </TargetLoadBalancer>
+                                      <InheritTarget>false</InheritTarget>
+                                      <ContainingProcessId>25f13104-6592-4847-b8f5-7f6d34fca074</ContainingProcessId>
+                                      <VariableToSet>
+                                        <DisplayPath>Process.Variables.Output.Status Log</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>27466a45-7483-415b-8a0d-487b29b2f680</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableToSet>
+                                      <NewValue xsi:type="SubstitutableString">
+                                        <FormattedCode>{0}
+    {1} succeeded!</FormattedCode>
+                                        <References>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Process.Variables.Output.Status Log</DisplayPath>
+                                            <LinkChain />
+                                            <ObjectId>27466a45-7483-415b-8a0d-487b29b2f680</ObjectId>
+                                            <ObjectType>GlobalVariable</ObjectType>
+                                          </VariableReference>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.Discover Infrastructure -&gt; UCS VLANs.Instance Name</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>DisplayName</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>be852ec4-c75c-46e3-a660-621e4aa199e9</ObjectId>
+                                            <ObjectType>ProcessInstance</ObjectType>
+                                          </VariableReference>
+                                        </References>
+                                      </NewValue>
+                                    </Configuration>
+                                  </ActivityNode>
+                                </Children>
+                                <Condition>
+                                  <Id>ee792bf8-a50b-419e-b87b-1e564e87f2f0</Id>
+                                  <Conditions />
+                                </Condition>
+                              </ActivityNode>
+                            </Children>
+                            <ProcessId>24ba4a85-7d79-4e2f-a990-2324a41832a5</ProcessId>
+                            <InputVariableTable>
+                              <VariableAssignmentsAsArray>
+                                <InputVariableAssignment>
+                                  <InputVariableId>131b9bb3-dd5b-42a8-ae65-f35a95f05786</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableBoolean">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Input.Scheduled</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>75e4c205-3dcf-458c-b267-2f0ff914c126</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                                <InputVariableAssignment>
+                                  <InputVariableId>4c8aa5e8-90a7-4637-beef-c7cfdf305cda</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Input.Channel ID</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>1ad3bca4-7d9e-4acd-9e7c-36354cf1f1c1</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                              </VariableAssignmentsAsArray>
+                            </InputVariableTable>
+                            <Asynchronous>true</Asynchronous>
+                            <InheritTarget>false</InheritTarget>
+                            <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                              <SingleTargetReference>
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Find UCS Manager Target.Found Targets.First</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>GetAllFoundTargets</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>FirstItem</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>ce164c27-740d-4652-9388-44d2afaef60e</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </SingleTargetReference>
+                            </TargetLoadBalancer>
+                            <InheritPriorityClass>true</InheritPriorityClass>
+                            <RuntimeUserId>
+                              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                            </RuntimeUserId>
+                            <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                            <StartPointId>
+                              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                            </StartPointId>
+                            <StartPointName>
+                              <FormattedCode />
+                            </StartPointName>
+                          </ActivityNode>
+                        </Children>
+                        <Condition>
+                          <Id>7b00047c-31e6-49ea-9c31-e3a11e412e4c</Id>
+                          <Operator>Or</Operator>
+                          <Conditions>
+                            <ConditionDefinition xsi:type="VariableConditionDefinition">
+                              <Id>f7986336-6ca6-41f5-82dd-3eba23241eb5</Id>
+                              <Expression xsi:type="SubstitutableWildcard">
+                                <HardcodedValue>*VLANs*</HardcodedValue>
+                              </Expression>
+                              <Comparison>Wildcard</Comparison>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Variables.Input.DiscoveryAction</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>8b825ca9-92a4-4666-92f6-3997497a33c6</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableReference>
+                            </ConditionDefinition>
+                            <ConditionDefinition xsi:type="VariableConditionDefinition">
+                              <Id>5cb69250-1518-445d-a9ce-d1ba187ba39f</Id>
+                              <Expression xsi:type="SubstitutableString">
+                                <HardcodedValue>UCSManager</HardcodedValue>
+                              </Expression>
+                              <Comparison>Equals</Comparison>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Variables.Input.DiscoveryAction</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>8b825ca9-92a4-4666-92f6-3997497a33c6</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableReference>
+                            </ConditionDefinition>
+                          </Conditions>
+                        </Condition>
+                      </ActivityNode>
+                    </Children>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="SequenceNode">
+                    <Id>e039e58a-5dc7-4c05-84e5-ed6f1cb60cb6</Id>
+                    <DisplayName>UCS Service Profile Templates</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ConditionBranchNode">
+                        <Id>272bef9c-216d-497e-90f0-1b20750a3775</Id>
+                        <DisplayName>If discovering this resource</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="StartProcessNode">
+                            <Id>406554f4-c055-453e-b743-b0fa90fde502</Id>
+                            <DisplayName>Discover Infrastructure -&gt; UCS Service Profile Templates</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="ConditionBranchNode">
+                                <Id>b9c3660a-f60d-43b1-82ea-44ee26a47eff</Id>
+                                <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                                <DisplayName>If Execution Fails</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="ExecuteActivityNode">
+                                    <Id>bc43d1b2-4725-4683-8af2-36b293781253</Id>
+                                    <DisplayName>Update Discovery Status Log</DisplayName>
+                                    <Children>
+                                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                        <Id>1755b555-12cc-45fb-806d-b4366b7a741b</Id>
+                                        <ActivityNodeId>bc43d1b2-4725-4683-8af2-36b293781253</ActivityNodeId>
+                                        <CompletedId>7a0508d1-a4c3-4583-b10f-ce7d3cc2d86b</CompletedId>
+                                      </ActivityNode>
+                                    </Children>
+                                    <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                                      <Id>bc43d1b2-4725-4683-8af2-36b293781253</Id>
+                                      <DisplayName>Update Discovery Status Log</DisplayName>
+                                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                        <SingleTargetId>
+                                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                        </SingleTargetId>
+                                      </TargetLoadBalancer>
+                                      <InheritTarget>false</InheritTarget>
+                                      <ContainingProcessId>25f13104-6592-4847-b8f5-7f6d34fca074</ContainingProcessId>
+                                      <VariableToSet>
+                                        <DisplayPath>Process.Variables.Output.Status Log</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>27466a45-7483-415b-8a0d-487b29b2f680</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableToSet>
+                                      <NewValue xsi:type="SubstitutableString">
+                                        <FormattedCode>{0}
+    {1} failed
+    Reason for failure: {2}</FormattedCode>
+                                        <References>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Process.Variables.Output.Status Log</DisplayPath>
+                                            <LinkChain />
+                                            <ObjectId>27466a45-7483-415b-8a0d-487b29b2f680</ObjectId>
+                                            <ObjectType>GlobalVariable</ObjectType>
+                                          </VariableReference>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.Discover Infrastructure -&gt; UCS Service Profile Templates.Instance Name</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>DisplayName</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>406554f4-c055-453e-b743-b0fa90fde502</ObjectId>
+                                            <ObjectType>ProcessInstance</ObjectType>
+                                          </VariableReference>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.Discover Infrastructure -&gt; UCS Service Profile Templates.Error Information</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>ErrorInformation</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>406554f4-c055-453e-b743-b0fa90fde502</ObjectId>
+                                            <ObjectType>ProcessInstance</ObjectType>
+                                          </VariableReference>
+                                        </References>
+                                      </NewValue>
+                                    </Configuration>
+                                  </ActivityNode>
+                                </Children>
+                                <Condition>
+                                  <Id>46368f2e-e929-4c31-97fe-29bcbf39f4e4</Id>
+                                  <Conditions>
+                                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                                      <Id>84e50203-9bbd-4885-af88-3255edd3620a</Id>
+                                      <Expression xsi:type="SubstitutableBoolean">
+                                        <HardcodedValue>true</HardcodedValue>
+                                      </Expression>
+                                      <Comparison>Equals</Comparison>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>InstanceFailed</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>406554f4-c055-453e-b743-b0fa90fde502</ObjectId>
+                                        <ObjectType>ProcessInstance</ObjectType>
+                                      </VariableReference>
+                                    </ConditionDefinition>
+                                  </Conditions>
+                                </Condition>
+                              </ActivityNode>
+                              <ActivityNode xsi:type="ConditionBranchNode">
+                                <Id>637c1fff-c8e4-4697-84a5-b54418a01da3</Id>
+                                <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                                <DisplayName>Record Success</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="ExecuteActivityNode">
+                                    <Id>31d2543e-a062-4144-8f35-74deec78fad5</Id>
+                                    <DisplayName>Update Discovery Status Log</DisplayName>
+                                    <Children>
+                                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                        <Id>55c92e53-e4d0-4fde-b09b-2a7fdf0f057e</Id>
+                                        <ActivityNodeId>31d2543e-a062-4144-8f35-74deec78fad5</ActivityNodeId>
+                                        <CompletedId>5ae5cb5a-80bc-44ad-b5d5-5b1d2a6eb17f</CompletedId>
+                                      </ActivityNode>
+                                    </Children>
+                                    <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                                      <Id>31d2543e-a062-4144-8f35-74deec78fad5</Id>
+                                      <DisplayName>Update Discovery Status Log</DisplayName>
+                                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                        <SingleTargetId>
+                                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                        </SingleTargetId>
+                                      </TargetLoadBalancer>
+                                      <InheritTarget>false</InheritTarget>
+                                      <ContainingProcessId>25f13104-6592-4847-b8f5-7f6d34fca074</ContainingProcessId>
+                                      <VariableToSet>
+                                        <DisplayPath>Process.Variables.Output.Status Log</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>27466a45-7483-415b-8a0d-487b29b2f680</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableToSet>
+                                      <NewValue xsi:type="SubstitutableString">
+                                        <FormattedCode>{0}
+    {1} succeeded!</FormattedCode>
+                                        <References>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Process.Variables.Output.Status Log</DisplayPath>
+                                            <LinkChain />
+                                            <ObjectId>27466a45-7483-415b-8a0d-487b29b2f680</ObjectId>
+                                            <ObjectType>GlobalVariable</ObjectType>
+                                          </VariableReference>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.Discover Infrastructure -&gt; UCS Service Profile Templates.Instance Name</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>DisplayName</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>406554f4-c055-453e-b743-b0fa90fde502</ObjectId>
+                                            <ObjectType>ProcessInstance</ObjectType>
+                                          </VariableReference>
+                                        </References>
+                                      </NewValue>
+                                    </Configuration>
+                                  </ActivityNode>
+                                </Children>
+                                <Condition>
+                                  <Id>ee792bf8-a50b-419e-b87b-1e564e87f2f0</Id>
+                                  <Conditions />
+                                </Condition>
+                              </ActivityNode>
+                            </Children>
+                            <ProcessId>b2146b29-396a-479d-8237-ee2d910953f2</ProcessId>
+                            <InputVariableTable>
+                              <VariableAssignmentsAsArray>
+                                <InputVariableAssignment>
+                                  <InputVariableId>9efd0c55-cb6a-4334-a2f7-fd8eded33d07</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableBoolean">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Input.Scheduled</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>75e4c205-3dcf-458c-b267-2f0ff914c126</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                                <InputVariableAssignment>
+                                  <InputVariableId>707d6927-690c-47eb-a5fc-581ad8584a63</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Input.Channel ID</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>1ad3bca4-7d9e-4acd-9e7c-36354cf1f1c1</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                              </VariableAssignmentsAsArray>
+                            </InputVariableTable>
+                            <Asynchronous>true</Asynchronous>
+                            <InheritTarget>false</InheritTarget>
+                            <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                              <SingleTargetReference>
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Find UCS Manager Target.Found Targets.First</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>GetAllFoundTargets</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>FirstItem</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>ce164c27-740d-4652-9388-44d2afaef60e</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </SingleTargetReference>
+                            </TargetLoadBalancer>
+                            <InheritPriorityClass>true</InheritPriorityClass>
+                            <RuntimeUserId>
+                              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                            </RuntimeUserId>
+                            <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                            <StartPointId>
+                              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                            </StartPointId>
+                            <StartPointName>
+                              <FormattedCode />
+                            </StartPointName>
+                          </ActivityNode>
+                        </Children>
+                        <Condition>
+                          <Id>7b00047c-31e6-49ea-9c31-e3a11e412e4c</Id>
+                          <Operator>Or</Operator>
+                          <Conditions>
+                            <ConditionDefinition xsi:type="VariableConditionDefinition">
+                              <Id>f7986336-6ca6-41f5-82dd-3eba23241eb5</Id>
+                              <Expression xsi:type="SubstitutableWildcard">
+                                <HardcodedValue>*Service Profile Templates*</HardcodedValue>
+                              </Expression>
+                              <Comparison>Wildcard</Comparison>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Variables.Input.DiscoveryAction</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>8b825ca9-92a4-4666-92f6-3997497a33c6</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableReference>
+                            </ConditionDefinition>
+                            <ConditionDefinition xsi:type="VariableConditionDefinition">
+                              <Id>594c93a5-4508-46d1-95a9-d2e56e85f96f</Id>
+                              <Expression xsi:type="SubstitutableString">
+                                <HardcodedValue>UCSManager</HardcodedValue>
+                              </Expression>
+                              <Comparison>Equals</Comparison>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Variables.Input.DiscoveryAction</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>8b825ca9-92a4-4666-92f6-3997497a33c6</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableReference>
+                            </ConditionDefinition>
+                          </Conditions>
+                        </Condition>
+                      </ActivityNode>
+                    </Children>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="SequenceNode">
+                    <Id>c699b59a-ac0c-4b20-b760-4aaa39b9f3c6</Id>
+                    <DisplayName>UCS vNIC Templates</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ConditionBranchNode">
+                        <Id>2de37eb0-fe42-4258-980c-e01430d5b950</Id>
+                        <DisplayName>If discovering this resource</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="StartProcessNode">
+                            <Id>06a28a5a-9416-4d84-891b-091f8150ddad</Id>
+                            <DisplayName>Discover Infrastructure -&gt; UCS vNIC Templates</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="ConditionBranchNode">
+                                <Id>203a591e-3b50-4194-a400-0fcc2dd6f8fc</Id>
+                                <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                                <DisplayName>If Execution Fails</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="ExecuteActivityNode">
+                                    <Id>82f70ea1-dac2-4def-9615-9b3bad7fb553</Id>
+                                    <DisplayName>Update Discovery Status Log</DisplayName>
+                                    <Children>
+                                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                        <Id>6b35d7da-9fc4-4198-976c-0f9f1401c8e4</Id>
+                                        <ActivityNodeId>82f70ea1-dac2-4def-9615-9b3bad7fb553</ActivityNodeId>
+                                        <CompletedId>de5c4be4-5f52-4b43-be12-8b820fe7d267</CompletedId>
+                                      </ActivityNode>
+                                    </Children>
+                                    <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                                      <Id>82f70ea1-dac2-4def-9615-9b3bad7fb553</Id>
+                                      <DisplayName>Update Discovery Status Log</DisplayName>
+                                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                        <SingleTargetId>
+                                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                        </SingleTargetId>
+                                      </TargetLoadBalancer>
+                                      <InheritTarget>false</InheritTarget>
+                                      <ContainingProcessId>25f13104-6592-4847-b8f5-7f6d34fca074</ContainingProcessId>
+                                      <VariableToSet>
+                                        <DisplayPath>Process.Variables.Output.Status Log</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>27466a45-7483-415b-8a0d-487b29b2f680</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableToSet>
+                                      <NewValue xsi:type="SubstitutableString">
+                                        <FormattedCode>{0}
+    {1} failed!</FormattedCode>
+                                        <References>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Process.Variables.Output.Status Log</DisplayPath>
+                                            <LinkChain />
+                                            <ObjectId>27466a45-7483-415b-8a0d-487b29b2f680</ObjectId>
+                                            <ObjectType>GlobalVariable</ObjectType>
+                                          </VariableReference>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.Discover Infrastructure -&gt; UCS vNIC Templates.Instance Name</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>DisplayName</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>06a28a5a-9416-4d84-891b-091f8150ddad</ObjectId>
+                                            <ObjectType>ProcessInstance</ObjectType>
+                                          </VariableReference>
+                                        </References>
+                                      </NewValue>
+                                    </Configuration>
+                                  </ActivityNode>
+                                </Children>
+                                <Condition>
+                                  <Id>d2eff7f7-7250-4d61-8d9c-87b5b55a2270</Id>
+                                  <Conditions>
+                                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                                      <Id>5d890bf4-fee3-438d-9c04-7c6afb717229</Id>
+                                      <Expression xsi:type="SubstitutableBoolean">
+                                        <HardcodedValue>true</HardcodedValue>
+                                      </Expression>
+                                      <Comparison>Equals</Comparison>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>InstanceFailed</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>06a28a5a-9416-4d84-891b-091f8150ddad</ObjectId>
+                                        <ObjectType>ProcessInstance</ObjectType>
+                                      </VariableReference>
+                                    </ConditionDefinition>
+                                  </Conditions>
+                                </Condition>
+                              </ActivityNode>
+                              <ActivityNode xsi:type="ConditionBranchNode">
+                                <Id>2c89e271-0314-49d4-8a9d-d519ec0761ac</Id>
+                                <DisplayName>Record Success</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="ExecuteActivityNode">
+                                    <Id>d0919115-d39b-47ff-9873-d98126737517</Id>
+                                    <DisplayName>Update Discovery Status Log</DisplayName>
+                                    <Children>
+                                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                        <Id>1ac56ae4-bfa7-4f15-b53d-0ba0205fbc33</Id>
+                                        <ActivityNodeId>d0919115-d39b-47ff-9873-d98126737517</ActivityNodeId>
+                                        <CompletedId>044c2361-167c-48fa-b33e-6d0f8d0f820f</CompletedId>
+                                      </ActivityNode>
+                                    </Children>
+                                    <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                                      <Id>d0919115-d39b-47ff-9873-d98126737517</Id>
+                                      <DisplayName>Update Discovery Status Log</DisplayName>
+                                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                        <SingleTargetId>
+                                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                        </SingleTargetId>
+                                      </TargetLoadBalancer>
+                                      <InheritTarget>false</InheritTarget>
+                                      <ContainingProcessId>25f13104-6592-4847-b8f5-7f6d34fca074</ContainingProcessId>
+                                      <VariableToSet>
+                                        <DisplayPath>Process.Variables.Output.Status Log</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>27466a45-7483-415b-8a0d-487b29b2f680</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableToSet>
+                                      <NewValue xsi:type="SubstitutableString">
+                                        <FormattedCode>{0}
+    {1} succeeded!</FormattedCode>
+                                        <References>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Process.Variables.Output.Status Log</DisplayPath>
+                                            <LinkChain />
+                                            <ObjectId>27466a45-7483-415b-8a0d-487b29b2f680</ObjectId>
+                                            <ObjectType>GlobalVariable</ObjectType>
+                                          </VariableReference>
+                                          <VariableReference xsi:type="PropertyReference">
+                                            <DisplayPath>Workflow.Discover Infrastructure -&gt; UCS vNIC Templates.Instance Name</DisplayPath>
+                                            <LinkChain>
+                                              <Link xsi:type="PropertyNameLink">
+                                                <PropertyName>DisplayName</PropertyName>
+                                              </Link>
+                                            </LinkChain>
+                                            <ObjectId>06a28a5a-9416-4d84-891b-091f8150ddad</ObjectId>
+                                            <ObjectType>ProcessInstance</ObjectType>
+                                          </VariableReference>
+                                        </References>
+                                      </NewValue>
+                                    </Configuration>
+                                  </ActivityNode>
+                                </Children>
+                                <Condition>
+                                  <Id>6dc91d71-9c32-4af4-8d01-cb292207f352</Id>
+                                  <Conditions />
+                                </Condition>
+                              </ActivityNode>
+                            </Children>
+                            <ProcessId>460107d8-0609-4869-bceb-93e9e39fe50d</ProcessId>
+                            <InputVariableTable>
+                              <VariableAssignmentsAsArray>
+                                <InputVariableAssignment>
+                                  <InputVariableId>ec368082-1514-4833-9d05-d9ba58f872b9</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableBoolean">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Input.Scheduled</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>75e4c205-3dcf-458c-b267-2f0ff914c126</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                                <InputVariableAssignment>
+                                  <InputVariableId>d37908b7-7255-4ee6-97eb-9f542b017e88</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Input.Channel ID</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>1ad3bca4-7d9e-4acd-9e7c-36354cf1f1c1</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                              </VariableAssignmentsAsArray>
+                            </InputVariableTable>
+                            <Asynchronous>true</Asynchronous>
+                            <InheritTarget>false</InheritTarget>
+                            <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                              <SingleTargetReference>
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Find UCS Manager Target.Found Targets.First</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>GetAllFoundTargets</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>FirstItem</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>ce164c27-740d-4652-9388-44d2afaef60e</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </SingleTargetReference>
+                            </TargetLoadBalancer>
+                            <InheritPriorityClass>true</InheritPriorityClass>
+                            <RuntimeUserId>
+                              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                            </RuntimeUserId>
+                            <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                            <StartPointId>
+                              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                            </StartPointId>
+                            <StartPointName>
+                              <FormattedCode />
+                            </StartPointName>
+                          </ActivityNode>
+                        </Children>
+                        <Condition>
+                          <Id>7b00047c-31e6-49ea-9c31-e3a11e412e4c</Id>
+                          <Operator>Or</Operator>
+                          <Conditions>
+                            <ConditionDefinition xsi:type="VariableConditionDefinition">
+                              <Id>f7986336-6ca6-41f5-82dd-3eba23241eb5</Id>
+                              <Expression xsi:type="SubstitutableWildcard">
+                                <HardcodedValue>*vNIC Templates*</HardcodedValue>
+                              </Expression>
+                              <Comparison>Wildcard</Comparison>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Variables.Input.DiscoveryAction</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>8b825ca9-92a4-4666-92f6-3997497a33c6</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableReference>
+                            </ConditionDefinition>
+                            <ConditionDefinition xsi:type="VariableConditionDefinition">
+                              <Id>594c93a5-4508-46d1-95a9-d2e56e85f96f</Id>
+                              <Expression xsi:type="SubstitutableString">
+                                <HardcodedValue>UCSManager</HardcodedValue>
+                              </Expression>
+                              <Comparison>Equals</Comparison>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Variables.Input.DiscoveryAction</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>8b825ca9-92a4-4666-92f6-3997497a33c6</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableReference>
+                            </ConditionDefinition>
+                          </Conditions>
+                        </Condition>
+                      </ActivityNode>
+                    </Children>
+                  </ActivityNode>
+                </Children>
+              </ActivityNode>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>b1d07f15-f313-4c77-88ce-7d1f3d0986b5</Id>
+                <DisplayName>Update Discovery Status Log</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>95cf2e08-e503-48bc-b317-f57bd87bd8de</Id>
+                    <ActivityNodeId>b1d07f15-f313-4c77-88ce-7d1f3d0986b5</ActivityNodeId>
+                    <CompletedId>2bfa3275-14f5-4578-ad52-be0b05f92397</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                  <Id>b1d07f15-f313-4c77-88ce-7d1f3d0986b5</Id>
+                  <DisplayName>Update Discovery Status Log</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                    <SingleTargetId>
+                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                    </SingleTargetId>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>25f13104-6592-4847-b8f5-7f6d34fca074</ContainingProcessId>
+                  <VariableToSet>
+                    <DisplayPath>Process.Variables.Output.Status Log</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>27466a45-7483-415b-8a0d-487b29b2f680</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableToSet>
+                  <NewValue xsi:type="SubstitutableString">
+                    <FormattedCode>{0}
+  === Finished Discovery for Platform Element: {1}</FormattedCode>
+                    <References>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Variables.Output.Status Log</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>27466a45-7483-415b-8a0d-487b29b2f680</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableReference>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Workflow.Find UCS Manager Target.Found Targets.First.UCS Manager Host Name</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>GetAllFoundTargets</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>FirstItem</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>GetReferencedObject</PropertyName>
+                          </Link>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>UcsManagerHost</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>ce164c27-740d-4652-9388-44d2afaef60e</ObjectId>
+                        <ObjectType>ActivityInstance</ObjectType>
+                      </VariableReference>
+                    </References>
+                  </NewValue>
+                </Configuration>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>2ddd75c6-6eac-4331-b4ba-adfe71b9f437</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>3c93c2df-bb52-45ad-b7f3-416ca75f87c6</Id>
+                  <Expression xsi:type="SubstitutableNumber">
+                    <HardcodedValue>0</HardcodedValue>
+                  </Expression>
+                  <Comparison>GreaterThan</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Find UCS Manager Target.Found Targets.Count</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>GetAllFoundTargets</PropertyName>
+                      </Link>
+                      <Link xsi:type="PropertyNameLink">
+                        <PropertyName>ItemCount</PropertyName>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>ce164c27-740d-4652-9388-44d2afaef60e</ObjectId>
+                    <ObjectType>ActivityInstance</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+        </Children>
+        <ForEachSource xsi:type="PropertyReference">
+          <DisplayPath>Workflow.Convert Platform Element IDs to List.Item Table.Rows</DisplayPath>
+          <LinkChain>
+            <Link xsi:type="ProcessOutputVariableLink">
+              <LaunchingActivityId>d60a90a6-e7fc-4ae8-9def-fb18aa9f6d82</LaunchingActivityId>
+              <OutputVariableId>0bb31cca-c404-4a3c-bcdf-f5fc07e00171</OutputVariableId>
+            </Link>
+            <Link xsi:type="PropertyNameLink">
+              <PropertyName>TIARows</PropertyName>
+            </Link>
+          </LinkChain>
+          <ObjectId>d60a90a6-e7fc-4ae8-9def-fb18aa9f6d82</ObjectId>
+          <ObjectType>WorkflowNode</ObjectType>
+        </ForEachSource>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>eba3f6db-0d50-42c2-874e-46b2e84b2472</Id>
+        <DisplayName>Log - Finished UCS Manager Discovery</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>4ad87996-5f80-4415-a14e-ac9c34904d15</Id>
+            <ActivityNodeId>eba3f6db-0d50-42c2-874e-46b2e84b2472</ActivityNodeId>
+            <CompletedId>75e8b718-f381-47c1-ac94-720d3210f48d</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+          <Id>eba3f6db-0d50-42c2-874e-46b2e84b2472</Id>
+          <DisplayName>Log - Finished UCS Manager Discovery</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>25f13104-6592-4847-b8f5-7f6d34fca074</ContainingProcessId>
+          <VariableToSet>
+            <DisplayPath>Process.Variables.Output.Status Log</DisplayPath>
+            <LinkChain />
+            <ObjectId>27466a45-7483-415b-8a0d-487b29b2f680</ObjectId>
+            <ObjectType>GlobalVariable</ObjectType>
+          </VariableToSet>
+          <NewValue xsi:type="SubstitutableString">
+            <FormattedCode>{0}
+=== Finished UCS Manager Discovery ===
+
+
+</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Output.Status Log</DisplayPath>
+                <LinkChain />
+                <ObjectId>27466a45-7483-415b-8a0d-487b29b2f680</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </NewValue>
+        </Configuration>
+      </ActivityNode>
+    </Children>
+  </FirstActivity>
+  <ProcessId>25f13104-6592-4847-b8f5-7f6d34fca074</ProcessId>
+</WorkflowConfiguration>

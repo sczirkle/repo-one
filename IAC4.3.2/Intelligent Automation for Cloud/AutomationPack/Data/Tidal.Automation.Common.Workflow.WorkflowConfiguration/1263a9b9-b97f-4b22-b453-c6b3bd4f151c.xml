@@ -1,0 +1,793 @@
+<?xml version="1.0"?>
+<WorkflowConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>1263a9b9-b97f-4b22-b453-c6b3bd4f151c</Id>
+  <DisplayName>Check Service Node State in NSC</DisplayName>
+  <CreatedTime>2016-02-15T20:45:22.910875Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:45:41.1201171Z</ModifiedTime>
+  <FirstActivity xsi:type="RootNode">
+    <Id>a63aaaf8-9212-4077-9c7b-1ef01f4b8348</Id>
+    <DisplayName />
+    <Children>
+      <ActivityNode xsi:type="StartProcessNode">
+        <Id>31cfa315-a75e-499a-ad8e-92450d9d39ee</Id>
+        <DisplayName>Login</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>5b9403fa-32ee-4b9c-abcd-9261b14651f1</Id>
+            <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+            <DisplayName>Execution Failed?</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="SwitchNode">
+                <Id>e983fb02-29ef-4193-ac82-225cd8827775</Id>
+                <DisplayName>Condition Block</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="ConditionBranchNode">
+                    <Id>b1a22b49-ea32-4547-b646-19daf43e5ea3</Id>
+                    <DisplayName>NO</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="SwitchNode">
+                        <Id>7c02ca49-a6df-4616-8a19-da5c8091f399</Id>
+                        <DisplayName>Condition Block</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="ConditionBranchNode">
+                            <Id>465859b4-9778-4fad-9bc0-7b6d01dc8837</Id>
+                            <DisplayName>VSG</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="ExecuteActivityNode">
+                                <Id>106b24f3-bb13-49c9-a081-7e56d9f34d74</Id>
+                                <DisplayName>Find Requested VSG in VNMC</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                    <Id>41b1d6e2-362f-495c-97c4-4be4389443d2</Id>
+                                    <ActivityNodeId>106b24f3-bb13-49c9-a081-7e56d9f34d74</ActivityNodeId>
+                                    <CompletedId>2642c863-cbf7-4b2c-b384-fd97c495209b</CompletedId>
+                                  </ActivityNode>
+                                </Children>
+                                <Configuration xsi:type="WebHttpTargetAwareRequestActivityConfiguration" xml:space="preserve">
+                                  <Id>106b24f3-bb13-49c9-a081-7e56d9f34d74</Id>
+                                  <DisplayName>Find Requested VSG in VNMC</DisplayName>
+                                  <TargetLoadBalancer xsi:type="ActivityTargetLoadBalancer">
+                                    <ActivityId>00000000-0000-0000-0000-000000000000</ActivityId>
+                                    <ChildProcessNodeId>31cfa315-a75e-499a-ad8e-92450d9d39ee</ChildProcessNodeId>
+                                  </TargetLoadBalancer>
+                                  <InheritTarget>false</InheritTarget>
+                                  <ContainingProcessId>ff008f12-2442-4da8-9a65-0f333065fdd3</ContainingProcessId>
+                                  <UseCredentials>true</UseCredentials>
+                                  <RelativeUrl>
+                                    <FormattedCode>/resource-mgr</FormattedCode>
+                                  </RelativeUrl>
+                                  <ContentType>
+                                    <HardcodedValue>application/xml; charset=utf-8</HardcodedValue>
+                                  </ContentType>
+                                  <Method>
+                                    <HardcodedValue>POST</HardcodedValue>
+                                  </Method>
+                                  <UserAgent>
+                                    <HardcodedValue />
+                                  </UserAgent>
+                                  <Request>
+                                    <FormattedCode>&lt;configResolveChildren
+cookie="{0}"
+
+classId="fwInstance"
+inDn="fw"
+inHierarchical="false"&gt;
+    &lt;inFilter&gt;
+&lt;eq class="fwInstance" property="assoc" value="none" property="mgmtIp" value="{1}"/&gt;
+    &lt;/inFilter&gt;
+&lt;/configResolveChildren&gt;
+</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.Login.pnsc-cookie</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="ProcessOutputVariableLink">
+                                            <LaunchingActivityId>31cfa315-a75e-499a-ad8e-92450d9d39ee</LaunchingActivityId>
+                                            <OutputVariableId>47c30024-30a5-47db-8eff-91f701676cfd</OutputVariableId>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>31cfa315-a75e-499a-ad8e-92450d9d39ee</ObjectId>
+                                        <ObjectType>WorkflowNode</ObjectType>
+                                      </VariableReference>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Input.IP Address</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>a21e4ee6-88c5-447a-b4ab-51f74d92b0ca</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </Request>
+                                  <ProtocolVersion>Version11</ProtocolVersion>
+                                  <AllowAutoRedirect>true</AllowAutoRedirect>
+                                  <Timeout>
+                                    <DisplayUnits>Seconds</DisplayUnits>
+                                    <Period>
+                                      <HardcodedValue>100</HardcodedValue>
+                                    </Period>
+                                  </Timeout>
+                                  <Accept>
+                                    <HardcodedValue />
+                                  </Accept>
+                                  <AcceptCookies>false</AcceptCookies>
+                                  <Headers />
+                                  <OutputFormat>Xml</OutputFormat>
+                                </Configuration>
+                              </ActivityNode>
+                              <ActivityNode xsi:type="ExecuteActivityNode">
+                                <Id>eaa4b9fd-bf10-4289-9cae-6f7bce9986a0</Id>
+                                <DisplayName>Find VSG dn</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                    <Id>131b1cc4-e7c9-4f9a-ad38-9f56026f7d0f</Id>
+                                    <ActivityNodeId>eaa4b9fd-bf10-4289-9cae-6f7bce9986a0</ActivityNodeId>
+                                    <CompletedId>e1484ee5-19a4-411e-9b6d-03300b28b6a3</CompletedId>
+                                  </ActivityNode>
+                                </Children>
+                                <Configuration xsi:type="XPathQueryActivityConfiguration" xml:space="preserve">
+                                  <Id>eaa4b9fd-bf10-4289-9cae-6f7bce9986a0</Id>
+                                  <DisplayName>Find VSG dn</DisplayName>
+                                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                    <SingleTargetId>
+                                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                    </SingleTargetId>
+                                  </TargetLoadBalancer>
+                                  <InheritTarget>false</InheritTarget>
+                                  <ContainingProcessId>ff008f12-2442-4da8-9a65-0f333065fdd3</ContainingProcessId>
+                                  <SourceXml>
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.Find Requested VSG in VNMC.Response</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>Response</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>106b24f3-bb13-49c9-a081-7e56d9f34d74</ObjectId>
+                                        <ObjectType>ActivityInstance</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </SourceXml>
+                                  <Namespaces />
+                                  <Queries>
+                                    <XPathQueryDefinition>
+                                      <DisplayName>vsg dn</DisplayName>
+                                      <Query>
+                                        <HardcodedValue>configResolveChildren/outConfigs/fwInstance[1]/@registeredClientDn</HardcodedValue>
+                                      </Query>
+                                      <ReturnType>String</ReturnType>
+                                      <DefaultBehavior>Fail</DefaultBehavior>
+                                    </XPathQueryDefinition>
+                                  </Queries>
+                                </Configuration>
+                              </ActivityNode>
+                              <ActivityNode xsi:type="ExecuteActivityNode">
+                                <Id>c56d526d-4f12-47e9-b66b-39641e3216d4</Id>
+                                <DisplayName>Set Variable</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                    <Id>be115473-f74d-45a9-a546-0269f147b180</Id>
+                                    <ActivityNodeId>c56d526d-4f12-47e9-b66b-39641e3216d4</ActivityNodeId>
+                                    <CompletedId>c3804ae1-b971-4648-ba34-923e23452903</CompletedId>
+                                  </ActivityNode>
+                                </Children>
+                                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                                  <Id>c56d526d-4f12-47e9-b66b-39641e3216d4</Id>
+                                  <DisplayName>Set Variable</DisplayName>
+                                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                    <SingleTargetId>
+                                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                    </SingleTargetId>
+                                  </TargetLoadBalancer>
+                                  <InheritTarget>false</InheritTarget>
+                                  <ContainingProcessId>ff008f12-2442-4da8-9a65-0f333065fdd3</ContainingProcessId>
+                                  <VariableToSet>
+                                    <DisplayPath>Process.Variables.Output.Node Found</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>4b56bfe7-1838-497f-9a07-00b8e5771926</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableToSet>
+                                  <NewValue xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.Find VSG dn.Results.vsg dn</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>Results</PropertyName>
+                                          </Link>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>vsg dn</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>eaa4b9fd-bf10-4289-9cae-6f7bce9986a0</ObjectId>
+                                        <ObjectType>ActivityInstance</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </NewValue>
+                                </Configuration>
+                              </ActivityNode>
+                            </Children>
+                            <Condition>
+                              <Id>3f4d69e5-e721-47d7-abc0-1d6cfad1a73f</Id>
+                              <Operator>Or</Operator>
+                              <Conditions>
+                                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                                  <Id>a2794e7e-dff9-41c3-935f-d904d00145f0</Id>
+                                  <Expression xsi:type="SubstitutableString">
+                                    <HardcodedValue>VSG</HardcodedValue>
+                                  </Expression>
+                                  <Comparison>Equals</Comparison>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Process.Variables.Input.Type</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>1f395fc6-a3dd-4eec-a956-2fc6f168c53d</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableReference>
+                                </ConditionDefinition>
+                              </Conditions>
+                            </Condition>
+                          </ActivityNode>
+                          <ActivityNode xsi:type="ConditionBranchNode">
+                            <Id>10740c6c-47ea-48ec-b100-0a909e37281b</Id>
+                            <DisplayName>CSR</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="ExecuteActivityNode">
+                                <Id>eb18132b-61e0-4059-b977-cb5390953bf6</Id>
+                                <DisplayName>Find Requested CSR in VNMC</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                    <Id>c5878bce-841b-467e-9d96-f413cde45433</Id>
+                                    <ActivityNodeId>eb18132b-61e0-4059-b977-cb5390953bf6</ActivityNodeId>
+                                    <CompletedId>06d3555b-0b29-4585-982a-bdc0ce5bc4e6</CompletedId>
+                                  </ActivityNode>
+                                </Children>
+                                <Configuration xsi:type="WebHttpTargetAwareRequestActivityConfiguration" xml:space="preserve">
+                                  <Id>eb18132b-61e0-4059-b977-cb5390953bf6</Id>
+                                  <DisplayName>Find Requested CSR in VNMC</DisplayName>
+                                  <TargetLoadBalancer xsi:type="ActivityTargetLoadBalancer">
+                                    <ActivityId>00000000-0000-0000-0000-000000000000</ActivityId>
+                                    <ChildProcessNodeId>31cfa315-a75e-499a-ad8e-92450d9d39ee</ChildProcessNodeId>
+                                  </TargetLoadBalancer>
+                                  <InheritTarget>false</InheritTarget>
+                                  <ContainingProcessId>ff008f12-2442-4da8-9a65-0f333065fdd3</ContainingProcessId>
+                                  <UseCredentials>true</UseCredentials>
+                                  <RelativeUrl>
+                                    <FormattedCode>/resource-mgr</FormattedCode>
+                                  </RelativeUrl>
+                                  <ContentType>
+                                    <HardcodedValue>application/xml; charset=utf-8</HardcodedValue>
+                                  </ContentType>
+                                  <Method>
+                                    <HardcodedValue>POST</HardcodedValue>
+                                  </Method>
+                                  <UserAgent>
+                                    <HardcodedValue />
+                                  </UserAgent>
+                                  <Request>
+                                    <FormattedCode>&lt;configResolveChildren
+cookie="{0}"
+
+classId="routerInstance"
+inDn="router"
+inHierarchical="false"&gt;
+    &lt;inFilter&gt;
+&lt;eq class="routerInstance" property="assoc" value="none" property="mgmtIp" value="{1}"/&gt;
+    &lt;/inFilter&gt;
+&lt;/configResolveChildren&gt;
+</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.Login.pnsc-cookie</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="ProcessOutputVariableLink">
+                                            <LaunchingActivityId>31cfa315-a75e-499a-ad8e-92450d9d39ee</LaunchingActivityId>
+                                            <OutputVariableId>47c30024-30a5-47db-8eff-91f701676cfd</OutputVariableId>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>31cfa315-a75e-499a-ad8e-92450d9d39ee</ObjectId>
+                                        <ObjectType>WorkflowNode</ObjectType>
+                                      </VariableReference>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Input.IP Address</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>a21e4ee6-88c5-447a-b4ab-51f74d92b0ca</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </Request>
+                                  <ProtocolVersion>Version11</ProtocolVersion>
+                                  <AllowAutoRedirect>true</AllowAutoRedirect>
+                                  <Timeout>
+                                    <DisplayUnits>Seconds</DisplayUnits>
+                                    <Period>
+                                      <HardcodedValue>100</HardcodedValue>
+                                    </Period>
+                                  </Timeout>
+                                  <Accept>
+                                    <HardcodedValue />
+                                  </Accept>
+                                  <AcceptCookies>false</AcceptCookies>
+                                  <Headers />
+                                  <OutputFormat>Xml</OutputFormat>
+                                </Configuration>
+                              </ActivityNode>
+                              <ActivityNode xsi:type="ExecuteActivityNode">
+                                <Id>852e4513-0a02-4bf3-a220-5b0beeb74392</Id>
+                                <DisplayName>Find CSR dn</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                    <Id>cfaa355d-3839-4b90-9b16-a53d9ae2793d</Id>
+                                    <ActivityNodeId>852e4513-0a02-4bf3-a220-5b0beeb74392</ActivityNodeId>
+                                    <CompletedId>02396ef8-99f5-4efd-8945-585d9629d3d9</CompletedId>
+                                  </ActivityNode>
+                                </Children>
+                                <Configuration xsi:type="XPathQueryActivityConfiguration" xml:space="preserve">
+                                  <Id>852e4513-0a02-4bf3-a220-5b0beeb74392</Id>
+                                  <DisplayName>Find CSR dn</DisplayName>
+                                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                    <SingleTargetId>
+                                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                    </SingleTargetId>
+                                  </TargetLoadBalancer>
+                                  <InheritTarget>false</InheritTarget>
+                                  <ContainingProcessId>ff008f12-2442-4da8-9a65-0f333065fdd3</ContainingProcessId>
+                                  <SourceXml>
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.Find Requested CSR in VNMC.Response</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>Response</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>eb18132b-61e0-4059-b977-cb5390953bf6</ObjectId>
+                                        <ObjectType>ActivityInstance</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </SourceXml>
+                                  <Namespaces />
+                                  <Queries>
+                                    <XPathQueryDefinition>
+                                      <DisplayName>CSR dn</DisplayName>
+                                      <Query>
+                                        <HardcodedValue>configResolveChildren/outConfigs/routerInstance[1]/@registeredClientDn</HardcodedValue>
+                                      </Query>
+                                      <ReturnType>String</ReturnType>
+                                      <DefaultValue xsi:type="SubstitutableString">
+                                        <HardcodedValue />
+                                      </DefaultValue>
+                                      <DefaultBehavior>UseDefaults</DefaultBehavior>
+                                    </XPathQueryDefinition>
+                                  </Queries>
+                                </Configuration>
+                              </ActivityNode>
+                              <ActivityNode xsi:type="ExecuteActivityNode">
+                                <Id>a3b9e26d-2fea-4fd6-8f6f-61777444efda</Id>
+                                <DisplayName>Set Variable</DisplayName>
+                                <Children>
+                                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                    <Id>81722e55-b059-484e-904d-74a7454db847</Id>
+                                    <ActivityNodeId>a3b9e26d-2fea-4fd6-8f6f-61777444efda</ActivityNodeId>
+                                    <CompletedId>97efa188-b698-4b93-aa63-c6269ce21e0d</CompletedId>
+                                  </ActivityNode>
+                                </Children>
+                                <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                                  <Id>a3b9e26d-2fea-4fd6-8f6f-61777444efda</Id>
+                                  <DisplayName>Set Variable</DisplayName>
+                                  <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                    <SingleTargetId>
+                                      <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                    </SingleTargetId>
+                                  </TargetLoadBalancer>
+                                  <InheritTarget>false</InheritTarget>
+                                  <ContainingProcessId>ff008f12-2442-4da8-9a65-0f333065fdd3</ContainingProcessId>
+                                  <VariableToSet>
+                                    <DisplayPath>Process.Variables.Output.Node Found</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>4b56bfe7-1838-497f-9a07-00b8e5771926</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableToSet>
+                                  <NewValue xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.Find CSR dn.Results.CSR dn</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>Results</PropertyName>
+                                          </Link>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>CSR dn</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>852e4513-0a02-4bf3-a220-5b0beeb74392</ObjectId>
+                                        <ObjectType>ActivityInstance</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </NewValue>
+                                </Configuration>
+                              </ActivityNode>
+                            </Children>
+                            <Condition>
+                              <Id>98d5aac1-ddb8-4f84-8c43-177c85fc4bd8</Id>
+                              <Conditions />
+                            </Condition>
+                          </ActivityNode>
+                        </Children>
+                      </ActivityNode>
+                      <ActivityNode xsi:type="ConditionBranchNode">
+                        <Id>f5073ecb-3339-4a0c-a900-a63ccd71fd06</Id>
+                        <DisplayName>Condition Branch</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="StartProcessNode">
+                            <Id>04892269-f564-4f52-b7dc-e9770b647c7b</Id>
+                            <DisplayName>Get Object in PNSC</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                <Id>22fd75a0-7ddc-4987-b030-0711be06bf67</Id>
+                                <ProcessNodeId>04892269-f564-4f52-b7dc-e9770b647c7b</ProcessNodeId>
+                                <CompletedId>3f9812f9-7562-4e8f-914e-781459d5fb9b</CompletedId>
+                              </ActivityNode>
+                            </Children>
+                            <ProcessId>278de494-6eb1-4bd9-8458-e4183bbc2d13</ProcessId>
+                            <InputVariableTable>
+                              <VariableAssignmentsAsArray>
+                                <InputVariableAssignment>
+                                  <InputVariableId>97743146-65c3-42b1-8242-c64aa44dd5fd</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableBoolean">
+                                    <HardcodedValue>false</HardcodedValue>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                                <InputVariableAssignment>
+                                  <InputVariableId>ee753695-ba9d-4675-9e0b-f15601e3ebe7</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableString">
+                                    <HardcodedValue>policy-mgr</HardcodedValue>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                                <InputVariableAssignment>
+                                  <InputVariableId>372395cb-5aed-43f3-b09b-74922bf39e59</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Output.Node Found</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>4b56bfe7-1838-497f-9a07-00b8e5771926</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                                <InputVariableAssignment>
+                                  <InputVariableId>ad6e7eb3-3fce-4430-a821-0f82a5b002e9</InputVariableId>
+                                  <VariableValue xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.Login.pnsc-cookie</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="ProcessOutputVariableLink">
+                                            <LaunchingActivityId>31cfa315-a75e-499a-ad8e-92450d9d39ee</LaunchingActivityId>
+                                            <OutputVariableId>47c30024-30a5-47db-8eff-91f701676cfd</OutputVariableId>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>31cfa315-a75e-499a-ad8e-92450d9d39ee</ObjectId>
+                                        <ObjectType>WorkflowNode</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </VariableValue>
+                                </InputVariableAssignment>
+                              </VariableAssignmentsAsArray>
+                            </InputVariableTable>
+                            <Asynchronous>false</Asynchronous>
+                            <InheritTarget>false</InheritTarget>
+                            <TargetLoadBalancer xsi:type="ActivityTargetLoadBalancer">
+                              <ActivityId>00000000-0000-0000-0000-000000000000</ActivityId>
+                              <ChildProcessNodeId>31cfa315-a75e-499a-ad8e-92450d9d39ee</ChildProcessNodeId>
+                            </TargetLoadBalancer>
+                            <InheritPriorityClass>true</InheritPriorityClass>
+                            <RuntimeUserId>
+                              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                            </RuntimeUserId>
+                            <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                            <StartPointId>
+                              <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                            </StartPointId>
+                            <StartPointName>
+                              <FormattedCode />
+                            </StartPointName>
+                          </ActivityNode>
+                          <ActivityNode xsi:type="ExecuteActivityNode">
+                            <Id>180fda16-1cfa-44bf-9e86-8250f2f3f937</Id>
+                            <DisplayName>Find Status</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                <Id>1403d763-9991-43e8-8fee-c207a2000443</Id>
+                                <ActivityNodeId>180fda16-1cfa-44bf-9e86-8250f2f3f937</ActivityNodeId>
+                                <CompletedId>94213f9b-e782-444a-abff-86d03ac972c6</CompletedId>
+                              </ActivityNode>
+                            </Children>
+                            <Configuration xsi:type="XPathQueryActivityConfiguration" xml:space="preserve">
+                              <Id>180fda16-1cfa-44bf-9e86-8250f2f3f937</Id>
+                              <DisplayName>Find Status</DisplayName>
+                              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                <SingleTargetId>
+                                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                </SingleTargetId>
+                              </TargetLoadBalancer>
+                              <InheritTarget>false</InheritTarget>
+                              <ContainingProcessId>ff008f12-2442-4da8-9a65-0f333065fdd3</ContainingProcessId>
+                              <SourceXml>
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Get Object in PNSC.Object XML</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="ProcessOutputVariableLink">
+                                        <LaunchingActivityId>04892269-f564-4f52-b7dc-e9770b647c7b</LaunchingActivityId>
+                                        <OutputVariableId>004915b1-3d5b-41ff-b70f-0e5ddc8b4c82</OutputVariableId>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>04892269-f564-4f52-b7dc-e9770b647c7b</ObjectId>
+                                    <ObjectType>WorkflowNode</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </SourceXml>
+                              <Namespaces />
+                              <Queries>
+                                <XPathQueryDefinition>
+                                  <DisplayName>Status</DisplayName>
+                                  <Query>
+                                    <HardcodedValue>extpolClient/@operState</HardcodedValue>
+                                  </Query>
+                                  <ReturnType>String</ReturnType>
+                                  <DefaultBehavior>Fail</DefaultBehavior>
+                                </XPathQueryDefinition>
+                              </Queries>
+                            </Configuration>
+                          </ActivityNode>
+                          <ActivityNode xsi:type="ExecuteActivityNode">
+                            <Id>50da3a6f-5488-4559-a027-8063f44b2cd3</Id>
+                            <DisplayName>Set Status</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                <Id>92a09561-e537-41ef-a7d2-55bd01f9dd24</Id>
+                                <ActivityNodeId>50da3a6f-5488-4559-a027-8063f44b2cd3</ActivityNodeId>
+                                <CompletedId>cfa262b4-1688-4b39-bcf7-6cd958388adb</CompletedId>
+                              </ActivityNode>
+                            </Children>
+                            <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                              <Id>50da3a6f-5488-4559-a027-8063f44b2cd3</Id>
+                              <DisplayName>Set Status</DisplayName>
+                              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                <SingleTargetId>
+                                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                </SingleTargetId>
+                              </TargetLoadBalancer>
+                              <InheritTarget>false</InheritTarget>
+                              <ContainingProcessId>ff008f12-2442-4da8-9a65-0f333065fdd3</ContainingProcessId>
+                              <VariableToSet>
+                                <DisplayPath>Process.Variables.Output.Node Status</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>ea13beb7-b621-43d7-94ab-dda5d959f7e1</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableToSet>
+                              <NewValue xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.Find Status.Results.Status</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>Results</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>Status</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>180fda16-1cfa-44bf-9e86-8250f2f3f937</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </NewValue>
+                            </Configuration>
+                          </ActivityNode>
+                        </Children>
+                        <Condition>
+                          <Id>da78d517-2d0a-4af7-be26-610bb70ca6b0</Id>
+                          <Conditions>
+                            <ConditionDefinition xsi:type="VariableConditionDefinition">
+                              <Id>2d6e2af2-838c-4e78-bfba-667d9675a2f2</Id>
+                              <Expression xsi:type="SubstitutableString">
+                                <HardcodedValue />
+                              </Expression>
+                              <Comparison>NotEquals</Comparison>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Variables.Output.Node Found</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>4b56bfe7-1838-497f-9a07-00b8e5771926</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableReference>
+                            </ConditionDefinition>
+                          </Conditions>
+                        </Condition>
+                      </ActivityNode>
+                    </Children>
+                    <Condition>
+                      <Id>7d5642a5-d6f6-4ccd-a897-40b2f38acc09</Id>
+                      <Conditions>
+                        <ConditionDefinition xsi:type="VariableConditionDefinition">
+                          <Id>628802fb-c0d2-4dbb-888d-0eacf9ae38cf</Id>
+                          <Expression xsi:type="SubstitutableBoolean">
+                            <HardcodedValue>false</HardcodedValue>
+                          </Expression>
+                          <Comparison>Equals</Comparison>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.Login.Instance Failed</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>InstanceFailed</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>31cfa315-a75e-499a-ad8e-92450d9d39ee</ObjectId>
+                            <ObjectType>ProcessInstance</ObjectType>
+                          </VariableReference>
+                        </ConditionDefinition>
+                      </Conditions>
+                    </Condition>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="ConditionBranchNode">
+                    <Id>438226c9-959e-4bbe-8a36-f5370a797e18</Id>
+                    <DisplayName>YES</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ExecuteActivityNode">
+                        <Id>5f662d9c-91ed-45e3-bcff-63b5a23e79bd</Id>
+                        <DisplayName>Set Output Status</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                            <Id>540a90f9-fed4-451e-9f37-e0b6a0167419</Id>
+                            <ActivityNodeId>5f662d9c-91ed-45e3-bcff-63b5a23e79bd</ActivityNodeId>
+                            <CompletedId>76683028-382d-4f1e-9bbf-c355aa1b7f3e</CompletedId>
+                          </ActivityNode>
+                        </Children>
+                        <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                          <Id>5f662d9c-91ed-45e3-bcff-63b5a23e79bd</Id>
+                          <DisplayName>Set Output Status</DisplayName>
+                          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                            <SingleTargetId>
+                              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                            </SingleTargetId>
+                          </TargetLoadBalancer>
+                          <InheritTarget>false</InheritTarget>
+                          <ContainingProcessId>ff008f12-2442-4da8-9a65-0f333065fdd3</ContainingProcessId>
+                          <VariableToSet>
+                            <DisplayPath>Process.Variables.Output.Node Status</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>ea13beb7-b621-43d7-94ab-dda5d959f7e1</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableToSet>
+                          <NewValue xsi:type="SubstitutableString">
+                            <HardcodedValue>Login Failed</HardcodedValue>
+                          </NewValue>
+                        </Configuration>
+                      </ActivityNode>
+                    </Children>
+                    <Condition>
+                      <Id>36c41fc9-cf69-4f5a-a1a0-a0ad73a9664e</Id>
+                      <Conditions />
+                    </Condition>
+                  </ActivityNode>
+                </Children>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>9217f7dc-9d35-426d-95b5-d4788ad549f9</Id>
+              <Conditions />
+            </Condition>
+          </ActivityNode>
+        </Children>
+        <ProcessId>07e1dd08-08f9-42bc-8661-8ce2dde61c28</ProcessId>
+        <InputVariableTable>
+          <VariableAssignmentsAsArray />
+        </InputVariableTable>
+        <Asynchronous>false</Asynchronous>
+        <InheritTarget>false</InheritTarget>
+        <TargetLoadBalancer xsi:type="VariableBasedSingleTargetLoadBalancer">
+          <TargetGroupId>030cc8f4-f329-4a05-b630-ea401df17264</TargetGroupId>
+          <Criteria>
+            <ConditionDefinition xsi:type="VariableConditionDefinition">
+              <Id>4759eb25-c1a8-4e3a-aacb-87bde65c1b86</Id>
+              <Expression xsi:type="SubstitutableGuid">
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Input.PNMC Target ID</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>a94a6841-6db7-491a-9bae-7dccd9c828ef</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                </References>
+              </Expression>
+              <Comparison>Equals</Comparison>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Target.Target Id</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>Id</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectType>Target</ObjectType>
+              </VariableReference>
+            </ConditionDefinition>
+          </Criteria>
+        </TargetLoadBalancer>
+        <InheritPriorityClass>true</InheritPriorityClass>
+        <RuntimeUserId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </RuntimeUserId>
+        <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+        <StartPointId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </StartPointId>
+        <StartPointName>
+          <FormattedCode />
+        </StartPointName>
+      </ActivityNode>
+      <ActivityNode xsi:type="StartProcessNode">
+        <Id>10fc5caf-43e8-4fe4-90eb-1cffec1e9ac4</Id>
+        <DisplayName>Logout</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>d27c74cc-264a-4dff-b7c1-07a00c07e48a</Id>
+            <ProcessNodeId>10fc5caf-43e8-4fe4-90eb-1cffec1e9ac4</ProcessNodeId>
+            <CompletedId>e0517128-a541-4aa2-9957-c14d971f4113</CompletedId>
+          </ActivityNode>
+        </Children>
+        <ProcessId>86bda686-8f5e-4ab1-b1a2-6901d6310df2</ProcessId>
+        <InputVariableTable>
+          <VariableAssignmentsAsArray>
+            <InputVariableAssignment>
+              <InputVariableId>2438f9f1-854a-4ba7-bc28-748c73288819</InputVariableId>
+              <VariableValue xsi:type="SubstitutableString">
+                <FormattedCode>{0}</FormattedCode>
+                <References>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Workflow.Login.pnsc-cookie</DisplayPath>
+                    <LinkChain>
+                      <Link xsi:type="ProcessOutputVariableLink">
+                        <LaunchingActivityId>31cfa315-a75e-499a-ad8e-92450d9d39ee</LaunchingActivityId>
+                        <OutputVariableId>47c30024-30a5-47db-8eff-91f701676cfd</OutputVariableId>
+                      </Link>
+                    </LinkChain>
+                    <ObjectId>31cfa315-a75e-499a-ad8e-92450d9d39ee</ObjectId>
+                    <ObjectType>WorkflowNode</ObjectType>
+                  </VariableReference>
+                </References>
+              </VariableValue>
+            </InputVariableAssignment>
+          </VariableAssignmentsAsArray>
+        </InputVariableTable>
+        <Asynchronous>false</Asynchronous>
+        <InheritTarget>false</InheritTarget>
+        <TargetLoadBalancer xsi:type="ActivityTargetLoadBalancer">
+          <ActivityId>00000000-0000-0000-0000-000000000000</ActivityId>
+          <ChildProcessNodeId>31cfa315-a75e-499a-ad8e-92450d9d39ee</ChildProcessNodeId>
+        </TargetLoadBalancer>
+        <InheritPriorityClass>true</InheritPriorityClass>
+        <RuntimeUserId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </RuntimeUserId>
+        <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+        <StartPointId>
+          <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+        </StartPointId>
+        <StartPointName>
+          <FormattedCode />
+        </StartPointName>
+      </ActivityNode>
+    </Children>
+  </FirstActivity>
+  <ProcessId>ff008f12-2442-4da8-9a65-0f333065fdd3</ProcessId>
+</WorkflowConfiguration>

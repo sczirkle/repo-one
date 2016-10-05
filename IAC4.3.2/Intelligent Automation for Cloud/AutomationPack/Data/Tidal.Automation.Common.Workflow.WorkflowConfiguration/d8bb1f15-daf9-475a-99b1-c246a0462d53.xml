@@ -1,0 +1,2068 @@
+<?xml version="1.0"?>
+<WorkflowConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>d8bb1f15-daf9-475a-99b1-c246a0462d53</Id>
+  <DisplayName>Network Discovery - Create Device SI</DisplayName>
+  <CreatedTime>2016-02-15T20:46:23.89525Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:46:42.1044921Z</ModifiedTime>
+  <FirstActivity xsi:type="RootNode">
+    <Id>f3d0c694-281f-4d60-b931-c433065ed829</Id>
+    <DisplayName />
+    <Children>
+      <ActivityNode xsi:type="StartPointNode">
+        <Id>a760de5f-8d1a-467b-8044-c285a81b2f3a</Id>
+        <DisplayName>Network Device Registration</DisplayName>
+      </ActivityNode>
+      <ActivityNode xsi:type="ExecuteActivityNode">
+        <Id>f94f2cd5-a902-4323-a409-f559b75007e1</Id>
+        <DisplayName>Devices to Table</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+            <Id>ceb5ae48-4f92-4821-b367-c6bbb1853d0a</Id>
+            <ActivityNodeId>f94f2cd5-a902-4323-a409-f559b75007e1</ActivityNodeId>
+            <CompletedId>2f90516c-4231-40f9-bf0b-2a4a3f3a49a0</CompletedId>
+          </ActivityNode>
+        </Children>
+        <Configuration xsi:type="BuiltinReadTableFromTextActivityConfiguration" xml:space="preserve">
+          <Id>f94f2cd5-a902-4323-a409-f559b75007e1</Id>
+          <DisplayName>Devices to Table</DisplayName>
+          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+            <SingleTargetId>
+              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+            </SingleTargetId>
+          </TargetLoadBalancer>
+          <InheritTarget>false</InheritTarget>
+          <ContainingProcessId>da89497e-e106-4ff1-a370-280935b1a355</ContainingProcessId>
+          <Columns>
+            <BuiltinTableColumn>
+              <Name>UniqueID</Name>
+              <DataType>System.String</DataType>
+            </BuiltinTableColumn>
+            <BuiltinTableColumn>
+              <Name>UserName</Name>
+              <DataType>System.String</DataType>
+            </BuiltinTableColumn>
+            <BuiltinTableColumn>
+              <Name>SystemName</Name>
+              <DataType>System.String</DataType>
+            </BuiltinTableColumn>
+            <BuiltinTableColumn>
+              <Name>SystemLocation</Name>
+              <DataType>System.String</DataType>
+            </BuiltinTableColumn>
+            <BuiltinTableColumn>
+              <Name>SystemObjectID</Name>
+              <DataType>System.String</DataType>
+            </BuiltinTableColumn>
+            <BuiltinTableColumn>
+              <Name>DNSName</Name>
+              <DataType>System.String</DataType>
+            </BuiltinTableColumn>
+            <BuiltinTableColumn>
+              <Name>Hostname</Name>
+              <DataType>System.String</DataType>
+            </BuiltinTableColumn>
+            <BuiltinTableColumn>
+              <Name>SystemDescription</Name>
+              <DataType>System.String</DataType>
+            </BuiltinTableColumn>
+            <BuiltinTableColumn>
+              <Name>ManagementIPAddress</Name>
+              <DataType>System.String</DataType>
+            </BuiltinTableColumn>
+            <BuiltinTableColumn>
+              <Name>IPAddress</Name>
+              <DataType>System.String</DataType>
+            </BuiltinTableColumn>
+            <BuiltinTableColumn>
+              <Name>OperatingSystem</Name>
+              <DataType>System.String</DataType>
+            </BuiltinTableColumn>
+            <BuiltinTableColumn>
+              <Name>CredentialDiscovered</Name>
+              <DataType>System.String</DataType>
+            </BuiltinTableColumn>
+            <BuiltinTableColumn>
+              <Name>XMPID</Name>
+              <DataType>System.String</DataType>
+            </BuiltinTableColumn>
+            <BuiltinTableColumn>
+              <Name>ProductSeries</Name>
+              <DataType>System.String</DataType>
+            </BuiltinTableColumn>
+            <BuiltinTableColumn>
+              <Name>ProductFamily</Name>
+              <DataType>System.String</DataType>
+            </BuiltinTableColumn>
+            <BuiltinTableColumn>
+              <Name>ProductType</Name>
+              <DataType>System.String</DataType>
+            </BuiltinTableColumn>
+            <BuiltinTableColumn>
+              <Name>TimestampPriority</Name>
+              <DataType>System.Double</DataType>
+            </BuiltinTableColumn>
+          </Columns>
+          <OtherDelimeter>0</OtherDelimeter>
+          <SourceText>
+            <FormattedCode>{0}</FormattedCode>
+            <References>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Process.Variables.Input.DeviceCSV</DisplayPath>
+                <LinkChain />
+                <ObjectId>79bfaa8e-9033-444e-84c7-1d6fe3b73dcc</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableReference>
+            </References>
+          </SourceText>
+        </Configuration>
+      </ActivityNode>
+      <ActivityNode xsi:type="ConditionBranchNode">
+        <Id>e27dfb47-0e3d-4de6-856c-1ef2940b70fa</Id>
+        <DisplayName>If devices are discovered</DisplayName>
+        <Children>
+          <ActivityNode xsi:type="ExecuteActivityNode">
+            <Id>f7f72d95-3e8a-4130-bbe5-319384c3b308</Id>
+            <DisplayName>Set Discovered Devices Table Variable</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                <Id>620ec808-2a7e-4310-b34a-224e64dff1ca</Id>
+                <ActivityNodeId>f7f72d95-3e8a-4130-bbe5-319384c3b308</ActivityNodeId>
+                <CompletedId>74f8ed1c-745d-4556-8675-c6d82449eae8</CompletedId>
+              </ActivityNode>
+            </Children>
+            <Configuration xsi:type="BuiltinSetTableVariableActivityConfiguration" xml:space="preserve">
+              <Id>f7f72d95-3e8a-4130-bbe5-319384c3b308</Id>
+              <DisplayName>Set Discovered Devices Table Variable</DisplayName>
+              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                <SingleTargetId>
+                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                </SingleTargetId>
+              </TargetLoadBalancer>
+              <InheritTarget>false</InheritTarget>
+              <ContainingProcessId>da89497e-e106-4ff1-a370-280935b1a355</ContainingProcessId>
+              <VariableToSet>
+                <DisplayPath>Process.Variables.Local.Discovered Devices Table</DisplayPath>
+                <LinkChain />
+                <ObjectId>94e44ab5-a5be-4e46-9081-bf328f773a59</ObjectId>
+                <ObjectType>GlobalVariable</ObjectType>
+              </VariableToSet>
+              <NewValue>
+                <DisplayPath>Workflow.Devices to Table.Result Table</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>ResultTable</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>f94f2cd5-a902-4323-a409-f559b75007e1</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </NewValue>
+              <OperatorType>setto</OperatorType>
+            </Configuration>
+          </ActivityNode>
+          <ActivityNode xsi:type="LockNode">
+            <Id>996ff76a-13af-4171-8127-3abf12ae2c67</Id>
+            <DisplayName>Queue Block</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="ExecuteActivityNode">
+                <Id>643d975e-b2f6-4015-8657-f31ef9a83216</Id>
+                <DisplayName>Query Existing Network Devices from CCP</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>df013a4b-3078-4539-9b95-b0d560066173</Id>
+                    <ActivityNodeId>643d975e-b2f6-4015-8657-f31ef9a83216</ActivityNodeId>
+                    <CompletedId>37cb7e6c-8cfa-41ec-8c5d-c925460adcb1</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <Configuration xsi:type="FindServiceItemsActivityConfiguration" xml:space="preserve">
+                  <Id>643d975e-b2f6-4015-8657-f31ef9a83216</Id>
+                  <DisplayName>Query Existing Network Devices from CCP</DisplayName>
+                  <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                    <SingleTargetReference>
+                      <FormattedCode />
+                      <HardcodedValue>
+                        <Id>b3216113-bb0f-4cb3-b7c2-93b9074ef87b</Id>
+                        <ObjectType>Target</ObjectType>
+                      </HardcodedValue>
+                    </SingleTargetReference>
+                  </TargetLoadBalancer>
+                  <InheritTarget>false</InheritTarget>
+                  <ContainingProcessId>da89497e-e106-4ff1-a370-280935b1a355</ContainingProcessId>
+                  <RetryTimePeriod>
+                    <DisplayUnits>Minutes</DisplayUnits>
+                    <Period>
+                      <FormattedCode>{0}</FormattedCode>
+                      <References>
+                        <VariableReference xsi:type="PropertyReference">
+                          <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Time Period (minutes)</DisplayPath>
+                          <LinkChain>
+                            <Link xsi:type="PropertyNameLink">
+                              <PropertyName>DefaultRetryMinutes</PropertyName>
+                            </Link>
+                          </LinkChain>
+                          <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                          <ObjectType>Adapter</ObjectType>
+                        </VariableReference>
+                      </References>
+                    </Period>
+                  </RetryTimePeriod>
+                  <RetryFrequency>
+                    <DisplayUnits>Seconds</DisplayUnits>
+                    <Period>
+                      <FormattedCode>{0}</FormattedCode>
+                      <References>
+                        <VariableReference xsi:type="PropertyReference">
+                          <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Frequency (seconds)</DisplayPath>
+                          <LinkChain>
+                            <Link xsi:type="PropertyNameLink">
+                              <PropertyName>DefaultRetryFrequency</PropertyName>
+                            </Link>
+                          </LinkChain>
+                          <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                          <ObjectType>Adapter</ObjectType>
+                        </VariableReference>
+                      </References>
+                    </Period>
+                  </RetryFrequency>
+                  <Timeout>
+                    <DisplayUnits>Seconds</DisplayUnits>
+                    <Period>
+                      <HardcodedValue>100</HardcodedValue>
+                    </Period>
+                  </Timeout>
+                  <ItemType>
+                    <HardcodedValue>NetworkDevices</HardcodedValue>
+                  </ItemType>
+                  <ItemName>
+                    <FormattedCode />
+                  </ItemName>
+                  <BrowseServiceItemName>NetworkDevices</BrowseServiceItemName>
+                  <Properties>
+                    <ServiceItemProperty>
+                      <Name>
+                        <HardcodedValue>Name</HardcodedValue>
+                      </Name>
+                    </ServiceItemProperty>
+                    <ServiceItemProperty>
+                      <Name>
+                        <HardcodedValue>UniqueID</HardcodedValue>
+                      </Name>
+                    </ServiceItemProperty>
+                    <ServiceItemProperty>
+                      <Name>
+                        <HardcodedValue>TimestampPriority</HardcodedValue>
+                      </Name>
+                      <VariableType>Number</VariableType>
+                    </ServiceItemProperty>
+                  </Properties>
+                  <SearchCriteria />
+                  <Subscriber>
+                    <HardcodedValue />
+                  </Subscriber>
+                  <SubscriberOuName>
+                    <HardcodedValue />
+                  </SubscriberOuName>
+                </Configuration>
+              </ActivityNode>
+              <ActivityNode xsi:type="ForEachNode">
+                <Id>696c907c-3952-4ae4-bca4-2506dd38a00d</Id>
+                <DisplayName>For Each Existing Device</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="ExecuteActivityNode">
+                    <Id>184830e6-b6cc-4c04-97d3-0f02d3674cd2</Id>
+                    <DisplayName>See if the discovered device already exists in CP</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                        <Id>24bca0c9-9488-43cf-aeaf-0fd5859a9171</Id>
+                        <ActivityNodeId>184830e6-b6cc-4c04-97d3-0f02d3674cd2</ActivityNodeId>
+                        <CompletedId>65b0ebd4-25c4-4821-8516-251e6bac8890</CompletedId>
+                      </ActivityNode>
+                    </Children>
+                    <Configuration xsi:type="ExtractTableActivityConfiguration" xml:space="preserve">
+                      <Id>184830e6-b6cc-4c04-97d3-0f02d3674cd2</Id>
+                      <DisplayName>See if the discovered device already exists in CP</DisplayName>
+                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                        <SingleTargetId>
+                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                        </SingleTargetId>
+                      </TargetLoadBalancer>
+                      <InheritTarget>false</InheritTarget>
+                      <ContainingProcessId>da89497e-e106-4ff1-a370-280935b1a355</ContainingProcessId>
+                      <Columns>
+                        <BuiltinTableColumn>
+                          <Name>UniqueID</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>UserName</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>SystemName</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>SystemLocation</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>SystemObjectID</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>DNSName</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>Hostname</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>SystemDescription</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>ManagementIPAddress</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>IPAddress</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>OperatingSystem</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>CredentialDiscovered</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>XMPID</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>ProductSeries</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>ProductFamily</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>ProductType</Name>
+                          <DataType>System.String</DataType>
+                        </BuiltinTableColumn>
+                        <BuiltinTableColumn>
+                          <Name>TimestampPriority</Name>
+                          <DataType>System.Double</DataType>
+                        </BuiltinTableColumn>
+                      </Columns>
+                      <SourceTable xsi:type="PropertyReference">
+                        <DisplayPath>Process.Variables.Local.Discovered Devices Table</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>94e44ab5-a5be-4e46-9081-bf328f773a59</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </SourceTable>
+                      <WhereClause>
+                        <FormattedCode>UniqueID='{0}'</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.For Each Existing Device.Item.UniqueID</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>UniqueID</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>696c907c-3952-4ae4-bca4-2506dd38a00d</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </WhereClause>
+                      <SortColumn />
+                      <SortOrder>Ascending</SortOrder>
+                      <MaxRows>
+                        <HardcodedValue>2147483647</HardcodedValue>
+                      </MaxRows>
+                    </Configuration>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="ConditionBranchNode">
+                    <Id>ba77501e-70de-451c-bc17-27ebfdbc34eb</Id>
+                    <DisplayName>Device exists, Update table</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ExecuteActivityNode">
+                        <Id>5136eaf1-e6af-49c4-a606-9c776ab3cc80</Id>
+                        <DisplayName>Add Device to be Updated</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                            <Id>a90a08f4-add6-464a-85a7-73352b9c076a</Id>
+                            <ActivityNodeId>5136eaf1-e6af-49c4-a606-9c776ab3cc80</ActivityNodeId>
+                            <CompletedId>88c17ec3-54e8-4808-9e72-89a5cef8919a</CompletedId>
+                          </ActivityNode>
+                        </Children>
+                        <Configuration xsi:type="AddTableRowActivityConfiguration" xml:space="preserve">
+                          <Id>5136eaf1-e6af-49c4-a606-9c776ab3cc80</Id>
+                          <DisplayName>Add Device to be Updated</DisplayName>
+                          <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                            <SingleTargetId>
+                              <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                            </SingleTargetId>
+                          </TargetLoadBalancer>
+                          <InheritTarget>false</InheritTarget>
+                          <ContainingProcessId>da89497e-e106-4ff1-a370-280935b1a355</ContainingProcessId>
+                          <TableVariable>
+                            <DisplayPath>Process.Variables.Local.Updated Devices Table</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>21796ba1-ec15-4686-83a0-ee29b08a21b6</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </TableVariable>
+                          <Values>
+                            <BuiltinDataCellValue>
+                              <ColumnName>CredentialDiscovered</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.See if the discovered device already exists in CP.Result Table.First Row.CredentialDiscovered</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ResultTable</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>FirstRow</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>CredentialDiscovered</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>184830e6-b6cc-4c04-97d3-0f02d3674cd2</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>DNSName</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.See if the discovered device already exists in CP.Result Table.First Row.DNSName</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ResultTable</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>FirstRow</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>DNSName</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>184830e6-b6cc-4c04-97d3-0f02d3674cd2</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>Hostname</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.See if the discovered device already exists in CP.Result Table.First Row.Hostname</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ResultTable</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>FirstRow</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>Hostname</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>184830e6-b6cc-4c04-97d3-0f02d3674cd2</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>IPAddress</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.See if the discovered device already exists in CP.Result Table.First Row.IPAddress</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ResultTable</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>FirstRow</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>IPAddress</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>184830e6-b6cc-4c04-97d3-0f02d3674cd2</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>LastDiscovery</ColumnName>
+                              <Value xsi:type="SubstitutableDate">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Process.Start Time</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>StartTime</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectType>ProcessInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>ManagementIPAddress</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.See if the discovered device already exists in CP.Result Table.First Row.ManagementIPAddress</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ResultTable</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>FirstRow</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ManagementIPAddress</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>184830e6-b6cc-4c04-97d3-0f02d3674cd2</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>Name</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.For Each Existing Device.Item.Name</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>Name</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>696c907c-3952-4ae4-bca4-2506dd38a00d</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>OperatingSystem</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.See if the discovered device already exists in CP.Result Table.First Row.OperatingSystem</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ResultTable</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>FirstRow</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>OperatingSystem</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>184830e6-b6cc-4c04-97d3-0f02d3674cd2</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>ProductFamily</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.See if the discovered device already exists in CP.Result Table.First Row.ProductFamily</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ResultTable</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>FirstRow</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ProductFamily</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>184830e6-b6cc-4c04-97d3-0f02d3674cd2</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>ProductSeries</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.See if the discovered device already exists in CP.Result Table.First Row.ProductSeries</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ResultTable</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>FirstRow</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ProductSeries</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>184830e6-b6cc-4c04-97d3-0f02d3674cd2</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>ProductType</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.See if the discovered device already exists in CP.Result Table.First Row.ProductType</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ResultTable</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>FirstRow</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ProductType</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>184830e6-b6cc-4c04-97d3-0f02d3674cd2</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>SystemDescription</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.See if the discovered device already exists in CP.Result Table.First Row.SystemDescription</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ResultTable</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>FirstRow</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>SystemDescription</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>184830e6-b6cc-4c04-97d3-0f02d3674cd2</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>SystemLocation</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.See if the discovered device already exists in CP.Result Table.First Row.SystemLocation</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ResultTable</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>FirstRow</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>SystemLocation</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>184830e6-b6cc-4c04-97d3-0f02d3674cd2</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>SystemName</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.See if the discovered device already exists in CP.Result Table.First Row.SystemName</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ResultTable</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>FirstRow</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>SystemName</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>184830e6-b6cc-4c04-97d3-0f02d3674cd2</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>SystemObjectID</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.See if the discovered device already exists in CP.Result Table.First Row.SystemObjectID</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ResultTable</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>FirstRow</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>SystemObjectID</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>184830e6-b6cc-4c04-97d3-0f02d3674cd2</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>TimestampPriority</ColumnName>
+                              <Value xsi:type="SubstitutableNumber">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.See if the discovered device already exists in CP.Result Table.First Row.TimestampPriority</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ResultTable</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>FirstRow</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>TimestampPriority</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>184830e6-b6cc-4c04-97d3-0f02d3674cd2</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>UniqueDeviceID</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.See if the discovered device already exists in CP.Result Table.First Row.UniqueID</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ResultTable</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>FirstRow</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>UniqueID</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>184830e6-b6cc-4c04-97d3-0f02d3674cd2</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>UniqueID</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.See if the discovered device already exists in CP.Result Table.First Row.UniqueID</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ResultTable</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>FirstRow</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>UniqueID</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>184830e6-b6cc-4c04-97d3-0f02d3674cd2</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>UserName</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.See if the discovered device already exists in CP.Result Table.First Row.UserName</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ResultTable</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>FirstRow</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>UserName</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>184830e6-b6cc-4c04-97d3-0f02d3674cd2</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                            <BuiltinDataCellValue>
+                              <ColumnName>XMPID</ColumnName>
+                              <Value xsi:type="SubstitutableString">
+                                <FormattedCode>{0}</FormattedCode>
+                                <References>
+                                  <VariableReference xsi:type="PropertyReference">
+                                    <DisplayPath>Workflow.See if the discovered device already exists in CP.Result Table.First Row.XMPID</DisplayPath>
+                                    <LinkChain>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>ResultTable</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>FirstRow</PropertyName>
+                                      </Link>
+                                      <Link xsi:type="PropertyNameLink">
+                                        <PropertyName>XMPID</PropertyName>
+                                      </Link>
+                                    </LinkChain>
+                                    <ObjectId>184830e6-b6cc-4c04-97d3-0f02d3674cd2</ObjectId>
+                                    <ObjectType>ActivityInstance</ObjectType>
+                                  </VariableReference>
+                                </References>
+                              </Value>
+                            </BuiltinDataCellValue>
+                          </Values>
+                        </Configuration>
+                      </ActivityNode>
+                    </Children>
+                    <Condition>
+                      <Id>d65ae622-b3b7-4f72-96b8-bbd56e32f197</Id>
+                      <Conditions>
+                        <ConditionDefinition xsi:type="VariableConditionDefinition">
+                          <Id>1e5147b0-7bc4-4229-af37-0189e7247d5a</Id>
+                          <Expression xsi:type="SubstitutableNumber">
+                            <HardcodedValue>0</HardcodedValue>
+                          </Expression>
+                          <Comparison>GreaterThan</Comparison>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.Query table if device already exists.Result Table.Row Count</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResultTable</PropertyName>
+                              </Link>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>RowCount</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>184830e6-b6cc-4c04-97d3-0f02d3674cd2</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </ConditionDefinition>
+                        <ConditionDefinition xsi:type="VariableConditionDefinition">
+                          <Id>8e5b0cb9-db38-4ec3-97e5-f76075dc96ae</Id>
+                          <Expression xsi:type="SubstitutableNumber">
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.For Each Existing Device.Item.TimestampPriority</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>TimestampPriority</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>696c907c-3952-4ae4-bca4-2506dd38a00d</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </Expression>
+                          <Comparison>GreaterThanOrEquals</Comparison>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.See if the discovered device already exists in CP.Result Table.First Row.TimestampPriority</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>ResultTable</PropertyName>
+                              </Link>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>FirstRow</PropertyName>
+                              </Link>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>TimestampPriority</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>184830e6-b6cc-4c04-97d3-0f02d3674cd2</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </ConditionDefinition>
+                      </Conditions>
+                    </Condition>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="ExecuteActivityNode">
+                    <Id>95cb7c02-44f5-47f6-9e32-9718c1d2c2aa</Id>
+                    <DisplayName>Remove Device from Discovered Devices Table</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                        <Id>bb031746-55f5-4f35-9a9e-15deebed46ba</Id>
+                        <ActivityNodeId>95cb7c02-44f5-47f6-9e32-9718c1d2c2aa</ActivityNodeId>
+                        <CompletedId>8c37d1c2-1c21-4c78-a23b-a0fc6d3a1e78</CompletedId>
+                      </ActivityNode>
+                    </Children>
+                    <Configuration xsi:type="RemoveTableRowActivityConfiguration" xml:space="preserve">
+                      <Id>95cb7c02-44f5-47f6-9e32-9718c1d2c2aa</Id>
+                      <DisplayName>Remove Device from Discovered Devices Table</DisplayName>
+                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                        <SingleTargetId>
+                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                        </SingleTargetId>
+                      </TargetLoadBalancer>
+                      <InheritTarget>false</InheritTarget>
+                      <ContainingProcessId>da89497e-e106-4ff1-a370-280935b1a355</ContainingProcessId>
+                      <RowSelectionMode>WhereClause</RowSelectionMode>
+                      <WhereClause>
+                        <FormattedCode>UniqueID='{0}'</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Workflow.For Each Existing Device.Item.UniqueID</DisplayPath>
+                            <LinkChain>
+                              <Link xsi:type="PropertyNameLink">
+                                <PropertyName>UniqueID</PropertyName>
+                              </Link>
+                            </LinkChain>
+                            <ObjectId>696c907c-3952-4ae4-bca4-2506dd38a00d</ObjectId>
+                            <ObjectType>ActivityInstance</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </WhereClause>
+                      <TableVariable>
+                        <DisplayPath>Process.Variables.Local.Discovered Devices Table</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>94e44ab5-a5be-4e46-9081-bf328f773a59</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </TableVariable>
+                    </Configuration>
+                  </ActivityNode>
+                </Children>
+                <ForEachSource xsi:type="PropertyReference">
+                  <DisplayPath>Workflow.Query Existing Network Devices from CCP.Service Items.Rows</DisplayPath>
+                  <LinkChain>
+                    <Link xsi:type="PropertyNameLink">
+                      <PropertyName>ResultsTable</PropertyName>
+                    </Link>
+                    <Link xsi:type="PropertyNameLink">
+                      <PropertyName>TIARows</PropertyName>
+                    </Link>
+                  </LinkChain>
+                  <ObjectId>643d975e-b2f6-4015-8657-f31ef9a83216</ObjectId>
+                  <ObjectType>ActivityInstance</ObjectType>
+                </ForEachSource>
+              </ActivityNode>
+              <ActivityNode xsi:type="ForEachNode">
+                <Id>b08e8dea-f69a-4b6f-9205-f395cac44034</Id>
+                <DisplayName>For Each Discovered Device</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="ExecuteActivityNode">
+                    <Id>8d98f495-58cf-4e4b-84a1-aab9acadd79b</Id>
+                    <DisplayName>Add Discovered device to New Device table</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                        <Id>756c112a-61ec-4eae-a3d2-764abd4541a2</Id>
+                        <ActivityNodeId>8d98f495-58cf-4e4b-84a1-aab9acadd79b</ActivityNodeId>
+                        <CompletedId>cb3cd189-b44c-4c3b-a33b-39c464d53788</CompletedId>
+                      </ActivityNode>
+                    </Children>
+                    <Configuration xsi:type="AddTableRowActivityConfiguration" xml:space="preserve">
+                      <Id>8d98f495-58cf-4e4b-84a1-aab9acadd79b</Id>
+                      <DisplayName>Add Discovered device to New Device table</DisplayName>
+                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                        <SingleTargetId>
+                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                        </SingleTargetId>
+                      </TargetLoadBalancer>
+                      <InheritTarget>false</InheritTarget>
+                      <ContainingProcessId>da89497e-e106-4ff1-a370-280935b1a355</ContainingProcessId>
+                      <TableVariable>
+                        <DisplayPath>Process.Variables.Local.New Devices Table</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>d734e0bf-7b50-40e3-b49a-8af016246133</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </TableVariable>
+                      <Values>
+                        <BuiltinDataCellValue>
+                          <ColumnName>CredentialDiscovered</ColumnName>
+                          <Value xsi:type="SubstitutableString">
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.For Each Discovered Device.Item.CredentialDiscovered</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>CredentialDiscovered</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>b08e8dea-f69a-4b6f-9205-f395cac44034</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </Value>
+                        </BuiltinDataCellValue>
+                        <BuiltinDataCellValue>
+                          <ColumnName>DeviceRole</ColumnName>
+                          <Value xsi:type="SubstitutableString">
+                            <HardcodedValue>Not Defined</HardcodedValue>
+                          </Value>
+                        </BuiltinDataCellValue>
+                        <BuiltinDataCellValue>
+                          <ColumnName>DNSName</ColumnName>
+                          <Value xsi:type="SubstitutableString">
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.For Each Discovered Device.Item.DNSName</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>DNSName</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>b08e8dea-f69a-4b6f-9205-f395cac44034</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </Value>
+                        </BuiltinDataCellValue>
+                        <BuiltinDataCellValue>
+                          <ColumnName>FirstDiscovered</ColumnName>
+                          <Value xsi:type="SubstitutableDate">
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Start Time</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>StartTime</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectType>ProcessInstance</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </Value>
+                        </BuiltinDataCellValue>
+                        <BuiltinDataCellValue>
+                          <ColumnName>FSMStatus</ColumnName>
+                          <Value xsi:type="SubstitutableString">
+                            <HardcodedValue>Discovered</HardcodedValue>
+                          </Value>
+                        </BuiltinDataCellValue>
+                        <BuiltinDataCellValue>
+                          <ColumnName>Hostname</ColumnName>
+                          <Value xsi:type="SubstitutableString">
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.For Each Discovered Device.Item.Hostname</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>Hostname</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>b08e8dea-f69a-4b6f-9205-f395cac44034</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </Value>
+                        </BuiltinDataCellValue>
+                        <BuiltinDataCellValue>
+                          <ColumnName>IPAddress</ColumnName>
+                          <Value xsi:type="SubstitutableString">
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.For Each Discovered Device.Item.IPAddress</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>IPAddress</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>b08e8dea-f69a-4b6f-9205-f395cac44034</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </Value>
+                        </BuiltinDataCellValue>
+                        <BuiltinDataCellValue>
+                          <ColumnName>LastDiscovery</ColumnName>
+                          <Value xsi:type="SubstitutableDate">
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Start Time</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>StartTime</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectType>ProcessInstance</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </Value>
+                        </BuiltinDataCellValue>
+                        <BuiltinDataCellValue>
+                          <ColumnName>ManagementIPAddress</ColumnName>
+                          <Value xsi:type="SubstitutableString">
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.For Each Discovered Device.Item.ManagementIPAddress</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>ManagementIPAddress</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>b08e8dea-f69a-4b6f-9205-f395cac44034</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </Value>
+                        </BuiltinDataCellValue>
+                        <BuiltinDataCellValue>
+                          <ColumnName>Name</ColumnName>
+                          <Value xsi:type="SubstitutableString">
+                            <FormattedCode>{0}{1}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Process Instance Id</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>Id</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectType>ProcessInstance</ObjectType>
+                              </VariableReference>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Process.Variables.Local.GUIDCount</DisplayPath>
+                                <LinkChain />
+                                <ObjectId>955c2ac6-49af-47f9-b16b-ecb83792f967</ObjectId>
+                                <ObjectType>GlobalVariable</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </Value>
+                        </BuiltinDataCellValue>
+                        <BuiltinDataCellValue>
+                          <ColumnName>OperatingSystem</ColumnName>
+                          <Value xsi:type="SubstitutableString">
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.For Each Discovered Device.Item.OperatingSystem</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>OperatingSystem</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>b08e8dea-f69a-4b6f-9205-f395cac44034</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </Value>
+                        </BuiltinDataCellValue>
+                        <BuiltinDataCellValue>
+                          <ColumnName>ProductFamily</ColumnName>
+                          <Value xsi:type="SubstitutableString">
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.For Each Discovered Device.Item.ProductFamily</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>ProductFamily</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>b08e8dea-f69a-4b6f-9205-f395cac44034</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </Value>
+                        </BuiltinDataCellValue>
+                        <BuiltinDataCellValue>
+                          <ColumnName>ProductSeries</ColumnName>
+                          <Value xsi:type="SubstitutableString">
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.For Each Discovered Device.Item.ProductSeries</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>ProductSeries</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>b08e8dea-f69a-4b6f-9205-f395cac44034</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </Value>
+                        </BuiltinDataCellValue>
+                        <BuiltinDataCellValue>
+                          <ColumnName>ProductType</ColumnName>
+                          <Value xsi:type="SubstitutableString">
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.For Each Discovered Device.Item.ProductType</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>ProductType</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>b08e8dea-f69a-4b6f-9205-f395cac44034</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </Value>
+                        </BuiltinDataCellValue>
+                        <BuiltinDataCellValue>
+                          <ColumnName>SystemDescription</ColumnName>
+                          <Value xsi:type="SubstitutableString">
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.For Each Discovered Device.Item.SystemDescription</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>SystemDescription</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>b08e8dea-f69a-4b6f-9205-f395cac44034</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </Value>
+                        </BuiltinDataCellValue>
+                        <BuiltinDataCellValue>
+                          <ColumnName>SystemLocation</ColumnName>
+                          <Value xsi:type="SubstitutableString">
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.For Each Discovered Device.Item.SystemLocation</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>SystemLocation</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>b08e8dea-f69a-4b6f-9205-f395cac44034</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </Value>
+                        </BuiltinDataCellValue>
+                        <BuiltinDataCellValue>
+                          <ColumnName>SystemName</ColumnName>
+                          <Value xsi:type="SubstitutableString">
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.For Each Discovered Device.Item.SystemName</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>SystemName</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>b08e8dea-f69a-4b6f-9205-f395cac44034</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </Value>
+                        </BuiltinDataCellValue>
+                        <BuiltinDataCellValue>
+                          <ColumnName>SystemObjectID</ColumnName>
+                          <Value xsi:type="SubstitutableString">
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.For Each Discovered Device.Item.SystemObjectID</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>SystemObjectID</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>b08e8dea-f69a-4b6f-9205-f395cac44034</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </Value>
+                        </BuiltinDataCellValue>
+                        <BuiltinDataCellValue>
+                          <ColumnName>TimestampPriority</ColumnName>
+                          <Value xsi:type="SubstitutableNumber">
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.For Each Discovered Device.Item.TimestampPriority</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>TimestampPriority</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>b08e8dea-f69a-4b6f-9205-f395cac44034</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </Value>
+                        </BuiltinDataCellValue>
+                        <BuiltinDataCellValue>
+                          <ColumnName>UniqueDeviceID</ColumnName>
+                          <Value xsi:type="SubstitutableString">
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.For Each Discovered Device.Item.UniqueID</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>UniqueID</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>b08e8dea-f69a-4b6f-9205-f395cac44034</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </Value>
+                        </BuiltinDataCellValue>
+                        <BuiltinDataCellValue>
+                          <ColumnName>UniqueID</ColumnName>
+                          <Value xsi:type="SubstitutableString">
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.For Each Discovered Device.Item.UniqueID</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>UniqueID</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>b08e8dea-f69a-4b6f-9205-f395cac44034</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </Value>
+                        </BuiltinDataCellValue>
+                        <BuiltinDataCellValue>
+                          <ColumnName>UserName</ColumnName>
+                          <Value xsi:type="SubstitutableString">
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.For Each Discovered Device.Item.UserName</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>UserName</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>b08e8dea-f69a-4b6f-9205-f395cac44034</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </Value>
+                        </BuiltinDataCellValue>
+                        <BuiltinDataCellValue>
+                          <ColumnName>XMPID</ColumnName>
+                          <Value xsi:type="SubstitutableString">
+                            <FormattedCode>{0}</FormattedCode>
+                            <References>
+                              <VariableReference xsi:type="PropertyReference">
+                                <DisplayPath>Workflow.For Each Discovered Device.Item.XMPID</DisplayPath>
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>XMPID</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>b08e8dea-f69a-4b6f-9205-f395cac44034</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </References>
+                          </Value>
+                        </BuiltinDataCellValue>
+                      </Values>
+                    </Configuration>
+                  </ActivityNode>
+                  <ActivityNode xsi:type="ExecuteActivityNode">
+                    <Id>02bfb1a2-ba28-43fa-b045-6abbe606b591</Id>
+                    <DisplayName>Increment GUID Count</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                        <Id>68b8293d-a027-4eb3-b30f-5f5e7ebb32fa</Id>
+                        <ActivityNodeId>02bfb1a2-ba28-43fa-b045-6abbe606b591</ActivityNodeId>
+                        <CompletedId>6982f5a9-9f19-4a08-a958-dbe5810b246f</CompletedId>
+                      </ActivityNode>
+                    </Children>
+                    <Configuration xsi:type="SetVariableActivityConfiguration" xml:space="preserve">
+                      <Id>02bfb1a2-ba28-43fa-b045-6abbe606b591</Id>
+                      <DisplayName>Increment GUID Count</DisplayName>
+                      <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                        <SingleTargetId>
+                          <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                        </SingleTargetId>
+                      </TargetLoadBalancer>
+                      <InheritTarget>false</InheritTarget>
+                      <ContainingProcessId>da89497e-e106-4ff1-a370-280935b1a355</ContainingProcessId>
+                      <VariableToSet>
+                        <DisplayPath>Process.Variables.Local.GUIDCount</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>955c2ac6-49af-47f9-b16b-ecb83792f967</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableToSet>
+                      <NewValue xsi:type="SubstitutableNumber">
+                        <FormattedCode>{0}+1</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Local.GUIDCount</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>955c2ac6-49af-47f9-b16b-ecb83792f967</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </NewValue>
+                    </Configuration>
+                  </ActivityNode>
+                </Children>
+                <ForEachSource xsi:type="PropertyReference">
+                  <DisplayPath>Process.Variables.Local.Discovered Devices Table.Rows</DisplayPath>
+                  <LinkChain>
+                    <Link xsi:type="PropertyNameLink">
+                      <PropertyName>TIARows</PropertyName>
+                    </Link>
+                  </LinkChain>
+                  <ObjectId>94e44ab5-a5be-4e46-9081-bf328f773a59</ObjectId>
+                  <ObjectType>GlobalVariable</ObjectType>
+                </ForEachSource>
+              </ActivityNode>
+              <ActivityNode xsi:type="ConditionBranchNode">
+                <Id>52d3a742-5366-406a-aa85-df37ec3e1b65</Id>
+                <DisplayName>Create Service Items if device table has rows</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="ExecuteActivityNode">
+                    <Id>389e4751-7ea1-4e18-94a5-66c70372a4a3</Id>
+                    <DisplayName>Create Service Items for Discovered Devices</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ConditionBranchNode">
+                        <Id>7fcf8432-93dc-4cbe-95fc-369fd8fcebe8</Id>
+                        <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                        <DisplayName>If Execution Fails</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="ExecuteActivityNode">
+                            <Id>df6c788d-38b9-47ea-94ba-542066b9e161</Id>
+                            <DisplayName>Set Variables - Create fail</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                <Id>020be22e-022e-4b64-acd5-5573a2ac024b</Id>
+                                <ActivityNodeId>df6c788d-38b9-47ea-94ba-542066b9e161</ActivityNodeId>
+                                <CompletedId>5f34ccc6-f986-49a1-b6d7-1c6632250b7d</CompletedId>
+                              </ActivityNode>
+                            </Children>
+                            <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+                              <Id>df6c788d-38b9-47ea-94ba-542066b9e161</Id>
+                              <DisplayName>Set Variables - Create fail</DisplayName>
+                              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                <SingleTargetId>
+                                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                </SingleTargetId>
+                              </TargetLoadBalancer>
+                              <InheritTarget>false</InheritTarget>
+                              <ContainingProcessId>da89497e-e106-4ff1-a370-280935b1a355</ContainingProcessId>
+                              <Assignments>
+                                <PropertyReferenceValuePair>
+                                  <VariableToSet>
+                                    <DisplayPath>Process.Variables.Local.Failure Summary</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>a6b1391e-fc71-4d90-b5ab-f4c4000db11e</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableToSet>
+                                  <NewValue xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}
+  {1} failed. 
+  Reason for failure: {2}.</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Local.Failure Summary</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>a6b1391e-fc71-4d90-b5ab-f4c4000db11e</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.Create Service Items for Discovered Devices.Name</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>DisplayName</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>389e4751-7ea1-4e18-94a5-66c70372a4a3</ObjectId>
+                                        <ObjectType>ActivityInstance</ObjectType>
+                                      </VariableReference>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.Create Service Items for Discovered Devices.Error Information</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>ErrorInformation</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>389e4751-7ea1-4e18-94a5-66c70372a4a3</ObjectId>
+                                        <ObjectType>ActivityInstance</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </NewValue>
+                                </PropertyReferenceValuePair>
+                              </Assignments>
+                            </Configuration>
+                          </ActivityNode>
+                        </Children>
+                        <Condition>
+                          <Id>b25e1c62-f862-433f-96a1-14e594dd1611</Id>
+                          <Conditions>
+                            <ConditionDefinition xsi:type="VariableConditionDefinition">
+                              <Id>e4558318-1c6f-44fc-ab88-8381d63b240f</Id>
+                              <Expression xsi:type="SubstitutableBoolean">
+                                <HardcodedValue>true</HardcodedValue>
+                              </Expression>
+                              <Comparison>Equals</Comparison>
+                              <VariableReference xsi:type="PropertyReference">
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>InstanceFailed</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>389e4751-7ea1-4e18-94a5-66c70372a4a3</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </ConditionDefinition>
+                          </Conditions>
+                        </Condition>
+                      </ActivityNode>
+                    </Children>
+                    <Configuration xsi:type="CreateServiceItemsFromTableActivityConfiguration" xml:space="preserve">
+                      <Id>389e4751-7ea1-4e18-94a5-66c70372a4a3</Id>
+                      <DisplayName>Create Service Items for Discovered Devices</DisplayName>
+                      <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                        <SingleTargetReference>
+                          <FormattedCode />
+                          <HardcodedValue>
+                            <Id>b3216113-bb0f-4cb3-b7c2-93b9074ef87b</Id>
+                            <ObjectType>Target</ObjectType>
+                          </HardcodedValue>
+                        </SingleTargetReference>
+                      </TargetLoadBalancer>
+                      <InheritTarget>false</InheritTarget>
+                      <ContainingProcessId>da89497e-e106-4ff1-a370-280935b1a355</ContainingProcessId>
+                      <RetryTimePeriod>
+                        <DisplayUnits>Minutes</DisplayUnits>
+                        <Period>
+                          <FormattedCode>{0}</FormattedCode>
+                          <References>
+                            <VariableReference xsi:type="PropertyReference">
+                              <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Time Period (minutes)</DisplayPath>
+                              <LinkChain>
+                                <Link xsi:type="PropertyNameLink">
+                                  <PropertyName>DefaultRetryMinutes</PropertyName>
+                                </Link>
+                              </LinkChain>
+                              <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                              <ObjectType>Adapter</ObjectType>
+                            </VariableReference>
+                          </References>
+                        </Period>
+                      </RetryTimePeriod>
+                      <RetryFrequency>
+                        <DisplayUnits>Seconds</DisplayUnits>
+                        <Period>
+                          <FormattedCode>{0}</FormattedCode>
+                          <References>
+                            <VariableReference xsi:type="PropertyReference">
+                              <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Frequency (seconds)</DisplayPath>
+                              <LinkChain>
+                                <Link xsi:type="PropertyNameLink">
+                                  <PropertyName>DefaultRetryFrequency</PropertyName>
+                                </Link>
+                              </LinkChain>
+                              <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                              <ObjectType>Adapter</ObjectType>
+                            </VariableReference>
+                          </References>
+                        </Period>
+                      </RetryFrequency>
+                      <Timeout>
+                        <DisplayUnits>Seconds</DisplayUnits>
+                        <Period>
+                          <HardcodedValue>100</HardcodedValue>
+                        </Period>
+                      </Timeout>
+                      <ChannelId>
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Global Variables.Cloud Service Item Update Channel ID</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>c070b5b6-0120-48f1-8b36-2319f9348a4a</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </ChannelId>
+                      <ItemType>
+                        <HardcodedValue>NetworkDevices</HardcodedValue>
+                      </ItemType>
+                      <Table>
+                        <DisplayPath>Process.Variables.Local.New Devices Table</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>d734e0bf-7b50-40e3-b49a-8af016246133</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </Table>
+                      <Subscriber>
+                        <HardcodedValue />
+                      </Subscriber>
+                      <SubscriberOuName>
+                        <HardcodedValue />
+                      </SubscriberOuName>
+                      <SubscriberRequisitionId>
+                        <FormattedCode />
+                      </SubscriberRequisitionId>
+                      <SubscriberRequisitionEntryId>
+                        <HardcodedValue />
+                      </SubscriberRequisitionEntryId>
+                    </Configuration>
+                  </ActivityNode>
+                </Children>
+                <Condition>
+                  <Id>4762b798-e5f2-44b2-a5c4-b790bbf8afbb</Id>
+                  <Conditions>
+                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                      <Id>a17aff4a-c3f5-4443-ad7f-71ae1ce49d2d</Id>
+                      <Expression xsi:type="SubstitutableNumber">
+                        <HardcodedValue>0</HardcodedValue>
+                      </Expression>
+                      <Comparison>GreaterThan</Comparison>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Variables.Local.Discovered Devices Table.Row Count</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>RowCount</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>d734e0bf-7b50-40e3-b49a-8af016246133</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableReference>
+                    </ConditionDefinition>
+                  </Conditions>
+                </Condition>
+              </ActivityNode>
+              <ActivityNode xsi:type="ConditionBranchNode">
+                <Id>1f63e370-aa6f-491b-bae1-86f05255c257</Id>
+                <DisplayName>Update existing devices</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="ExecuteActivityNode">
+                    <Id>96c916f6-90f0-43fd-af95-10b70469ee3d</Id>
+                    <DisplayName>Update Service Items from Table</DisplayName>
+                    <Children>
+                      <ActivityNode xsi:type="ConditionBranchNode">
+                        <Id>a2dc0d0b-e8bb-4258-8e85-398778520812</Id>
+                        <Notes>If this execution fails, execute the contained workflow nodes.</Notes>
+                        <DisplayName>If Execution Fails</DisplayName>
+                        <Children>
+                          <ActivityNode xsi:type="ExecuteActivityNode">
+                            <Id>ef320301-d7e3-4912-844b-d337506172da</Id>
+                            <DisplayName>Set Variables - Update Fail</DisplayName>
+                            <Children>
+                              <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                                <Id>acef0825-3e3a-40d9-93ad-a4db69da89cc</Id>
+                                <ActivityNodeId>ef320301-d7e3-4912-844b-d337506172da</ActivityNodeId>
+                                <CompletedId>87af8f0e-8654-4bb6-b5af-38efa2390d11</CompletedId>
+                              </ActivityNode>
+                            </Children>
+                            <Configuration xsi:type="SetMultipleVariableActivityConfiguration" xml:space="preserve">
+                              <Id>ef320301-d7e3-4912-844b-d337506172da</Id>
+                              <DisplayName>Set Variables - Update Fail</DisplayName>
+                              <TargetLoadBalancer xsi:type="SingleTargetLoadBalancer">
+                                <SingleTargetId>
+                                  <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+                                </SingleTargetId>
+                              </TargetLoadBalancer>
+                              <InheritTarget>false</InheritTarget>
+                              <ContainingProcessId>da89497e-e106-4ff1-a370-280935b1a355</ContainingProcessId>
+                              <Assignments>
+                                <PropertyReferenceValuePair>
+                                  <VariableToSet>
+                                    <DisplayPath>Process.Variables.Local.Failure Summary</DisplayPath>
+                                    <LinkChain />
+                                    <ObjectId>a6b1391e-fc71-4d90-b5ab-f4c4000db11e</ObjectId>
+                                    <ObjectType>GlobalVariable</ObjectType>
+                                  </VariableToSet>
+                                  <NewValue xsi:type="SubstitutableString">
+                                    <FormattedCode>{0}
+  {1} failed.
+  Reason for failure: {2}.</FormattedCode>
+                                    <References>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Process.Variables.Local.Failure Summary</DisplayPath>
+                                        <LinkChain />
+                                        <ObjectId>a6b1391e-fc71-4d90-b5ab-f4c4000db11e</ObjectId>
+                                        <ObjectType>GlobalVariable</ObjectType>
+                                      </VariableReference>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.Update Service Items from Table.Name</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>DisplayName</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>96c916f6-90f0-43fd-af95-10b70469ee3d</ObjectId>
+                                        <ObjectType>ActivityInstance</ObjectType>
+                                      </VariableReference>
+                                      <VariableReference xsi:type="PropertyReference">
+                                        <DisplayPath>Workflow.Update Service Items from Table.Error Information</DisplayPath>
+                                        <LinkChain>
+                                          <Link xsi:type="PropertyNameLink">
+                                            <PropertyName>ErrorInformation</PropertyName>
+                                          </Link>
+                                        </LinkChain>
+                                        <ObjectId>96c916f6-90f0-43fd-af95-10b70469ee3d</ObjectId>
+                                        <ObjectType>ActivityInstance</ObjectType>
+                                      </VariableReference>
+                                    </References>
+                                  </NewValue>
+                                </PropertyReferenceValuePair>
+                              </Assignments>
+                            </Configuration>
+                          </ActivityNode>
+                        </Children>
+                        <Condition>
+                          <Id>6586caed-eff5-4912-9338-c17692893957</Id>
+                          <Conditions>
+                            <ConditionDefinition xsi:type="VariableConditionDefinition">
+                              <Id>5fa91af0-2bd9-40ed-ae17-1db75117add4</Id>
+                              <Expression xsi:type="SubstitutableBoolean">
+                                <HardcodedValue>true</HardcodedValue>
+                              </Expression>
+                              <Comparison>Equals</Comparison>
+                              <VariableReference xsi:type="PropertyReference">
+                                <LinkChain>
+                                  <Link xsi:type="PropertyNameLink">
+                                    <PropertyName>InstanceFailed</PropertyName>
+                                  </Link>
+                                </LinkChain>
+                                <ObjectId>96c916f6-90f0-43fd-af95-10b70469ee3d</ObjectId>
+                                <ObjectType>ActivityInstance</ObjectType>
+                              </VariableReference>
+                            </ConditionDefinition>
+                          </Conditions>
+                        </Condition>
+                      </ActivityNode>
+                    </Children>
+                    <Configuration xsi:type="UpdateServiceItemsFromTableActivityConfiguration" xml:space="preserve">
+                      <Id>96c916f6-90f0-43fd-af95-10b70469ee3d</Id>
+                      <DisplayName>Update Service Items from Table</DisplayName>
+                      <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                        <SingleTargetReference>
+                          <FormattedCode />
+                          <HardcodedValue>
+                            <Id>b3216113-bb0f-4cb3-b7c2-93b9074ef87b</Id>
+                            <ObjectType>Target</ObjectType>
+                          </HardcodedValue>
+                        </SingleTargetReference>
+                      </TargetLoadBalancer>
+                      <InheritTarget>false</InheritTarget>
+                      <ContainingProcessId>da89497e-e106-4ff1-a370-280935b1a355</ContainingProcessId>
+                      <RetryTimePeriod>
+                        <DisplayUnits>Minutes</DisplayUnits>
+                        <Period>
+                          <FormattedCode>{0}</FormattedCode>
+                          <References>
+                            <VariableReference xsi:type="PropertyReference">
+                              <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Time Period (minutes)</DisplayPath>
+                              <LinkChain>
+                                <Link xsi:type="PropertyNameLink">
+                                  <PropertyName>DefaultRetryMinutes</PropertyName>
+                                </Link>
+                              </LinkChain>
+                              <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                              <ObjectType>Adapter</ObjectType>
+                            </VariableReference>
+                          </References>
+                        </Period>
+                      </RetryTimePeriod>
+                      <RetryFrequency>
+                        <DisplayUnits>Seconds</DisplayUnits>
+                        <Period>
+                          <FormattedCode>{0}</FormattedCode>
+                          <References>
+                            <VariableReference xsi:type="PropertyReference">
+                              <DisplayPath>Adapters.Cisco Prime Service Catalog Adapter.Retry Frequency (seconds)</DisplayPath>
+                              <LinkChain>
+                                <Link xsi:type="PropertyNameLink">
+                                  <PropertyName>DefaultRetryFrequency</PropertyName>
+                                </Link>
+                              </LinkChain>
+                              <ObjectId>c433762b-9ba6-4059-a616-85d8f3f236c3</ObjectId>
+                              <ObjectType>Adapter</ObjectType>
+                            </VariableReference>
+                          </References>
+                        </Period>
+                      </RetryFrequency>
+                      <Timeout>
+                        <DisplayUnits>Seconds</DisplayUnits>
+                        <Period>
+                          <HardcodedValue>100</HardcodedValue>
+                        </Period>
+                      </Timeout>
+                      <ChannelId>
+                        <FormattedCode>{0}</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Global Variables.Cloud Service Item Update Channel ID</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>c070b5b6-0120-48f1-8b36-2319f9348a4a</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </ChannelId>
+                      <ItemType>
+                        <HardcodedValue>NetworkDevices</HardcodedValue>
+                      </ItemType>
+                      <Table>
+                        <DisplayPath>Process.Variables.Local.Updated Devices Table</DisplayPath>
+                        <LinkChain />
+                        <ObjectId>21796ba1-ec15-4686-83a0-ee29b08a21b6</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </Table>
+                      <Subscriber>
+                        <HardcodedValue />
+                      </Subscriber>
+                      <SubscriberOuName>
+                        <HardcodedValue />
+                      </SubscriberOuName>
+                      <SubscriberRequisitionId>
+                        <FormattedCode />
+                      </SubscriberRequisitionId>
+                      <SubscriberRequisitionEntryId>
+                        <HardcodedValue />
+                      </SubscriberRequisitionEntryId>
+                    </Configuration>
+                  </ActivityNode>
+                </Children>
+                <Condition>
+                  <Id>e8119bdc-4957-4664-962b-4d6dfe384a26</Id>
+                  <Conditions>
+                    <ConditionDefinition xsi:type="VariableConditionDefinition">
+                      <Id>55338d11-54fa-4116-a2bc-e3c234c366b2</Id>
+                      <Expression xsi:type="SubstitutableNumber">
+                        <HardcodedValue>0</HardcodedValue>
+                      </Expression>
+                      <Comparison>GreaterThan</Comparison>
+                      <VariableReference xsi:type="PropertyReference">
+                        <DisplayPath>Process.Variables.Local.Updated Devices Table.Row Count</DisplayPath>
+                        <LinkChain>
+                          <Link xsi:type="PropertyNameLink">
+                            <PropertyName>RowCount</PropertyName>
+                          </Link>
+                        </LinkChain>
+                        <ObjectId>21796ba1-ec15-4686-83a0-ee29b08a21b6</ObjectId>
+                        <ObjectType>GlobalVariable</ObjectType>
+                      </VariableReference>
+                    </ConditionDefinition>
+                  </Conditions>
+                </Condition>
+              </ActivityNode>
+            </Children>
+            <LockSource xsi:type="SubstitutableObjectReference">
+              <FormattedCode />
+              <HardcodedValue>
+                <Id>2dd27e3d-cca4-496a-9660-69811950002d</Id>
+                <ObjectType>SynchronizedResource</ObjectType>
+              </HardcodedValue>
+            </LockSource>
+            <Priority>High</Priority>
+            <TimeoutOccurred>false</TimeoutOccurred>
+          </ActivityNode>
+          <ActivityNode xsi:type="ConditionBranchNode">
+            <Id>10bb6ebf-985c-4884-8f3b-5ce5879a7085</Id>
+            <DisplayName>If Any Failures</DisplayName>
+            <Children>
+              <ActivityNode xsi:type="StartProcessNode">
+                <Id>64dc9908-8fd6-455b-99d1-aeab6e619530</Id>
+                <DisplayName>Initiate Cloud Portal Email Notification</DisplayName>
+                <Children>
+                  <ActivityNode xsi:type="FailedBranchPlaceholderNode">
+                    <Id>22a28352-1e09-4755-b741-275b360573ec</Id>
+                    <ProcessNodeId>64dc9908-8fd6-455b-99d1-aeab6e619530</ProcessNodeId>
+                    <CompletedId>93cf68db-a53a-4615-b785-6bee408a2bbb</CompletedId>
+                  </ActivityNode>
+                </Children>
+                <ProcessId>c22def22-4abd-4d7f-8e37-51ff3a11fd73</ProcessId>
+                <InputVariableTable>
+                  <VariableAssignmentsAsArray>
+                    <InputVariableAssignment>
+                      <InputVariableId>cd07bdc9-ac07-4ab4-9994-aee2e0eac32d</InputVariableId>
+                      <VariableValue xsi:type="SubstitutableString">
+                        <HardcodedValue>portal/Manage%20Cloud%20Infrastructure&amp;3&amp;1</HardcodedValue>
+                      </VariableValue>
+                    </InputVariableAssignment>
+                    <InputVariableAssignment>
+                      <InputVariableId>5815bcba-7cc5-441e-a11d-2f85f89fb0b3</InputVariableId>
+                      <VariableValue xsi:type="SubstitutableString">
+                        <FormattedCode>{0}
+
+Link to Manage Cloud Infrastructure:</FormattedCode>
+                        <References>
+                          <VariableReference xsi:type="PropertyReference">
+                            <DisplayPath>Process.Variables.Local.Failure Summary</DisplayPath>
+                            <LinkChain />
+                            <ObjectId>a6b1391e-fc71-4d90-b5ab-f4c4000db11e</ObjectId>
+                            <ObjectType>GlobalVariable</ObjectType>
+                          </VariableReference>
+                        </References>
+                      </VariableValue>
+                    </InputVariableAssignment>
+                    <InputVariableAssignment>
+                      <InputVariableId>1c5fb702-4f4f-43ca-a13c-df5aadaf4827</InputVariableId>
+                      <VariableValue xsi:type="SubstitutableString">
+                        <HardcodedValue>One or more problems were encountered during discovery.  See description for details.</HardcodedValue>
+                      </VariableValue>
+                    </InputVariableAssignment>
+                    <InputVariableAssignment>
+                      <InputVariableId>61ca0c81-f0f4-4e46-a736-3229563fb3a7</InputVariableId>
+                      <VariableValue xsi:type="SubstitutableString">
+                        <HardcodedValue>Network Devices Creation Failed</HardcodedValue>
+                      </VariableValue>
+                    </InputVariableAssignment>
+                    <InputVariableAssignment>
+                      <InputVariableId>72114e65-3d38-45af-8ce1-1fceb9b6c302</InputVariableId>
+                      <VariableValue xsi:type="SubstitutableString">
+                        <HardcodedValue>Network Discovery: NetworkDevices SI Creation Failure</HardcodedValue>
+                      </VariableValue>
+                    </InputVariableAssignment>
+                  </VariableAssignmentsAsArray>
+                </InputVariableTable>
+                <Asynchronous>false</Asynchronous>
+                <InheritTarget>false</InheritTarget>
+                <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+                  <SingleTargetReference>
+                    <FormattedCode />
+                    <HardcodedValue>
+                      <Id>b3216113-bb0f-4cb3-b7c2-93b9074ef87b</Id>
+                      <ObjectType>Target</ObjectType>
+                    </HardcodedValue>
+                  </SingleTargetReference>
+                </TargetLoadBalancer>
+                <InheritPriorityClass>true</InheritPriorityClass>
+                <RuntimeUserId>
+                  <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                </RuntimeUserId>
+                <KnowledgeBaseId>00000000-0000-0000-0000-000000000000</KnowledgeBaseId>
+                <StartPointId>
+                  <HardcodedValue>00000000-0000-0000-0000-000000000000</HardcodedValue>
+                </StartPointId>
+                <StartPointName>
+                  <FormattedCode />
+                </StartPointName>
+              </ActivityNode>
+            </Children>
+            <Condition>
+              <Id>91d2ca50-4c5a-4d1e-8f82-79eb3965300e</Id>
+              <Conditions>
+                <ConditionDefinition xsi:type="VariableConditionDefinition">
+                  <Id>971e9d33-f46a-4263-b629-f83aa29a37aa</Id>
+                  <Expression xsi:type="SubstitutableString">
+                    <HardcodedValue />
+                  </Expression>
+                  <Comparison>NotEquals</Comparison>
+                  <VariableReference xsi:type="PropertyReference">
+                    <DisplayPath>Process.Variables.Local.Failure Summary</DisplayPath>
+                    <LinkChain />
+                    <ObjectId>a6b1391e-fc71-4d90-b5ab-f4c4000db11e</ObjectId>
+                    <ObjectType>GlobalVariable</ObjectType>
+                  </VariableReference>
+                </ConditionDefinition>
+              </Conditions>
+            </Condition>
+          </ActivityNode>
+        </Children>
+        <Condition>
+          <Id>215f6357-d7e0-43f3-abe1-13322273a575</Id>
+          <Operator>Or</Operator>
+          <Conditions>
+            <ConditionDefinition xsi:type="VariableConditionDefinition">
+              <Id>fceb8472-14d2-406a-8d01-64b24e83c771</Id>
+              <Expression xsi:type="SubstitutableNumber">
+                <HardcodedValue>0</HardcodedValue>
+              </Expression>
+              <Comparison>GreaterThan</Comparison>
+              <VariableReference xsi:type="PropertyReference">
+                <DisplayPath>Workflow.Devices to Table.Result Table.Row Count</DisplayPath>
+                <LinkChain>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>ResultTable</PropertyName>
+                  </Link>
+                  <Link xsi:type="PropertyNameLink">
+                    <PropertyName>RowCount</PropertyName>
+                  </Link>
+                </LinkChain>
+                <ObjectId>f94f2cd5-a902-4323-a409-f559b75007e1</ObjectId>
+                <ObjectType>ActivityInstance</ObjectType>
+              </VariableReference>
+            </ConditionDefinition>
+          </Conditions>
+        </Condition>
+      </ActivityNode>
+      <ActivityNode xsi:type="CompletedNode">
+        <Id>656ade25-320a-472e-8fe4-ce7da81a5b97</Id>
+        <CompletedType>Succeeded</CompletedType>
+      </ActivityNode>
+    </Children>
+  </FirstActivity>
+  <ProcessId>da89497e-e106-4ff1-a370-280935b1a355</ProcessId>
+</WorkflowConfiguration>

@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<ProcessConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>4fe6766c-f23a-426b-89de-0a95f87fa421</Id>
+  <DisplayName>Decommission VDC Handler</DisplayName>
+  <Description>This process manages the change request for this service and catches all errors produced by it and its child processes.</Description>
+  <CreatedTime>2016-02-15T20:44:28.239Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:44:46.4482421Z</ModifiedTime>
+  <Version>4.3.1.9733</Version>
+  <TargetLoadBalancer xsi:type="SingleTargetReferenceLoadBalancer">
+    <SingleTargetReference>
+      <FormattedCode>{0}</FormattedCode>
+      <References>
+        <VariableReference xsi:type="PropertyReference">
+          <DisplayPath>Process.Triggers.Change Request Created.Task.Affected Target</DisplayPath>
+          <LinkChain>
+            <Link xsi:type="PropertyNameLink">
+              <PropertyName>Task</PropertyName>
+            </Link>
+            <Link xsi:type="PropertyNameLink">
+              <PropertyName>AffectedTargetReference</PropertyName>
+            </Link>
+          </LinkChain>
+          <ObjectType>EventInstance</ObjectType>
+        </VariableReference>
+      </References>
+    </SingleTargetReference>
+  </TargetLoadBalancer>
+  <AuditStarts>true</AuditStarts>
+  <AuditSuccesses>true</AuditSuccesses>
+  <WorkflowId>751e4c15-a9d2-4977-a9fd-74d8cc23cfad</WorkflowId>
+  <CategoryIds>
+    <guid>9b15aaa9-974d-41f6-8e09-3222a20b781a</guid>
+  </CategoryIds>
+  <TriggerOwner>74d6de41-8d7c-42dd-b0df-37578a8885eb</TriggerOwner>
+  <Triggers>
+    <TriggerDefinition>
+      <Event xsi:type="ChangeRequestTaskCreatedEventDefinition">
+        <Id>6a7f5a5c-c429-4c0d-b67e-06435687d48a</Id>
+        <DisplayName>Change Request Created</DisplayName>
+        <LoadBalancer xsi:type="SingleTargetLoadBalancer">
+          <SingleTargetId>
+            <HardcodedValue>bd4b3145-4e20-42bb-ba8f-34c013ca86cc</HardcodedValue>
+          </SingleTargetId>
+        </LoadBalancer>
+        <Imported>true</Imported>
+        <MatchingCriteria>
+          <GenericCriteria xsi:type="NumberCriteria">
+            <LinkChain>
+              <Link xsi:type="PropertyNameLink">
+                <PropertyName>ChangeRequestClass</PropertyName>
+              </Link>
+            </LinkChain>
+            <MatchingNumber>
+              <HardcodedValue>12098</HardcodedValue>
+            </MatchingNumber>
+            <Comparison>Equals</Comparison>
+          </GenericCriteria>
+          <GenericCriteria xsi:type="WildcardCriteria">
+            <LinkChain>
+              <Link xsi:type="PropertyNameLink">
+                <PropertyName>Process</PropertyName>
+              </Link>
+              <Link xsi:type="PropertyNameLink">
+                <PropertyName>AutomationPack</PropertyName>
+              </Link>
+              <Link xsi:type="PropertyNameLink">
+                <PropertyName>DisplayName</PropertyName>
+              </Link>
+            </LinkChain>
+            <MatchingWildcard>
+              <HardcodedValue>Intelligent Automation*</HardcodedValue>
+            </MatchingWildcard>
+          </GenericCriteria>
+        </MatchingCriteria>
+      </Event>
+      <Condition xsi:type="RootConditionDefinition">
+        <Id>9544d767-34b8-4a27-9b3b-5b1182360c35</Id>
+        <Conditions />
+      </Condition>
+      <TriggerId>adf83830-a4b0-4552-8f4f-73b6b6f64a45</TriggerId>
+    </TriggerDefinition>
+  </Triggers>
+  <VariableDefinitions>
+    <VariableConfiguration xsi:type="StringVariableConfiguration" xml:space="preserve">
+      <Id>0bd7d412-b7f4-4a6a-be50-bf5cdb86ed3c</Id>
+      <DisplayName>Service Request XML</DisplayName>
+      <string />
+      <Scope>
+        <Family>ProcessInstanceIn</Family>
+        <ControllingItemId>4fe6766c-f23a-426b-89de-0a95f87fa421</ControllingItemId>
+      </Scope>
+      <ValueRequired>true</ValueRequired>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="StringVariableConfiguration" xml:space="preserve">
+      <Id>cb32eeea-bb23-4b06-89bb-36f5726955b5</Id>
+      <DisplayName>Target Name</DisplayName>
+      <ModifiedTime>2013-11-25T16:08:24.657134Z</ModifiedTime>
+      <string />
+      <Scope>
+        <Family>ProcessInstanceLocal</Family>
+        <ControllingItemId>4fe6766c-f23a-426b-89de-0a95f87fa421</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+  </VariableDefinitions>
+  <Notes />
+  <GeneralHelp xsi:type="CustomHelpAlias">
+    <Alias />
+  </GeneralHelp>
+  <GeneralInstanceHelp xsi:type="CustomHelpAlias">
+    <Alias />
+  </GeneralInstanceHelp>
+  <InputHelp xsi:type="CustomHelpAlias">
+    <Alias />
+  </InputHelp>
+  <InputInstanceHelp xsi:type="CustomHelpAlias">
+    <Alias />
+  </InputInstanceHelp>
+  <OutputHelp xsi:type="CustomHelpAlias">
+    <Alias />
+  </OutputHelp>
+  <ValidTargetTypeNames>
+    <string>Tidal.Automation.BuiltinAdapter.Common.ServiceTargetConfiguration, Tidal.Automation.BuiltinAdapter.Common</string>
+  </ValidTargetTypeNames>
+  <ValidTargetTypeExtensionIds>
+    <guid>2144f9f9-e556-424e-bb95-709d41dcc237</guid>
+  </ValidTargetTypeExtensionIds>
+  <ValidRuntimeUserTypeNames>
+    <string>Tidal.Automation.Tsp.Common.TspUserConfiguration, Tidal.Automation.Tsp.Common</string>
+    <string>Tidal.Automation.Ssh.Common.PublicKeyAdminUserConfiguration, Tidal.Automation.Ssh.Common</string>
+    <string>Tidal.Automation.Ssh.Common.IOSUserConfiguration, Tidal.Automation.Ssh.Common</string>
+    <string>Tidal.Automation.BuiltinAdapter.Common.GenericRuntimeUserConfiguration, Tidal.Automation.BuiltinAdapter.Common</string>
+    <string>Tidal.Automation.Sap.Common.Users.SAPUserConfiguration, Tidal.Automation.Sap.Common</string>
+    <string>Tidal.Automation.Snmp.Common.SnmpUserConfiguration, Tidal.Automation.Snmp.Common</string>
+    <string>Tidal.Automation.Windows.Common.WindowsUserConfiguration, Tidal.Automation.Windows.Common</string>
+  </ValidRuntimeUserTypeNames>
+  <GroupName>Cloud Service Orchestration</GroupName>
+</ProcessConfiguration>

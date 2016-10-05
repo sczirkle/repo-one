@@ -1,0 +1,349 @@
+<?xml version="1.0"?>
+<ProcessConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve">
+  <Id>9f7a154d-3d09-45c2-ba4f-c9939029b0bb</Id>
+  <DisplayName>Enterprise Transit Network</DisplayName>
+  <Description>This process create network requested by user by populating VLAN instance and IP addresses in the IP management SI tables. </Description>
+  <CreatedTime>2016-02-15T20:46:00.879625Z</CreatedTime>
+  <ModifiedTime>2016-02-15T20:46:19.0888671Z</ModifiedTime>
+  <Version>4.3.1.9733</Version>
+  <TargetLoadBalancer xsi:type="RequireOverrideLoadBalancer" />
+  <AuditStarts>true</AuditStarts>
+  <AuditSuccesses>true</AuditSuccesses>
+  <WorkflowId>a0af1d5c-6520-4a0d-a569-ffebad4e4d5a</WorkflowId>
+  <CategoryIds>
+    <guid>c8a1b9cb-7259-45fe-9232-237f46189f21</guid>
+  </CategoryIds>
+  <TriggerOwner>74d6de41-8d7c-42dd-b0df-37578a8885eb</TriggerOwner>
+  <Triggers>
+    <TriggerDefinition>
+      <Event xsi:type="StartProcessEventDefinition">
+        <Id>f8e0d878-9a19-4430-baa4-4ac257163138</Id>
+        <DisplayName>Started by Parent Process</DisplayName>
+        <Imported>true</Imported>
+        <ProcessIds />
+      </Event>
+      <Condition xsi:type="RootConditionDefinition">
+        <Id>cf3b4354-1eae-4b09-8bce-dbfa2a0f0ace</Id>
+        <Conditions />
+      </Condition>
+      <TriggerId>b61dac7a-b6e0-4643-a131-7e8fca00b696</TriggerId>
+    </TriggerDefinition>
+    <TriggerDefinition>
+      <Event xsi:type="AdHocEventDefinition">
+        <Id>d73bb2e2-e012-4c75-9c4d-60b918ed2daf</Id>
+        <DisplayName>Started by User</DisplayName>
+        <Imported>true</Imported>
+        <Identities />
+      </Event>
+      <Condition xsi:type="RootConditionDefinition">
+        <Id>0d2ee6dd-881a-4e4f-9388-9830c295397a</Id>
+        <Conditions />
+      </Condition>
+      <TriggerId>ef46d671-65e4-4b99-b3c8-d4abb6a1bbaa</TriggerId>
+    </TriggerDefinition>
+  </Triggers>
+  <VariableDefinitions>
+    <VariableConfiguration xsi:type="StringVariableConfiguration" xml:space="preserve">
+      <Id>75f05c07-6bd9-4379-980d-8dff4a5a8ef6</Id>
+      <DisplayName>IP Address Service Item</DisplayName>
+      <string>IPAddress</string>
+      <Scope>
+        <Family>ProcessInstanceLocal</Family>
+        <ControllingItemId>9f7a154d-3d09-45c2-ba4f-c9939029b0bb</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="NumberVariableConfiguration" xml:space="preserve">
+      <Id>463bec2b-2ab1-42fa-a1fe-6892a5792dd1</Id>
+      <DisplayName>Host</DisplayName>
+      <ModifiedTime>2013-10-01T15:55:00.4941186Z</ModifiedTime>
+      <double>0</double>
+      <Scope>
+        <Family>ProcessInstanceLocal</Family>
+        <ControllingItemId>9f7a154d-3d09-45c2-ba4f-c9939029b0bb</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="NumberVariableConfiguration" xml:space="preserve">
+      <Id>27dc1d31-90da-428c-9dde-9e4c40fa68d0</Id>
+      <DisplayName>Last</DisplayName>
+      <ModifiedTime>2013-10-01T15:55:09.5844348Z</ModifiedTime>
+      <double>0</double>
+      <Scope>
+        <Family>ProcessInstanceLocal</Family>
+        <ControllingItemId>9f7a154d-3d09-45c2-ba4f-c9939029b0bb</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="NumberVariableConfiguration" xml:space="preserve">
+      <Id>63295023-316d-4d28-aa45-b8fd1f5bb5bf</Id>
+      <DisplayName>subnets</DisplayName>
+      <double>0</double>
+      <Scope>
+        <Family>ProcessInstanceLocal</Family>
+        <ControllingItemId>9f7a154d-3d09-45c2-ba4f-c9939029b0bb</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="NumberVariableConfiguration" xml:space="preserve">
+      <Id>03728187-aca4-475b-90e0-d3a82e61de71</Id>
+      <DisplayName>subnet count</DisplayName>
+      <double>0</double>
+      <Scope>
+        <Family>ProcessInstanceLocal</Family>
+        <ControllingItemId>9f7a154d-3d09-45c2-ba4f-c9939029b0bb</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="StringVariableConfiguration" xml:space="preserve">
+      <Id>4f32c80b-3aae-4e43-a59f-c6457530445c</Id>
+      <DisplayName>Gateway</DisplayName>
+      <string />
+      <Scope>
+        <Family>ProcessInstanceIn</Family>
+        <ControllingItemId>9f7a154d-3d09-45c2-ba4f-c9939029b0bb</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="StringVariableConfiguration" xml:space="preserve">
+      <Id>a432ecfe-d20c-4827-a6b9-8b64de796f3d</Id>
+      <DisplayName>Broadcast</DisplayName>
+      <string />
+      <Scope>
+        <Family>ProcessInstanceIn</Family>
+        <ControllingItemId>9f7a154d-3d09-45c2-ba4f-c9939029b0bb</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="StringVariableConfiguration" xml:space="preserve">
+      <Id>d78762ee-98bf-4467-a37d-2c9a41b189d5</Id>
+      <DisplayName>Name</DisplayName>
+      <string />
+      <Scope>
+        <Family>ProcessInstanceIn</Family>
+        <ControllingItemId>9f7a154d-3d09-45c2-ba4f-c9939029b0bb</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="StringVariableConfiguration" xml:space="preserve">
+      <Id>43c7defb-5e1c-4934-9eb7-caac2ad61e07</Id>
+      <DisplayName>Network Name</DisplayName>
+      <string />
+      <Scope>
+        <Family>ProcessInstanceIn</Family>
+        <ControllingItemId>9f7a154d-3d09-45c2-ba4f-c9939029b0bb</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="StringVariableConfiguration" xml:space="preserve">
+      <Id>b797d987-06f5-4ba1-a5a4-0ee88bebd7d1</Id>
+      <DisplayName>Routing Prefix</DisplayName>
+      <string />
+      <Scope>
+        <Family>ProcessInstanceIn</Family>
+        <ControllingItemId>9f7a154d-3d09-45c2-ba4f-c9939029b0bb</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="StringVariableConfiguration" xml:space="preserve">
+      <Id>a3a5a1eb-7f57-46e1-879a-23c6e3d1126c</Id>
+      <DisplayName>Routing Prefix Size</DisplayName>
+      <string />
+      <Scope>
+        <Family>ProcessInstanceIn</Family>
+        <ControllingItemId>9f7a154d-3d09-45c2-ba4f-c9939029b0bb</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="StringVariableConfiguration" xml:space="preserve">
+      <Id>1992a23c-ea36-4ba6-9571-d17e3389724d</Id>
+      <DisplayName>Subnet</DisplayName>
+      <string />
+      <Scope>
+        <Family>ProcessInstanceIn</Family>
+        <ControllingItemId>9f7a154d-3d09-45c2-ba4f-c9939029b0bb</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="StringVariableConfiguration" xml:space="preserve">
+      <Id>176df1f4-1ddf-463b-bc04-c96a56bf375f</Id>
+      <DisplayName>HostingBeginAddress</DisplayName>
+      <ModifiedTime>2013-10-01T14:50:53.7711011Z</ModifiedTime>
+      <string />
+      <Scope>
+        <Family>ProcessInstanceIn</Family>
+        <ControllingItemId>9f7a154d-3d09-45c2-ba4f-c9939029b0bb</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="StringVariableConfiguration" xml:space="preserve">
+      <Id>e321c8d7-5965-4d97-b812-a713e2e73cc6</Id>
+      <DisplayName>HostingEndAddress</DisplayName>
+      <ModifiedTime>2013-10-01T14:51:11.5273135Z</ModifiedTime>
+      <string />
+      <Scope>
+        <Family>ProcessInstanceIn</Family>
+        <ControllingItemId>9f7a154d-3d09-45c2-ba4f-c9939029b0bb</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="StringVariableConfiguration" xml:space="preserve">
+      <Id>7d234645-da34-4a26-9075-e87e3d10f3ee</Id>
+      <DisplayName>HostingRange</DisplayName>
+      <ModifiedTime>2013-10-01T14:51:41.8634573Z</ModifiedTime>
+      <string />
+      <Scope>
+        <Family>ProcessInstanceIn</Family>
+        <ControllingItemId>9f7a154d-3d09-45c2-ba4f-c9939029b0bb</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="StringVariableConfiguration" xml:space="preserve">
+      <Id>7d69b9be-fd80-4172-8368-9d03ae6dd0e1</Id>
+      <DisplayName>Usage</DisplayName>
+      <string />
+      <Scope>
+        <Family>ProcessInstanceIn</Family>
+        <ControllingItemId>9f7a154d-3d09-45c2-ba4f-c9939029b0bb</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="StringVariableConfiguration" xml:space="preserve">
+      <Id>5dee9ca1-8c27-4f50-b50d-09d49d93c540</Id>
+      <DisplayName>Prefix</DisplayName>
+      <string />
+      <Scope>
+        <Family>ProcessInstanceIn</Family>
+        <ControllingItemId>9f7a154d-3d09-45c2-ba4f-c9939029b0bb</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="NumberVariableConfiguration" xml:space="preserve">
+      <Id>0da7c909-a102-4951-813d-e718f10f0d73</Id>
+      <DisplayName>count</DisplayName>
+      <ModifiedTime>2013-10-01T15:50:17.050081Z</ModifiedTime>
+      <double>1</double>
+      <Scope>
+        <Family>ProcessInstanceLocal</Family>
+        <ControllingItemId>9f7a154d-3d09-45c2-ba4f-c9939029b0bb</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="StringVariableConfiguration" xml:space="preserve">
+      <Id>979fec4b-2164-4f21-a39a-b242c0336716</Id>
+      <DisplayName>prefix</DisplayName>
+      <string />
+      <Scope>
+        <Family>ProcessInstanceLocal</Family>
+        <ControllingItemId>9f7a154d-3d09-45c2-ba4f-c9939029b0bb</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="StringVariableConfiguration" xml:space="preserve">
+      <Id>546d96c6-7e2b-4f93-8e09-8e40bcc60586</Id>
+      <DisplayName>Tenant Acronym</DisplayName>
+      <string />
+      <Scope>
+        <Family>ProcessInstanceIn</Family>
+        <ControllingItemId>9f7a154d-3d09-45c2-ba4f-c9939029b0bb</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="StringVariableConfiguration" xml:space="preserve">
+      <Id>c60884bf-6659-47cc-877b-bf845f710ae9</Id>
+      <DisplayName>Tenant Name</DisplayName>
+      <string />
+      <Scope>
+        <Family>ProcessInstanceIn</Family>
+        <ControllingItemId>9f7a154d-3d09-45c2-ba4f-c9939029b0bb</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="BooleanVariableConfiguration" xml:space="preserve">
+      <Id>778f7914-42b8-43ab-896f-fd2e4ffbbfa5</Id>
+      <DisplayName>Reserve VLAN</DisplayName>
+      <boolean>false</boolean>
+      <Scope>
+        <Family>ProcessInstanceIn</Family>
+        <ControllingItemId>9f7a154d-3d09-45c2-ba4f-c9939029b0bb</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="BooleanVariableConfiguration" xml:space="preserve">
+      <Id>dcc47ef4-2af0-4b24-a21c-bd8955fd5689</Id>
+      <DisplayName>Reserve Subnet</DisplayName>
+      <boolean>false</boolean>
+      <Scope>
+        <Family>ProcessInstanceIn</Family>
+        <ControllingItemId>9f7a154d-3d09-45c2-ba4f-c9939029b0bb</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="StringVariableConfiguration" xml:space="preserve">
+      <Id>b5037a64-8164-48cc-a8f7-154e1ae7805d</Id>
+      <DisplayName>Network POD</DisplayName>
+      <string />
+      <Scope>
+        <Family>ProcessInstanceIn</Family>
+        <ControllingItemId>9f7a154d-3d09-45c2-ba4f-c9939029b0bb</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="NumberVariableConfiguration" xml:space="preserve">
+      <Id>fdb54bc0-ddfd-47f0-9665-10971fe88e94</Id>
+      <DisplayName>Begin Range</DisplayName>
+      <double>0</double>
+      <Scope>
+        <Family>ProcessInstanceIn</Family>
+        <ControllingItemId>9f7a154d-3d09-45c2-ba4f-c9939029b0bb</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="NumberVariableConfiguration" xml:space="preserve">
+      <Id>348cff7a-efd2-4fec-bc73-44067e87e1f5</Id>
+      <DisplayName>End Range</DisplayName>
+      <double>0</double>
+      <Scope>
+        <Family>ProcessInstanceIn</Family>
+        <ControllingItemId>9f7a154d-3d09-45c2-ba4f-c9939029b0bb</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="NumberVariableConfiguration" xml:space="preserve">
+      <Id>f07c2da9-97c7-4512-a590-f69b55045a86</Id>
+      <DisplayName>VLAN ID</DisplayName>
+      <double>0</double>
+      <Scope>
+        <Family>ProcessInstanceLocal</Family>
+        <ControllingItemId>9f7a154d-3d09-45c2-ba4f-c9939029b0bb</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="StringVariableConfiguration" xml:space="preserve">
+      <Id>91457180-fca5-4a6e-80b7-ac00e91efc2c</Id>
+      <DisplayName>Network</DisplayName>
+      <string />
+      <Scope>
+        <Family>ProcessInstanceIn</Family>
+        <ControllingItemId>9f7a154d-3d09-45c2-ba4f-c9939029b0bb</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+    <VariableConfiguration xsi:type="StringVariableConfiguration" xml:space="preserve">
+      <Id>814fe1da-48bb-4987-8dc4-2f8e5146c893</Id>
+      <DisplayName>Organization Name</DisplayName>
+      <string />
+      <Scope>
+        <Family>ProcessInstanceIn</Family>
+        <ControllingItemId>9f7a154d-3d09-45c2-ba4f-c9939029b0bb</ControllingItemId>
+      </Scope>
+    </VariableConfiguration>
+  </VariableDefinitions>
+  <Notes />
+  <GeneralHelp xsi:type="CustomHelpAlias">
+    <Alias />
+  </GeneralHelp>
+  <GeneralInstanceHelp xsi:type="CustomHelpAlias">
+    <Alias />
+  </GeneralInstanceHelp>
+  <InputHelp xsi:type="CustomHelpAlias">
+    <Alias />
+  </InputHelp>
+  <InputInstanceHelp xsi:type="CustomHelpAlias">
+    <Alias />
+  </InputInstanceHelp>
+  <OutputHelp xsi:type="CustomHelpAlias">
+    <Alias />
+  </OutputHelp>
+  <ValidTargetTypeNames>
+    <string>Tidal.Automation.BuiltinAdapter.Common.ServiceTargetConfiguration, Tidal.Automation.BuiltinAdapter.Common</string>
+  </ValidTargetTypeNames>
+  <ValidTargetTypeExtensionIds>
+    <guid>2144f9f9-e556-424e-bb95-709d41dcc237</guid>
+  </ValidTargetTypeExtensionIds>
+  <ValidRuntimeUserTypeNames>
+    <string>Tidal.Automation.Tsp.Common.TspUserConfiguration, Tidal.Automation.Tsp.Common</string>
+    <string>Tidal.Automation.Ssh.Common.PublicKeyAdminUserConfiguration, Tidal.Automation.Ssh.Common</string>
+    <string>Tidal.Automation.Ssh.Common.IOSUserConfiguration, Tidal.Automation.Ssh.Common</string>
+    <string>Tidal.Automation.BuiltinAdapter.Common.GenericRuntimeUserConfiguration, Tidal.Automation.BuiltinAdapter.Common</string>
+    <string>Tidal.Automation.Sap.Common.Users.SAPUserConfiguration, Tidal.Automation.Sap.Common</string>
+    <string>Tidal.Automation.Snmp.Common.SnmpUserConfiguration, Tidal.Automation.Snmp.Common</string>
+    <string>Tidal.Automation.vCloud.Common.Users.vCloudUserConfiguration, Tidal.Automation.vCloud.Common</string>
+    <string>Tidal.Automation.Windows.Common.WindowsUserConfiguration, Tidal.Automation.Windows.Common</string>
+  </ValidRuntimeUserTypeNames>
+  <GroupName>Cloud Service Orchestration</GroupName>
+  <StoreWhenCompleted>false</StoreWhenCompleted>
+  <MustStoreOnError>true</MustStoreOnError>
+</ProcessConfiguration>
